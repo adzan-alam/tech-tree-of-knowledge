@@ -1,0 +1,52 @@
+id: "550e8400-e29b-41d4-a716-446655440000"
+slug: "math-vectors-2d"
+title: "2D Cartesian Vectors & Vector Algebra"
+summary: "Foundations of two-dimensional vector mathematics including geometric representation, dot product, and orthogonal projection."
+version: "1.0.0"
+created_at: "2026-11-18T22:00:00Z"
+updated_at: "2026-11-18T22:00:00Z"
+
+classification:
+  discipline: "mathematics"
+  domain: "linear-algebra"
+  proficiency_tier: 2
+  difficulty_score: 0.35
+  estimated_duration_minutes: 60
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["architect-agent-01"]
+  verification_date: "2026-11-18"
+  notes: "Formulas and component derivations mathematically checked."
+
+relationships:
+  prerequisites: []
+  related_modules:
+    - slug: "phys-kinematics-1d-2d"
+      relationship: "computational_application"
+
+learning_objectives:
+  - id: "obj-vec-1"
+    statement: "Represent a two-dimensional vector as Cartesian components and calculate its Euclidean magnitude."
+    bloom_level: "apply"
+  - id: "obj-vec-2"
+    statement: "Compute the dot product of two 2D vectors and determine the angle between them."
+    bloom_level: "analyze"
+
+practical_applications:
+  - title: "Direction and Velocity Vector Normalization"
+    type: "computational_simulation"
+    description: "Normalize velocity vectors for 2D game loops and physics engines."
+
+provenance:
+  sources:
+    - id: "src-strang-linear-algebra"
+      citation: "Strang, G. (2016). Introduction to Linear Algebra (5th ed.). Wellesley-Cambridge Press."
+      isbn: "978-0980232776"
+      claims_supported: ["Vector spaces", "Dot product definition", "Cauchy-Schwarz inequality"]
+
+discovery_context:
+  historical_significance: "Modern vector notation emerged from Hamilton's quaternions and Gibbs' vector analysis in the late 19th century."
+  historical_influences:
+    - discovery_id: "disc-descartes-analytic-geometry"
+    - discovery_id: "disc-gibbs-vector-analysis"

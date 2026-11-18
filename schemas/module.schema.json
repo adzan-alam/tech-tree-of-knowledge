@@ -1,0 +1,262 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://techtree.org/schemas/module.schema.json",
+  "title": "TechTreeKnowledgeModule",
+  "description": "Validation schema for sovereign Tech Tree knowledge module manifests (module.yaml).",
+  "type": "object",
+  "required": [
+    "id",
+    "slug",
+    "title",
+    "summary",
+    "version",
+    "classification",
+    "verification",
+    "relationships",
+    "learning_objectives",
+    "provenance"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Immutable UUIDv4 for this module."
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Unique, lowercase, hyphen-separated identifier (e.g. phys-newtons-laws)."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 150
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 500
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$",
+      "description": "Semantic Versioning string (e.g. 1.0.0)."
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "classification": {
+      "type": "object",
+      "required": [
+        "discipline",
+        "domain",
+        "proficiency_tier",
+        "estimated_duration_minutes"
+      ],
+      "properties": {
+        "discipline": {
+          "type": "string",
+          "enum": ["mathematics", "physics", "computer-science", "chemistry", "biology", "engineering", "philosophy"]
+        },
+        "domain": {
+          "type": "string",
+          "minLength": 2
+        },
+        "proficiency_tier": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4,
+          "description": "1: Foundational, 2: Intermediate, 3: Advanced, 4: Specialist"
+        },
+        "difficulty_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "estimated_duration_minutes": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 600
+        }
+      },
+      "additionalProperties": false
+    },
+    "verification": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "research-verified",
+            "technically-verified",
+            "expert-reviewed",
+            "published"
+          ]
+        },
+        "reviewed_by": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "verification_date": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "relationships": {
+      "type": "object",
+      "required": ["prerequisites"],
+      "properties": {
+        "prerequisites": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["slug"],
+            "properties": {
+              "slug": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+              },
+              "min_version": {
+                "type": "string"
+              },
+              "rationale": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "related_modules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["slug", "relationship"],
+            "properties": {
+              "slug": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+              },
+              "relationship": {
+                "type": "string",
+                "enum": [
+                  "subsequent_concept",
+                  "computational_application",
+                  "alternative_derivation",
+                  "experimental_verification"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "learning_objectives": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "statement", "bloom_level"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 10
+          },
+          "bloom_level": {
+            "type": "string",
+            "enum": [
+              "remember",
+              "understand",
+              "apply",
+              "analyze",
+              "evaluate",
+              "create"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "practical_applications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "type", "description"],
+        "properties": {
+          "title": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["computational_simulation", "laboratory_experiment", "mathematical_proof", "engineering_design"]
+          },
+          "description": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["sources"],
+      "properties": {
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id", "citation", "claims_supported"],
+            "properties": {
+              "id": { "type": "string" },
+              "citation": { "type": "string" },
+              "url": { "type": "string" },
+              "isbn": { "type": "string" },
+              "license": { "type": "string" },
+              "claims_supported": {
+                "type": "array",
+                "minItems": 1,
+                "items": { "type": "string" }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "discovery_context": {
+      "type": "object",
+      "properties": {
+        "historical_significance": { "type": "string" },
+        "historical_influences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["discovery_id"],
+            "properties": {
+              "discovery_id": { "type": "string" },
+              "relationship": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "related_instruments": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

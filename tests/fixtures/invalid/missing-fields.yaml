@@ -1,0 +1,19 @@
+id: "550e8400-e29b-41d4-a716-446655440099"
+slug: "broken-module-no-provenance"
+title: "A Module Without Provenance or Objectives"
+summary: "This module intentionally omits required fields to test schema rejection."
+version: "1.0.0"
+
+classification:
+  discipline: "physics"
+  domain: "mechanics"
+  proficiency_tier: 2
+  estimated_duration_minutes: 30
+
+verification:
+  status: "draft"
+
+relationships:
+  prerequisites: []
+
+# Missing: learning_objectives and provenance!

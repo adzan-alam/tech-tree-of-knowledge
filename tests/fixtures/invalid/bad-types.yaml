@@ -1,0 +1,25 @@
+id: "not-a-valid-uuid"
+slug: "INVALID SLUG WITH UPPERCASE AND SPACES"
+title: "X"  # Too short (minLength is 3)
+summary: "Short" # Too short (minLength is 10)
+version: "v1.0" # Invalid SemVer pattern (must be 1.0.0 without 'v')
+
+classification:
+  discipline: "astrology" # Invalid discipline enum
+  domain: "pseudoscience"
+  proficiency_tier: 99 # Invalid tier (must be 1-4)
+  estimated_duration_minutes: 1 # Too short (min 5)
+
+verification:
+  status: "unapproved-random-status" # Invalid status enum
+
+relationships:
+  prerequisites: "not-an-array" # Should be array
+
+learning_objectives:
+  - id: "obj-1"
+    statement: "Short"
+    bloom_level: "guess" # Invalid bloom level
+
+provenance:
+  sources: [] # Must have minItems: 1

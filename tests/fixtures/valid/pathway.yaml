@@ -1,0 +1,25 @@
+id: "6ba7b810-9dad-11d1-80b4-00c04fd430c8"
+slug: "pathway-2d-physics-simulator"
+title: "Foundations of 2D Computational Physics & Simulation"
+description: "A cross-disciplinary learning pathway guiding learners from foundational vector mathematics to building an interactive 2D physics simulation from first principles."
+target_goal: "Construct a functioning 2D particle and rigid-body physics simulator."
+target_proficiency_tier: 2
+
+capstone_project:
+  title: "Interactive 2D Physics Simulator"
+  description: "A canvas-based interactive simulation modeling gravity, drag, velocity Verlet numerical integration, and elastic restitution."
+  deliverable_type: "interactive_simulation"
+
+modules:
+  - slug: "math-vectors-2d"
+    sequence_order: 1
+    curation_note: "Provides the geometric foundation for displacement, velocity, and force."
+  - slug: "phys-kinematics-1d-2d"
+    sequence_order: 2
+    curation_note: "Formalizes rates of change in space and time."
+  - slug: "phys-newtons-laws"
+    sequence_order: 3
+    curation_note: "Introduces dynamical forces and causes of acceleration."
+  - slug: "cs-numerical-integration"
+    sequence_order: 4
+    curation_note: "Translates continuous differential equations into discrete time-step approximations."

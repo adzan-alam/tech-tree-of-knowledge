@@ -1,0 +1,32 @@
+module_slug: "math-vectors-2d"
+passing_threshold_percent: 75.0
+
+questions:
+  - id: "q-vec-01"
+    target_objective_id: "obj-vec-1"
+    prompt: "Given vector A = (3, 4), what is its Euclidean magnitude ||A||?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 5.0
+      tolerance: 0.01
+      unit: "scalar"
+    explanation: "By the Pythagorean theorem, ||A|| = sqrt(3^2 + 4^2) = sqrt(9 + 16) = sqrt(25) = 5."
+
+  - id: "q-vec-02"
+    target_objective_id: "obj-vec-2"
+    prompt: "If the dot product of two non-zero vectors A and B is zero (A · B = 0), what does this indicate about their geometric relationship?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The vectors are parallel pointing in the same direction."
+        is_correct: false
+      - id: "opt-2"
+        text: "The vectors are orthogonal (perpendicular) to each other."
+        is_correct: true
+      - id: "opt-3"
+        text: "The vectors have identical magnitudes."
+        is_correct: false
+      - id: "opt-4"
+        text: "The vectors are anti-parallel pointing in opposite directions."
+        is_correct: false
+    explanation: "Since A · B = ||A|| ||B|| cos(theta), A · B = 0 for non-zero vectors implies cos(theta) = 0, meaning theta = 90 degrees."

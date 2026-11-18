@@ -32,6 +32,13 @@ From inception, the architecture was divided into two intertwined systems:
   - Established this historical chronicle and organized repository memory.
   - *Phase Report:* [`phase-reports/PHASE_0_DISCOVERY_REPORT.md`](./phase-reports/PHASE_0_DISCOVERY_REPORT.md)
 
+- **Phase 1 — Knowledge Ontology, Schemas & Validation Engine:**
+  - Formulated formal JSON Schemas (`module.schema.json`, `pathway.schema.json`, `assessment.schema.json`).
+  - Implemented the TypeScript schema validation engine with Ajv and YAML support.
+  - Built the `techtree-validate` CLI tool for recursive module linting.
+  - Established automated test suite with valid and invalid fixtures (100% test pass rate).
+  - *Phase Report:* [`phase-reports/PHASE_1_SCHEMA_REPORT.md`](./phase-reports/PHASE_1_SCHEMA_REPORT.md)
+
 ---
 
 ## 🔮 Planning Ahead & Planning Behind

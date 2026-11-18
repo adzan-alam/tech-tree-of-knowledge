@@ -6,6 +6,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.2.0] - 2026-11-19 (Phase 1: Knowledge Ontology, Schemas & Validation Engine)
+
+### Added
+- **Validation Schemas:**
+  - `schemas/module.schema.json`: Complete schema for sovereign module manifests.
+  - `schemas/pathway.schema.json`: Schema for composable learning pathways.
+  - `schemas/assessment.schema.json`: Schema for module assessments and rubrics.
+- **Validation Engine & CLI:**
+  - `src/core/validation/schema-validator.ts`: TypeScript validation engine utilizing Ajv.
+  - `src/core/validation/types.ts`: Comprehensive domain TypeScript types.
+  - `src/cli/validate.ts`: `techtree-validate` CLI scanner.
+- **Automated Test Suite:**
+  - Positive fixtures in `tests/fixtures/valid/`.
+  - Negative fixtures in `tests/fixtures/invalid/`.
+  - Unit test suite `tests/unit/schema-validator.test.ts` (5/5 tests passing).
+- **Chronicle & Institutional Memory:**
+  - `docs/chronicle/phase-reports/PHASE_1_SCHEMA_REPORT.md`: Detailed completion report.
+
+---
+
 ## [0.1.0] - 2026-11-18 (Phase 0: Project Discovery & Architecture Baseline)
 
 ### Added

@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://techtree.org/schemas/pathway.schema.json",
+  "title": "TechTreeLearningPathway",
+  "description": "Validation schema for composable, goal-oriented learning pathways (pathways/*.yaml).",
+  "type": "object",
+  "required": [
+    "id",
+    "slug",
+    "title",
+    "description",
+    "target_goal",
+    "capstone_project",
+    "modules"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 150
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10
+    },
+    "target_goal": {
+      "type": "string"
+    },
+    "target_proficiency_tier": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "capstone_project": {
+      "type": "object",
+      "required": ["title", "description", "deliverable_type"],
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "deliverable_type": {
+          "type": "string",
+          "enum": ["interactive_simulation", "software_application", "hardware_model", "research_paper"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "modules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["slug", "sequence_order", "curation_note"],
+        "properties": {
+          "slug": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "sequence_order": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "curation_note": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
