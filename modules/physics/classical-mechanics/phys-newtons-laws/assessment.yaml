@@ -1,0 +1,42 @@
+module_slug: "phys-newtons-laws"
+passing_threshold_percent: 75
+
+questions:
+  - id: "q-newt-01"
+    target_objective_id: "obj-newt-1"
+    prompt: "A passenger in a car feels pushed backward against their seat when the driver stomps on the gas pedal. In the inertial reference frame of the road, what is physically occurring?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The back of the seat exerts a forward contact force on the passenger, accelerating them forward to match the car's increasing speed."
+        is_correct: true
+      - id: "opt-2"
+        text: "A real backwards centrifugal force is pulling the passenger backwards through space."
+        is_correct: false
+      - id: "opt-3"
+        text: "Gravity has temporarily rotated 90 degrees."
+        is_correct: false
+      - id: "opt-4"
+        text: "The passenger's mass is increasing due to relativistic inertia."
+        is_correct: false
+    explanation: "In an inertial frame, the passenger's body tends to remain at its previous velocity due to inertia. The accelerating seat pushes them forward to accelerate them."
+
+  - id: "q-newt-02"
+    target_objective_id: "obj-newt-2"
+    prompt: "A 5.0 kg crate on a frictionless horizontal floor is pulled by two horizontal forces: F1 = 18 N pointing East (+x) and F2 = 8 N pointing West (-x). What is the crate's acceleration?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 2.0
+      tolerance: 0.05
+      unit: "m/s^2"
+    explanation: "F_net = 18 - 8 = 10 N East. a = F_net / m = 10 / 5.0 = 2.0 m/s^2."
+
+  - id: "q-newt-03"
+    target_objective_id: "obj-newt-3"
+    prompt: "Earth exerts a gravitational force of 700 N on an astronaut standing on the surface. According to Newton's Third Law, what force does the astronaut exert on Earth?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 700.0
+      tolerance: 0.01
+      unit: "Newtons"
+    explanation: "Action-reaction pairs are strictly equal in magnitude and opposite in direction. The astronaut exerts exactly 700 N of gravitational pull upward on the Earth."

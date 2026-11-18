@@ -1,0 +1,75 @@
+id: "a1000000-0000-0000-0000-000000000008"
+slug: "cs-collision-detection"
+title: "Collision Detection and Contact Manifold Resolution"
+summary: "Geometric collision algorithms: Circle-Circle, Axis-Aligned Bounding Box (AABB), penetration depth calculation, positional separation, and restitution impulses."
+version: "1.0.0"
+created_at: "2026-11-19T01:30:00Z"
+updated_at: "2026-11-19T01:30:00Z"
+
+classification:
+  discipline: "computer-science"
+  domain: "graphics-simulation"
+  proficiency_tier: 2
+  difficulty_score: 0.5
+  estimated_duration_minutes: 90
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["cs-verifier-01", "phys-verifier-01"]
+  verification_date: "2026-11-19"
+  notes: "Separating axis theorem, penetration displacement, and positional correction to prevent sinking verified."
+
+relationships:
+  prerequisites:
+    - slug: "math-vectors-2d"
+      min_version: "^1.0.0"
+      rationale: "Requires distance calculations, dot products, and vector normalization."
+    - slug: "phys-momentum-conservation"
+      min_version: "^1.0.0"
+      rationale: "Requires impulse scalar formula and coefficient of restitution for velocity response."
+    - slug: "cs-prog-fundamentals"
+      min_version: "^1.0.0"
+      rationale: "Requires entity iteration and nested collision checking loops."
+  related_modules:
+    - slug: "cs-numerical-integration"
+      relationship: "computational_application"
+
+learning_objectives:
+  - id: "obj-col-1"
+    statement: "Explain the distinction between the broad-phase and narrow-phase collision detection pipelines."
+    bloom_level: "understand"
+  - id: "obj-col-2"
+    statement: "Implement circle-circle and circle-line intersection tests and calculate contact penetration depths."
+    bloom_level: "apply"
+  - id: "obj-col-3"
+    statement: "Construct a complete collision resolution pipeline including positional correction (Baumgarte stabilization) and restitution impulses."
+    bloom_level: "create"
+
+practical_applications:
+  - title: "Real-time Bouncing Ball Simulator"
+    type: "computational_simulation"
+    description: "Detect multiple bouncing spheres colliding with floor, walls, and each other without sinking or overlapping."
+
+provenance:
+  sources:
+    - id: "src-ericson-real-time-collision-detection"
+      citation: "Ericson, C. (2004). Real-Time Collision Detection. Morgan Kaufmann / Elsevier, Chapter 4: AABB and Sphere Geometric Tests."
+      isbn: "978-1558607323"
+      claims_supported: [
+        "Sphere-sphere intersection condition",
+        "AABB overlap predicate",
+        "Penetration depth and contact normal computation"
+      ]
+    - id: "src-carden-game-physics-engine-development"
+      citation: "Millington, I. (2010). Game Physics Engine Development (2nd ed.). CRC Press, Chapter 12: Particle Contact Resolution."
+      isbn: "978-0123819765"
+      claims_supported: [
+        "Impulse resolution along contact normal",
+        "Interpenetration removal and Baumgarte stabilization"
+      ]
+
+discovery_context:
+  historical_significance: "Early computer graphics and CAD pioneers in the 1960s-1970s developed computational geometry algorithms, foundational to modern video games and aerospace simulations."
+  historical_influences:
+    - discovery_id: "disc-sutherland-sketchpad-1963"
+    - discovery_id: "disc-computational-geometry-1970s"

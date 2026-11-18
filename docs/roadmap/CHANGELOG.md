@@ -6,6 +6,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.5.0] - 2026-11-19 (Phase 4: Foundational Pilot Content Creation)
+
+### Added
+- **Sovereign Knowledge Modules:**
+  - `modules/mathematics/linear-algebra/math-vectors-2d/`: Complete manifest, exposition, and assessment.
+  - `modules/mathematics/calculus/math-calculus-derivatives/`: Complete manifest, exposition, and assessment.
+  - `modules/physics/classical-mechanics/phys-kinematics-1d-2d/`: Complete manifest, exposition, and assessment.
+  - `modules/physics/classical-mechanics/phys-newtons-laws/`: Complete manifest, exposition, and assessment.
+  - `modules/physics/classical-mechanics/phys-momentum-conservation/`: Complete manifest, exposition, and assessment.
+  - `modules/computer-science/programming/cs-prog-fundamentals/`: Complete manifest, exposition, and assessment.
+  - `modules/computer-science/numerical-computing/cs-numerical-integration/`: Complete manifest, exposition, and assessment.
+  - `modules/computer-science/graphics-simulation/cs-collision-detection/`: Complete manifest, exposition, and assessment.
+  - `modules/chemistry/physical-chemistry/chem-atomic-structure/`: Complete manifest, exposition, and assessment (proving ontology generality).
+- **Capstone Cross-Disciplinary Pathway:**
+  - `pathways/pathway-2d-physics-simulator.yaml`: Sequences the 8 mechanics and computational modules into an unbroken generative pathway culminating in the 2D Physics Simulator.
+- **Verification Audit:**
+  - All 9 modules verified with `npm run validate`, `npm run graph:check`, `npm run module:lint`, and `npm run module:audit` (0 errors, 100% pass rate).
+
+---
+
 ## [0.4.0] - 2026-11-19 (Phase 3: Content Authoring System & Verification Pipeline)
 
 ### Added

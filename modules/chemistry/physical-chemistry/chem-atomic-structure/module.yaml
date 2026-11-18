@@ -1,0 +1,68 @@
+id: "a1000000-0000-0000-0000-000000000009"
+slug: "chem-atomic-structure"
+title: "Atomic Structure, Subatomic Particles, and Periodic Trends"
+summary: "Protons, neutrons, electrons, the nuclear atom, Rutherford and Bohr models, atomic mass, isotopes, and electron configuration across the periodic table."
+version: "1.0.0"
+created_at: "2026-11-19T01:30:00Z"
+updated_at: "2026-11-19T01:30:00Z"
+
+classification:
+  discipline: "chemistry"
+  domain: "physical-chemistry"
+  proficiency_tier: 1
+  difficulty_score: 0.35
+  estimated_duration_minutes: 60
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["chem-verifier-01", "pedagogy-auditor-02"]
+  verification_date: "2026-11-19"
+  notes: "Atomic mass units, electron shell capacities, and periodic ionization energy trends verified."
+
+relationships:
+  prerequisites: []
+  related_modules:
+    - slug: "phys-newtons-laws"
+      relationship: "subsequent_concept"
+
+learning_objectives:
+  - id: "obj-atom-1"
+    statement: "Describe the fundamental subatomic particles (protons, neutrons, electrons) including relative charges, masses, and spatial distribution."
+    bloom_level: "understand"
+  - id: "obj-atom-2"
+    statement: "Calculate atomic numbers, mass numbers, and isotopic abundances for elemental isotopes."
+    bloom_level: "apply"
+  - id: "obj-atom-3"
+    statement: "Analyze electron configurations (Aufbau principle, Pauli exclusion principle, Hund's rule) to predict chemical valence."
+    bloom_level: "analyze"
+
+practical_applications:
+  - title: "Bohr Orbital State Visualization"
+    type: "computational_simulation"
+    description: "Model energy level transitions (E = -13.6 eV / n^2) and photon emission wavelengths in hydrogen-like atoms."
+
+provenance:
+  sources:
+    - id: "src-zumdahl-chemistry"
+      citation: "Zumdahl, S. S., & DeCoste, D. J. (2018). Chemical Principles (8th ed.). Cengage Learning, Chapter 12: Quantum Mechanics and Atomic Theory."
+      isbn: "978-1305581982"
+      claims_supported: [
+        "Nuclear atomic model and subatomic properties",
+        "Aufbau principle and electron orbital filling",
+        "Periodic trends in ionization energy and atomic radius"
+      ]
+    - id: "src-openstax-chemistry-2e"
+      citation: "OpenStax. (2019). Chemistry 2e, Chapter 2: Atoms, Molecules, and Ions. OpenStax CNX."
+      url: "https://openstax.org/details/books/chemistry-2e"
+      license: "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+      claims_supported: [
+        "Isotope definitions and atomic mass calculations",
+        "Bohr model of hydrogen"
+      ]
+
+discovery_context:
+  historical_significance: "Evolved from J.J. Thomson's cathode ray experiments (1897), Ernest Rutherford's gold foil experiment (1911), and Niels Bohr's quantum model (1913)."
+  historical_influences:
+    - discovery_id: "disc-thomson-electron-1897"
+    - discovery_id: "disc-rutherford-gold-foil-1911"
+    - discovery_id: "disc-bohr-model-1913"

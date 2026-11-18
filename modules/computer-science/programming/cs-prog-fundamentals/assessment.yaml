@@ -1,0 +1,42 @@
+module_slug: "cs-prog-fundamentals"
+passing_threshold_percent: 75
+
+questions:
+  - id: "q-prog-01"
+    target_objective_id: "obj-prog-1"
+    prompt: "Why do physics simulations favor a fixed time-step (e.g. dt = 1/60s) over a variable delta time tied directly to the monitor framerate?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Fixed time-steps ensure deterministic, stable, and reproducible numerical integration regardless of framerate fluctuations."
+        is_correct: true
+      - id: "opt-2"
+        text: "Computers can only calculate numbers divisible by 60."
+        is_correct: false
+      - id: "opt-3"
+        text: "Variable delta time is forbidden by the operating system kernel."
+        is_correct: false
+      - id: "opt-4"
+        text: "A fixed time step eliminates the need to calculate friction."
+        is_correct: false
+    explanation: "Variable time steps introduce non-deterministic numerical drift and instability when frame drops occur. Fixed time-stepping guarantees reproducible physics."
+
+  - id: "q-prog-02"
+    target_objective_id: "obj-prog-2"
+    prompt: "A discrete position update loop executes: for (let i = 0; i < 4; i++) { x += v * dt; } with initial x = 10, v = -2, and dt = 0.5. What is the final value of x?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 6.0
+      tolerance: 0.01
+      unit: "scalar"
+    explanation: "Each iteration adds v * dt = -2 * 0.5 = -1. Over 4 iterations: x = 10 + 4*(-1) = 6."
+
+  - id: "q-prog-03"
+    target_objective_id: "obj-prog-3"
+    prompt: "If a simulation runs at 120 ticks per second, what is the fixed delta time dt in seconds?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 0.008333
+      tolerance: 0.0001
+      unit: "seconds"
+    explanation: "dt = 1 / frequency = 1 / 120 = 0.008333... seconds."

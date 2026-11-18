@@ -1,0 +1,42 @@
+module_slug: "phys-momentum-conservation"
+passing_threshold_percent: 75
+
+questions:
+  - id: "q-mom-01"
+    target_objective_id: "obj-mom-1"
+    prompt: "A baseball of mass 0.15 kg traveling at 40 m/s is hit by a bat directly back toward the pitcher at 50 m/s. What is the magnitude of the impulse delivered to the ball?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 13.5
+      tolerance: 0.1
+      unit: "N*s"
+    explanation: "Taking initial direction as positive (+40 m/s), final velocity is -50 m/s. Delta p = m*(vf - vi) = 0.15*(-50 - 40) = 0.15*(-90) = -13.5 N*s. Magnitude is 13.5 N*s."
+
+  - id: "q-mom-02"
+    target_objective_id: "obj-mom-2"
+    prompt: "In a completely inelastic collision between two moving bodies with coefficient of restitution e = 0, what happens to the two bodies immediately following impact?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "They stick together and move with a single common velocity, while total momentum is strictly conserved."
+        is_correct: true
+      - id: "opt-2"
+        text: "They bounce apart with zero loss of kinetic energy."
+        is_correct: false
+      - id: "opt-3"
+        text: "Total linear momentum drops to zero."
+        is_correct: false
+      - id: "opt-4"
+        text: "They explode into fragments."
+        is_correct: false
+    explanation: "By definition, e = 0 means relative separating velocity is 0, so the colliding bodies stick together and move with a shared velocity."
+
+  - id: "q-mom-03"
+    target_objective_id: "obj-mom-3"
+    prompt: "A 3.0 kg object moving East at 4.0 m/s collides with a 1.0 kg object at rest. If the collision is completely inelastic (they stick together), what is their final combined speed?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 3.0
+      tolerance: 0.05
+      unit: "m/s"
+    explanation: "P_initial = 3.0*4.0 + 1.0*0 = 12.0 kg*m/s. Total mass = 3.0 + 1.0 = 4.0 kg. V_final = P_initial / M_total = 12.0 / 4.0 = 3.0 m/s."

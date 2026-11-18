@@ -1,0 +1,70 @@
+id: "a1000000-0000-0000-0000-000000000005"
+slug: "phys-momentum-conservation"
+title: "Linear Momentum, Impulse, and Collision Dynamics"
+summary: "Linear momentum vector p = mv, the impulse-momentum theorem, isolated systems, and 1D/2D elastic and inelastic collision conservation laws."
+version: "1.0.0"
+created_at: "2026-11-19T01:30:00Z"
+updated_at: "2026-11-19T01:30:00Z"
+
+classification:
+  discipline: "physics"
+  domain: "classical-mechanics"
+  proficiency_tier: 2
+  difficulty_score: 0.45
+  estimated_duration_minutes: 80
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["phys-verifier-01", "pedagogy-auditor-02"]
+  verification_date: "2026-11-19"
+  notes: "Impulse momentum theorem, kinetic energy restitution formulas, and 2D vector collision balance verified."
+
+relationships:
+  prerequisites:
+    - slug: "phys-newtons-laws"
+      min_version: "^1.0.0"
+      rationale: "Requires Newton's Third Law (action-reaction) to prove internal force cancellation in isolated systems."
+  related_modules:
+    - slug: "cs-collision-detection"
+      relationship: "computational_application"
+
+learning_objectives:
+  - id: "obj-mom-1"
+    statement: "Explain linear momentum as a conserved vector quantity and apply the impulse-momentum theorem to collisions."
+    bloom_level: "understand"
+  - id: "obj-mom-2"
+    statement: "Calculate post-collision velocities in one-dimensional perfectly elastic and completely inelastic collisions."
+    bloom_level: "apply"
+  - id: "obj-mom-3"
+    statement: "Analyze two-dimensional oblique particle collisions using vector momentum conservation along orthogonal axes."
+    bloom_level: "analyze"
+
+practical_applications:
+  - title: "Rigid-Body Elastic Collision Resolution"
+    type: "computational_simulation"
+    description: "Calculate normal impulse scalar J to update velocities of colliding particles using the coefficient of restitution e."
+
+provenance:
+  sources:
+    - id: "src-halliday-resnick-ch9"
+      citation: "Halliday, D., Resnick, R., & Walker, J. (2018). Fundamentals of Physics (11th ed.). Wiley, Chapter 9: Center of Mass and Linear Momentum."
+      isbn: "978-1119460138"
+      claims_supported: [
+        "Conservation of linear momentum in isolated systems",
+        "Elastic and inelastic collision definitions",
+        "Impulse integral J = integral F dt"
+      ]
+    - id: "src-openstax-university-physics-v1-ch9"
+      citation: "OpenStax. (2016). University Physics Volume 1, Chapter 9: Linear Momentum and Collisions. OpenStax CNX."
+      url: "https://openstax.org/details/books/university-physics-volume-1"
+      license: "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+      claims_supported: [
+        "Coefficient of restitution",
+        "Oblique collisions in two dimensions"
+      ]
+
+discovery_context:
+  historical_significance: "Formulated mathematically in the 17th century by John Wallis, Christopher Wren, and Christiaan Huygens prior to Newton's Principia, establishing the conservation of quantity of motion."
+  historical_influences:
+    - discovery_id: "disc-huygens-collision-laws-1669"
+    - discovery_id: "disc-descartes-quantity-of-motion"

@@ -1,0 +1,75 @@
+id: "a1000000-0000-0000-0000-000000000004"
+slug: "phys-newtons-laws"
+title: "Newton's Laws of Motion & Classical Dynamics"
+summary: "The dynamical laws governing force interactions, mass, inertia, friction, free-body diagrams, and systems of interacting bodies."
+version: "1.0.0"
+created_at: "2026-11-19T01:30:00Z"
+updated_at: "2026-11-19T01:30:00Z"
+
+classification:
+  discipline: "physics"
+  domain: "classical-mechanics"
+  proficiency_tier: 2
+  difficulty_score: 0.45
+  estimated_duration_minutes: 90
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["phys-verifier-01", "pedagogy-auditor-02"]
+  verification_date: "2026-11-19"
+  notes: "Free body diagrams, vector force summation, and contact friction models verified."
+
+relationships:
+  prerequisites:
+    - slug: "phys-kinematics-1d-2d"
+      min_version: "^1.0.0"
+      rationale: "Requires acceleration and kinematic equations of motion."
+    - slug: "math-vectors-2d"
+      min_version: "^1.0.0"
+      rationale: "Requires 2D vector addition for net force summation."
+  related_modules:
+    - slug: "phys-momentum-conservation"
+      relationship: "subsequent_concept"
+    - slug: "cs-numerical-integration"
+      relationship: "computational_application"
+
+learning_objectives:
+  - id: "obj-newt-1"
+    statement: "Explain the concept of inertia and distinguish between inertial and non-inertial reference frames."
+    bloom_level: "understand"
+  - id: "obj-newt-2"
+    statement: "Apply Newton's Second Law as a vector sum (F_net = m*a) to calculate accelerations in multi-force systems."
+    bloom_level: "apply"
+  - id: "obj-newt-3"
+    statement: "Analyze action-reaction pairs using Newton's Third Law to ensure internal forces cancel in coupled systems."
+    bloom_level: "analyze"
+
+practical_applications:
+  - title: "2D Force Accumulator in Physics Engines"
+    type: "computational_simulation"
+    description: "Sum all forces (gravity, spring forces, drag, friction) acting on a body to calculate net acceleration a = F_net / m."
+
+provenance:
+  sources:
+    - id: "src-halliday-resnick-ch5"
+      citation: "Halliday, D., Resnick, R., & Walker, J. (2018). Fundamentals of Physics (11th ed.). Wiley, Chapters 5 and 6: Force and Motion."
+      isbn: "978-1119460138"
+      claims_supported: [
+        "Inertial reference frame definition",
+        "Newton's three laws of motion",
+        "Static and kinetic friction equations"
+      ]
+    - id: "src-feynman-lectures-vol1-ch9"
+      citation: "Feynman, R. P., Leighton, R. B., & Sands, M. (1963). The Feynman Lectures on Physics, Vol. I, Chapter 9: Newton's Laws of Dynamics. Caltech."
+      url: "https://www.feynmanlectures.caltech.edu/I_09.html"
+      license: "Free to read online (Educational citation)"
+      claims_supported: [
+        "Operational definition of force and mass",
+        "Linear momentum formulation F = dp/dt"
+      ]
+
+discovery_context:
+  historical_significance: "Published in Isaac Newton's Philosophiæ Naturalis Principia Mathematica in 1687, unifying terrestrial and celestial mechanics under universal physical laws."
+  historical_influences:
+    - discovery_id: "disc-galileo-inertia"
+    - discovery_id: "disc-kepler-planetary-laws"

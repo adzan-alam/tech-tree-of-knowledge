@@ -1,0 +1,51 @@
+module_slug: "cs-numerical-integration"
+passing_threshold_percent: 75
+
+questions:
+  - id: "q-num-01"
+    target_objective_id: "obj-num-1"
+    prompt: "Why is the naive Explicit (Forward) Euler algorithm generally considered unsuitable for long-term physics simulations of planetary orbits or springs?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "It is non-symplectic and artificially injects energy into oscillatory systems each step, causing orbits to spiral outward uncontrollably."
+        is_correct: true
+      - id: "opt-2"
+        text: "It cannot handle positive numbers."
+        is_correct: false
+      - id: "opt-3"
+        text: "It requires quantum computers to compile."
+        is_correct: false
+      - id: "opt-4"
+        text: "It violates Newton's First Law only on weekends."
+        is_correct: false
+    explanation: "Explicit Euler systematically overestimates velocity and position in convex potential wells, artificially inflating total mechanical energy over time."
+
+  - id: "q-num-02"
+    target_objective_id: "obj-num-2"
+    prompt: "In Semi-Implicit (Symplectic) Euler, what is the crucial sequencing difference compared to Explicit Euler?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Velocity is updated first using acceleration, and then position is updated using the NEW velocity (x_{k+1} = x_k + v_{k+1}*dt)."
+        is_correct: true
+      - id: "opt-2"
+        text: "Position is updated first using past velocity, then velocity is deleted."
+        is_correct: false
+      - id: "opt-3"
+        text: "Acceleration is ignored entirely."
+        is_correct: false
+      - id: "opt-4"
+        text: "Time dt is set to zero."
+        is_correct: false
+    explanation: "Using the updated velocity v_{k+1} to compute x_{k+1} makes the transform symplectic, conserving phase space area."
+
+  - id: "q-num-03"
+    target_objective_id: "obj-num-3"
+    prompt: "A particle with initial x = 0, initial v = 10 m/s undergoes constant acceleration a = 4 m/s^2. Using the Verlet position formula x = x_0 + v_0*dt + 0.5*a*(dt)^2 with dt = 2 seconds, what is x?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 28.0
+      tolerance: 0.05
+      unit: "meters"
+    explanation: "x = 0 + 10*(2) + 0.5*(4)*(2^2) = 20 + 0.5*4*4 = 20 + 8 = 28 meters."

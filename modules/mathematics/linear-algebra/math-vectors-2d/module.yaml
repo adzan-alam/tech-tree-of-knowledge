@@ -1,0 +1,70 @@
+id: "a1000000-0000-0000-0000-000000000001"
+slug: "math-vectors-2d"
+title: "2D Cartesian Vectors and Vector Algebra"
+summary: "Foundational mathematics of two-dimensional Euclidean vectors, Cartesian representations, vector arithmetic, dot products, norms, and orthogonal projections."
+version: "1.0.0"
+created_at: "2026-11-19T01:30:00Z"
+updated_at: "2026-11-19T01:30:00Z"
+
+classification:
+  discipline: "mathematics"
+  domain: "linear-algebra"
+  proficiency_tier: 1
+  difficulty_score: 0.3
+  estimated_duration_minutes: 60
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["math-verifier-01", "pedagogy-auditor-02"]
+  verification_date: "2026-11-19"
+  notes: "Algebraic identities, geometric proofs, and vector projection equations verified against standard linear algebra literature."
+
+relationships:
+  prerequisites: []
+  related_modules:
+    - slug: "phys-kinematics-1d-2d"
+      relationship: "computational_application"
+    - slug: "cs-prog-fundamentals"
+      relationship: "computational_application"
+
+learning_objectives:
+  - id: "obj-vec-1"
+    statement: "Represent a two-dimensional vector using Cartesian components and calculate its Euclidean magnitude and direction angle."
+    bloom_level: "apply"
+  - id: "obj-vec-2"
+    statement: "Calculate the vector sum, difference, and scalar multiple geometrically and algebraically."
+    bloom_level: "apply"
+  - id: "obj-vec-3"
+    statement: "Compute the dot product of two vectors to determine orthogonality and calculate the scalar projection of one vector onto another."
+    bloom_level: "analyze"
+
+practical_applications:
+  - title: "Velocity and Force Resolution in Simulations"
+    type: "computational_simulation"
+    description: "Decompose diagonal velocity and force vectors into orthogonal x and y components for discrete numerical updates."
+
+provenance:
+  sources:
+    - id: "src-strang-linear-algebra"
+      citation: "Strang, G. (2016). Introduction to Linear Algebra (5th ed.). Wellesley-Cambridge Press, Chapter 1: Vectors and Linear Combinations."
+      isbn: "978-0980232776"
+      claims_supported: [
+        "Cartesian component representation",
+        "Euclidean vector norm definition",
+        "Algebraic dot product definition and properties"
+      ]
+    - id: "src-openstax-calculus-vol3"
+      citation: "OpenStax. (2016). Calculus Volume 3, Chapter 2: Vectors in Space. OpenStax CNX."
+      url: "https://openstax.org/details/books/calculus-volume-3"
+      license: "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+      claims_supported: [
+        "Vector addition and triangle inequality",
+        "Scalar projection and direction cosines"
+      ]
+
+discovery_context:
+  historical_significance: "Formal vector analysis was unified in the late 19th century by J. Willard Gibbs and Oliver Heaviside, emerging from Hamilton's quaternions to simplify electromagnetic theory."
+  historical_influences:
+    - discovery_id: "disc-descartes-analytic-geometry"
+    - discovery_id: "disc-hamilton-quaternions"
+    - discovery_id: "disc-gibbs-vector-analysis"

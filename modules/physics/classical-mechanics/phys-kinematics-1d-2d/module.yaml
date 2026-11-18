@@ -1,0 +1,72 @@
+id: "a1000000-0000-0000-0000-000000000003"
+slug: "phys-kinematics-1d-2d"
+title: "1D and 2D Kinematics: The Description of Motion"
+summary: "Comprehensive study of position, displacement, velocity, acceleration, constant acceleration equations, and 2D projectile motion under gravity."
+version: "1.0.0"
+created_at: "2026-11-19T01:30:00Z"
+updated_at: "2026-11-19T01:30:00Z"
+
+classification:
+  discipline: "physics"
+  domain: "classical-mechanics"
+  proficiency_tier: 1
+  difficulty_score: 0.35
+  estimated_duration_minutes: 75
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["phys-verifier-01", "pedagogy-auditor-02"]
+  verification_date: "2026-11-19"
+  notes: "Kinematic equations, Galilean projectile independence, and numerical integration convergence verified."
+
+relationships:
+  prerequisites:
+    - slug: "math-vectors-2d"
+      min_version: "^1.0.0"
+      rationale: "Requires 2D vector decomposition into orthogonal horizontal and vertical components."
+  related_modules:
+    - slug: "phys-newtons-laws"
+      relationship: "subsequent_concept"
+    - slug: "cs-prog-fundamentals"
+      relationship: "computational_application"
+
+learning_objectives:
+  - id: "obj-kin-1"
+    statement: "Differentiate between scalar distance/speed and vector displacement/velocity in one and two dimensions."
+    bloom_level: "understand"
+  - id: "obj-kin-2"
+    statement: "Apply the standard constant-acceleration kinematic equations to solve one-dimensional motion problems."
+    bloom_level: "apply"
+  - id: "obj-kin-3"
+    statement: "Analyze two-dimensional projectile motion by decoupling independent horizontal and vertical motions."
+    bloom_level: "analyze"
+
+practical_applications:
+  - title: "2D Projectile Trajectory Simulation"
+    type: "computational_simulation"
+    description: "Simulate a projectile launched with angle theta and initial speed v_0, calculating time of flight, peak height, and landing distance."
+
+provenance:
+  sources:
+    - id: "src-halliday-resnick"
+      citation: "Halliday, D., Resnick, R., & Walker, J. (2018). Fundamentals of Physics (11th ed.). Wiley, Chapters 2 and 4: Motion Along a Straight Line and Motion in Two and Three Dimensions."
+      isbn: "978-1119460138"
+      claims_supported: [
+        "Kinematic equations of constant acceleration",
+        "Independence of horizontal and vertical projectile motion",
+        "Trajectory parabola derivation"
+      ]
+    - id: "src-openstax-university-physics-v1"
+      citation: "OpenStax. (2016). University Physics Volume 1, Chapters 3 and 4. OpenStax CNX."
+      url: "https://openstax.org/details/books/university-physics-volume-1"
+      license: "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+      claims_supported: [
+        "Average and instantaneous acceleration",
+        "Projectile range equation"
+      ]
+
+discovery_context:
+  historical_significance: "Formulated experimentally by Galileo Galilei in 1638 via inclined planes, refuting Aristotelian kinematics and showing that falling bodies accelerate uniformly regardless of mass."
+  historical_influences:
+    - discovery_id: "disc-galileo-two-new-sciences-1638"
+    - discovery_id: "disc-galileo-inclined-plane"

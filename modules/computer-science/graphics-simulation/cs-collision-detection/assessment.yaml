@@ -1,0 +1,51 @@
+module_slug: "cs-collision-detection"
+passing_threshold_percent: 75
+
+questions:
+  - id: "q-col-01"
+    target_objective_id: "obj-col-1"
+    prompt: "In a computational physics pipeline with thousands of bodies, what is the role of the broad-phase collision detection step?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Quickly discard pairs of objects that are nowhere near each other using cheap bounding volumes, avoiding expensive O(N^2) narrow-phase geometric tests."
+        is_correct: true
+      - id: "opt-2"
+        text: "Directly calculate exact contact manifolds and friction forces."
+        is_correct: false
+      - id: "opt-3"
+        text: "Render textures to the GPU."
+        is_correct: false
+      - id: "opt-4"
+        text: "Delete overlapping bodies from memory."
+        is_correct: false
+    explanation: "Broad-phase collision detection uses spatial partitioning or bounding boxes to rapidly prune distant pairs before exact shape tests."
+
+  - id: "q-col-02"
+    target_objective_id: "obj-col-2"
+    prompt: "Circle A has center at (0, 0) and radius 5. Circle B has center at (3, 4) and radius 3. What is the penetration depth between them?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 3.0
+      tolerance: 0.05
+      unit: "units"
+    explanation: "Distance between centers = sqrt(3^2 + 4^2) = 5. Sum of radii = 5 + 3 = 8. Penetration = 8 - 5 = 3 units."
+
+  - id: "q-col-03"
+    target_objective_id: "obj-col-3"
+    prompt: "Why is positional correction (moving overlapping bodies apart) necessary in addition to applying an elastic velocity impulse?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Because without positional correction, finite numerical time-steps cause objects to remain partially embedded, creating jitter or sinking."
+        is_correct: true
+      - id: "opt-2"
+        text: "Because Newton's Third Law is only true when objects are at rest."
+        is_correct: false
+      - id: "opt-3"
+        text: "To increase the framerate of the monitor."
+        is_correct: false
+      - id: "opt-4"
+        text: "Positional correction is actually never used in physics engines."
+        is_correct: false
+    explanation: "Due to discrete time steps, bodies penetrate before a collision is detected. Velocity impulses alone don't instantly remove the positional overlap, causing objects to sink."

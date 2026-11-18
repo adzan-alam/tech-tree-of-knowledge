@@ -1,0 +1,42 @@
+module_slug: "chem-atomic-structure"
+passing_threshold_percent: 75
+
+questions:
+  - id: "q-atom-01"
+    target_objective_id: "obj-atom-1"
+    prompt: "Which subatomic particle possesses a negative unit charge and accounts for less than 0.06% of an atom's total mass?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The Electron"
+        is_correct: true
+      - id: "opt-2"
+        text: "The Proton"
+        is_correct: false
+      - id: "opt-3"
+        text: "The Neutron"
+        is_correct: false
+      - id: "opt-4"
+        text: "The Alpha Particle"
+        is_correct: false
+    explanation: "Electrons carry a -1 elementary charge and have a mass of ~9.11e-31 kg (~1/1836 the mass of a proton or neutron)."
+
+  - id: "q-atom-02"
+    target_objective_id: "obj-atom-2"
+    prompt: "An isotope of Carbon has 6 protons and 8 neutrons (Carbon-14). What is its mass number A?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 14.0
+      tolerance: 0.01
+      unit: "nucleons"
+    explanation: "Mass number A = Z (protons) + N (neutrons) = 6 + 8 = 14."
+
+  - id: "q-atom-03"
+    target_objective_id: "obj-atom-3"
+    prompt: "According to the Bohr model, how much energy (in eV) does an electron in the ground state (n = 1) of hydrogen possess?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: -13.6
+      tolerance: 0.1
+      unit: "eV"
+    explanation: "E_n = -13.6 / n^2 eV. For n = 1, E_1 = -13.6 / 1 = -13.6 eV."

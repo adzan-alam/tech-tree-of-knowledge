@@ -1,0 +1,42 @@
+module_slug: "phys-kinematics-1d-2d"
+passing_threshold_percent: 75
+
+questions:
+  - id: "q-kin-01"
+    target_objective_id: "obj-kin-1"
+    prompt: "An athlete runs exactly one full lap around a 400-meter circular track in 50 seconds, returning to their starting mark. What is their average velocity vector magnitude?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 0.0
+      tolerance: 0.01
+      unit: "m/s"
+    explanation: "Average velocity is net displacement divided by time. Since the starting and ending positions are identical, net displacement is 0 meters, so average velocity is 0 m/s (whereas average speed is 400/50 = 8 m/s)."
+
+  - id: "q-kin-02"
+    target_objective_id: "obj-kin-2"
+    prompt: "A car traveling at 20 m/s brakes with a constant deceleration of 4 m/s^2. How far does the car travel before coming to a complete stop?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 50.0
+      tolerance: 0.1
+      unit: "meters"
+    explanation: "Using v^2 = v_0^2 + 2*a*d with v = 0, v_0 = 20, a = -4: 0 = 400 - 8*d => 8*d = 400 => d = 50 meters."
+
+  - id: "q-kin-03"
+    target_objective_id: "obj-kin-3"
+    prompt: "In the absence of air resistance, what happens to the horizontal velocity component v_x of a projectile as it rises and falls?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "It remains completely constant throughout the entire flight because no horizontal force acts upon it."
+        is_correct: true
+      - id: "opt-2"
+        text: "It decreases to zero at the peak height and then reverses direction."
+        is_correct: false
+      - id: "opt-3"
+        text: "It increases continuously due to gravity."
+        is_correct: false
+      - id: "opt-4"
+        text: "It fluctuates according to the sine of the angle."
+        is_correct: false
+    explanation: "Gravity acts purely vertically (downwards). With zero horizontal force and zero air drag, horizontal acceleration is zero (a_x = 0), keeping v_x constant."

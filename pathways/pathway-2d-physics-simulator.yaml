@@ -1,0 +1,44 @@
+id: "b2000000-0000-0000-0000-000000000001"
+slug: "pathway-2d-physics-simulator"
+title: "The 2D Computational Physics Engine Pathway"
+description: "A cross-disciplinary learning journey uniting 2D vector mathematics, Newtonian mechanics, and discrete numerical algorithms into an interactive physics simulator built from first principles."
+target_goal: "Construct a real-time, interactive 2D physics simulation modeling particle dynamics, gravity, air resistance, Velocity Verlet integration, and elastic collisions."
+target_proficiency_tier: 2
+
+capstone_project:
+  title: "Interactive 2D Physics Simulator"
+  description: "A canvas-based interactive simulation environment demonstrating gravity, air drag, Velocity Verlet numerical integration, boundary bouncing, and sphere-sphere restitution collisions without overlapping or sinking."
+  deliverable_type: "interactive_simulation"
+
+modules:
+  - slug: "math-vectors-2d"
+    sequence_order: 1
+    curation_note: "Axiomatic foundation: Cartesian components, vector arithmetic, dot products, and Euclidean distance."
+
+  - slug: "math-calculus-derivatives"
+    sequence_order: 2
+    curation_note: "Mathematical bridge: Understanding instantaneous rates of change, velocity as dx/dt, and acceleration as dv/dt."
+
+  - slug: "phys-kinematics-1d-2d"
+    sequence_order: 3
+    curation_note: "Physical description: Connecting vector coordinates to velocity, acceleration, and parabolic projectile trajectories under gravity."
+
+  - slug: "phys-newtons-laws"
+    sequence_order: 4
+    curation_note: "Physical cause of motion: Force accumulation (F_net = m*a), inertia, friction, and fluid drag forces."
+
+  - slug: "phys-momentum-conservation"
+    sequence_order: 5
+    curation_note: "Interaction dynamics: Linear momentum (p = mv), impulse, and elastic restitution during high-speed collisions."
+
+  - slug: "cs-prog-fundamentals"
+    sequence_order: 6
+    curation_note: "Computational foundation: State representation, fixed delta-time loops, and iterating over arrays of entities."
+
+  - slug: "cs-numerical-integration"
+    sequence_order: 7
+    curation_note: "Numerical engine: Converting continuous differential equations into stable discrete time steps via Velocity Verlet."
+
+  - slug: "cs-collision-detection"
+    sequence_order: 8
+    curation_note: "Geometric resolution: Circle-circle intersection tests, positional separation to avoid sinking, and restitution impulses."

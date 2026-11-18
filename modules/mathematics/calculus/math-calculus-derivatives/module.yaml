@@ -1,0 +1,69 @@
+id: "a1000000-0000-0000-0000-000000000002"
+slug: "math-calculus-derivatives"
+title: "Differential Calculus: Rates of Change and Derivatives"
+summary: "The derivative as an instantaneous rate of change and tangent slope, limits, power rule, product rule, and physical interpretations in kinematics."
+version: "1.0.0"
+created_at: "2026-11-19T01:30:00Z"
+updated_at: "2026-11-19T01:30:00Z"
+
+classification:
+  discipline: "mathematics"
+  domain: "calculus"
+  proficiency_tier: 2
+  difficulty_score: 0.4
+  estimated_duration_minutes: 75
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["math-verifier-01", "pedagogy-auditor-02"]
+  verification_date: "2026-11-19"
+  notes: "Formal limit definition of the derivative and differentiation theorems checked."
+
+relationships:
+  prerequisites: []
+  related_modules:
+    - slug: "phys-kinematics-1d-2d"
+      relationship: "computational_application"
+    - slug: "cs-numerical-integration"
+      relationship: "computational_application"
+
+learning_objectives:
+  - id: "obj-calc-1"
+    statement: "Explain the formal limit definition of the derivative as the instantaneous rate of change of a function."
+    bloom_level: "understand"
+  - id: "obj-calc-2"
+    statement: "Apply the power rule, sum rule, and constant multiple rule to compute derivatives of algebraic functions."
+    bloom_level: "apply"
+  - id: "obj-calc-3"
+    statement: "Analyze position functions with respect to time to derive instantaneous velocity and acceleration."
+    bloom_level: "analyze"
+
+practical_applications:
+  - title: "Kinematic State Derivation"
+    type: "computational_simulation"
+    description: "Analytically derive velocity v(t) = dx/dt and acceleration a(t) = dv/dt to benchmark discrete numerical simulators."
+
+provenance:
+  sources:
+    - id: "src-stewart-calculus"
+      citation: "Stewart, J. (2015). Calculus: Early Transcendentals (8th ed.). Cengage Learning, Chapter 2: Derivatives and Rates of Change."
+      isbn: "978-1285741550"
+      claims_supported: [
+        "Limit definition of the derivative",
+        "Power rule and differentiation rules",
+        "Rates of change in physics and natural sciences"
+      ]
+    - id: "src-openstax-calculus-vol1"
+      citation: "OpenStax. (2016). Calculus Volume 1, Chapter 3: Derivatives. OpenStax CNX."
+      url: "https://openstax.org/details/books/calculus-volume-1"
+      license: "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+      claims_supported: [
+        "Tangents and instantaneous velocity",
+        "Higher order derivatives"
+      ]
+
+discovery_context:
+  historical_significance: "Independently invented by Isaac Newton and Gottfried Wilhelm Leibniz in the late 17th century, providing the mathematical language for classical mechanics."
+  historical_influences:
+    - discovery_id: "disc-newton-fluxions"
+    - discovery_id: "disc-leibniz-differential-calculus"
