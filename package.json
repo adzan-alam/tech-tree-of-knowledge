@@ -12,6 +12,9 @@
     "validate": "tsx src/cli/validate.ts",
     "graph:check": "tsx src/cli/graph.ts check",
     "graph:path": "tsx src/cli/graph.ts pathway",
+    "module:create": "tsx src/cli/author.ts create",
+    "module:lint": "tsx src/cli/author.ts lint",
+    "module:audit": "tsx src/cli/author.ts audit",
     "lint": "tsc --noEmit"
   },
   "dependencies": {

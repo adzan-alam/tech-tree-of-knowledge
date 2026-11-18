@@ -6,6 +6,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.4.0] - 2026-11-19 (Phase 3: Content Authoring System & Verification Pipeline)
+
+### Added
+- **Module Scaffolder Subsystem:**
+  - `src/authoring/scaffold.ts`: Automated sovereign module generator outputting compliant `module.yaml`, `content.md`, and `assessment.yaml`.
+- **Provenance & Pedagogical Linter:**
+  - `src/authoring/provenance-linter.ts`: Strict citation checker requiring verified locators (URL/ISBN/DOI) and Bloom's Taxonomy active verb auditing.
+  - KaTeX mathematical delimiter syntax validation.
+- **Verification Workflow Auditor:**
+  - `src/authoring/verification-auditor.ts`: Repository-wide quality auditor evaluating verification readiness.
+- **Authoring Studio CLI Commands:**
+  - `src/cli/author.ts`: `techtree-author` CLI with `create`, `lint`, and `audit` commands.
+  - Added npm scripts: `npm run module:create`, `npm run module:lint`, `npm run module:audit`.
+- **Automated Tests:**
+  - `tests/unit/authoring.test.ts`: Expanded test suite from 15 to 21 tests (100% pass rate).
+
+---
+
 ## [0.3.0] - 2026-11-19 (Phase 2: Core Graph Engine & Pathway Generator)
 
 ### Added
