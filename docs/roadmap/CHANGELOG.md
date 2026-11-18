@@ -6,6 +6,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.3.0] - 2026-11-19 (Phase 2: Core Graph Engine & Pathway Generator)
+
+### Added
+- **Core Graph Engine:**
+  - `src/core/graph/knowledge-graph.ts`: Decoupled, in-memory knowledge DAG indexer.
+  - `src/core/graph/types.ts`: Graph edge, node, cycle result, and pathway resolution types.
+  - Three-color Depth-First Search (`WHITE`, `GRAY`, `BLACK`) cycle detection engine.
+  - Kahn's algorithm topological sorting with deterministic tie-breaking.
+  - Backwards-chaining goal pathway resolution and delta competency calculations.
+  - Recommended and complementary module surfacing along learning paths.
+  - Transitive redundancy identification.
+- **Graph CLI Subsystem:**
+  - `src/cli/graph.ts`: `techtree-graph` CLI with `check` and `pathway` commands.
+  - Scripts `npm run graph:check` and `npm run graph:path`.
+- **Architectural Records:**
+  - `docs/architecture/DECISION_LOG.md`: Added ADR-004 (Multi-Platform Client Portability: Web, Desktop, Mobile, Offline-first).
+- **Automated Tests:**
+  - `tests/unit/knowledge-graph.test.ts`: Comprehensive tests for cycle detection, topological sorting, pathway resolution, and transitive reduction (15/15 tests passing across project).
+- **Cloud Synchronization:**
+  - Linked GitHub remote `https://github.com/adzan-alam/tech-tree-of-knowledge.git` on `main`.
+
+---
+
 ## [0.2.0] - 2026-11-19 (Phase 1: Knowledge Ontology, Schemas & Validation Engine)
 
 ### Added

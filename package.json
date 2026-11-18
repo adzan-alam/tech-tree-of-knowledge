@@ -10,6 +10,8 @@
     "test": "node --test dist/tests/**/*.test.js || tsx --test tests/**/*.test.ts",
     "test:ts": "tsx --test tests/**/*.test.ts",
     "validate": "tsx src/cli/validate.ts",
+    "graph:check": "tsx src/cli/graph.ts check",
+    "graph:path": "tsx src/cli/graph.ts pathway",
     "lint": "tsc --noEmit"
   },
   "dependencies": {

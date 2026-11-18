@@ -39,6 +39,16 @@ From inception, the architecture was divided into two intertwined systems:
   - Established automated test suite with valid and invalid fixtures (100% test pass rate).
   - *Phase Report:* [`phase-reports/PHASE_1_SCHEMA_REPORT.md`](./phase-reports/PHASE_1_SCHEMA_REPORT.md)
 
+- **Phase 2 — Core Graph Engine & Pathway Generator:**
+  - Implemented platform-agnostic `KnowledgeGraph` with bidirectional adjacency lists.
+  - Engineered 3-color DFS cycle detector returning explicit circular paths.
+  - Engineered Kahn's topological sorter with proficiency tier prioritization.
+  - Implemented backwards-chaining pathway synthesis with competency delta calculation.
+  - Added discovery of recommended / complementary modules along pathways.
+  - Codified ADR-004 (Multi-Platform Client Portability: Web, Desktop, Mobile, Offline-first).
+  - Linked GitHub remote (`adzan-alam/tech-tree-of-knowledge`) and established automated cloud sync.
+  - *Phase Report:* [`phase-reports/PHASE_2_GRAPH_ENGINE_REPORT.md`](./phase-reports/PHASE_2_GRAPH_ENGINE_REPORT.md)
+
 ---
 
 ## 🔮 Planning Ahead & Planning Behind

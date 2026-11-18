@@ -33,3 +33,19 @@
 - **Decision:** Select the **2D Physics Simulator** as the capstone pilot, synthesizing Mathematics (2D vectors, calculus), Physics (kinematics, dynamics, collisions), and Computer Science (game loops, numerical integration, collision detection).
 - **Rationale:** It embodies the core axiom: *"Knowledge organized around understanding and the ability to create."* It produces an immediately visual, interactive, and satisfying artifact.
 - **Consequences:** Guides the selection of the initial 12–16 modules for Phase 4.
+
+---
+
+## ADR-004: Multi-Platform Architecture (Web, Desktop, Mobile & Offline-First)
+- **Status:** **Accepted**
+- **Date:** 2026-11-19
+- **Context:** The system must not be constrained to a traditional web browser; it must eventually package seamlessly as a cross-platform desktop application (Windows, macOS, Linux) and mobile/tablet application (iOS, Android) with full offline functionality.
+- **Decision:**
+  1. The Core Domain & Graph Engine is implemented in 100% pure, platform-agnostic TypeScript with zero OS-native binary bindings. It executes identically in Node.js, browsers, web workers, and mobile webviews.
+  2. The Presentation Layer will be built as a responsive Single Page Application (SPA / PWA) utilizing standard web technologies (HTML5 Canvas, WebGL, SVG, KaTeX).
+  3. Packaging targets:
+     - **Web:** Hosted Progressive Web App (PWA) with Service Worker caching.
+     - **Desktop:** Native desktop wrapper via **Tauri** or **Electron** bundling local file storage.
+     - **Mobile:** Native mobile wrapper via **Capacitor** or React Native WebView.
+  4. Knowledge repositories are completely offline-capable: modules can be bundled locally or synchronized via IndexedDB/SQLite.
+- **Consequences:** Zero vendor lock-in; true "write once, run everywhere" capability from high-end desktop workstations to offline mobile devices.
