@@ -1001,6 +1001,70 @@
           </div>
         </div>
 
+        <!-- Interactive Calculus Derivative Lab Sandbox (Mounted dynamically for math-calculus-derivatives) -->
+        <div id="calculusLabBox" style="display:none; background:#111827; border:1px solid #374151; border-radius:12px; padding:1.2rem; margin-bottom:2rem; box-shadow:0 10px 25px -5px rgba(0,0,0,0.5);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem; border-bottom:1px solid #1f2937; padding-bottom:0.6rem;">
+            <div>
+              <span style="font-size:0.75rem; text-transform:uppercase; font-weight:700; color:var(--accent-math); letter-spacing:0.05em;">Interactive Laboratory</span>
+              <h3 style="font-size:1.1rem; font-weight:700; margin:0.2rem 0; color:#fff;">Secant-to-Tangent Limit & Rate-of-Change Visualizer</h3>
+            </div>
+            <span style="font-size:0.75rem; color:#9ca3af;">Drag point x₀ or click "Shrink h → 0"</span>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 310px; gap:1.2rem;">
+            <div>
+              <canvas id="calculusLabCanvas" width="560" height="380" style="background:#0b0f19; border:1px solid #1f2937; border-radius:8px; cursor:crosshair; width:100%; height:auto; display:block;"></canvas>
+              <div style="display:flex; gap:0.5rem; margin-top:0.6rem; flex-wrap:wrap; align-items:center;">
+                <button class="sim-btn" id="btnLabCalcParabola" style="font-size:0.75rem; padding:0.3rem 0.6rem;">Parabola x²</button>
+                <button class="sim-btn" id="btnLabCalcCubic" style="font-size:0.75rem; padding:0.3rem 0.6rem;">Cubic (x³/3 - x)</button>
+                <button class="sim-btn" id="btnLabCalcSine" style="font-size:0.75rem; padding:0.3rem 0.6rem;">Harmonic sin(x)</button>
+                <button class="sim-btn" id="btnLabCalcRocket" style="font-size:0.75rem; padding:0.3rem 0.6rem;">Rocket (-0.5t²+3t)</button>
+                <button class="sim-btn" id="btnLabCalcAnimate" style="font-size:0.75rem; padding:0.3rem 0.6rem; background:#2563eb; color:#fff; font-weight:700;">⚡ Shrink h → 0</button>
+              </div>
+              <div style="display:flex; gap:1rem; margin-top:0.6rem; font-size:0.8rem; color:#9ca3af; align-items:center; flex-wrap:wrap;">
+                <label style="display:flex; align-items:center; gap:0.4rem;">
+                  Point x₀: <input type="range" id="sliderLabX0" min="-2.5" max="2.5" step="0.05" value="1.0" style="width:110px;">
+                </label>
+                <label style="display:flex; align-items:center; gap:0.4rem;">
+                  Step h: <input type="range" id="sliderLabH" min="0.02" max="2.0" step="0.02" value="1.0" style="width:110px;">
+                </label>
+              </div>
+            </div>
+
+            <!-- Live Math HUD -->
+            <div style="background:#131b2e; border:1px solid #1e293b; border-radius:8px; padding:0.8rem; font-size:0.8rem; display:flex; flex-direction:column; gap:0.6rem;">
+              <div>
+                <strong style="color:#38bdf8;">Evaluation Point P(x₀, f(x₀)):</strong><br>
+                Coordinates: <span id="labCalcPoint" style="font-family:monospace; color:#fff;">(1.00, 1.00)</span>
+              </div>
+              <div>
+                <strong style="color:#c084fc;">Secant Point Q(x₀ + h, f(x₀ + h)):</strong><br>
+                Step size h: <span id="labCalcH" style="font-family:monospace; color:#fff;">1.00</span><br>
+                Coordinates: <span id="labCalcSecPoint" style="font-family:monospace; color:#fff;">(2.00, 4.00)</span>
+              </div>
+              <div style="border-top:1px solid #1e293b; padding-top:0.4rem;">
+                <strong style="color:#34d399;">Secant Slope (Average Rate):</strong><br>
+                <span style="font-size:0.75rem; color:#9ca3af;">m_sec = [f(x₀+h) - f(x₀)] / h</span><br>
+                Value: <span style="font-family:monospace; font-size:1.05rem; color:#34d399; font-weight:700;" id="labCalcSecSlope">3.000</span>
+              </div>
+              <div style="border-top:1px solid #1e293b; padding-top:0.4rem;">
+                <strong style="color:#f59e0b;">Exact Tangent Slope f'(x₀):</strong><br>
+                <span style="font-size:0.75rem; color:#9ca3af;">f'(x₀) = lim_{h→0} Difference Quotient</span><br>
+                Value: <span style="font-family:monospace; font-size:1.05rem; color:#f59e0b; font-weight:700;" id="labCalcTanSlope">2.000</span>
+              </div>
+              <div>
+                <strong style="color:#ec4899;">Truncation Error |m_sec - f'(x₀)|:</strong><br>
+                Error: <span style="font-family:monospace; font-weight:700; color:#ec4899;" id="labCalcError">1.000</span>
+              </div>
+              <div style="border-top:1px solid #1e293b; padding-top:0.4rem;">
+                <strong style="color:#94a3b8;">Physical Dynamics Telemetry:</strong><br>
+                Velocity v(t): <span id="labCalcPhysVel" style="font-family:monospace; color:#fff;">+2.00 m/s</span><br>
+                State: <span id="labCalcPhysState" style="font-weight:700; color:#34d399;">Forward Speeding Up</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div id="readerBody" class="reader-body">
           <!-- Dynamically populated with text and KaTeX formulas -->
         </div>
@@ -1273,32 +1337,161 @@ export class Vector2D {
         {
           id: "a1000000-0000-0000-0000-000000000002",
           slug: "math-calculus-derivatives",
-          title: "Differential Calculus: Derivatives",
+          title: "Differential Calculus: Rates of Change & Derivatives",
           discipline: "mathematics",
           domain: "calculus",
           proficiencyTier: 2,
-          duration: 75,
-          summary: "The derivative as an instantaneous rate of change and tangent slope, power rule, and physical interpretations in velocity and acceleration.",
+          duration: 90,
+          summary: "A comprehensive first-principles guide to differential calculus: from Zeno's Arrow Paradox (Class 6 level) and secant-to-tangent limits to algebraic differentiation rules, the kinematic motion hierarchy, optimization, and high-precision numerical engines.",
           prerequisites: [],
           x: 100, y: 350,
           content: `
-            <h2>1. The Instantaneous Rate of Change</h2>
-            <p>The derivative represents the limit of average velocity as time delta approaches zero:</p>
-            <div class="math-card">$$ f'(x) = \\lim_{\\Delta x \\to 0} \\frac{f(x + \\Delta x) - f(x)}{\\Delta x} $$</div>
-            <h2>2. Physical Meaning</h2>
-            <p>Velocity is the first derivative of position; acceleration is the second derivative of position:</p>
-            <div class="math-card">$$ v(t) = \\frac{dx}{dt} = \\dot{x}(t), \\quad a(t) = \\frac{dv}{dt} = \\frac{d^2x}{dt^2} = \\ddot{x}(t) $$</div>
+            <div style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--accent-math); padding: 1rem; border-radius: 4px; margin-bottom: 1.5rem;">
+              <strong>🎯 Pedagogical Journey:</strong> This module starts from absolute zero—assuming only basic arithmetic and the everyday Speedometer Paradox—and builds an unbroken cognitive ladder to university-level kinematic dynamics and numerical software engines.
+            </div>
+
+            <h2>Level 0: The Speedometer Paradox & Arithmetic Failure</h2>
+            <p>Imagine you are sitting in a passenger train traveling between two cities. You look at the digital speedometer mounted on the wall: <strong>Current Speed: 240 km/h</strong>.</p>
+            <p>You snap a photo with your phone. In that frozen photograph, how much time elapsed? <strong>Zero seconds</strong> ($\\Delta t = 0$). How far did the train travel? <strong>Zero meters</strong> ($\\Delta s = 0$).</p>
+            <p>If you calculate speed using school arithmetic ($\\text{Speed} = \\Delta s / \\Delta t$), you get:</p>
+            <div class="math-card">$$ \\text{Speed} = \\frac{0}{0} $$</div>
+            <p>Dividing by zero is undefined! In the 5th century BCE, <strong>Zeno of Elea</strong> used this exact puzzle in his famous <em>Arrow Paradox</em>: at every single instant, an arrow occupies a fixed space equal to itself, so it is motionless. If it is motionless at every instant, when does it ever move?</p>
+            <p>Differential calculus is humanity's resolution of Zeno's paradox. We do not set $\\Delta t = 0$. Instead, we ask: <em>What stable finite value does the ratio $\\frac{\\Delta s}{\\Delta t}$ approach as $\\Delta t$ shrinks infinitely close to zero?</em></p>
+
+            <h2>Level 1: Average vs. Instantaneous Rate of Change</h2>
+            <p>Consider an accelerating object whose position is given by $s(t) = t^2$ (meters). The average speed between any two times is the slope of the <strong>Secant Line</strong> cutting through the curve:</p>
+            <div class="math-card">$$ m_{\\text{secant}} = \\frac{\\Delta s}{\\Delta t} = \\frac{s(t + h) - s(t)}{h} $$</div>
+            <p>As we shrink the time interval $h$ toward zero at $t = 1\\text{ s}$:</p>
+            <ul>
+              <li>For $h = 1.0\\text{ s} \\implies m = \\frac{2^2 - 1^2}{1} = 3.0\\text{ m/s}$</li>
+              <li>For $h = 0.1\\text{ s} \\implies m = \\frac{1.1^2 - 1^2}{0.1} = 2.1\\text{ m/s}$</li>
+              <li>For $h = 0.01\\text{ s} \\implies m = \\frac{1.01^2 - 1^2}{0.01} = 2.01\\text{ m/s}$</li>
+              <li>For $h = 0.0001\\text{ s} \\implies m = \\frac{1.0001^2 - 1^2}{0.0001} = 2.0001\\text{ m/s}$</li>
+            </ul>
+            <p>The secant line pivots until it grazes the curve at exactly one point: the <strong>Tangent Line</strong>. Its slope at $t = 1$ converges to exactly $2\\text{ m/s}$.</p>
+
+            <h2>Level 2: The Formal Limit Definition of the Derivative</h2>
+            <p>The slope of the tangent line at any point $x$ is defined as the <strong>Derivative</strong>:</p>
+            <div class="math-card">$$ f'(x) = \\frac{df}{dx} = \\lim_{h \\to 0} \\frac{f(x + h) - f(x)}{h} $$</div>
+            <p><strong>First-Principles Proof for $f(x) = x^2$ (Zero Skipped Steps):</strong></p>
+            <div class="math-card">$$ f'(x) = \\lim_{h \\to 0} \\frac{(x + h)^2 - x^2}{h} = \\lim_{h \\to 0} \\frac{(x^2 + 2xh + h^2) - x^2}{h} $$
+$$ = \\lim_{h \\to 0} \\frac{2xh + h^2}{h} = \\lim_{h \\to 0} \\frac{h(2x + h)}{h} = \\lim_{h \\to 0} (2x + h) = 2x $$</div>
+            <p>The $h$ in the denominator cancelled completely before setting $h = 0$, resolving the $0/0$ paradox!</p>
+
+            <h2>Level 3: The Toolkit of Differentiation (Derivations)</h2>
+            <p>Rather than calculating limits manually every time, we derive universal operational rules:</p>
+            <ul>
+              <li><strong>The Power Rule:</strong> $\\frac{d}{dx}[x^n] = n x^{n-1}$. Derived via the Binomial Theorem expansion of $(x+h)^n$.</li>
+              <li><strong>The Product Rule:</strong> $\\frac{d}{dx}[u \\cdot v] = u' v + u v'$. Proved by the expanding geometric rectangle of area $u \\times v$.</li>
+              <li><strong>The Quotient Rule:</strong> $\\frac{d}{dx}\\left[\\frac{u}{v}\\right] = \\frac{u' v - u v'}{v^2}$. ("Low D-High minus High D-Low, over the square of what's below").</li>
+              <li><strong>The Chain Rule:</strong> $\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)$. Like interlocked gears multiplying their angular velocity ratios: $\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}$.</li>
+              <li><strong>Trigonometric Derivatives:</strong> $\\frac{d}{dx}[\\sin x] = \\cos x$ and $\\frac{d}{dx}[\\cos x] = -\\sin x$. Cyclic every 4 derivatives, naturally modeling harmonic oscillations.</li>
+            </ul>
+
+            <h2>Level 4: The Physical Hierarchy of Motion</h2>
+            <div class="math-card">$$ \\text{Position } s(t) \\xrightarrow{\\frac{d}{dt}} \\text{Velocity } v(t) = \\dot{s}(t) \\xrightarrow{\\frac{d}{dt}} \\text{Acceleration } a(t) = \\ddot{s}(t) \\xrightarrow{\\frac{d}{dt}} \\text{Jerk } j(t) = \\dddot{s}(t) $$</div>
+            <p><strong>Speeding Up vs Slowing Down:</strong> An object speeds up if and only if velocity and acceleration share the same sign ($v \\cdot a > 0$). If $v > 0$ but $a < 0$, the object is moving forward while braking.</p>
+            <p><strong>Why Jerk Matters:</strong> Instantaneous acceleration changes imply infinite jerk ($\\Delta F = m \\Delta a$), causing mechanical gear wear and passenger motion sickness. Modern elevator and drone flight controllers enforce smooth S-curve trajectories with bounded jerk.</p>
+
+            <h2>Level 5: Curvature, Optimization & Potential Wells</h2>
+            <p>At local peaks (maxima) and valleys (minima), the tangent line is horizontal:</p>
+            <div class="math-card">$$ f'(x) = 0 \\quad (\\text{Critical Points}) $$</div>
+            <ul>
+              <li><strong>Second Derivative Test:</strong> If $f'(c) = 0$ and $f''(c) > 0$, the curve is concave up (holds water) $\\implies$ <strong>Local Minimum</strong>. If $f''(c) < 0$, concave down $\\implies$ <strong>Local Maximum</strong>.</li>
+              <li><strong>Physical Potential Energy:</strong> In potential field $U(x)$, force is $F = -\\frac{dU}{dx}$. Minima of potential energy ($U'' > 0$) create stable harmonic equilibrium wells (e.g. pendulum, mass on spring).</li>
+            </ul>
+
+            <h2>Level 6: Numerical Differentiation for Software & Catastrophic Traps</h2>
+            <p>In discrete software and game engines, analytical formulas are often unavailable. We approximate derivatives via finite differences derived from Taylor series:</p>
+            <div class="math-card">$$ \\text{Forward Difference: } f'(x) \\approx \\frac{f(x + h) - f(x)}{h} \\quad [\\mathcal{O}(h) \\text{ error}] $$
+$$ \\text{Central Difference: } f'(x) \\approx \\frac{f(x + h) - f(x - h)}{2h} \\quad [\\mathcal{O}(h^2) \\text{ error}] $$</div>
+            <p><strong>The Catastrophic Cancellation Trap:</strong> In IEEE-754 64-bit floats (~16 digits precision), setting $h = 10^{-16}$ causes $x + h$ to round identically to $x$, resulting in $f(x+h) - f(x) = 0$ ($100\\%$ error!). The optimal step size balancing math truncation against hardware roundoff is $h \\approx \\sqrt[3]{\\epsilon_{\\text{mach}}} \\approx 10^{-5}$.</p>
+
+            <h2>Level 7: Production TypeScript Implementation</h2>
+            <pre style="background:#111827; padding:0.8rem; border-radius:6px; font-family:monospace; color:#60a5fa; font-size:0.82rem; overflow-x:auto;">
+export class CalculusEngine {
+  public static derivative(f: (x: number) => number, x: number, h?: number): number {
+    const step = h ?? (1e-5 * Math.max(1.0, Math.abs(x)));
+    return (f(x + step) - f(x - step)) / (2 * step); // O(h²) Central Difference
+  }
+
+  public static secondDerivative(f: (x: number) => number, x: number, h?: number): number {
+    const step = h ?? (1e-4 * Math.max(1.0, Math.abs(x)));
+    return (f(x + step) - 2 * f(x) + f(x - step)) / (step * step);
+  }
+
+  public static findRootNewtonRaphson(f: (x: number) => number, x0: number, tol = 1e-10): number {
+    let x = x0;
+    for (let i = 0; i < 100; i++) {
+      const y = f(x);
+      if (Math.abs(y) < tol) return x;
+      const slope = CalculusEngine.derivative(f, x);
+      if (Math.abs(slope) < 1e-14) break;
+      x -= y / slope;
+    }
+    return x;
+  }
+}
+            </pre>
+
+            <h2>Level 8: Multi-Tiered Mastery Practice Set</h2>
+            <ul>
+              <li><strong>Tier 1 (Class 6-7):</strong> Cyclist $s(t) = 3t^2$. Average speed on $[1, 3]$ is $\\frac{27-3}{2} = 12\\text{ m/s}$. Instantaneous speed $v(t) = 6t \\implies v(2) = 12\\text{ m/s}$.</li>
+              <li><strong>Tier 2 (Class 8-9):</strong> Mortar shell $y(t) = -5t^2 + 60t$. Velocity $v(t) = -10t + 60 = 0 \\implies$ Apogee at $t = 6\\text{ s}$, max height $y(6) = 180\\text{ m}$.</li>
+              <li><strong>Tier 3 (Class 10-11):</strong> Damped suspension $x(t) = 8e^{-t}\\cos(2t)$. Product & Chain Rule yields $v(t) = -8e^{-t}[\\cos(2t) + 2\\sin(2t)]$. At $t = 0$, $v(0) = -8\\text{ cm/s}$.</li>
+              <li><strong>Tier 4 (Engineering):</strong> Closed cylindrical tank of volume $V = 54\\pi$. Surface area $A(r) = 2\\pi r^2 + 108\\pi/r$. Minimum area occurs when $r = 3\\text{ m}$ and height $h = 6\\text{ m} = 2r$.</li>
+              <li><strong>Tier 5 (Computational):</strong> Numerical derivative of $\\sin(x)$ at $\\pi/4$. Central difference with $h = 10^{-5}$ gives $0.70710678...$ ($11$ digits correct). Setting $h = 10^{-16}$ triggers catastrophic cancellation, returning $0.0$ ($100\\%$ error).</li>
+            </ul>
+
+            <h2>Level 9: Socratic Inquiry & Horizons</h2>
+            <p><strong>Discrete vs Continuous Reality:</strong> Continuous physics assumes $dt \\to 0$. But digital computers run at discrete clock ticks ($\\Delta t = 16.6\\text{ ms}$). Simple forward integration (Explicit Euler) artificially creates energy, blowing up orbital simulations! This necessitates <em>Symplectic Integrators</em> (Velocity Verlet) explored in Module <code>cs-numerical-integration</code>.</p>
           `,
           quiz: [
             {
-              prompt: "Given position s(t) = 3t^2 + 4t, what is the instantaneous velocity at t = 2s?",
-              options: ["16 m/s", "10 m/s", "12 m/s", "20 m/s"],
+              prompt: "Geometrically, what does the derivative f'(a) evaluate to at point x = a?",
+              options: [
+                "The exact slope of the tangent line to the curve at the point (a, f(a))",
+                "The net area under the curve between 0 and a",
+                "The average secant slope over an infinite domain",
+                "The curvature radius of the circle of best fit"
+              ],
               correctIndex: 0,
-              explanation: "v(t) = s'(t) = 6t + 4. At t = 2: 6(2) + 4 = 16 m/s."
+              explanation: "The derivative evaluates to the limit of secant slopes as dx -> 0, which yields the exact tangent slope at that point."
+            },
+            {
+              prompt: "Given f(x) = 4x^3 - 5x^2 + 7x - 9, compute f'(2).",
+              options: ["35", "28", "42", "19"],
+              correctIndex: 0,
+              explanation: "f'(x) = 12x^2 - 10x + 7. At x = 2: 12(4) - 10(2) + 7 = 48 - 20 + 7 = 35."
+            },
+            {
+              prompt: "A drone moves with position function s(t) = t^4 - 2t^2. What is its acceleration a(t) at t = 2 seconds?",
+              options: ["44 m/s²", "28 m/s²", "32 m/s²", "16 m/s²"],
+              correctIndex: 0,
+              explanation: "v(t) = s'(t) = 4t^3 - 4t. a(t) = v'(t) = 12t^2 - 4. At t = 2: 12(4) - 4 = 48 - 4 = 44 m/s²."
+            },
+            {
+              prompt: "A projectile is launched vertically with height y(t) = -5t^2 + 40t + 10. At what time t does it reach maximum height?",
+              options: ["4.0 seconds", "8.0 seconds", "2.5 seconds", "5.0 seconds"],
+              correctIndex: 0,
+              explanation: "Max height occurs when vertical velocity is zero: v(t) = dy/dt = -10t + 40 = 0 ==> t = 4 seconds."
+            },
+            {
+              prompt: "In numerical software, why is central difference [f(x+h) - f(x-h)] / (2h) preferred over forward difference [f(x+h) - f(x)] / h?",
+              options: [
+                "The symmetric Taylor series quadratic terms cancel out completely, yielding second-order O(h²) error",
+                "It eliminates IEEE-754 floating point roundoff error completely down to 1e-30",
+                "It requires only a single function evaluation per derivative calculation",
+                "It successfully evaluates derivatives at non-differentiable sharp cusps"
+              ],
+              correctIndex: 0,
+              explanation: "Subtracting the Taylor expansions of f(x+h) and f(x-h) cancels out the even quadratic error terms identically, upgrading convergence from O(h) to O(h²)."
             }
           ],
           sources: [
-            { citation: "Stewart, J. (2015). Calculus: Early Transcendentals (8th ed.). Cengage Learning.", isbn: "978-1285741550" }
+            { citation: "Stewart, J. (2015). Calculus: Early Transcendentals (8th ed.). Cengage Learning.", isbn: "978-1285741550" },
+            { citation: "OpenStax. (2016). Calculus Volume 1, Chapter 3: Derivatives. OpenStax CNX.", url: "https://openstax.org/details/books/calculus-volume-1" },
+            { citation: "Burden, R. L., & Faires, J. D. (2010). Numerical Analysis (9th ed.). Cengage Learning.", isbn: "978-0538733519" }
           ]
         },
         {
@@ -2473,6 +2666,303 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
       draw();
     }
 
+    // =========================================================================
+    // INTERACTIVE CALCULUS SECANT-TO-TANGENT LAB SANDBOX
+    // =========================================================================
+    let calcX0 = 1.0;
+    let calcH = 1.0;
+    let calcFuncType = 'parabola';
+    let calcLabInitialized = false;
+    let calcAnimationId = null;
+
+    function getCalcFunc(type) {
+      switch (type) {
+        case 'parabola':
+          return {
+            name: "f(x) = x²",
+            f: (x) => x * x,
+            df: (x) => 2 * x,
+            rangeX: [-3, 3],
+            rangeY: [-1, 7]
+          };
+        case 'cubic':
+          return {
+            name: "f(x) = x³/3 - x",
+            f: (x) => (x * x * x) / 3 - x,
+            df: (x) => x * x - 1,
+            rangeX: [-2.5, 2.5],
+            rangeY: [-2, 2]
+          };
+        case 'sine':
+          return {
+            name: "f(x) = sin(x)",
+            f: (x) => Math.sin(x),
+            df: (x) => Math.cos(x),
+            rangeX: [-3.5, 3.5],
+            rangeY: [-1.8, 1.8]
+          };
+        case 'rocket':
+          return {
+            name: "f(t) = -0.5t² + 3t",
+            f: (x) => -0.5 * x * x + 3 * x,
+            df: (x) => -x + 3,
+            rangeX: [0, 6],
+            rangeY: [-1, 6]
+          };
+        default:
+          return {
+            name: "f(x) = x²",
+            f: (x) => x * x,
+            df: (x) => 2 * x,
+            rangeX: [-3, 3],
+            rangeY: [-1, 7]
+          };
+      }
+    }
+
+    function initCalculusLab() {
+      const canvas = document.getElementById('calculusLabCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      function draw() {
+        const fn = getCalcFunc(calcFuncType);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const padX = 45;
+        const padY = 35;
+        const width = canvas.width - 2 * padX;
+        const height = canvas.height - 2 * padY;
+
+        function toScreen(x, y) {
+          const sx = padX + ((x - fn.rangeX[0]) / (fn.rangeX[1] - fn.rangeX[0])) * width;
+          const sy = canvas.height - padY - ((y - fn.rangeY[0]) / (fn.rangeY[1] - fn.rangeY[0])) * height;
+          return { x: sx, y: sy };
+        }
+
+        // Draw grid
+        ctx.strokeStyle = '#1e293b';
+        ctx.lineWidth = 1;
+
+        const xStep = (fn.rangeX[1] - fn.rangeX[0]) > 5 ? 1 : 0.5;
+        for (let x = Math.ceil(fn.rangeX[0]); x <= fn.rangeX[1]; x += xStep) {
+          const s = toScreen(x, 0);
+          ctx.beginPath(); ctx.moveTo(s.x, padY); ctx.lineTo(s.x, canvas.height - padY); ctx.stroke();
+          ctx.fillStyle = '#64748b';
+          ctx.font = '10px monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText(x.toFixed(1), s.x, canvas.height - padY + 16);
+        }
+
+        const yStep = (fn.rangeY[1] - fn.rangeY[0]) > 6 ? 2 : 1;
+        for (let y = Math.ceil(fn.rangeY[0]); y <= fn.rangeY[1]; y += yStep) {
+          const s = toScreen(0, y);
+          ctx.beginPath(); ctx.moveTo(padX, s.y); ctx.lineTo(canvas.width - padX, s.y); ctx.stroke();
+          ctx.fillStyle = '#64748b';
+          ctx.font = '10px monospace';
+          ctx.textAlign = 'right';
+          ctx.fillText(y.toFixed(1), padX - 8, s.y + 3);
+        }
+
+        // Axes
+        const origin = toScreen(0, 0);
+        ctx.strokeStyle = '#475569';
+        ctx.lineWidth = 2;
+
+        if (origin.y >= padY && origin.y <= canvas.height - padY) {
+          ctx.beginPath(); ctx.moveTo(padX, origin.y); ctx.lineTo(canvas.width - padX, origin.y); ctx.stroke();
+        }
+        if (origin.x >= padX && origin.x <= canvas.width - padX) {
+          ctx.beginPath(); ctx.moveTo(origin.x, padY); ctx.lineTo(origin.x, canvas.height - padY); ctx.stroke();
+        }
+
+        // Curve
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        const steps = 250;
+        for (let i = 0; i <= steps; i++) {
+          const mx = fn.rangeX[0] + (i / steps) * (fn.rangeX[1] - fn.rangeX[0]);
+          const my = fn.f(mx);
+          const s = toScreen(mx, my);
+          if (i === 0) ctx.moveTo(s.x, s.y);
+          else ctx.lineTo(s.x, s.y);
+        }
+        ctx.stroke();
+
+        // Points P & Q
+        const x0 = calcX0;
+        const y0 = fn.f(x0);
+        const x1 = calcX0 + calcH;
+        const y1 = fn.f(x1);
+
+        const sP = toScreen(x0, y0);
+        const sQ = toScreen(x1, y1);
+
+        // Secant Triangle
+        const sCorner = toScreen(x1, y0);
+        ctx.fillStyle = 'rgba(52, 211, 153, 0.1)';
+        ctx.beginPath();
+        ctx.moveTo(sP.x, sP.y);
+        ctx.lineTo(sCorner.x, sCorner.y);
+        ctx.lineTo(sQ.x, sQ.y);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.strokeStyle = 'rgba(52, 211, 153, 0.5)';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 3]);
+        ctx.beginPath();
+        ctx.moveTo(sP.x, sP.y);
+        ctx.lineTo(sCorner.x, sCorner.y);
+        ctx.lineTo(sQ.x, sQ.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Secant Line
+        const secSlope = (y1 - y0) / calcH;
+        ctx.strokeStyle = '#34d399';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        const secStartX = fn.rangeX[0];
+        const secStartY = y0 + secSlope * (secStartX - x0);
+        const secEndX = fn.rangeX[1];
+        const secEndY = y0 + secSlope * (secEndX - x0);
+        const sSecA = toScreen(secStartX, secStartY);
+        const sSecB = toScreen(secEndX, secEndY);
+        ctx.moveTo(sSecA.x, sSecA.y);
+        ctx.lineTo(sSecB.x, sSecB.y);
+        ctx.stroke();
+
+        // Tangent Line
+        const tanSlope = fn.df(x0);
+        ctx.strokeStyle = '#f59e0b';
+        ctx.lineWidth = 2.5;
+        ctx.setLineDash([6, 4]);
+        ctx.beginPath();
+        const tanStartX = fn.rangeX[0];
+        const tanStartY = y0 + tanSlope * (tanStartX - x0);
+        const tanEndX = fn.rangeX[1];
+        const tanEndY = y0 + tanSlope * (tanEndX - x0);
+        const sTanA = toScreen(tanStartX, tanStartY);
+        const sTanB = toScreen(tanEndX, tanEndY);
+        ctx.moveTo(sTanA.x, sTanA.y);
+        ctx.lineTo(sTanB.x, sTanB.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Draw Point P
+        ctx.fillStyle = '#0284c7';
+        ctx.beginPath(); ctx.arc(sP.x, sP.y, 8, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#38bdf8';
+        ctx.beginPath(); ctx.arc(sP.x, sP.y, 5, 0, Math.PI * 2); ctx.fill();
+
+        // Draw Point Q
+        ctx.fillStyle = '#9333ea';
+        ctx.beginPath(); ctx.arc(sQ.x, sQ.y, 8, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#c084fc';
+        ctx.beginPath(); ctx.arc(sQ.x, sQ.y, 5, 0, Math.PI * 2); ctx.fill();
+
+        // Update HUD
+        document.getElementById('labCalcPoint').textContent = `(${x0.toFixed(2)}, ${y0.toFixed(2)})`;
+        document.getElementById('labCalcH').textContent = calcH.toFixed(3);
+        document.getElementById('labCalcSecPoint').textContent = `(${x1.toFixed(2)}, ${y1.toFixed(2)})`;
+        document.getElementById('labCalcSecSlope').textContent = (secSlope >= 0 ? '+' : '') + secSlope.toFixed(4);
+        document.getElementById('labCalcTanSlope').textContent = (tanSlope >= 0 ? '+' : '') + tanSlope.toFixed(4);
+
+        const error = Math.abs(secSlope - tanSlope);
+        document.getElementById('labCalcError').textContent = error.toFixed(4);
+
+        const velEl = document.getElementById('labCalcPhysVel');
+        const stateEl = document.getElementById('labCalcPhysState');
+        velEl.textContent = (tanSlope >= 0 ? '+' : '') + tanSlope.toFixed(2) + ' m/s';
+
+        if (Math.abs(tanSlope) < 0.05) {
+          stateEl.textContent = 'Stationary / Peak (v ≈ 0)';
+          stateEl.style.color = '#38bdf8';
+        } else if (tanSlope > 0) {
+          stateEl.textContent = 'Forward Motion (v > 0)';
+          stateEl.style.color = '#34d399';
+        } else {
+          stateEl.textContent = 'Reverse / Decelerating (v < 0)';
+          stateEl.style.color = '#ef4444';
+        }
+      }
+
+      if (!calcLabInitialized) {
+        calcLabInitialized = true;
+        const sliderX0 = document.getElementById('sliderLabX0');
+        const sliderH = document.getElementById('sliderLabH');
+
+        sliderX0.oninput = (e) => {
+          calcX0 = parseFloat(e.target.value);
+          draw();
+        };
+
+        sliderH.oninput = (e) => {
+          calcH = parseFloat(e.target.value);
+          draw();
+        };
+
+        document.getElementById('btnLabCalcParabola').onclick = () => {
+          calcFuncType = 'parabola';
+          calcX0 = 1.0;
+          calcH = 1.0;
+          sliderX0.min = "-2.5"; sliderX0.max = "2.5"; sliderX0.value = "1.0";
+          sliderH.value = "1.0";
+          draw();
+        };
+
+        document.getElementById('btnLabCalcCubic').onclick = () => {
+          calcFuncType = 'cubic';
+          calcX0 = 0.5;
+          calcH = 0.8;
+          sliderX0.min = "-2.0"; sliderX0.max = "2.0"; sliderX0.value = "0.5";
+          sliderH.value = "0.8";
+          draw();
+        };
+
+        document.getElementById('btnLabCalcSine').onclick = () => {
+          calcFuncType = 'sine';
+          calcX0 = 0.0;
+          calcH = 1.0;
+          sliderX0.min = "-3.0"; sliderX0.max = "3.0"; sliderX0.value = "0.0";
+          sliderH.value = "1.0";
+          draw();
+        };
+
+        document.getElementById('btnLabCalcRocket').onclick = () => {
+          calcFuncType = 'rocket';
+          calcX0 = 1.5;
+          calcH = 1.0;
+          sliderX0.min = "0.2"; sliderX0.max = "5.0"; sliderX0.value = "1.5";
+          sliderH.value = "1.0";
+          draw();
+        };
+
+        document.getElementById('btnLabCalcAnimate').onclick = () => {
+          if (calcAnimationId) cancelAnimationFrame(calcAnimationId);
+          let startH = 1.5;
+          let startTime = null;
+          const duration = 1800;
+
+          function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min(1.0, (timestamp - startTime) / duration);
+            calcH = Math.max(0.01, startH * Math.pow(0.01 / startH, progress));
+            sliderH.value = calcH.toFixed(2);
+            draw();
+            if (progress < 1.0) {
+              calcAnimationId = requestAnimationFrame(step);
+            }
+          }
+          calcAnimationId = requestAnimationFrame(step);
+        };
+      }
+
+      draw();
+    }
+
     // Render Reader Studio
     function renderReaderModule(mod) {
       document.getElementById('readerTitle').textContent = mod.title;
@@ -2489,6 +2979,15 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
         initVectorLab();
       } else {
         labBox.style.display = 'none';
+      }
+
+      // Mount or unmount Interactive Calculus Lab
+      const calcLabBox = document.getElementById('calculusLabBox');
+      if (mod.slug === 'math-calculus-derivatives') {
+        calcLabBox.style.display = 'block';
+        initCalculusLab();
+      } else {
+        calcLabBox.style.display = 'none';
       }
 
       // Render KaTeX Math

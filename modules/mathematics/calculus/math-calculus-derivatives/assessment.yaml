@@ -40,3 +40,32 @@ questions:
       tolerance: 0.05
       unit: "m/s^2"
     explanation: "v(t) = s'(t) = 4t^3 - 4t. a(t) = v'(t) = 12t^2 - 4. At t = 2: a(2) = 12(4) - 4 = 48 - 4 = 44 m/s^2."
+
+  - id: "q-calc-04"
+    target_objective_id: "obj-calc-4"
+    prompt: "A projectile is launched vertically with height y(t) = -5t^2 + 40t + 10 (meters). At what time t (seconds) does it reach its maximum height?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 4.0
+      tolerance: 0.01
+      unit: "seconds"
+    explanation: "Maximum height occurs when vertical velocity is zero: v(t) = dy/dt = -10t + 40 = 0 ==> 10t = 40 ==> t = 4 seconds. The second derivative d^2y/dt^2 = -10 < 0 confirms a maximum."
+
+  - id: "q-calc-05"
+    target_objective_id: "obj-calc-5"
+    prompt: "In numerical software, why is central difference [f(x+h) - f(x-h)] / (2h) preferred over forward difference [f(x+h) - f(x)] / h?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The symmetric Taylor series quadratic terms cancel out completely, yielding second-order O(h^2) truncation error."
+        is_correct: true
+      - id: "opt-2"
+        text: "It eliminates IEEE-754 floating point roundoff error completely for all step sizes down to 1e-30."
+        is_correct: false
+      - id: "opt-3"
+        text: "It requires only a single function evaluation per derivative calculation."
+        is_correct: false
+      - id: "opt-4"
+        text: "It successfully evaluates derivatives at sharp corners and non-differentiable cusps."
+        is_correct: false
+    explanation: "Subtracting the Taylor expansions of f(x+h) and f(x-h) causes the even-powered quadratic error terms to cancel identically, upgrading convergence from O(h) to O(h^2)."

@@ -77,3 +77,18 @@
   2. Every module must construct an unbroken 9-level cognitive ladder spanning intuitive explanation, step-by-step mathematical derivation (no skipped steps), spatial demonstrations, misconception debunking, software edge cases, multi-disciplinary applications, complete production code, and multi-tiered mastery exercises (Class 6 to University level).
   3. The web client must embed interactive graphical visualizers directly inside the reading experience to allow hands-on manipulation of concepts.
 - **Consequences:** Elevates every module from a standard textbook summary (6/10) to a world-class educational masterwork (10/10) that can teach any human being from first principles to creative mastery.
+
+---
+
+## ADR-007: Elevation of Differential Calculus (`math-calculus-derivatives`) to GSMS-10 & Interactive Tangent Studio
+- **Status:** **Accepted**
+- **Date:** 2026-11-20
+- **Context:** Following the elevation of `math-vectors-2d`, `math-calculus-derivatives` required elevation from a summary stub (6/10) to the 10/10 Masterwork Standard (GSMS-10). Differential calculus is the mathematical bedrock for classical kinematics (`phys-kinematics-1d-2d`), dynamics (`phys-newtons-laws`), and numerical physics simulation (`cs-numerical-integration`).
+- **Decision:**
+  1. Grounded the entire topic in the everyday Speedometer Paradox and Zeno's Arrow Paradox (Class 6 intuition), demonstrating why static arithmetic collapses at $\Delta t = 0$ ($0/0$) and how the limit concept resolves it.
+  2. Built an unbroken 9-level cognitive ladder with full, unskipped algebraic derivations for $f(x) = x^2$, the Binomial Power Rule, the Product Rule expanding rectangle, the Chain Rule gear ratio multiplier, and the trigonometric derivatives.
+  3. Codified the kinematic motion hierarchy ($s \to v \to a \to j \to s$) with directional sign rules and engineering motivations for jerk minimization (elevator S-curves, drone flight control).
+  4. Exposed the catastrophic floating-point cancellation trap in IEEE-754 double precision (why $h = 10^{-16}$ outputs $0$ and causes $100\%$ error) and proved the optimal central difference step size $h \approx \sqrt[3]{\epsilon_{\text{mach}}} \approx 10^{-5}$.
+  5. Implemented a production-grade TypeScript `CalculusEngine` with central differences, second derivatives, Richardson extrapolation, and Newton-Raphson root finding.
+  6. Integrated the interactive `#calculusLabBox` visualizer into the Reader Studio on `http://localhost:3000`, enabling users to manipulate $x_0$, change functions, and click "⚡ Shrink h → 0" to watch secant lines pivot onto tangent lines in real time.
+- **Consequences:** Provides an accessible, rigorous, and verifiable foundation for all subsequent physics and robotics pathways.
