@@ -49,3 +49,19 @@
      - **Mobile:** Native mobile wrapper via **Capacitor** or React Native WebView.
   4. Knowledge repositories are completely offline-capable: modules can be bundled locally or synchronized via IndexedDB/SQLite.
 - **Consequences:** Zero vendor lock-in; true "write once, run everywhere" capability from high-end desktop workstations to offline mobile devices.
+
+---
+
+## ADR-005: Expansion of V1 Scope to Include 3D Physics, AI Environments, and Embodied Robotics Synthesis
+- **Status:** **Accepted**
+- **Date:** 2026-11-20
+- **Context:** The initial pilot focused on the 2D Physics Simulator. To fully prove that the Tech Tree architecture supports multi-tiered knowledge composition and advanced real-world engineering, the user requested expanding Version 1 to include:
+  1. 3D Physics Engine Pathway (Spatial math, Quaternions, 3D Collision Detection).
+  2. AI in Simulated Environments Pathway (Neural Networks, Reinforcement Learning, MDPs, Policy Gradients).
+  3. Embodied AI & Robotics Synthesis Pathway (Synthesizing 3D Physics + AI Control + Computer Vision + Sensor State Estimation).
+- **Decision:**
+  1. Expand the master roadmap to incorporate these advanced tiers into Version 1.
+  2. Implement Phase 5 (Learner Interface & Tech Tree Visualizer) immediately, equipped with the interactive visualizer, module reader, and live 2D simulator, while supporting the preview and visualization of the expanded pathways.
+  3. Structure Phase 6 as the Advanced Generative Content phase (curating 3D Physics, Reinforcement Learning, and Embodied Robotics modules).
+  4. Preserve all strict modularity invariants: every advanced module must remain sovereign and declare explicit prerequisites down to the foundational math/physics/CS layers.
+- **Consequences:** Elevates Version 1 from an educational pilot into an industry-grade knowledge infrastructure spanning first principles to modern autonomous systems.

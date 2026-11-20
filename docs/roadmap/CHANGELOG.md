@@ -6,6 +6,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.6.0] - 2026-11-20 (Phase 5: Learner Interface & Interactive Tech Tree Visualizer)
+
+### Added
+- **Interactive Web Interface (`public/index.html`):**
+  - Interactive SVG Tech Tree Canvas with smooth pan, zoom, discipline filtering, and search.
+  - Dynamic prerequisite ancestor highlighter and inspector panel.
+  - Multi-pathway explorer previewing 2D Physics, 3D Physics, AI Environments, and Embodied Robotics.
+  - Module reader studio rendering KaTeX mathematical equations, code blocks, and source provenance.
+  - Interactive self-assessment quiz system with immediate verification and progress tracking.
+- **Embedded 2D Physics Simulator Sandbox:**
+  - Real-time HTML5 Canvas physics engine implementing Symplectic Velocity Verlet integration, gravity, viscous drag, and elastic restitution collisions.
+  - Interactive parameter sliders (gravity, air drag, restitution) and particle spawning controls.
+- **Local Web Server:**
+  - `src/web/server.ts`: Lightweight zero-dependency HTTP server (`npm run serve`).
+- **Strategic V1 Scope Expansion (ADR-005):**
+  - Updated `ROADMAP.md` and `PRODUCT_REQUIREMENTS.md` with 3D Physics, AI Environments, and Embodied Robotics pathways for Phase 6.
+- **Automated Tests:**
+  - `tests/unit/web.test.ts`: Added web interface validation tests (22/22 tests passing).
+
+---
+
 ## [0.5.0] - 2026-11-19 (Phase 4: Foundational Pilot Content Creation)
 
 ### Added

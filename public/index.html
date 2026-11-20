@@ -1,0 +1,1957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Tech Tree of Knowledge | Interactive Knowledge Infrastructure</title>
+  
+  <!-- KaTeX for high-performance mathematical formula rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+  <style>
+    :root {
+      --bg-primary: #0a0e17;
+      --bg-secondary: #111827;
+      --bg-card: #1f2937;
+      --bg-card-hover: #374151;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent-math: #3b82f6;
+      --accent-phys: #10b981;
+      --accent-cs: #f59e0b;
+      --accent-chem: #8b5cf6;
+      --accent-gold: #fbbf24;
+      --accent-cyan: #06b6d4;
+      --border-color: #374151;
+      --success: #10b981;
+      --error: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header & Navigation */
+    header {
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-icon {
+      font-size: 1.6rem;
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: var(--bg-card);
+      color: #fff;
+    }
+
+    .nav-btn.active {
+      background: var(--bg-card);
+      color: #fff;
+      border-color: var(--border-color);
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .badge-offline {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--accent-phys);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+    }
+
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent-phys);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.7; }
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .tab-content {
+      display: none;
+      flex: 1;
+    }
+
+    .tab-content.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ==========================================================================
+       TAB 1: TECH TREE GRAPH CANVAS
+       ========================================================================== */
+    .graph-view-container {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 65px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .canvas-sidebar {
+      width: 320px;
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border-color);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      z-index: 10;
+      overflow-y: auto;
+    }
+
+    .sidebar-section h3 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .filter-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-pill.active {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .filter-pill[data-disc="math"].active { background: rgba(59, 130, 246, 0.25); border-color: var(--accent-math); }
+    .filter-pill[data-disc="phys"].active { background: rgba(16, 185, 129, 0.25); border-color: var(--accent-phys); }
+    .filter-pill[data-disc="cs"].active { background: rgba(245, 158, 11, 0.25); border-color: var(--accent-cs); }
+    .filter-pill[data-disc="chem"].active { background: rgba(139, 92, 246, 0.25); border-color: var(--accent-chem); }
+
+    .search-box {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .search-box:focus {
+      border-color: var(--accent-math);
+    }
+
+    .progress-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.85rem;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: #111827;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 0.5rem 0 0.3rem 0;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-math), var(--accent-phys));
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    .canvas-main {
+      flex: 1;
+      position: relative;
+      background: radial-gradient(circle at 50% 50%, #172033 0%, #0a0e17 100%);
+      overflow: hidden;
+      cursor: grab;
+    }
+
+    .canvas-main:active {
+      cursor: grabbing;
+    }
+
+    #graphSvg {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .canvas-controls {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      z-index: 20;
+    }
+
+    .ctrl-btn {
+      width: 36px;
+      height: 36px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      transition: all 0.2s;
+    }
+
+    .ctrl-btn:hover {
+      background: var(--bg-card);
+      border-color: #60a5fa;
+    }
+
+    /* Inspector Panel on Node Select */
+    .node-inspector {
+      width: 340px;
+      background: var(--bg-secondary);
+      border-left: 1px solid var(--border-color);
+      padding: 1.25rem;
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      z-index: 10;
+      overflow-y: auto;
+    }
+
+    .node-inspector.active {
+      display: flex;
+    }
+
+    .inspector-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .tier-badge {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .tier-1 { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+    .tier-2 { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .tier-3 { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+    .tier-4 { background: rgba(139, 92, 246, 0.2); color: #a78bfa; }
+
+    /* ==========================================================================
+       TAB 2: PATHWAYS & ROADMAP
+       ========================================================================== */
+    .pathways-container {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .pathway-selector-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .pathway-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .pathway-card:hover {
+      border-color: var(--accent-math);
+      transform: translateY(-2px);
+    }
+
+    .pathway-card.active {
+      border-color: var(--accent-math);
+      background: rgba(59, 130, 246, 0.08);
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+    }
+
+    .pathway-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      width: fit-content;
+    }
+
+    .tag-active { background: rgba(16, 185, 129, 0.2); color: var(--accent-phys); }
+    .tag-v1-roadmap { background: rgba(245, 158, 11, 0.2); color: var(--accent-cs); }
+    .tag-synthesis { background: rgba(139, 92, 246, 0.2); color: var(--accent-chem); }
+
+    .pathway-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .timeline-step {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .timeline-step:hover {
+      border-color: var(--accent-phys);
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      background: var(--bg-card);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+
+    .step-number.completed {
+      background: var(--accent-phys);
+      color: #000;
+    }
+
+    .step-details {
+      flex: 1;
+    }
+
+    .step-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .step-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       TAB 3: MODULE READER STUDIO
+       ========================================================================== */
+    .reader-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      width: 100%;
+    }
+
+    .reader-header {
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .reader-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0.5rem 0;
+    }
+
+    .reader-summary {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .reader-body h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem 0;
+      border-bottom: 1px solid #1f2937;
+      padding-bottom: 0.4rem;
+      color: #60a5fa;
+    }
+
+    .reader-body p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #d1d5db;
+      margin-bottom: 1.25rem;
+    }
+
+    .math-card {
+      background: #1e293b;
+      border-left: 4px solid var(--accent-math);
+      padding: 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1.5rem 0;
+      overflow-x: auto;
+    }
+
+    .code-block {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 1.25rem;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #e2e8f0;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+
+    /* Assessment Quiz Box */
+    .quiz-container {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 2.5rem 0;
+    }
+
+    .quiz-header {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .quiz-question {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .quiz-prompt {
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+    }
+
+    .quiz-option {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.6rem 0.85rem;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .quiz-option:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .quiz-option.selected {
+      border-color: var(--accent-math);
+      background: rgba(59, 130, 246, 0.15);
+    }
+
+    .quiz-option.correct {
+      border-color: var(--success);
+      background: rgba(16, 185, 129, 0.2);
+    }
+
+    .quiz-option.incorrect {
+      border-color: var(--error);
+      background: rgba(239, 68, 68, 0.2);
+    }
+
+    .quiz-feedback {
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      padding: 0.6rem;
+      border-radius: 6px;
+      display: none;
+    }
+
+    /* ==========================================================================
+       TAB 4: LIVE 2D PHYSICS SIMULATOR SANDBOX
+       ========================================================================== */
+    .simulator-container {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 65px);
+    }
+
+    .sim-canvas-panel {
+      flex: 1;
+      background: #060911;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #physicsCanvas {
+      background: #020408;
+      border: 2px solid #1f2937;
+      border-radius: 8px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+      cursor: crosshair;
+    }
+
+    .sim-controls-panel {
+      width: 350px;
+      background: var(--bg-secondary);
+      border-left: 1px solid var(--border-color);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      overflow-y: auto;
+    }
+
+    .sim-slider-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .sim-slider-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    input[type=range] {
+      accent-color: var(--accent-phys);
+      cursor: pointer;
+    }
+
+    .sim-buttons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .sim-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 0.6rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sim-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: #60a5fa;
+    }
+
+    .sim-btn.primary {
+      background: var(--accent-phys);
+      color: #000;
+      border: none;
+    }
+
+    .sim-btn.primary:hover {
+      background: #34d399;
+    }
+
+    .sim-stats-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.8rem;
+      line-height: 1.6;
+    }
+
+    /* SVG Graph styling */
+    .edge-line {
+      stroke: #374151;
+      stroke-width: 2;
+      transition: all 0.3s;
+      fill: none;
+    }
+
+    .edge-line.highlighted {
+      stroke: var(--accent-phys);
+      stroke-width: 3.5;
+      filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.8));
+    }
+
+    .graph-node {
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .graph-node:hover rect {
+      stroke-width: 2.5;
+      filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
+    }
+
+    .graph-node.selected rect {
+      stroke-width: 3.5;
+      stroke: #fbbf24 !important;
+      filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.8));
+    }
+
+    .graph-node.completed rect {
+      stroke: var(--accent-phys);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- App Header -->
+  <header>
+    <div class="brand">
+      <span class="brand-icon">🌳</span>
+      <div>
+        <div class="brand-title">The Tech Tree of Knowledge</div>
+        <div class="brand-subtitle">Civic Knowledge Architecture • v1.0 Pilot</div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+      <button class="nav-btn active" data-tab="tab-graph">Interactive Graph</button>
+      <button class="nav-btn" data-tab="tab-pathways">Learning Pathways</button>
+      <button class="nav-btn" data-tab="tab-reader">Module Reader</button>
+      <button class="nav-btn" data-tab="tab-simulator">Physics Simulator</button>
+    </div>
+
+    <div class="header-actions">
+      <div class="badge-offline">
+        <span class="pulse-dot"></span>
+        <span>Local / Offline-Ready</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ======================================================================
+         TAB 1: TECH TREE GRAPH CANVAS
+         ====================================================================== -->
+    <div id="tab-graph" class="tab-content active">
+      <div class="graph-view-container">
+        <!-- Canvas Sidebar Controls -->
+        <aside class="canvas-sidebar">
+          <div class="sidebar-section">
+            <input type="text" id="nodeSearch" class="search-box" placeholder="Search modules, concepts...">
+          </div>
+
+          <div class="sidebar-section">
+            <h3>Filter Discipline</h3>
+            <div class="filter-pills">
+              <button class="filter-pill active" data-disc="all">All (9)</button>
+              <button class="filter-pill" data-disc="math">Math</button>
+              <button class="filter-pill" data-disc="phys">Physics</button>
+              <button class="filter-pill" data-disc="cs">CS</button>
+              <button class="filter-pill" data-disc="chem">Chemistry</button>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <h3>Learner Competency</h3>
+            <div class="progress-card">
+              <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:600;">
+                <span>Completed:</span>
+                <span id="progressText">0 / 9 Modules</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div id="progressBar" class="progress-bar-fill"></div>
+              </div>
+              <span style="font-size:0.75rem; color:var(--text-muted);">Click any node to study or mark completed.</span>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <h3>Legend</h3>
+            <div style="display:flex; flex-direction:column; gap:0.4rem; font-size:0.8rem;">
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <span style="width:12px; height:12px; background:var(--accent-math); border-radius:3px;"></span>
+                <span>Mathematics</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <span style="width:12px; height:12px; background:var(--accent-phys); border-radius:3px;"></span>
+                <span>Physics</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <span style="width:12px; height:12px; background:var(--accent-cs); border-radius:3px;"></span>
+                <span>Computer Science</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <span style="width:12px; height:12px; background:var(--accent-chem); border-radius:3px;"></span>
+                <span>Chemistry</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main SVG Canvas -->
+        <div class="canvas-main" id="canvasViewport">
+          <svg id="graphSvg">
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#4b5563" />
+              </marker>
+              <marker id="arrow-highlight" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#10b981" />
+              </marker>
+            </defs>
+            <g id="graphEdgesGroup"></g>
+            <g id="graphNodesGroup"></g>
+          </svg>
+
+          <!-- Canvas Zoom/Pan Controls -->
+          <div class="canvas-controls">
+            <button class="ctrl-btn" id="btnZoomIn">+</button>
+            <button class="ctrl-btn" id="btnZoomOut">-</button>
+            <button class="ctrl-btn" id="btnResetView">⟲</button>
+          </div>
+        </div>
+
+        <!-- Node Inspector Panel -->
+        <aside class="node-inspector" id="nodeInspector">
+          <div class="inspector-header">
+            <div>
+              <span id="inspectDiscipline" style="font-size:0.75rem; text-transform:uppercase; color:var(--accent-math); font-weight:700;">Mathematics</span>
+              <h2 id="inspectTitle" style="font-size:1.15rem; font-weight:700; margin:0.2rem 0;">2D Vectors</h2>
+            </div>
+            <span id="inspectTier" class="tier-badge tier-1">Tier 1</span>
+          </div>
+
+          <p id="inspectSummary" style="font-size:0.85rem; color:var(--text-muted); line-height:1.5;">
+            Foundational mathematics of two-dimensional Euclidean vectors and Cartesian algebra.
+          </p>
+
+          <div style="font-size:0.8rem;">
+            <strong>Prerequisites:</strong>
+            <ul id="inspectPrereqs" style="margin-left:1.2rem; margin-top:0.3rem; color:var(--text-muted);">
+              <li>None (Axiomatic Root)</li>
+            </ul>
+          </div>
+
+          <div style="font-size:0.8rem;">
+            <strong>Learning Objectives:</strong>
+            <ul id="inspectObjectives" style="margin-left:1.2rem; margin-top:0.3rem; color:var(--text-muted);">
+              <li>Calculate Euclidean vector magnitudes.</li>
+              <li>Compute dot products and orthogonality.</li>
+            </ul>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:0.5rem; margin-top:auto;">
+            <button id="btnReadModule" class="sim-btn primary">Open in Reader Studio ➔</button>
+            <button id="btnToggleComplete" class="sim-btn">Mark as Mastered ✓</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         TAB 2: LEARNING PATHWAYS
+         ====================================================================== -->
+    <div id="tab-pathways" class="tab-content">
+      <div class="pathways-container">
+        <h1 style="font-size:1.8rem; font-weight:800; margin-bottom:0.5rem;">Goal-Oriented Learning Pathways</h1>
+        <p style="color:var(--text-muted); margin-bottom:1.5rem;">
+          Cross-disciplinary routes composing independent knowledge modules to achieve concrete creative breakthroughs.
+        </p>
+
+        <!-- Pathway Selection Cards -->
+        <div class="pathway-selector-grid">
+          <div class="pathway-card active" data-pathway="2d-physics">
+            <span class="pathway-tag tag-active">Active V1 Pilot</span>
+            <h3 style="font-size:1.05rem; font-weight:700;">2D Physics Simulator</h3>
+            <p style="font-size:0.8rem; color:var(--text-muted);">
+              Unites 2D vectors, kinematics, Newton's laws, Verlet integration, and restitution collisions.
+            </p>
+            <span style="font-size:0.75rem; color:var(--accent-phys); font-weight:600;">8 Modules • ~8.5 Hours</span>
+          </div>
+
+          <div class="pathway-card" data-pathway="3d-physics">
+            <span class="pathway-tag tag-v1-roadmap">Expanded V1 Scope</span>
+            <h3 style="font-size:1.05rem; font-weight:700;">3D Physics & Quaternions</h3>
+            <p style="font-size:0.8rem; color:var(--text-muted);">
+              Expands into 3D vectors, spatial rotation quaternions, inertia tensors, and BVH 3D collision detection.
+            </p>
+            <span style="font-size:0.75rem; color:var(--accent-cs); font-weight:600;">Phase 6 Track • 4 Advanced Modules</span>
+          </div>
+
+          <div class="pathway-card" data-pathway="ai-agent">
+            <span class="pathway-tag tag-v1-roadmap">Expanded V1 Scope</span>
+            <h3 style="font-size:1.05rem; font-weight:700;">AI in Simulated Environments</h3>
+            <p style="font-size:0.8rem; color:var(--text-muted);">
+              Markov decision processes, neural networks, Deep Q-learning, and policy gradients for autonomous agents.
+            </p>
+            <span style="font-size:0.75rem; color:var(--accent-cs); font-weight:600;">Phase 6 Track • 4 Advanced Modules</span>
+          </div>
+
+          <div class="pathway-card" data-pathway="embodied-ai">
+            <span class="pathway-tag tag-synthesis">Master Synthesis</span>
+            <h3 style="font-size:1.05rem; font-weight:700;">Embodied AI & Robotics</h3>
+            <p style="font-size:0.8rem; color:var(--text-muted);">
+              Synthesizes 3D physics engines, simulated environments, computer vision, and sim-to-real transfer.
+            </p>
+            <span style="font-size:0.75rem; color:var(--accent-chem); font-weight:600;">Phase 6 Capstone • Cross-Disciplinary</span>
+          </div>
+        </div>
+
+        <!-- Pathway Timeline Steps -->
+        <h2 id="pathwayTitle" style="font-size:1.25rem; font-weight:700; margin-bottom:1rem;">Sequenced Pathway: 2D Physics Simulator</h2>
+        <div class="pathway-timeline" id="pathwayTimeline">
+          <!-- Dynamically populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         TAB 3: MODULE READER STUDIO
+         ====================================================================== -->
+    <div id="tab-reader" class="tab-content">
+      <div class="reader-container">
+        <div class="reader-header">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span id="readerDisciplineBadge" class="filter-pill active">Physics / Dynamics</span>
+            <span id="readerTierBadge" class="tier-badge tier-2">Tier 2 Intermediate</span>
+          </div>
+          <h1 id="readerTitle" class="reader-title">Newton's Laws of Motion & Classical Dynamics</h1>
+          <p id="readerSummary" class="reader-summary">
+            The dynamical laws governing force interactions, mass, inertia, friction, and systems of interacting bodies.
+          </p>
+        </div>
+
+        <div id="readerBody" class="reader-body">
+          <!-- Dynamically populated with text and KaTeX formulas -->
+        </div>
+
+        <!-- Interactive Self-Assessment Quiz -->
+        <div class="quiz-container" id="moduleQuizBox">
+          <div class="quiz-header">
+            <span>📝</span>
+            <span>Module Mastery Check</span>
+          </div>
+          <div id="quizQuestionsContainer">
+            <!-- Questions populated by JS -->
+          </div>
+          <button id="btnSubmitQuiz" class="sim-btn primary" style="width:100%; margin-top:1rem;">Check My Answers</button>
+        </div>
+
+        <!-- Provenance Footer -->
+        <div style="border-top:1px solid var(--border-color); padding-top:1.5rem; margin-top:3rem; font-size:0.8rem; color:var(--text-muted);">
+          <strong>Source Provenance & Citations:</strong>
+          <ul id="readerProvenanceList" style="margin-left:1.2rem; margin-top:0.4rem; line-height:1.6;">
+            <!-- Populated by JS -->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         TAB 4: LIVE 2D PHYSICS SIMULATOR SANDBOX
+         ====================================================================== -->
+    <div id="tab-simulator" class="tab-content">
+      <div class="simulator-container">
+        <div class="sim-canvas-panel">
+          <canvas id="physicsCanvas" width="800" height="600"></canvas>
+          <div style="position:absolute; top:1rem; left:1rem; font-size:0.75rem; color:#6b7280; pointer-events:none;">
+            Click anywhere on the canvas to spawn particles!
+          </div>
+        </div>
+
+        <aside class="sim-controls-panel">
+          <h2 style="font-size:1.15rem; font-weight:700;">Physics Engine Controls</h2>
+          <span style="font-size:0.8rem; color:var(--text-muted);">
+            Running Velocity Verlet Numerical Integration & Contact Restitution from our modules!
+          </span>
+
+          <div class="sim-slider-group">
+            <div class="sim-slider-label">
+              <span>Gravity ($g$):</span>
+              <span id="labelGravity">9.81 m/s²</span>
+            </div>
+            <input type="range" id="sliderGravity" min="0" max="25" step="0.5" value="9.81">
+          </div>
+
+          <div class="sim-slider-group">
+            <div class="sim-slider-label">
+              <span>Restitution ($e$ elasticity):</span>
+              <span id="labelRestitution">0.85</span>
+            </div>
+            <input type="range" id="sliderRestitution" min="0.1" max="1.0" step="0.05" value="0.85">
+          </div>
+
+          <div class="sim-slider-group">
+            <div class="sim-slider-label">
+              <span>Air Drag ($c_d$):</span>
+              <span id="labelDrag">0.005</span>
+            </div>
+            <input type="range" id="sliderDrag" min="0.0" max="0.05" step="0.002" value="0.005">
+          </div>
+
+          <div class="sim-buttons-grid">
+            <button class="sim-btn" id="btnSpawn10">Spawn +10 Balls</button>
+            <button class="sim-btn" id="btnClearBalls">Clear Canvas</button>
+            <button class="sim-btn" id="btnZeroGravity">Zero Gravity 🛰️</button>
+            <button class="sim-btn primary" id="btnPauseSim">Pause / Play</button>
+          </div>
+
+          <div class="sim-stats-card">
+            <strong>Engine Telemetry:</strong><br>
+            • Particles: <span id="statCount">0</span><br>
+            • Frame Rate: <span id="statFps">60</span> FPS<br>
+            • Integrator: Velocity Verlet (Symplectic)<br>
+            • Energy: <span id="statEnergy">0.00</span> J<br>
+            • Collision Phase: O(N²) Exact Circle-Circle
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Embedded Knowledge Repository & Core Web Engine -->
+  <script>
+    // Embedded Manifests for Instant Offline Execution
+    const REPO_DATA = {
+      modules: [
+        {
+          id: "a1000000-0000-0000-0000-000000000001",
+          slug: "math-vectors-2d",
+          title: "2D Cartesian Vectors & Algebra",
+          discipline: "mathematics",
+          domain: "linear-algebra",
+          proficiencyTier: 1,
+          duration: 60,
+          summary: "Foundational mathematics of two-dimensional Euclidean vectors, Cartesian representations, vector arithmetic, dot products, norms, and orthogonal projections.",
+          prerequisites: [],
+          x: 100, y: 150,
+          content: `
+            <h2>1. Vectors in Euclidean Space</h2>
+            <p>A two-dimensional vector represents directed quantity. In Cartesian components, it is defined as:</p>
+            <div class="math-card">$$ \\vec{v} = v_x \\hat{i} + v_y \\hat{j} = \\begin{bmatrix} v_x \\\\ v_y \\end{bmatrix} $$</div>
+            <p>The Euclidean norm (magnitude) is calculated by Pythagorean theorem:</p>
+            <div class="math-card">$$ \\|\\vec{v}\\| = \\sqrt{v_x^2 + v_y^2} $$</div>
+            <h2>2. The Dot Product & Orthogonality</h2>
+            <p>The dot product evaluates directional alignment:</p>
+            <div class="math-card">$$ \\vec{u} \\cdot \\vec{v} = u_x v_x + u_y v_y = \\|\\vec{u}\\| \\|\\vec{v}\\| \\cos\\theta $$</div>
+            <p>Two non-zero vectors are perpendicular if and only if $\\vec{u} \\cdot \\vec{v} = 0$.</p>
+          `,
+          quiz: [
+            {
+              prompt: "What is the Euclidean magnitude of a vector with components (6, -8)?",
+              options: ["10.0", "14.0", "48.0", "7.0"],
+              correctIndex: 0,
+              explanation: "sqrt(6^2 + (-8)^2) = sqrt(36 + 64) = sqrt(100) = 10."
+            }
+          ],
+          sources: [
+            { citation: "Strang, G. (2016). Introduction to Linear Algebra (5th ed.). Wellesley-Cambridge Press.", isbn: "978-0980232776" }
+          ]
+        },
+        {
+          id: "a1000000-0000-0000-0000-000000000002",
+          slug: "math-calculus-derivatives",
+          title: "Differential Calculus: Derivatives",
+          discipline: "mathematics",
+          domain: "calculus",
+          proficiencyTier: 2,
+          duration: 75,
+          summary: "The derivative as an instantaneous rate of change and tangent slope, power rule, and physical interpretations in velocity and acceleration.",
+          prerequisites: [],
+          x: 100, y: 350,
+          content: `
+            <h2>1. The Instantaneous Rate of Change</h2>
+            <p>The derivative represents the limit of average velocity as time delta approaches zero:</p>
+            <div class="math-card">$$ f'(x) = \\lim_{\\Delta x \\to 0} \\frac{f(x + \\Delta x) - f(x)}{\\Delta x} $$</div>
+            <h2>2. Physical Meaning</h2>
+            <p>Velocity is the first derivative of position; acceleration is the second derivative of position:</p>
+            <div class="math-card">$$ v(t) = \\frac{dx}{dt} = \\dot{x}(t), \\quad a(t) = \\frac{dv}{dt} = \\frac{d^2x}{dt^2} = \\ddot{x}(t) $$</div>
+          `,
+          quiz: [
+            {
+              prompt: "Given position s(t) = 3t^2 + 4t, what is the instantaneous velocity at t = 2s?",
+              options: ["16 m/s", "10 m/s", "12 m/s", "20 m/s"],
+              correctIndex: 0,
+              explanation: "v(t) = s'(t) = 6t + 4. At t = 2: 6(2) + 4 = 16 m/s."
+            }
+          ],
+          sources: [
+            { citation: "Stewart, J. (2015). Calculus: Early Transcendentals (8th ed.). Cengage Learning.", isbn: "978-1285741550" }
+          ]
+        },
+        {
+          id: "a1000000-0000-0000-0000-000000000003",
+          slug: "phys-kinematics-1d-2d",
+          title: "1D & 2D Kinematics: Motion",
+          discipline: "physics",
+          domain: "classical-mechanics",
+          proficiencyTier: 1,
+          duration: 75,
+          summary: "Position, displacement, velocity, acceleration, constant acceleration equations, and 2D projectile motion under gravity.",
+          prerequisites: ["math-vectors-2d"],
+          x: 350, y: 150,
+          content: `
+            <h2>1. Orthogonal Independence</h2>
+            <p>Galileo demonstrated that horizontal and vertical motions under uniform gravity are independent:</p>
+            <div class="math-card">$$ x(t) = x_0 + (v_0 \\cos\\theta) t, \\quad y(t) = y_0 + (v_0 \\sin\\theta) t - \\frac{1}{2} g t^2 $$</div>
+          `,
+          quiz: [
+            {
+              prompt: "In the absence of air drag, what is the horizontal acceleration of a flying projectile?",
+              options: ["Zero (0 m/s²)", "-9.81 m/s²", "Dependent on mass", "9.81 m/s²"],
+              correctIndex: 0,
+              explanation: "Gravity acts strictly vertically. Without horizontal force, a_x = 0."
+            }
+          ],
+          sources: [
+            { citation: "Halliday, D., Resnick, R., & Walker, J. (2018). Fundamentals of Physics (11th ed.). Wiley.", isbn: "978-1119460138" }
+          ]
+        },
+        {
+          id: "a1000000-0000-0000-0000-000000000004",
+          slug: "phys-newtons-laws",
+          title: "Newton's Laws & Dynamics",
+          discipline: "physics",
+          domain: "classical-mechanics",
+          proficiencyTier: 2,
+          duration: 90,
+          summary: "The dynamical laws governing force interactions, mass, inertia, friction, free-body diagrams, and systems of interacting bodies.",
+          prerequisites: ["phys-kinematics-1d-2d", "math-vectors-2d"],
+          x: 600, y: 150,
+          content: `
+            <h2>1. The Fundamental Law of Motion</h2>
+            <p>The net vector sum of forces acting on a body generates acceleration proportional to mass:</p>
+            <div class="math-card">$$ \\vec{F}_{\\text{net}} = \\sum_{i=1}^N \\vec{F}_i = m \\vec{a} = m \\frac{d^2\\vec{x}}{dt^2} $$</div>
+          `,
+          quiz: [
+            {
+              prompt: "A 5 kg mass accelerates at 3 m/s². What net force acted on it?",
+              options: ["15 Newtons", "8 Newtons", "0.6 Newtons", "1.67 Newtons"],
+              correctIndex: 0,
+              explanation: "F = m * a = 5 * 3 = 15 N."
+            }
+          ],
+          sources: [
+            { citation: "Feynman, R. P. (1963). The Feynman Lectures on Physics, Vol. I.", url: "https://www.feynmanlectures.caltech.edu/I_09.html" }
+          ]
+        },
+        {
+          id: "a1000000-0000-0000-0000-000000000005",
+          slug: "phys-momentum-conservation",
+          title: "Linear Momentum & Collisions",
+          discipline: "physics",
+          domain: "classical-mechanics",
+          proficiencyTier: 2,
+          duration: 80,
+          summary: "Linear momentum vector p = mv, impulse-momentum theorem, isolated systems, and elastic and inelastic collision conservation laws.",
+          prerequisites: ["phys-newtons-laws"],
+          x: 850, y: 150,
+          content: `
+            <h2>1. Momentum Conservation</h2>
+            <p>In isolated systems, total linear momentum is conserved:</p>
+            <div class="math-card">$$ \\vec{P} = \\sum m_i \\vec{v}_i = \\text{constant} $$</div>
+            <p>Coefficient of restitution ($e$) defines collision elasticity from 1.0 (perfectly elastic) to 0.0 (inelastic).</p>
+          `,
+          quiz: [
+            {
+              prompt: "Two equal masses collide elastically (e=1). If Ball 1 was moving at 5 m/s and Ball 2 was at rest, what is Ball 1's speed after collision?",
+              options: ["0 m/s (stops completely)", "2.5 m/s", "5 m/s", "-5 m/s"],
+              correctIndex: 0,
+              explanation: "In an equal-mass elastic head-on collision, velocities are completely exchanged."
+            }
+          ],
+          sources: [
+            { citation: "Halliday, D. (2018). Fundamentals of Physics, Chapter 9.", isbn: "978-1119460138" }
+          ]
+        },
+        {
+          id: "a1000000-0000-0000-0000-000000000006",
+          slug: "cs-prog-fundamentals",
+          title: "Programming State & Loops",
+          discipline: "computer-science",
+          domain: "programming",
+          proficiencyTier: 1,
+          duration: 60,
+          summary: "State variables, iteration loops, functions, discrete time-stepping, and structuring software loops for real-time simulations.",
+          prerequisites: [],
+          x: 350, y: 350,
+          content: `
+            <h2>1. Discrete Simulation Ticks</h2>
+            <p>Simulations evolve state step by step in a fixed time loop:</p>
+            <div class="code-block">while (accumulatedTime >= FIXED_DT) {
+  physicsTick(FIXED_DT);
+  accumulatedTime -= FIXED_DT;
+}</div>
+          `,
+          quiz: [
+            {
+              prompt: "Why use a fixed delta time dt instead of variable monitor frame time?",
+              options: ["Guarantees deterministic, reproducible, and stable physics", "Makes the monitor run faster", "Required by JavaScript", "Saves battery only"],
+              correctIndex: 0,
+              explanation: "Fixed time steps prevent numerical instability and tunneling during frame drops."
+            }
+          ],
+          sources: [
+            { citation: "Nystrom, R. (2014). Game Programming Patterns: Game Loop.", isbn: "978-0990582908" }
+          ]
+        },
+        {
+          id: "a1000000-0000-0000-0000-000000000007",
+          slug: "cs-numerical-integration",
+          title: "Numerical Integration: Verlet",
+          discipline: "computer-science",
+          domain: "numerical-computing",
+          proficiencyTier: 2,
+          duration: 90,
+          summary: "Solving Newton's differential equations numerically: Explicit Euler instability, Symplectic Euler, and Velocity Verlet integration for energy conservation.",
+          prerequisites: ["phys-newtons-laws", "cs-prog-fundamentals", "math-calculus-derivatives"],
+          x: 600, y: 350,
+          content: `
+            <h2>1. Velocity Verlet Algorithm</h2>
+            <p>A second-order symplectic integrator that preserves phase space volume:</p>
+            <div class="math-card">$$ \\vec{x}_{k+1} = \\vec{x}_k + \\vec{v}_k \\Delta t + \\frac{1}{2} \\vec{a}_k (\\Delta t)^2 $$
+$$ \\vec{v}_{k+1} = \\vec{v}_k + \\frac{1}{2} (\\vec{a}_k + \\vec{a}_{k+1}) \\Delta t $$</div>
+          `,
+          quiz: [
+            {
+              prompt: "Why does Explicit Euler fail for orbital or spring simulations?",
+              options: ["It continually adds artificial energy causing orbits to explode", "It can only compute integers", "It cannot handle gravity", "It divides by zero"],
+              correctIndex: 0,
+              explanation: "Explicit Euler is non-symplectic and artificially inflates mechanical energy over time."
+            }
+          ],
+          sources: [
+            { citation: "Hairer, E. (2006). Geometric Numerical Integration. Springer.", isbn: "978-3540306634" }
+          ]
+        },
+        {
+          id: "a1000000-0000-0000-0000-000000000008",
+          slug: "cs-collision-detection",
+          title: "Collision Detection & Resolution",
+          discipline: "computer-science",
+          domain: "graphics-simulation",
+          proficiencyTier: 2,
+          duration: 90,
+          summary: "Geometric collision algorithms: Circle-Circle, penetration depth, positional separation, and restitution impulses.",
+          prerequisites: ["math-vectors-2d", "phys-momentum-conservation", "cs-prog-fundamentals"],
+          x: 850, y: 350,
+          content: `
+            <h2>1. Circle-Circle Detection</h2>
+            <p>Two circles collide when distance between centers is less than the sum of radii:</p>
+            <div class="math-card">$$ \\|\\vec{p}_2 - \\vec{p}_1\\|^2 < (r_1 + r_2)^2 $$</div>
+            <h2>2. Positional Separation</h2>
+            <p>Bodies must be pushed apart to prevent sinking before applying velocity impulses:</p>
+            <div class="math-card">$$ \\Delta \\vec{p}_1 = -\\hat{n} \\cdot \\text{penetration} \\cdot 0.5 $$</div>
+          `,
+          quiz: [
+            {
+              prompt: "What is the contact normal vector pointing between Ball 1 at (0,0) and Ball 2 at (3,4)?",
+              options: ["(0.6, 0.8)", "(3, 4)", "(1, 1)", "(0.5, 0.5)"],
+              correctIndex: 0,
+              explanation: "Distance = sqrt(3^2 + 4^2) = 5. Normal = (3/5, 4/5) = (0.6, 0.8)."
+            }
+          ],
+          sources: [
+            { citation: "Ericson, C. (2004). Real-Time Collision Detection. Morgan Kaufmann.", isbn: "978-1558607323" }
+          ]
+        },
+        {
+          id: "a1000000-0000-0000-0000-000000000009",
+          slug: "chem-atomic-structure",
+          title: "Atomic Structure & Bohr Model",
+          discipline: "chemistry",
+          domain: "physical-chemistry",
+          proficiencyTier: 1,
+          duration: 60,
+          summary: "Protons, neutrons, electrons, the nuclear atom, Rutherford and Bohr models, atomic mass, isotopes, and periodic trends.",
+          prerequisites: [],
+          x: 100, y: 520,
+          content: `
+            <h2>1. The Subatomic Atom</h2>
+            <p>Electrons orbit a dense nucleus consisting of protons and neutrons. In the Bohr model:</p>
+            <div class="math-card">$$ E_n = -\\frac{13.6 \\text{ eV}}{n^2}, \\quad n \\in \\{1, 2, 3, \\dots\\} $$</div>
+          `,
+          quiz: [
+            {
+              prompt: "What is the ground state energy (n=1) of an electron in hydrogen according to Bohr?",
+              options: ["-13.6 eV", "0.0 eV", "+13.6 eV", "-3.4 eV"],
+              correctIndex: 0,
+              explanation: "E_1 = -13.6 / (1^2) = -13.6 eV."
+            }
+          ],
+          sources: [
+            { citation: "Zumdahl, S. S. (2018). Chemical Principles (8th ed.).", isbn: "978-1305581982" }
+          ]
+        }
+      ]
+    };
+
+    // State
+    let completedModules = new Set();
+    let selectedModule = REPO_DATA.modules[3]; // Default to phys-newtons-laws
+    let zoomLevel = 1.0;
+    let panOffset = { x: 50, y: 50 };
+    let isDragging = false;
+    let dragStart = { x: 0, y: 0 };
+
+    // DOM Elements
+    const graphSvg = document.getElementById('graphSvg');
+    const nodesGroup = document.getElementById('graphNodesGroup');
+    const edgesGroup = document.getElementById('graphEdgesGroup');
+    const nodeInspector = document.getElementById('nodeInspector');
+
+    // Tab Navigation
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        const tabId = btn.getAttribute('data-tab');
+        document.getElementById(tabId).classList.add('active');
+
+        if (tabId === 'tab-reader') {
+          renderReaderModule(selectedModule);
+        } else if (tabId === 'tab-simulator') {
+          initSimulator();
+        }
+      });
+    });
+
+    // Color Token Helper
+    function getDiscColor(disc) {
+      switch(disc) {
+        case 'mathematics': return '#3b82f6';
+        case 'physics': return '#10b981';
+        case 'computer-science': return '#f59e0b';
+        case 'chemistry': return '#8b5cf6';
+        default: return '#6b7280';
+      }
+    }
+
+    // Render SVG Graph Canvas
+    function renderGraph() {
+      nodesGroup.innerHTML = '';
+      edgesGroup.innerHTML = '';
+
+      const nodeMap = new Map();
+      REPO_DATA.modules.forEach(m => nodeMap.set(m.slug, m));
+
+      // Draw edges
+      REPO_DATA.modules.forEach(target => {
+        target.prerequisites.forEach(prereqSlug => {
+          const source = nodeMap.get(prereqSlug);
+          if (source) {
+            const x1 = source.x + 180;
+            const y1 = source.y + 35;
+            const x2 = target.x;
+            const y2 = target.y + 35;
+
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            const dx = (x2 - x1) * 0.5;
+            const d = `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+            path.setAttribute('d', d);
+            path.setAttribute('class', 'edge-line');
+            path.setAttribute('marker-end', 'url(#arrow)');
+            path.setAttribute('id', `edge-${source.slug}-${target.slug}`);
+            edgesGroup.appendChild(path);
+          }
+        });
+      });
+
+      // Draw nodes
+      REPO_DATA.modules.forEach(mod => {
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.setAttribute('class', 'graph-node' + (completedModules.has(mod.slug) ? ' completed' : '') + (selectedModule?.slug === mod.slug ? ' selected' : ''));
+        g.setAttribute('transform', `translate(${mod.x}, ${mod.y})`);
+        g.setAttribute('data-slug', mod.slug);
+
+        const color = getDiscColor(mod.discipline);
+
+        // Card background
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('width', '180');
+        rect.setAttribute('height', '70');
+        rect.setAttribute('rx', '8');
+        rect.setAttribute('fill', '#1f2937');
+        rect.setAttribute('stroke', color);
+        rect.setAttribute('stroke-width', '1.5');
+        g.appendChild(rect);
+
+        // Discipline dot
+        const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        dot.setAttribute('cx', '16');
+        dot.setAttribute('cy', '18');
+        dot.setAttribute('r', '5');
+        dot.setAttribute('fill', color);
+        g.appendChild(dot);
+
+        // Discipline name
+        const discText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        discText.setAttribute('x', '28');
+        discText.setAttribute('y', '22');
+        discText.setAttribute('fill', color);
+        discText.setAttribute('font-size', '10px');
+        discText.setAttribute('font-weight', '700');
+        discText.setAttribute('letter-spacing', '0.05em');
+        discText.textContent = mod.discipline.toUpperCase();
+        g.appendChild(discText);
+
+        // Title text
+        const titleText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        titleText.setAttribute('x', '16');
+        titleText.setAttribute('y', '44');
+        titleText.setAttribute('fill', '#ffffff');
+        titleText.setAttribute('font-size', '11px');
+        titleText.setAttribute('font-weight', '600');
+        titleText.textContent = mod.title.length > 22 ? mod.title.slice(0, 20) + '...' : mod.title;
+        g.appendChild(titleText);
+
+        // Tier / Status
+        const tierText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        tierText.setAttribute('x', '16');
+        tierText.setAttribute('y', '59');
+        tierText.setAttribute('fill', '#9ca3af');
+        tierText.setAttribute('font-size', '9.5px');
+        const doneBadge = completedModules.has(mod.slug) ? '✓ Mastered' : `Tier ${mod.proficiencyTier} • ${mod.duration}m`;
+        tierText.textContent = doneBadge;
+        g.appendChild(tierText);
+
+        g.addEventListener('click', (e) => {
+          e.stopPropagation();
+          selectNode(mod);
+        });
+
+        nodesGroup.appendChild(g);
+      });
+
+      updateCanvasTransform();
+    }
+
+    function updateCanvasTransform() {
+      const transform = `translate(${panOffset.x}, ${panOffset.y}) scale(${zoomLevel})`;
+      nodesGroup.setAttribute('transform', transform);
+      edgesGroup.setAttribute('transform', transform);
+    }
+
+    // Select and Highlight a Node
+    function selectNode(mod) {
+      selectedModule = mod;
+      nodeInspector.classList.add('active');
+
+      document.getElementById('inspectTitle').textContent = mod.title;
+      document.getElementById('inspectDiscipline').textContent = mod.discipline + ' • ' + mod.domain;
+      document.getElementById('inspectDiscipline').style.color = getDiscColor(mod.discipline);
+      document.getElementById('inspectTier').textContent = 'Tier ' + mod.proficiencyTier;
+      document.getElementById('inspectTier').className = 'tier-badge tier-' + mod.proficiencyTier;
+      document.getElementById('inspectSummary').textContent = mod.summary;
+
+      const prereqList = document.getElementById('inspectPrereqs');
+      prereqList.innerHTML = '';
+      if (mod.prerequisites.length === 0) {
+        prereqList.innerHTML = '<li>None (Foundational Root)</li>';
+      } else {
+        mod.prerequisites.forEach(p => {
+          const li = document.createElement('li');
+          li.textContent = p + (completedModules.has(p) ? ' ✓' : ' (Required)');
+          prereqList.appendChild(li);
+        });
+      }
+
+      const btnComplete = document.getElementById('btnToggleComplete');
+      btnComplete.textContent = completedModules.has(mod.slug) ? 'Mark as Incomplete ↺' : 'Mark as Mastered ✓';
+
+      // Highlight edges in graph
+      document.querySelectorAll('.edge-line').forEach(el => el.classList.remove('highlighted'));
+      highlightAncestry(mod.slug);
+      renderGraph();
+    }
+
+    function highlightAncestry(targetSlug) {
+      const nodeMap = new Map();
+      REPO_DATA.modules.forEach(m => nodeMap.set(m.slug, m));
+
+      const visited = new Set();
+      function traceBack(slug) {
+        if (visited.has(slug)) return;
+        visited.add(slug);
+        const node = nodeMap.get(slug);
+        if (!node) return;
+        node.prerequisites.forEach(pSlug => {
+          const edgeEl = document.getElementById(`edge-${pSlug}-${slug}`);
+          if (edgeEl) edgeEl.classList.add('highlighted');
+          traceBack(pSlug);
+        });
+      }
+      traceBack(targetSlug);
+    }
+
+    // Canvas Pan & Zoom
+    const viewport = document.getElementById('canvasViewport');
+    viewport.addEventListener('mousedown', (e) => {
+      if (e.target === viewport || e.target === graphSvg) {
+        isDragging = true;
+        dragStart = { x: e.clientX - panOffset.x, y: e.clientY - panOffset.y };
+      }
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        panOffset.x = e.clientX - dragStart.x;
+        panOffset.y = e.clientY - dragStart.y;
+        updateCanvasTransform();
+      }
+    });
+
+    window.addEventListener('mouseup', () => { isDragging = false; });
+
+    document.getElementById('btnZoomIn').addEventListener('click', () => {
+      zoomLevel = Math.min(zoomLevel + 0.15, 2.5);
+      updateCanvasTransform();
+    });
+
+    document.getElementById('btnZoomOut').addEventListener('click', () => {
+      zoomLevel = Math.max(zoomLevel - 0.15, 0.4);
+      updateCanvasTransform();
+    });
+
+    document.getElementById('btnResetView').addEventListener('click', () => {
+      zoomLevel = 1.0;
+      panOffset = { x: 50, y: 50 };
+      updateCanvasTransform();
+    });
+
+    // Inspector Action Buttons
+    document.getElementById('btnReadModule').addEventListener('click', () => {
+      document.querySelector('[data-tab="tab-reader"]').click();
+    });
+
+    document.getElementById('btnToggleComplete').addEventListener('click', () => {
+      if (selectedModule) {
+        if (completedModules.has(selectedModule.slug)) {
+          completedModules.delete(selectedModule.slug);
+        } else {
+          completedModules.add(selectedModule.slug);
+        }
+        updateProgress();
+        selectNode(selectedModule);
+      }
+    });
+
+    function updateProgress() {
+      const total = REPO_DATA.modules.length;
+      const done = completedModules.size;
+      const pct = Math.round((done / total) * 100);
+      document.getElementById('progressText').textContent = `${done} / ${total} Modules (${pct}%)`;
+      document.getElementById('progressBar').style.width = pct + '%';
+      renderTimeline();
+    }
+
+    // Render Learning Pathway Timeline
+    function renderTimeline() {
+      const container = document.getElementById('pathwayTimeline');
+      container.innerHTML = '';
+
+      const pathwaySlugs = [
+        "math-vectors-2d",
+        "math-calculus-derivatives",
+        "phys-kinematics-1d-2d",
+        "phys-newtons-laws",
+        "phys-momentum-conservation",
+        "cs-prog-fundamentals",
+        "cs-numerical-integration",
+        "cs-collision-detection"
+      ];
+
+      const nodeMap = new Map();
+      REPO_DATA.modules.forEach(m => nodeMap.set(m.slug, m));
+
+      pathwaySlugs.forEach((slug, idx) => {
+        const mod = nodeMap.get(slug);
+        if (!mod) return;
+        const isDone = completedModules.has(slug);
+
+        const card = document.createElement('div');
+        card.className = 'timeline-step';
+
+        card.innerHTML = `
+          <div class="step-number ${isDone ? 'completed' : ''}">${isDone ? '✓' : idx + 1}</div>
+          <div class="step-details">
+            <div class="step-title">${mod.title}</div>
+            <div class="step-meta">${mod.discipline.toUpperCase()} • Tier ${mod.proficiencyTier} • ~${mod.duration} mins</div>
+          </div>
+          <button class="sim-btn" onclick="openModuleBySlug('${mod.slug}')">Study Module ➔</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    window.openModuleBySlug = function(slug) {
+      const mod = REPO_DATA.modules.find(m => m.slug === slug);
+      if (mod) {
+        selectNode(mod);
+        document.querySelector('[data-tab="tab-reader"]').click();
+      }
+    };
+
+    // Render Reader Studio
+    function renderReaderModule(mod) {
+      document.getElementById('readerTitle').textContent = mod.title;
+      document.getElementById('readerDisciplineBadge').textContent = mod.discipline.toUpperCase() + ' / ' + mod.domain;
+      document.getElementById('readerDisciplineBadge').style.borderColor = getDiscColor(mod.discipline);
+      document.getElementById('readerTierBadge').textContent = 'Tier ' + mod.proficiencyTier;
+      document.getElementById('readerSummary').textContent = mod.summary;
+      document.getElementById('readerBody').innerHTML = mod.content;
+
+      // Render KaTeX Math
+      if (window.renderMathInElement) {
+        renderMathInElement(document.getElementById('readerBody'), {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+          ]
+        });
+      }
+
+      // Quiz
+      const quizContainer = document.getElementById('quizQuestionsContainer');
+      quizContainer.innerHTML = '';
+      mod.quiz.forEach((q, qIdx) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'quiz-question';
+        qDiv.innerHTML = `<div class="quiz-prompt">${qIdx + 1}. ${q.prompt}</div>`;
+
+        q.options.forEach((opt, oIdx) => {
+          const optDiv = document.createElement('div');
+          optDiv.className = 'quiz-option';
+          optDiv.innerHTML = `<input type="radio" name="q_${qIdx}" value="${oIdx}"> <span>${opt}</span>`;
+          optDiv.addEventListener('click', () => {
+            optDiv.querySelector('input').checked = true;
+            qDiv.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+            optDiv.classList.add('selected');
+          });
+          qDiv.appendChild(optDiv);
+        });
+
+        const feedback = document.createElement('div');
+        feedback.className = 'quiz-feedback';
+        feedback.id = `feedback_${qIdx}`;
+        qDiv.appendChild(feedback);
+
+        quizContainer.appendChild(qDiv);
+      });
+
+      // Provenance
+      const provList = document.getElementById('readerProvenanceList');
+      provList.innerHTML = '';
+      mod.sources.forEach(s => {
+        const li = document.createElement('li');
+        li.innerHTML = `${s.citation} ${s.isbn ? `(ISBN: ${s.isbn})` : ''} ${s.url ? `<a href="${s.url}" target="_blank" style="color:#60a5fa;">[Source Link]</a>` : ''}`;
+        provList.appendChild(li);
+      });
+    }
+
+    // Quiz Submission Checker
+    document.getElementById('btnSubmitQuiz').addEventListener('click', () => {
+      if (!selectedModule) return;
+      selectedModule.quiz.forEach((q, qIdx) => {
+        const selected = document.querySelector(`input[name="q_${qIdx}"]:checked`);
+        const feedback = document.getElementById(`feedback_${qIdx}`);
+        feedback.style.display = 'block';
+
+        if (!selected) {
+          feedback.style.background = 'rgba(239, 68, 68, 0.2)';
+          feedback.style.color = '#ef4444';
+          feedback.textContent = 'Please select an answer.';
+          return;
+        }
+
+        const chosenIndex = parseInt(selected.value, 10);
+        if (chosenIndex === q.correctIndex) {
+          feedback.style.background = 'rgba(16, 185, 129, 0.2)';
+          feedback.style.color = '#10b981';
+          feedback.textContent = '✓ Correct! ' + q.explanation;
+          completedModules.add(selectedModule.slug);
+          updateProgress();
+        } else {
+          feedback.style.background = 'rgba(239, 68, 68, 0.2)';
+          feedback.style.color = '#ef4444';
+          feedback.textContent = '✗ Incorrect. ' + q.explanation;
+        }
+      });
+    });
+
+    // =========================================================================
+    // TAB 4: REAL-TIME 2D PHYSICS SIMULATOR SANDBOX
+    // =========================================================================
+    let canvas, ctx;
+    let particles = [];
+    let isSimRunning = true;
+    let gravity = 9.81 * 40; // Scaled for pixels
+    let restitution = 0.85;
+    let drag = 0.005;
+    let lastTime = performance.now();
+    let fpsFrames = 0;
+    let fpsTimer = 0;
+
+    class SimParticle {
+      constructor(x, y, vx, vy, radius, mass, color) {
+        this.x = x;
+        this.y = y;
+        this.vx = vx;
+        this.vy = vy;
+        this.radius = radius;
+        this.mass = mass;
+        this.color = color;
+      }
+    }
+
+    function initSimulator() {
+      canvas = document.getElementById('physicsCanvas');
+      ctx = canvas.getContext('2d');
+
+      if (particles.length === 0) {
+        spawnInitialParticles();
+      }
+
+      canvas.onclick = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const rad = 12 + Math.random() * 14;
+        const colors = ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4'];
+        const col = colors[Math.floor(Math.random() * colors.length)];
+        particles.push(new SimParticle(x, y, (Math.random() - 0.5) * 200, (Math.random() - 0.5) * 200, rad, rad * 0.1, col));
+      };
+    }
+
+    function spawnInitialParticles() {
+      const colors = ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4'];
+      for (let i = 0; i < 8; i++) {
+        const rad = 14 + (i % 3) * 6;
+        const col = colors[i % colors.length];
+        particles.push(new SimParticle(150 + i * 70, 80 + (i % 4) * 40, (Math.random() - 0.5) * 120, (Math.random() - 0.5) * 80, rad, rad * 0.1, col));
+      }
+    }
+
+    function physicsLoop(now) {
+      const dtRaw = (now - lastTime) / 1000;
+      lastTime = now;
+      const dt = Math.min(dtRaw, 0.05); // Clamp dt
+
+      // FPS tracking
+      fpsFrames++;
+      fpsTimer += dt;
+      if (fpsTimer >= 0.5) {
+        document.getElementById('statFps').textContent = Math.round(fpsFrames / fpsTimer);
+        fpsFrames = 0;
+        fpsTimer = 0;
+      }
+
+      if (isSimRunning && ctx) {
+        // Clear
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Grid lines
+        ctx.strokeStyle = '#111827';
+        ctx.lineWidth = 1;
+        for (let x = 0; x < canvas.width; x += 50) {
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+        }
+        for (let y = 0; y < canvas.height; y += 50) {
+          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+        }
+
+        // Sub-stepping for maximum collision stability
+        const subSteps = 4;
+        const subDt = dt / subSteps;
+
+        for (let step = 0; step < subSteps; step++) {
+          // 1. Velocity Verlet Integration
+          for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+
+            // Forces: Gravity + Air Drag
+            const speed = Math.hypot(p.vx, p.vy);
+            const dragForceX = -drag * p.vx * speed;
+            const dragForceY = -drag * p.vy * speed;
+
+            const ax = dragForceX / p.mass;
+            const ay = gravity + (dragForceY / p.mass);
+
+            // Half-step velocity
+            p.vx += 0.5 * ax * subDt;
+            p.vy += 0.5 * ay * subDt;
+
+            // Full-step position
+            p.x += p.vx * subDt;
+            p.y += p.vy * subDt;
+
+            // Second half-step velocity
+            p.vx += 0.5 * ax * subDt;
+            p.vy += 0.5 * ay * subDt;
+
+            // Wall collisions with Restitution
+            if (p.x - p.radius < 0) {
+              p.x = p.radius;
+              p.vx = -p.vx * restitution;
+            } else if (p.x + p.radius > canvas.width) {
+              p.x = canvas.width - p.radius;
+              p.vx = -p.vx * restitution;
+            }
+
+            if (p.y - p.radius < 0) {
+              p.y = p.radius;
+              p.vy = -p.vy * restitution;
+            } else if (p.y + p.radius > canvas.height) {
+              p.y = canvas.height - p.radius;
+              p.vy = -p.vy * restitution;
+            }
+          }
+
+          // 2. Circle-Circle Collision Detection & Impulse Resolution
+          for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+              const b1 = particles[i];
+              const b2 = particles[j];
+
+              const dx = b2.x - b1.x;
+              const dy = b2.y - b1.y;
+              const distSq = dx * dx + dy * dy;
+              const minDist = b1.radius + b2.radius;
+
+              if (distSq < minDist * minDist && distSq > 0) {
+                const dist = Math.sqrt(distSq);
+                const nx = dx / dist;
+                const ny = dy / dist;
+                const penetration = minDist - dist;
+
+                // Positional correction
+                b1.x -= nx * penetration * 0.5;
+                b1.y -= ny * penetration * 0.5;
+                b2.x += nx * penetration * 0.5;
+                b2.y += ny * penetration * 0.5;
+
+                // Relative velocity along normal
+                const rvx = b2.vx - b1.vx;
+                const rvy = b2.vy - b1.vy;
+                const velAlongNormal = rvx * nx + rvy * ny;
+
+                if (velAlongNormal < 0) {
+                  // Restitution impulse
+                  const jScalar = (-(1 + restitution) * velAlongNormal) / (1 / b1.mass + 1 / b2.mass);
+                  b1.vx -= (jScalar / b1.mass) * nx;
+                  b1.vy -= (jScalar / b1.mass) * ny;
+                  b2.vx += (jScalar / b2.mass) * nx;
+                  b2.vy += (jScalar / b2.mass) * ny;
+                }
+              }
+            }
+          }
+        }
+
+        // Render Particles
+        let totalKineticEnergy = 0;
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          const speedSq = p.vx * p.vx + p.vy * p.vy;
+          totalKineticEnergy += 0.5 * p.mass * speedSq;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.shadowColor = p.color;
+          ctx.shadowBlur = 10;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+
+          // Velocity vector indicator
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p.x + p.vx * 0.08, p.y + p.vy * 0.08);
+          ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+          ctx.stroke();
+        }
+
+        document.getElementById('statCount').textContent = particles.length;
+        document.getElementById('statEnergy').textContent = Math.round(totalKineticEnergy).toLocaleString();
+      }
+
+      requestAnimationFrame(physicsLoop);
+    }
+    requestAnimationFrame(physicsLoop);
+
+    // Simulator Sliders & Controls
+    document.getElementById('sliderGravity').addEventListener('input', (e) => {
+      const val = parseFloat(e.target.value);
+      gravity = val * 40;
+      document.getElementById('labelGravity').textContent = `${val.toFixed(1)} m/s²`;
+    });
+
+    document.getElementById('sliderRestitution').addEventListener('input', (e) => {
+      restitution = parseFloat(e.target.value);
+      document.getElementById('labelRestitution').textContent = restitution.toFixed(2);
+    });
+
+    document.getElementById('sliderDrag').addEventListener('input', (e) => {
+      drag = parseFloat(e.target.value);
+      document.getElementById('labelDrag').textContent = drag.toFixed(4);
+    });
+
+    document.getElementById('btnSpawn10').addEventListener('click', () => {
+      const colors = ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4'];
+      for (let i = 0; i < 10; i++) {
+        const rad = 10 + Math.random() * 16;
+        const col = colors[Math.floor(Math.random() * colors.length)];
+        particles.push(new SimParticle(100 + Math.random() * 600, 50 + Math.random() * 200, (Math.random() - 0.5) * 150, (Math.random() - 0.5) * 150, rad, rad * 0.1, col));
+      }
+    });
+
+    document.getElementById('btnClearBalls').addEventListener('click', () => {
+      particles = [];
+    });
+
+    document.getElementById('btnZeroGravity').addEventListener('click', () => {
+      gravity = 0;
+      document.getElementById('sliderGravity').value = 0;
+      document.getElementById('labelGravity').textContent = '0.0 m/s² (Zero-G)';
+    });
+
+    document.getElementById('btnPauseSim').addEventListener('click', () => {
+      isSimRunning = !isSimRunning;
+      document.getElementById('btnPauseSim').textContent = isSimRunning ? 'Pause' : 'Resume ▶';
+    });
+
+    // Initial setup on load
+    renderGraph();
+    renderTimeline();
+    selectNode(REPO_DATA.modules[3]);
+    updateProgress();
+  </script>
+</body>
+</html>

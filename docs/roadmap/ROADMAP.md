@@ -10,25 +10,28 @@
 [Phase 0: Discovery & Master Planning] (APPROVED BASELINE)
       │
       ▼
-[Phase 1: Knowledge Ontology, Schemas & Validation Engine]
+[Phase 1: Knowledge Ontology, Schemas & Validation Engine] (COMPLETED)
       │
       ▼
-[Phase 2: Core Graph Engine & Pathway Generator]
+[Phase 2: Core Graph Engine & Pathway Generator] (COMPLETED)
       │
       ▼
-[Phase 3: Content Authoring System & Verification Pipeline]
+[Phase 3: Content Authoring System & Verification Pipeline] (COMPLETED)
       │
       ▼
-[Phase 4: Foundational Pilot Content Creation (Math, Physics, CS, Chem)]
+[Phase 4: Foundational Pilot Content Creation (Math, Physics, CS, Chem)] (COMPLETED)
       │
       ▼
-[Phase 5: Learner Interface & Interactive Tech Tree Visualizer]
+[Phase 5: Learner Interface & Interactive Tech Tree Visualizer] (CURRENT PHASE)
       │
       ▼
-[Phase 6: End-to-End System Testing & Quality Assurance]
+[Phase 6: Advanced Content Expansion: 3D Physics, AI Environments & Embodied Robotics]
       │
       ▼
-[Phase 7: Version 1 Release & Tree of Discovery Architectural Transition]
+[Phase 7: End-to-End System Testing & Quality Assurance]
+      │
+      ▼
+[Phase 8: Version 1 Release, Multi-Platform Packaging & System A Transition]
 ```
 
 ---
@@ -108,30 +111,51 @@
 ---
 
 ### Phase 5: Learner Interface & Interactive Tech Tree Visualizer
-- **Status:** *Queued*
-- **Objectives:** Develop the web-based interactive Tech Tree visualizer and rich module reader.
+- **Status:** **In Progress (Active Phase)**
+- **Objectives:** Develop the web-based interactive Tech Tree visualizer, pathway explorer, rich module reader, and live physics sandbox.
 - **Scope:**
-  - Zoomable, pan-able interactive graph canvas displaying disciplines and module nodes.
-  - Dynamic prerequisite highlight: clicking a module highlights its ancestry path in green.
-  - Rich module reader with KaTeX mathematical formulas, syntax-highlighted code blocks, and embedded interactive canvas simulations.
-- **Deliverables:** Working local web interface demonstrating graph navigation and module reading.
-- **Acceptance Criteria:** Learner can click the "2D Physics Simulator" pathway, view the sequenced nodes on the canvas, open each module, and run the simulator.
+  - Zoomable, pan-able interactive graph canvas displaying disciplines, domains, and module nodes with directed prerequisite edges.
+  - Dynamic pathway highlighting (click any goal to see its required ancestry illuminated on the canvas).
+  - Rich module reader with KaTeX mathematical formulas, code blocks, and interactive self-check quizzes.
+  - Built-in real-time 2D Physics Simulator interactive canvas where users can adjust gravity, restitution, and air drag.
+  - Multi-pathway selector previewing the 2D Physics, 3D Physics, AI Environment, and Embodied Robotics pathways.
+- **Deliverables:** Standalone, production-grade interactive web application in `public/index.html` and `src/web/`.
+- **Acceptance Criteria:** A learner can navigate the graph, inspect all modules, review derivations and formulas, take quizzes, and run the live 2D simulator.
 
 ---
 
-### Phase 6: End-to-End System Testing & Quality Assurance
+### Phase 6: Advanced Generative Content: 3D Physics, AI Environments & Embodied Robotics
+- **Status:** *Queued (Expanded V1 Scope)*
+- **Objectives:** Curate and verify advanced higher-tier modules across 3 intersecting pathways:
+  1. **3D Physics & Spatial Computing Pathway:**
+     - 3D Vectors & Cross Products (`math-vectors-3d`)
+     - Quaternions & Rotational Kinematics (`math-matrices-quaternions`)
+     - Rigid Body Dynamics & Inertia Tensors (`phys-rigid-body-3d`)
+     - 3D Collision Detection & Bounding Volume Hierarchies (`cs-3d-collision-bvh`)
+  2. **AI in Simulated Environments Pathway:**
+     - Probability, Statistics & Loss Functions (`math-probability-statistics`)
+     - Neural Network Foundations & Backpropagation (`cs-neural-networks-foundations`)
+     - Markov Decision Processes & Reinforcement Learning (`cs-reinforcement-learning-mdp`)
+     - Deep Q-Learning & Policy Gradients (`cs-deep-rl-agents`)
+  3. **Embodied AI & Physical Robotics Synthesis Pathway:**
+     - Computer Vision & Spatial Depth Perception (`cs-computer-vision-foundations`)
+     - Robotics Kinematics & Inverse Kinematics (`phys-robotics-inverse-kinematics`)
+     - State Estimation & Kalman Filtering (`math-kalman-filtering`)
+     - Sim-to-Real Transfer & Physics-Informed Neural Models (`cs-sim-to-real-embodied-ai`)
+- **Deliverables:** Complete sovereign modules and pathway declarations for all 3 advanced tracks.
+- **Acceptance Criteria:** All advanced modules pass schema validation, 0 cycles in DAG, and resolve valid cross-disciplinary pathways.
+
+---
+
+### Phase 7: End-to-End System Testing & Quality Assurance
 - **Status:** *Queued*
-- **Objectives:** Comprehensive testing of code, graph resolution, mathematical accuracy, and user experience.
-- **Scope:**
-  - Unit tests, integration tests, end-to-end pathway progression tests.
-  - Mathematical and scientific verification review.
-  - Broken link and dead citation scans.
+- **Objectives:** Comprehensive automated regression testing across all 20+ modules, DAG algorithms, and interactive simulators.
 - **Deliverables:** Automated QA test suite and formal Verification Report.
-- **Acceptance Criteria:** Zero test failures, zero broken dependencies, and 100% verified citations across pilot modules.
+- **Acceptance Criteria:** 100% test pass rate, 0 cyclic dependencies, 100% verified citations across all modules.
 
 ---
 
-### Phase 7: Version 1 Release & Tree of Discovery Architectural Transition
+### Phase 8: Version 1 Release, Multi-Platform Packaging & System A Transition
 - **Status:** *Queued*
-- **Objectives:** Package Version 1, finalize documentation, and draft the formal architectural transition plan for System A (The Tree of Discovery).
-- **Deliverables:** V1 Release tag, updated ADRs, user documentation, and System A RFC.
+- **Objectives:** Release Version 1.0, package multi-platform artifacts (Web PWA, Desktop Tauri/Electron wrapper, Mobile Capacitor wrapper), finalize ADRs, and produce the formal RFC for System A (The Tree of Discovery).
+- **Deliverables:** V1.0 tag, multi-platform binaries, complete repository documentation, and System A architecture blueprint.

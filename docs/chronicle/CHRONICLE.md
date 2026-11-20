@@ -64,6 +64,15 @@ From inception, the architecture was divided into two intertwined systems:
   - Audited full repository: 100% schema validation pass, 0 cycles in DAG, all 9 modules classified as `technically-verified`.
   - *Phase Report:* [`phase-reports/PHASE_4_PILOT_CONTENT_REPORT.md`](./phase-reports/PHASE_4_PILOT_CONTENT_REPORT.md)
 
+- **Phase 5 — Learner Interface & Interactive Tech Tree Visualizer:**
+  - Built interactive web application in `public/index.html` with pan/zoom SVG graph canvas, discipline filtering, and dynamic prerequisite ancestor illumination.
+  - Built multi-pathway explorer with timeline sequencing and competency progress tracking.
+  - Built module reader studio with live KaTeX formula rendering and self-checking interactive quizzes.
+  - Built live embedded 2D Physics Simulator sandbox running Velocity Verlet integration, drag, gravity, and circle-circle restitution impulses.
+  - Created zero-dependency local web server (`src/web/server.ts`, `npm run serve`).
+  - Formally codified ADR-005 expanding V1 scope to 3D Physics, AI Environments, and Embodied Robotics Synthesis.
+  - *Phase Report:* [`phase-reports/PHASE_5_LEARNER_INTERFACE_REPORT.md`](./phase-reports/PHASE_5_LEARNER_INTERFACE_REPORT.md)
+
 ---
 
 ## 🔮 Planning Ahead & Planning Behind

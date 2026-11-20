@@ -9,8 +9,13 @@
 ## 1. Product Goals
 
 1. **Demonstrate Cross-Disciplinary Knowledge Composition:** Prove that independently created and maintained knowledge modules from Mathematics, Physics, and Computer Science can be dynamically composed into an actionable learning pathway without content duplication.
-2. **Deliver the Capstone Pilot:** Successfully guide a learner through the prerequisite concepts and coding exercises required to build a functioning, interactive **2D Physics Simulator** from first principles.
-3. **Establish an Auditable Knowledge Infrastructure:** Implement a rigorous, schema-validated content repository with strict source provenance, multi-level verification statuses, and automated dependency validation.
+2. **Deliver the Foundational Capstone (2D Physics Simulator):** Guide a learner through the prerequisite concepts and coding exercises required to build a functioning, interactive **2D Physics Simulator** from first principles.
+3. **Deliver the Advanced Generative Tracks (V1 Expanded):**
+   - **3D Physics & Spatial Computing Pathway:** Extending 2D vectors and mechanics to 3D rigid bodies, quaternions, and 3D collision detection.
+   - **AI in Simulated Environments Pathway:** Guiding learners through probability, neural networks, Markov decision processes, and deep reinforcement learning agents.
+   - **Embodied AI & Robotics Synthesis Pathway:** Uniting 3D physics engines, simulated environments, and computer vision / sensor fusion into an autonomous physical agent capable of real-world interaction.
+4. **Establish an Auditable Knowledge Infrastructure:** Implement a rigorous, schema-validated content repository with strict source provenance, multi-level verification statuses, and automated dependency validation.
+5. **Multi-Platform Deployment:** Deliver the interface as an offline-first responsive web application ready for packaging onto desktop (Tauri/Electron) and mobile (Capacitor/PWA).
 
 ---
 
