@@ -2,289 +2,630 @@
 
 ---
 
-## 1. The Epistemological Insight: From Huygens to Noether's Symmetry
+## 🧭 Prologue: The World in Motion and the Ice Skaters Paradox
 
-### 1.1 The Collision Experiments of Christiaan Huygens (1669)
-Before Isaac Newton published the *Principia*, natural philosophers struggled to understand collisions. René Descartes had postulated that God preserved the total "quantity of motion" ($\sum m |v|$) in the universe. However, when tested against colliding pendulum balls, Descartes' scalar formula failed.
+Imagine two ice skaters standing motionless face-to-face in the center of an Olympic-sized sheet of frictionless ice:
+- On the left stands an adult athlete with a mass of $M = 80\text{ kg}$.
+- On the right stands a young child with a mass of $m = 40\text{ kg}$.
 
-In 1669, the Dutch physicist **Christiaan Huygens** presented a revolutionary analysis to the Royal Society. Huygens recognized that:
-1. Direction matters: momentum is fundamentally a **vector** quantity ($\vec{p} = m\vec{v}$).
-2. Motion is relative: by imagining the collision taking place inside a smoothly moving canal boat, Huygens derived the exact laws of elastic collisions and demonstrated that kinetic energy ($\frac{1}{2}mv^2$) is uniquely conserved in elastic impacts.
+Both are completely at rest ($v = 0$). 
 
-### 1.2 Emmy Noether's Theorem: Spatial Symmetry
-In 1915, the mathematician **Emmy Noether** proved one of the deepest theorems in theoretical physics: **every continuous symmetry of a physical system corresponds to an exact conservation law**.
+Suddenly, the child places her hands against the adult's chest and gives a vigorous, sudden push. The adult never moves his arms; he remains completely passive.
 
-> **The Origin of Momentum Conservation:**  
-> The universe possesses **spatial translational symmetry**—meaning the fundamental laws of physics do not depend on *where* you are in space. An experiment conducted in London, on Mars, or in deep intergalactic space behaves identically.  
-> Noether proved mathematically that spatial translational symmetry implies that the total linear momentum of an isolated system **must remain invariant for all time**.
+Now, ask someone without a background in physics what will happen. Most people will say:
+> *"The child pushed the adult, so the adult will glide backward while the child stays where she is, or perhaps the child moves a little bit."*
 
-Momentum conservation is even more fundamental than Newton's laws. When quantum mechanics and Einstein's relativity overturned classical mechanics at atomic and cosmic scales, Newton's Second Law ($\vec{F} = m\vec{a}$) had to be modified, but **conservation of momentum survived completely intact**.
+What actually happens on real ice?
+- The moment the child pushes, **both skaters instantly fly apart in opposite directions**.
+- The adult glides backward at $1.0\text{ meter per second}$.
+- The child glides backward in the opposite direction at **$2.0\text{ meters per second}$**—twice as fast as the adult!
 
----
+Now examine the total "quantity of motion" in this two-person universe:
+$$\text{Adult Motion: } (80\text{ kg}) \times (+1.0\text{ m/s}) = +80\text{ kg}\cdot\text{m/s}$$
+$$\text{Child Motion: } (40\text{ kg}) \times (-2.0\text{ m/s}) = -80\text{ kg}\cdot\text{m/s}$$
+$$\text{Total Motion: } (+80) + (-80) = \mathbf{0\text{ kg}\cdot\text{m/s}}!$$
 
-## 2. First-Principles Formalism: The Isolated System & Center of Mass
+Before the push, the total motion was zero. After the push, the total motion is **still exactly zero**.
 
-### 2.1 The Definition of Linear Momentum
-For a point particle of mass $m$ moving with velocity $\vec{v}$:
-$$ \vec{p} = m \vec{v} $$
-Momentum has units of $\text{kg}\cdot\text{m/s}$ (or Newton-seconds, $\text{N}\cdot\text{s}$).
+Even though explosive muscular energy was released, and even though two bodies are now flying across the rink, **the universe strictly conserved the net directional quantity of motion**.
 
-### 2.2 System Momentum and the Center of Mass
-For a collection of $N$ interacting particles with masses $m_i$ and positions $\vec{r}_i$:
-The **Center of Mass** $\vec{R}_{\text{cm}}$ is the mass-weighted average position:
-$$ \vec{R}_{\text{cm}} = \frac{\sum_{i=1}^N m_i \vec{r}_i}{M_{\text{total}}}, \quad \text{where } M_{\text{total}} = \sum_{i=1}^N m_i $$
+In the 17th century, before Isaac Newton published the *Principia*, philosophers struggled to explain what happens when bodies collide. René Descartes had proposed that God preserved the total scalar quantity $\sum m|v|$. But when Dutch physicist **Christiaan Huygens** analyzed colliding pendulum balls in 1669, Descartes' scalar formula failed. 
 
-Differentiating with respect to time yields the velocity of the center of mass:
-$$ \vec{V}_{\text{cm}} = \frac{d\vec{R}_{\text{cm}}}{dt} = \frac{\sum_{i=1}^N m_i \vec{v}_i}{M_{\text{total}}} = \frac{\vec{P}_{\text{total}}}{M_{\text{total}}} $$
+Huygens realized that motion possesses a **direction**: it is fundamentally a **vector**. When velocities carry signs, total vector momentum is never created and never destroyed in an isolated system.
 
-Differentiating again gives Newton's Second Law for the entire system:
-$$ M_{\text{total}} \vec{A}_{\text{cm}} = \frac{d\vec{P}_{\text{total}}}{dt} = \sum \vec{F}_{\text{external}} + \sum \vec{F}_{\text{internal}} $$
-
-By Newton's Third Law, every internal force $\vec{F}_{ij}$ exerted by particle $i$ on particle $j$ is canceled by $-\vec{F}_{ji}$:
-$$ \sum \vec{F}_{\text{internal}} = \vec{0} $$
-
-Therefore:
-$$ \mathbf{\sum \vec{F}_{\text{external}} = \frac{d\vec{P}_{\text{total}}}{dt}} $$
-
-**The Universal Conservation Law:**
-If the net external force on a system is zero ($\sum \vec{F}_{\text{external}} = \vec{0}$), the total momentum is strictly constant:
-$$ \mathbf{\vec{P}_{\text{total}} = \sum_{i=1}^N m_i \vec{v}_i = \text{constant}} $$
-*Illustration:* If an artillery shell explodes in mid-air, the internal explosion forces blow fragments in all directions, but the system's center of mass continues along its original parabolic trajectory undisturbed!
+In 1915, the mathematician **Emmy Noether** proved that this conservation law is not a terrestrial accident: it is the mathematical consequence of **spatial translational symmetry**—the profound fact that the laws of nature are identical everywhere in the cosmos.
 
 ---
 
-## 3. The Impulse-Momentum Theorem
-
-When a force acts over an interval of time $\Delta t = t_2 - t_1$, the cumulative effect is termed **impulse** $\vec{J}$:
-
-$$ \vec{J} = \int_{t_1}^{t_2} \vec{F}(t) \, dt = \Delta \vec{p} = m \vec{v}_f - m \vec{v}_i $$
+## 🗺️ Master Curriculum Overview
 
 ```
-    Force F(t)
-        ^          /---\
-        |        /   |   \       Area under curve = Impulse J = Δp
-        |       /    |    \
-        |______/_____|_____\____> Time t
-             t_1           t_2
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  LEVEL 8: PHILOSOPHICAL HORIZONS & NOETHER'S THEOREM                         │
+│  Continuous spatial symmetry, cosmic invariance, and quantum survival        │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  LEVEL 7: MULTI-TIERED MASTERY PRACTICE SET                                  │
+│  5 progressive tiers from Class 6 skaters to ballistic pendulums & rockets   │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  LEVEL 6: COMPLETE PRODUCTION COMPUTATIONAL ENGINE                           │
+│  TypeScript MomentumCollisionResolver, Baumgarte stabilization & restitution │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  LEVEL 5: 2D OBLIQUE COLLISIONS & THE 90° SCATTERING THEOREM                 │
+│  Vector dot product orthogonality proof, contact normal n, and impulse j     │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  LEVEL 4: 1D COLLISIONS & THE COEFFICIENT OF RESTITUTION (e)                 │
+│  Full algebraic derivation of elastic velocities and the 3 classical cases   │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  LEVEL 3: CONSERVATION OF MOMENTUM & THE CENTER OF MASS                      │
+│  Internal force cancellation via Third Law, isolated systems, explosions     │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  LEVEL 2: THE IMPULSE-MOMENTUM THEOREM & IMPACT ENGINEERING                  │
+│  J = ∫ F dt = Δp, force mitigation, airbags and automobile crumple zones     │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  LEVEL 1: LINEAR MOMENTUM — THE VECTOR QUANTITY OF MOTION                    │
+│  p = m * v, units (kg·m/s or N·s), vector vs scalar energy                   │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  LEVEL 0: THE ICE SKATERS PARADOX & THE NEWTON'S CRADLE MYSTERY              │
+│  Internal push, velocity inversion, Class 6 intuitive base                   │
+└──────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 3.1 Engineering Applications: Force Mitigation
-For a given change in momentum $\Delta \vec{p}$ (e.g. bringing a moving car to a complete stop):
-$$ \vec{F}_{\text{avg}} = \frac{\Delta \vec{p}}{\Delta t} $$
-- If $\Delta t$ is very small (hitting a rigid concrete barrier in $0.005 \text{ s}$), the impact force $\vec{F}_{\text{avg}}$ is gigantic, causing catastrophic structural destruction.
-- If $\Delta t$ is prolonged (automobile crumple zones and airbags extending deceleration time to $0.15 \text{ s}$), the peak force experienced by passengers is reduced by a factor of 30, saving human lives.
-
 ---
 
-## 4. Analytical Physics of Collisions
+# Level 0: The Ice Skaters Paradox & The Newton's Cradle Mystery
 
-Collisions are categorized according to whether kinetic energy ($K = \frac{1}{2}mv^2$) is conserved:
-
-### 4.1 The Coefficient of Restitution ($e$)
-The coefficient of restitution $e \in [0, 1]$ characterizes the elasticity of the contact materials:
-$$ e = -\frac{v_{1f} - v_{2f}}{v_{1i} - v_{2i}} = \frac{\text{Separation Speed}}{\text{Approach Speed}} $$
-
-1. **Perfectly Elastic Collision ($e = 1.0$):** Both momentum and kinetic energy are conserved ($K_f = K_i$).
-2. **Inelastic Collision ($0 < e < 1.0$):** Momentum is conserved; kinetic energy is partially converted into heat, sound, and atomic lattice deformation ($K_f < K_i$).
-3. **Completely Inelastic Collision ($e = 0.0$):** Colliding bodies stick together, moving with identical final velocity ($v_{1f} = v_{2f}$). This represents the **maximum possible kinetic energy dissipation** consistent with momentum conservation.
-
-### 4.2 Rigorous Derivation of 1D Elastic Velocities
-Consider two masses $m_1, m_2$ colliding head-on with initial velocities $u_1, u_2$.
-From momentum conservation:
-$$ m_1 u_1 + m_2 u_2 = m_1 v_1 + m_2 v_2 \implies m_1(u_1 - v_1) = m_2(v_2 - u_2) \quad \text{(Eq. 1)} $$
-
-From kinetic energy conservation:
-$$ \frac{1}{2}m_1 u_1^2 + \frac{1}{2}m_2 u_2^2 = \frac{1}{2}m_1 v_1^2 + \frac{1}{2}m_2 v_2^2 \implies m_1(u_1^2 - v_1^2) = m_2(v_2^2 - u_2^2) $$
-
-Factoring as difference of squares:
-$$ m_1(u_1 - v_1)(u_1 + v_1) = m_2(v_2 - u_2)(v_2 + u_2) \quad \text{(Eq. 2)} $$
-
-Dividing Eq. 2 by Eq. 1:
-$$ u_1 + v_1 = v_2 + u_2 \implies \mathbf{u_1 - u_2 = -(v_1 - v_2)} $$
-This proves that **the relative speed of separation equals the relative speed of approach** ($e = 1$)!
-
-Solving simultaneously for final velocities:
-$$ \mathbf{v_1 = \left(\frac{m_1 - m_2}{m_1 + m_2}\right) u_1 + \left(\frac{2m_2}{m_1 + m_2}\right) u_2} $$
-$$ \mathbf{v_2 = \left(\frac{2m_1}{m_1 + m_2}\right) u_1 + \left(\frac{m_2 - m_1}{m_1 + m_2}\right) u_2} $$
-
-#### Remarkable Special Cases:
-- **Case 1 ($m_1 = m_2$):** $v_1 = u_2$ and $v_2 = u_1$. Equal masses cleanly exchange velocities! (The basis of Newton's Cradle).
-- **Case 2 ($m_1 \ll m_2$, Target at rest $u_2 = 0$):** $v_1 \approx -u_1$ and $v_2 \approx 0$. A tennis ball bounces off a massive wall with inverted speed.
-- **Case 3 ($m_1 \gg m_2$, Target at rest $u_2 = 0$):** $v_1 \approx u_1$ and $v_2 \approx 2 u_1$. A speeding truck hits a tennis ball, launching the ball at twice the truck's speed!
-
----
-
-## 5. 2D Oblique Collisions & Computational Impulse Resolution
-
-In 2D physics engines, bodies collide at arbitrary angles. The collision resolution occurs strictly along the **contact normal** $\hat{n}$.
+### 0.1 The Newton's Cradle Mystery
+You have almost certainly seen the classic executive toy: five steel balls hanging by thin nylon strings, resting side-by-side.
 
 ```
-                  Sphere 1 (m1)        Sphere 2 (m2)
-                       ●                  ●
-                      / \   Contact n    / \
-                     | v1| ------------>| v2|
-                      \ /                \ /
+       O   O   O   O   O
+       |   |   |   |   |
+      (1) (2) (3) (4) (5)
 ```
 
-### 5.1 The Impulse Scalar Formula
-1. Compute the unit contact normal pointing from body 1 to body 2:
-   $$ \hat{n} = \frac{\vec{r}_2 - \vec{r}_1}{\|\vec{r}_2 - \vec{r}_1\|} $$
-2. Relative velocity along the normal:
-   $$ v_{\text{rel}} = (\vec{v}_1 - \vec{v}_2) \cdot \hat{n} $$
-   *(If $v_{\text{rel}} \le 0$, the bodies are already separating; no collision impulse is applied).*
-3. Impulse magnitude $j$:
-   $$ j = \frac{-(1 + e) v_{\text{rel}}}{\frac{1}{m_1} + \frac{1}{m_2}} $$
-4. Velocity updates:
-   $$ \vec{v}_1' = \vec{v}_1 + \frac{j}{m_1} \hat{n} $$
-   $$ \vec{v}_2' = \vec{v}_2 - \frac{j}{m_2} \hat{n} $$
+1. You pull ball 1 back and release it. It swings down and strikes ball 2 at speed $v$.
+2. What happens? Balls 2, 3, and 4 remain completely motionless!
+3. Only ball 5 on the far right shoots outward at the exact same speed $v$.
 
-### 5.2 Positional Penetration Resolution
-Due to finite discrete time steps $\Delta t$, colliding bodies overlap before a collision is detected. If only velocities are altered, objects may remain stuck or sink into each other ("sinking trap").
-We apply **Baumgarte position projection** to separate overlapping bodies:
-$$ d = (R_1 + R_2) - \|\vec{r}_2 - \vec{r}_1\| $$
-$$ \vec{r}_1' = \vec{r}_1 - \frac{m_2}{m_1 + m_2} d \hat{n}, \quad \vec{r}_2' = \vec{r}_2 + \frac{m_1}{m_1 + m_2} d \hat{n} $$
+Why didn't ball 1's impact cause **two balls** (balls 4 and 5) to pop out at **half speed** ($\frac{1}{2}v$)?
+Notice that if two balls popped out at half speed, total momentum would be conserved:
+$$m v = (2m)\left(\frac{1}{2}v\right) = mv$$
 
----
+Why does nature strictly forbid this outcome?
+Because a collision must satisfy **two independent conservation laws simultaneously**:
+1. **Conservation of Linear Momentum:** $m v = \sum m_i v_i$
+2. **Conservation of Kinetic Energy:** $\frac{1}{2}m v^2 = \sum \frac{1}{2}m_i v_i^2$
 
-## 6. Multi-Tiered Worked Examples
-
-### Level 1: The Ballistic Pendulum
-A wooden block of mass $M = 1.98 \text{ kg}$ hangs from light vertical wires. A bullet of mass $m = 0.02 \text{ kg}$ is fired horizontally into the block and embeds itself inside ($e = 0$). The combined block and bullet swing upward to a maximum vertical height $h = 0.20 \text{ m}$. Calculate the muzzle velocity $v_0$ of the bullet ($g = 9.8 \text{ m/s}^2$).
-
-**Step-by-step Solution:**
-1. **Stage 1 (Inelastic Collision):** During the instant of impact, external forces (gravity, string tension) have negligible impulse. Momentum is conserved:
-   $$ m v_0 = (m + M) V_{\text{post}} \implies V_{\text{post}} = \frac{m}{m + M} v_0 = \frac{0.02}{2.00} v_0 = 0.01 v_0 $$
-2. **Stage 2 (Swing to Height $h$):** After the bullet embeds, mechanical energy is conserved as the block swings up:
-   $$ \frac{1}{2}(m + M) V_{\text{post}}^2 = (m + M) g h $$
-   $$ V_{\text{post}} = \sqrt{2 g h} = \sqrt{2 \times 9.8 \times 0.20} = \sqrt{3.92} \approx 1.9799 \text{ m/s} $$
-3. **Connecting Stages:**
-   $$ 0.01 v_0 = 1.9799 \implies v_0 = \frac{1.9799}{0.01} \approx \mathbf{198.0 \text{ m/s}} $$
-Notice how the problem combines momentum conservation during the brief inelastic collision with energy conservation during the subsequent gravity swing!
+If two balls popped out at half speed, the kinetic energy would be:
+$$K_{\text{two balls}} = \frac{1}{2}(2m)\left(\frac{v}{2}\right)^2 = \frac{1}{2}(2m)\left(\frac{v^2}{4}\right) = \frac{1}{2}\left(\frac{1}{2}mv^2\right) = \mathbf{\frac{1}{2} K_{\text{initial}}}$$
+Half of the kinetic energy would mysteriously vanish! The only mathematical solution that conserves **both** momentum and kinetic energy simultaneously is for **exactly one ball** to pop out with the exact original speed $v$.
 
 ---
 
-### Level 2: 2D Oblique Billiard Scattering
-A cue ball of mass $m$ moving at $v_0 = 5 \text{ m/s}$ along the $+x$-axis strikes a stationary target ball of identical mass $m$ in a glancing elastic collision. After the collision, the cue ball moves at an angle of $\theta = 30^\circ$ relative to the $+x$-axis.
-1. Show that the angle between the two departing balls is always $90^\circ$.
-2. Calculate the final speeds $v_1$ and $v_2$.
+# Level 1: Linear Momentum — The Vector Quantity of Motion
 
-**Step-by-step Solution:**
-1. Vector momentum conservation:
-   $$ m \vec{v}_0 = m \vec{v}_1 + m \vec{v}_2 \implies \vec{v}_0 = \vec{v}_1 + \vec{v}_2 $$
-   Take the dot product of both sides with itself:
-   $$ \|\vec{v}_0\|^2 = \|\vec{v}_1 + \vec{v}_2\|^2 = v_1^2 + v_2^2 + 2(\vec{v}_1 \cdot \vec{v}_2) \quad \text{(Eq. A)} $$
-2. Kinetic energy conservation ($e = 1$):
-   $$ \frac{1}{2}m v_0^2 = \frac{1}{2}m v_1^2 + \frac{1}{2}m v_2^2 \implies v_0^2 = v_1^2 + v_2^2 \quad \text{(Eq. B)} $$
-3. Equating Eq. A and Eq. B:
-   $$ v_1^2 + v_2^2 + 2(\vec{v}_1 \cdot \vec{v}_2) = v_1^2 + v_2^2 \implies 2(\vec{v}_1 \cdot \vec{v}_2) = 0 \implies \mathbf{\vec{v}_1 \cdot \vec{v}_2 = 0} $$
-   Since the dot product is zero, the departing velocity vectors are strictly **perpendicular** ($90^\circ$)!
-4. Since $\theta_1 = 30^\circ$, it follows that $\theta_2 = 30^\circ - 90^\circ = -60^\circ$.
-   From the right triangle of velocities:
-   $$ v_1 = v_0 \cos(30^\circ) = 5 \times \frac{\sqrt{3}}{2} \approx \mathbf{4.33 \text{ m/s}} $$
-   $$ v_2 = v_0 \sin(30^\circ) = 5 \times 0.5 = \mathbf{2.50 \text{ m/s}} $$
+### 1.1 Formal Definition of Linear Momentum
+> **Definition:** The **Linear Momentum** $\vec{p}$ of a body of mass $m$ moving with velocity vector $\vec{v}$ is the product of its mass and velocity:
+> $$\mathbf{\vec{p} = m \vec{v}}$$
+
+- **Dimensionality:** Momentum is a **vector** pointing in the exact same spatial direction as the velocity vector $\vec{v}$.
+- **SI Units:** $\text{kg} \cdot \text{m/s}$ (kilogram-meters per second), identical to Newton-seconds ($\text{N} \cdot \text{s}$).
 
 ---
 
-### Level 3: The Tsiolkovsky Rocket Equation
-Derive the ideal rocket equation from first principles of momentum conservation for a rocket of total initial mass $m_0$ burning propellant expelled backward at constant relative exhaust speed $v_e$.
+### 1.2 Momentum ($\vec{p}$) vs. Kinetic Energy ($K$)
+A critical conceptual error among beginners is confusing momentum with kinetic energy:
 
-**Step-by-step Solution:**
-1. At time $t$, system momentum: $P(t) = m v$.
-2. At time $t + dt$, mass has decreased by $dm > 0$ to $(m - dm)$, moving at $(v + dv)$. The expelled gas has mass $dm$ and world velocity $(v - v_e)$:
-   $$ P(t + dt) = (m - dm)(v + dv) + dm(v - v_e) $$
-   $$ = mv + m\,dv - v\,dm - dm\,dv + v\,dm - v_e\,dm $$
-   Discarding second-order infinitesimal $dm\,dv \approx 0$:
-   $$ P(t + dt) = mv + m\,dv - v_e\,dm $$
-3. In absence of external forces ($P(t + dt) = P(t)$):
-   $$ mv + m\,dv - v_e\,dm = mv \implies m\,dv = v_e\,dm $$
-   Since the rocket mass changes by $d m_{\text{rocket}} = -dm$:
-   $$ dv = -v_e \frac{dm_{\text{rocket}}}{m_{\text{rocket}}} $$
-4. Integrate from initial fuel load $m_0$ to burnout mass $m_f$:
-   $$ \int_{v_0}^{v_f} dv = -v_e \int_{m_0}^{m_f} \frac{dm}{m} $$
-   $$ \mathbf{\Delta v = v_f - v_0 = v_e \ln\left(\frac{m_0}{m_f}\right)} \quad \blacksquare $$
+| Property | Linear Momentum ($\vec{p}$) | Kinetic Energy ($K$) |
+| :--- | :--- | :--- |
+| **Mathematical Nature** | **Vector** ($\vec{p} = m\vec{v}$) | **Scalar** ($K = \frac{1}{2}mv^2$) |
+| **Algebraic Sign** | Can be positive, negative, or zero | Always strictly positive ($\ge 0$) |
+| **Dependence on Speed** | Proportional to speed ($v$) | Proportional to speed squared ($v^2$) |
+| **Conservation Domain** | Conserved in **ALL** isolated collisions | Conserved **ONLY** in elastic collisions |
+
+#### The Two-Truck Head-On Crash:
+Two identical $10,000\text{ kg}$ semi-trucks travel toward each other on a highway at $100\text{ km/h}$ ($27.8\text{ m/s}$) and collide head-on, crumpling into a stationary heap:
+- **Total Momentum before crash:**
+  $$\vec{P} = m(+v) + m(-v) = \mathbf{0\text{ kg}\cdot\text{m/s}}$$
+- **Total Kinetic Energy before crash:**
+  $$K = \frac{1}{2}mv^2 + \frac{1}{2}mv^2 = mv^2 = (10,000)(27.8)^2 \approx \mathbf{7,728,400\text{ Joules}} \quad (7.7\text{ Megajoules}!)$$
+
+The total momentum was zero before the crash and zero after the crash. But the 7.7 Megajoules of kinetic energy didn't vanish—it was converted into violent metal deformation, heat, acoustic shockwaves, and structural destruction.
 
 ---
 
-## 7. Production-Ready Computational Engine: 2D Sphere Collision Resolver
+# Level 2: The Impulse-Momentum Theorem & Impact Engineering
+
+### 2.1 The Definition of Impulse ($\vec{J}$)
+Recall Newton's Second Law: $\vec{F} = \frac{d\vec{p}}{dt}$.
+Multiply both sides by $dt$ and integrate over a time interval $[t_1, t_2]$:
+$$\int_{t_1}^{t_2} \vec{F}(t) \, dt = \int_{p_i}^{p_f} d\vec{p} = \vec{p}_f - \vec{p}_i$$
+
+> **The Impulse-Momentum Theorem:**
+> The **Impulse** $\vec{J}$ delivered by an external force over a time interval equals the resulting **change in linear momentum**:
+> $$\mathbf{\vec{J} = \int_{t_1}^{t_2} \vec{F}(t) \, dt = \Delta \vec{p} = m\vec{v}_f - m\vec{v}_i}$$
+
+Geometrically, impulse is the **area under the Force-Time curve**:
+
+```
+      Force F(t)
+         ^          /---\
+         |        /   |   \       Area under curve = Impulse J = Δp
+         |       /    |    \
+         |______/_____|_____\____> Time t
+              t_1           t_2
+```
+
+---
+
+### 2.2 Impact Engineering: How Airbags and Crumple Zones Save Lives
+If a force is approximately constant over time interval $\Delta t$, the impulse is:
+$$\vec{J} = \vec{F}_{\text{avg}} \cdot \Delta t = \Delta \vec{p} \implies \mathbf{\vec{F}_{\text{avg}} = \frac{\Delta \vec{p}}{\Delta t}}$$
+
+Consider a $70\text{ kg}$ driver traveling at $25\text{ m/s}$ ($90\text{ km/h}$) whose car crashes into a concrete bridge pillar.
+The driver's change in momentum to come to a complete stop is fixed:
+$$\Delta p = 0 - (70\text{ kg} \times 25\text{ m/s}) = -1750\text{ N}\cdot\text{s}$$
+
+Now, examine two engineering designs:
+
+1. **Design A (No Crumple Zone, Rigid Steering Wheel):**
+   The driver's chest hits the unyielding steering wheel. Deceleration occurs over $\Delta t = 0.005\text{ seconds}$ ($5\text{ milliseconds}$):
+   $$F_{\text{avg}} = \frac{1750\text{ N}\cdot\text{s}}{0.005\text{ s}} = \mathbf{350,000\text{ Newtons}} \quad (\approx 35.7\text{ tons of force}!)$$
+   This generates an acceleration of $500g$, crushing human bone and rupturing organs fatally.
+2. **Design B (Modern Crumple Zone + Inflating Airbag + Seatbelt Pre-tensioner):**
+   The engineered accordion crumple zone collapses progressively, and the expanding nylon airbag cushions the chest, extending the deceleration time to $\Delta t = 0.15\text{ seconds}$ ($150\text{ milliseconds}$):
+   $$F_{\text{avg}} = \frac{1750\text{ N}\cdot\text{s}}{0.15\text{ s}} \approx \mathbf{11,667\text{ Newtons}} \quad (\approx 1.19\text{ tons of force})$$
+
+By increasing the impact duration by a factor of $30$, **the peak force experienced by the human body drops by a factor of 30**, turning a fatal crash into a survivable accident!
+
+---
+
+# Level 3: Conservation of Momentum & The Center of Mass
+
+### 3.1 The Center of Mass ($\vec{R}_{\text{cm}}$)
+For a system of $N$ particles with individual masses $m_i$ and positions $\vec{r}_i$, the **Center of Mass** is the mass-weighted average spatial coordinate:
+$$\mathbf{\vec{R}_{\text{cm}} = \frac{\sum_{i=1}^N m_i \vec{r}_i}{M_{\text{total}}}, \quad \text{where } M_{\text{total}} = \sum_{i=1}^N m_i}$$
+
+Differentiate with respect to time to obtain the velocity of the center of mass:
+$$\vec{V}_{\text{cm}} = \frac{d\vec{R}_{\text{cm}}}{dt} = \frac{\sum_{i=1}^N m_i \vec{v}_i}{M_{\text{total}}} = \frac{\vec{P}_{\text{total}}}{M_{\text{total}}}$$
+
+Multiply by total mass $M_{\text{total}}$:
+$$\mathbf{\vec{P}_{\text{total}} = M_{\text{total}} \vec{V}_{\text{cm}}}$$
+The total linear momentum of any complex multi-body system—whether a swarm of bees, a solar system, or an exploding grenade—is mathematically identical to a single imaginary particle of mass $M_{\text{total}}$ moving at the velocity of the center of mass!
+
+---
+
+### 3.2 Proof of Internal Force Cancellation (Newton's Third Law)
+Differentiate system momentum with respect to time:
+$$\frac{d\vec{P}_{\text{total}}}{dt} = \sum_{i=1}^N \frac{d\vec{p}_i}{dt} = \sum_{i=1}^N \vec{F}_i^{\text{net}}$$
+
+The total force on any particle $i$ consists of external forces plus interactions from all other particles $j$ in the system:
+$$\vec{F}_i^{\text{net}} = \vec{F}_i^{\text{ext}} + \sum_{j \neq i} \vec{F}_{ji}^{\text{int}}$$
+
+Summing across all particles:
+$$\frac{d\vec{P}_{\text{total}}}{dt} = \sum_{i=1}^N \vec{F}_i^{\text{ext}} + \sum_{i} \sum_{j \neq i} \vec{F}_{ji}^{\text{int}}$$
+
+By Newton's Third Law, every internal action-reaction pair is equal and opposite: $\vec{F}_{ji}^{\text{int}} = -\vec{F}_{ij}^{\text{int}}$.
+When summed over the entire system, **all internal forces cancel out identically to zero**:
+$$\sum_{i} \sum_{j \neq i} \vec{F}_{ji}^{\text{int}} \equiv \vec{0}$$
+
+We arrive at the master theorem of dynamics:
+$$\mathbf{\sum \vec{F}_{\text{ext}} = \frac{d\vec{P}_{\text{total}}}{dt}}$$
+
+> **The Law of Conservation of Linear Momentum:**
+> If a system is **isolated** (the net external force acting on it is zero, $\sum \vec{F}_{\text{ext}} = \vec{0}$):
+> $$\mathbf{\frac{d\vec{P}_{\text{total}}}{dt} = \vec{0} \implies \vec{P}_{\text{total}} = \sum m_i \vec{v}_i = \text{constant for all time}} \quad \blacksquare$$
+
+*Physical Manifestation:* If an artillery shell explodes in mid-air, the internal explosion exerts massive forces blowing fragments in all directions. But because the explosion forces are strictly internal, **the center of mass of the fragments continues sailing along its original parabolic trajectory as if the shell had never exploded!**
+
+---
+
+# Level 4: 1D Collisions & The Coefficient of Restitution
+
+### 4.1 Categorizing Collisions by Elasticity ($e$)
+When two bodies collide, their interaction is characterized by the **Coefficient of Restitution** $e \in [0, 1]$:
+$$\mathbf{e = -\frac{v_{1f} - v_{2f}}{v_{1i} - v_{2i}} = \frac{\text{Separation Speed}}{\text{Approach Speed}}}$$
+
+```
+Approach (Before):     ● m₁ (u₁)  ───────>    <───────  (u₂) m₂ ●
+                                   Impact!
+Separation (After):    <───────  ● m₁ (v₁)            ● m₂ (v₂) ───────>
+```
+
+1. **Perfectly Elastic Collision ($e = 1.0$):**
+   - Both momentum and kinetic energy are conserved ($K_f = K_i$).
+   - Bodies bounce off each other with zero mechanical energy lost to heat or sound (e.g., subatomic particle collisions, idealized billiard balls).
+2. **Inelastic Collision ($0 < e < 1.0$):**
+   - Momentum is strictly conserved.
+   - Kinetic energy is partially dissipated into heat, sound, and structural deformation ($K_f < K_i$) (e.g., a tennis ball bouncing off the court, $e \approx 0.75$).
+3. **Completely Inelastic Collision ($e = 0.0$):**
+   - Colliding bodies stick together and move with a single shared velocity ($v_{1f} = v_{2f}$).
+   - This represents the **maximum possible kinetic energy loss** allowed by the laws of physics (e.g., a bullet embedding in a ballistic wooden block).
+
+---
+
+### 4.2 Rigorous Derivation of 1D Elastic Collision Velocities
+Consider two masses $m_1$ and $m_2$ with initial velocities $u_1$ and $u_2$. Let them undergo a 1D perfectly elastic collision ($e = 1.0$).
+
+**Step 1: Write Conservation of Linear Momentum.**
+$$m_1 u_1 + m_2 u_2 = m_1 v_1 + m_2 v_2$$
+Group mass terms:
+$$m_1 (u_1 - v_1) = m_2 (v_2 - u_2) \quad \text{[Eq. 1]}$$
+
+**Step 2: Write Conservation of Kinetic Energy.**
+$$\frac{1}{2}m_1 u_1^2 + \frac{1}{2}m_2 u_2^2 = \frac{1}{2}m_1 v_1^2 + \frac{1}{2}m_2 v_2^2$$
+Multiply by 2 and group mass terms:
+$$m_1 (u_1^2 - v_1^2) = m_2 (v_2^2 - u_2^2)$$
+Factor using the algebraic difference-of-squares identity ($a^2 - b^2 = (a - b)(a + b)$):
+$$m_1 (u_1 - v_1)(u_1 + v_1) = m_2 (v_2 - u_2)(v_2 + u_2) \quad \text{[Eq. 2]}$$
+
+**Step 3: Divide Equation 2 by Equation 1.**
+$$\frac{m_1 (u_1 - v_1)(u_1 + v_1)}{m_1 (u_1 - v_1)} = \frac{m_2 (v_2 - u_2)(v_2 + u_2)}{m_2 (v_2 - u_2)}$$
+The $(u_1 - v_1)$ and $(v_2 - u_2)$ terms cancel out completely:
+$$u_1 + v_1 = v_2 + u_2$$
+Rearrange:
+$$\mathbf{u_1 - u_2 = -(v_1 - v_2)} \implies \frac{v_2 - v_1}{u_1 - u_2} = 1.0 \quad \blacksquare$$
+*This proves mathematically that for any elastic collision, the relative separation speed equals the relative approach speed!*
+
+**Step 4: Solve simultaneously for $v_1$ and $v_2$.**
+From Step 3, $v_2 = u_1 - u_2 + v_1$. Substitute this into Equation 1:
+$$m_1 u_1 + m_2 u_2 = m_1 v_1 + m_2 (u_1 - u_2 + v_1) = m_1 v_1 + m_2 u_1 - m_2 u_2 + m_2 v_1$$
+$$(m_1 + m_2) v_1 = (m_1 - m_2)u_1 + 2m_2 u_2$$
+$$\mathbf{v_1 = \left(\frac{m_1 - m_2}{m_1 + m_2}\right)u_1 + \left(\frac{2m_2}{m_1 + m_2}\right)u_2} \quad \blacksquare$$
+
+By symmetry (swapping indices 1 and 2):
+$$\mathbf{v_2 = \left(\frac{2m_1}{m_1 + m_2}\right)u_1 + \left(\frac{m_2 - m_1}{m_1 + m_2}\right)u_2} \quad \blacksquare$$
+
+---
+
+### 4.3 The Three Classical Limit Cases
+
+#### Case 1: Identical Masses ($m_1 = m_2$)
+Substitute $m_1 = m_2 = m$ into the formulas:
+$$v_1 = \left(\frac{0}{2m}\right)u_1 + \left(\frac{2m}{2m}\right)u_2 = \mathbf{u_2}$$
+$$v_2 = \left(\frac{2m}{2m}\right)u_1 + \left(\frac{0}{2m}\right)u_2 = \mathbf{u_1}$$
+**The two bodies cleanly exchange velocities!** If body 2 was stationary ($u_2 = 0$), body 1 stops dead ($v_1 = 0$), and body 2 shoots forward with body 1's original velocity ($v_2 = u_1$). This explains Newton's Cradle.
+
+#### Case 2: Tiny Mass hitting Heavy Stationary Target ($m_1 \ll m_2, u_2 = 0$)
+Substitute $m_1 \to 0$:
+$$v_1 = \left(\frac{-m_2}{m_2}\right)u_1 = \mathbf{-u_1}, \quad v_2 \approx \left(\frac{0}{m_2}\right)u_1 = \mathbf{0}$$
+The light object bounces off the heavy wall with its velocity cleanly inverted (e.g. a tennis ball bouncing off a brick wall).
+
+#### Case 3: Heavy Mass hitting Tiny Stationary Target ($m_1 \gg m_2, u_2 = 0$)
+Substitute $m_2 \to 0$:
+$$v_1 \approx \left(\frac{m_1}{m_1}\right)u_1 = \mathbf{u_1}, \quad v_2 \approx \left(\frac{2m_1}{m_1}\right)u_1 = \mathbf{2u_1}$$
+The massive body continues forward almost unhindered, but **launches the light target forward at TWICE the speed of the heavy body!** (The secret of baseball bats, golf drivers, and planetary gravitational slingshots).
+
+---
+
+# Level 5: 2D Oblique Collisions & The $90^\circ$ Scattering Theorem
+
+When two spheres collide at an angle in 2D space, momentum is conserved independently along both the $X$ and $Y$ axes:
+$$\sum p_x = \text{constant}, \quad \sum p_y = \text{constant}$$
+
+```
+                m₁ (v₁)           θ₁
+                  ●  ↗ ──────────
+                     /
+                    /
+  m₁ (u₁) ────>   ● Impact Point
+                    \
+                     \
+                  ●  ↘ ──────────
+                m₂ (v₂)           θ₂
+```
+
+---
+
+### 5.1 The $90^\circ$ Elastic Scattering Theorem
+Suppose a moving billiard ball of mass $m$ strikes an identical stationary billiard ball of mass $m$ in a glancing, frictionless, perfectly elastic collision ($e = 1.0$).
+
+What is the angle between their departing paths?
+
+**The Proof:**
+1. **Conservation of Momentum:**
+   $$m \vec{u}_1 = m \vec{v}_1 + m \vec{v}_2 \implies \vec{u}_1 = \vec{v}_1 + \vec{v}_2$$
+   Take the vector dot product of this equation with itself:
+   $$\|\vec{u}_1\|^2 = (\vec{v}_1 + \vec{v}_2) \cdot (\vec{v}_1 + \vec{v}_2) = \|\vec{v}_1\|^2 + \|\vec{v}_2\|^2 + 2(\vec{v}_1 \cdot \vec{v}_2) \quad \text{[Eq. A]}$$
+2. **Conservation of Kinetic Energy ($e = 1.0$):**
+   $$\frac{1}{2}m u_1^2 = \frac{1}{2}m v_1^2 + \frac{1}{2}m v_2^2 \implies u_1^2 = v_1^2 + v_2^2 \quad \text{[Eq. B]}$$
+3. **Compare Eq. A and Eq. B:**
+   $$v_1^2 + v_2^2 + 2(\vec{v}_1 \cdot \vec{v}_2) = v_1^2 + v_2^2$$
+   Subtract $v_1^2 + v_2^2$ from both sides:
+   $$2(\vec{v}_1 \cdot \vec{v}_2) = 0 \implies \mathbf{\vec{v}_1 \cdot \vec{v}_2 = 0} \quad \blacksquare$$
+
+Because their dot product is strictly zero, the departing velocity vectors are **strictly perpendicular**:
+$$\theta_1 + |\theta_2| = \mathbf{90^\circ}$$
+In professional billiards and snooker, every player relies on this fundamental geometric theorem: glancing collisions between identical balls always send the cue ball and object ball off at a right angle!
+
+---
+
+# Level 6: Game Engine Collision Impulse Resolution & The Sinking Trap
+
+In video games and computational physics engines, collisions are resolved by calculating a discrete **impulse scalar** $j$ along the contact normal $\hat{n}$.
+
+```
+                 Body 1 (m1)           Body 2 (m2)
+                      ●                   ●
+                     / \    Contact n    / \
+                    | v1| ------------->| v2|
+                     \ /                 \ /
+```
+
+### 6.1 The Impulse Scalar Formula
+1. **Contact Normal ($\hat{n}$):** Unit vector pointing from center of Body 1 to center of Body 2:
+   $$\hat{n} = \frac{\vec{r}_2 - \vec{r}_1}{\|\vec{r}_2 - \vec{r}_1\|}$$
+2. **Relative Velocity along Normal:**
+   $$v_{\text{rel}} = (\vec{v}_1 - \vec{v}_2) \cdot \hat{n}$$
+   *(If $v_{\text{rel}} \le 0$, the objects are already separating; zero impulse is applied).*
+3. **Impulse Scalar ($j$):**
+   $$\mathbf{j = \frac{-(1 + e) v_{\text{rel}}}{\frac{1}{m_1} + \frac{1}{m_2}} = \frac{-(1 + e) v_{\text{rel}}}{m_1^{-1} + m_2^{-1}}}$$
+4. **Velocity Updates:**
+   $$\vec{v}_1' = \vec{v}_1 + \frac{j}{m_1} \hat{n} = \vec{v}_1 + (j \cdot m_1^{-1}) \hat{n}$$
+   $$\vec{v}_2' = \vec{v}_2 - \frac{j}{m_2} \hat{n} = \vec{v}_2 - (j \cdot m_2^{-1}) \hat{n}$$
+
+---
+
+### 6.2 The Sinking Trap & Baumgarte Positional Stabilization
+Because physics engines advance time in discrete chunks $\Delta t$ (e.g. $16.6\text{ ms}$), colliding bodies often penetrate each other before the engine detects the collision:
+$$\text{Penetration Depth: } d = (R_1 + R_2) - \|\vec{r}_2 - \vec{r}_1\| > 0$$
+
+If you only alter velocities, overlapping bodies can remain glued or jitter violently.
+To solve this, modern engines apply **Baumgarte Positional Projection**:
+$$\vec{r}_1' = \vec{r}_1 - \left(\frac{m_1^{-1}}{m_1^{-1} + m_2^{-1}}\right) d \hat{n}$$
+$$\vec{r}_2' = \vec{r}_2 + \left(\frac{m_2^{-1}}{m_1^{-1} + m_2^{-1}}\right) d \hat{n}$$
+The lighter body is pushed back more than the heavier body, resolving penetration instantaneously!
+
+---
+
+# Level 7: Complete Production Code Implementation
+
+Here is a production-grade TypeScript `MomentumCollisionResolver` class implementing 2D impulse collision resolution with coefficient of restitution, Baumgarte stabilization, and inverse mass support.
 
 ```typescript
-export interface CircleBody {
+/**
+ * ============================================================================
+ * THE TECH TREE OF KNOWLEDGE: SOVEREIGN COMPUTATIONAL ENGINE
+ * Module: Linear Momentum & 2D Impulse Collision Dynamics
+ * Standard: GSMS-10 (Gold Standard Module Specification)
+ * ============================================================================
+ */
+
+export interface Vector2D {
   x: number;
   y: number;
-  vx: number;
-  vy: number;
-  mass: number;
-  radius: number;
-  restitution: number;
 }
 
-export class CollisionResolver {
-  /**
-   * Resolves impulse and positional penetration between two 2D circular bodies.
-   */
-  public static resolveCircleCollision(b1: CircleBody, b2: CircleBody): boolean {
-    const dx = b2.x - b1.x;
-    const dy = b2.y - b1.y;
-    const distSq = dx * dx + dy * dy;
-    const minDist = b1.radius + b2.radius;
+export interface CollidableParticle {
+  position: Vector2D;
+  velocity: Vector2D;
+  radius: number;
+  mass: number;
+  invMass: number; // 0 for static immovable obstacles
+  restitution: number; // e in [0, 1]
+}
 
-    if (distSq >= minDist * minDist || distSq === 0) {
+export class MomentumCollisionResolver {
+  /**
+   * Resolves a 2D collision between two spherical particles using linear impulse.
+   * Conserves momentum and handles variable elasticity (restitution e).
+   */
+  public static resolveCollision(
+    p1: CollidableParticle,
+    p2: CollidableParticle
+  ): boolean {
+    const dx = p2.position.x - p1.position.x;
+    const dy = p2.position.y - p1.position.y;
+    const dist = Math.hypot(dx, dy);
+    const minDist = p1.radius + p2.radius;
+
+    // Check for geometric contact / overlap
+    if (dist >= minDist || dist < 1e-9) {
       return false; // No collision
     }
 
-    const dist = Math.sqrt(distSq);
-    // Contact normal pointing from b1 to b2
+    // Normalized contact vector n (from p1 to p2)
     const nx = dx / dist;
     const ny = dy / dist;
 
-    // Relative velocity along normal
-    const rvx = b1.vx - b2.vx;
-    const rvy = b1.vy - b2.vy;
-    const velAlongNormal = rvx * nx + rvy * ny;
+    // Relative velocity: v_rel = (v1 - v2)
+    const relVx = p1.velocity.x - p2.velocity.x;
+    const relVy = p1.velocity.y - p2.velocity.y;
 
-    // Do not resolve if velocities are already separating
-    if (velAlongNormal <= 0) return false;
+    // Velocity projection along contact normal: v_rel · n
+    const normalVel = relVx * nx + relVy * ny;
 
-    // Combined restitution (elasticity)
-    const e = Math.min(b1.restitution, b2.restitution);
+    // If objects are already separating, do not apply an attractive impulse
+    if (normalVel <= 0) {
+      return false;
+    }
 
-    // Compute impulse scalar j
-    const invMass1 = b1.mass > 0 ? 1 / b1.mass : 0;
-    const invMass2 = b2.mass > 0 ? 1 / b2.mass : 0;
-    const totalInvMass = invMass1 + invMass2;
-    if (totalInvMass === 0) return false;
+    // Effective restitution (combined elasticity)
+    const e = Math.min(p1.restitution, p2.restitution);
 
-    const j = (-(1 + e) * velAlongNormal) / totalInvMass;
+    // Sum of inverse masses
+    const totalInvMass = p1.invMass + p2.invMass;
+    if (totalInvMass <= 0) {
+      return false; // Both objects are immovable
+    }
 
-    // Apply impulse to velocities
-    b1.vx += j * invMass1 * nx;
-    b1.vy += j * invMass1 * ny;
-    b2.vx -= j * invMass2 * nx;
-    b2.vy -= j * invMass2 * ny;
+    // Calculate impulse scalar: j = -(1 + e) * (v_rel · n) / (invM1 + invM2)
+    const impulseMag = -(1 + e) * normalVel / totalInvMass;
 
-    // Positional correction to resolve penetration
+    // Apply impulse to velocities: v1' = v1 + (j / m1) * n, v2' = v2 - (j / m2) * n
+    p1.velocity.x += (impulseMag * p1.invMass) * nx;
+    p1.velocity.y += (impulseMag * p1.invMass) * ny;
+    p2.velocity.x -= (impulseMag * p2.invMass) * nx;
+    p2.velocity.y -= (impulseMag * p2.invMass) * ny;
+
+    // Positional Baumgarte stabilization (separate overlapping circles)
     const penetration = minDist - dist;
-    const percent = 0.8; // Baumgarte penetration slack factor
-    const correctionX = (penetration / totalInvMass) * percent * nx;
-    const correctionY = (penetration / totalInvMass) * percent * ny;
+    const percent = 0.8; // Baumgarte penetration resolution factor
+    const slop = 0.01;   // Penetration allowance to prevent jitter
+    const correctionMag = (Math.max(0, penetration - slop) / totalInvMass) * percent;
 
-    b1.x -= correctionX * invMass1;
-    b1.y -= correctionY * invMass1;
-    b2.x += correctionX * invMass2;
-    b2.y += correctionY * invMass2;
+    p1.position.x -= (correctionMag * p1.invMass) * nx;
+    p1.position.y -= (correctionMag * p1.invMass) * ny;
+    p2.position.x += (correctionMag * p2.invMass) * nx;
+    p2.position.y += (correctionMag * p2.invMass) * ny;
 
     return true;
+  }
+
+  /**
+   * Calculates total linear momentum vector of a collection of bodies.
+   */
+  public static calculateTotalMomentum(bodies: CollidableParticle[]): Vector2D {
+    let px = 0;
+    let py = 0;
+    for (const b of bodies) {
+      if (b.invMass > 0) {
+        px += b.mass * b.velocity.x;
+        py += b.mass * b.velocity.y;
+      }
+    }
+    return { x: px, y: py };
+  }
+
+  /**
+   * Calculates total mechanical kinetic energy of a collection of bodies.
+   */
+  public static calculateTotalKineticEnergy(bodies: CollidableParticle[]): number {
+    let totalK = 0;
+    for (const b of bodies) {
+      if (b.invMass > 0) {
+        const v2 = b.velocity.x * b.velocity.x + b.velocity.y * b.velocity.y;
+        totalK += 0.5 * b.mass * v2;
+      }
+    }
+    return totalK;
   }
 }
 ```
 
 ---
 
-## 8. Socratic Self-Check & Verification
+# Level 8: Multi-Tiered Mastery Practice Set
 
-1. **Question:** In an inelastic collision, total kinetic energy decreases. Where does the missing kinetic energy go?
-   - **Answer:** The missing macroscopic kinetic energy is converted into microscopic internal thermal energy (random vibration of molecules), plastic deformation (permanent bending of lattice bonds), and acoustic energy (sound waves radiating into the air).
-2. **Question:** Can a body have zero momentum but non-zero kinetic energy?
-   - **Answer:** For an individual point particle, no ($p = mv = 0 \implies v = 0 \implies K = 0$). But for a **system of particles**, absolutely yes! For example, two identical masses moving directly toward each other with velocities $+v$ and $-v$ have total momentum $\vec{P} = mv - mv = 0$, but total kinetic energy $K = \frac{1}{2}mv^2 + \frac{1}{2}mv^2 = mv^2 > 0$.
-3. **Question:** Why do modern rockets need multiple stages to achieve orbit?
-   - **Answer:** By the Tsiolkovsky equation, $\Delta v = v_e \ln(m_0/m_f)$. To reach Earth orbital velocity ($\sim 8 \text{ km/s}$), a single-stage rocket would need a fuel-to-dry-mass fraction exceeding $90\%$, which is structurally impossible. Staging discards heavy empty fuel tanks and engines during flight, resetting the dry mass $m_f$ and allowing higher final velocity.
+---
+
+### 🟢 Tier 1 (Class 6–7 Foundations): The Ice Skaters Push
+**Problem:** Two ice skaters face each other on frictionless ice. Skater A has mass $M = 80\text{ kg}$ and Skater B has mass $m = 40\text{ kg}$. Both start at rest.
+Skater B pushes Skater A, causing Skater B to recoil backward at $v_B = -3.0\text{ m/s}$.
+What is the resulting velocity $v_A$ of Skater A?
+
+#### Step-by-Step Solution:
+Because ice is frictionless, horizontal external forces are zero ($\sum F_{\text{ext}} = 0$). Total momentum is conserved:
+$$P_{\text{initial}} = P_{\text{final}} \implies 0 = M v_A + m v_B$$
+$$0 = (80\text{ kg})v_A + (40\text{ kg})(-3.0\text{ m/s})$$
+$$80 v_A - 120 = 0 \implies 80 v_A = 120 \implies \mathbf{v_A = +1.5\text{ m/s}}$$
+Skater A glides forward at $+1.5\text{ m/s}$ (exactly half the speed of Skater B, because Skater A has twice the mass!).
+
+---
+
+### 🟡 Tier 2 (Class 8–9 Intermediate): Freight Train Shunting
+**Problem:** A $30,000\text{ kg}$ railroad boxcar moving at $4.0\text{ m/s}$ collides with a stationary $20,000\text{ kg}$ tank car. The automatic couplers engage, locking them together in a completely inelastic collision ($e = 0$).
+1. What is the final common speed $V_f$ of the coupled train cars?
+2. How much mechanical kinetic energy was converted into heat, sound, and metal deformation?
+
+#### Step-by-Step Solution:
+**Part 1: Final Common Speed**
+$$P_{\text{initial}} = (30,000)(4.0) + (20,000)(0) = 120,000\text{ kg}\cdot\text{m/s}$$
+$$M_{\text{total}} = 30,000 + 20,000 = 50,000\text{ kg}$$
+$$V_f = \frac{P_{\text{initial}}}{M_{\text{total}}} = \frac{120,000}{50,000} = \mathbf{2.40\text{ m/s}}$$
+
+**Part 2: Kinetic Energy Dissipated**
+- Initial Kinetic Energy:
+  $$K_i = \frac{1}{2}(30,000)(4.0)^2 = 15,000 \times 16 = \mathbf{240,000\text{ Joules}}$$
+- Final Kinetic Energy:
+  $$K_f = \frac{1}{2}(50,000)(2.4)^2 = 25,000 \times 5.76 = \mathbf{144,000\text{ Joules}}$$
+- Kinetic Energy Lost:
+  $$\Delta K = 240,000 - 144,000 = \mathbf{96,000\text{ Joules}} \quad (40\%\text{ dissipated as heat and noise!})$$
+
+---
+
+### 🟠 Tier 3 (Class 10–11 Advanced): The Ballistic Pendulum
+**Problem:** A wooden block of mass $M = 1.98\text{ kg}$ hangs suspended from long vertical cords. A bullet of mass $m = 0.02\text{ kg}$ is fired horizontally into the block and embeds inside. The block swings upward to a peak height $h = 0.20\text{ m}$ ($g = 9.8\text{ m/s}^2$).
+Calculate the muzzle speed $v_0$ of the bullet.
+
+#### Step-by-Step Solution:
+**Stage 1: Gravitational Swing (Conservation of Energy)**
+Immediately after impact, the combined mass $(m + M = 2.00\text{ kg})$ has post-impact speed $V$. As it swings upward, kinetic energy converts to potential energy:
+$$\frac{1}{2}(m + M)V^2 = (m + M)gh \implies V = \sqrt{2gh}$$
+$$V = \sqrt{2 \times 9.8 \times 0.20} = \sqrt{3.92} \approx \mathbf{1.9799\text{ m/s}}$$
+
+**Stage 2: Bullet Embedding (Conservation of Momentum)**
+During the impact itself, external forces have zero impulse:
+$$m v_0 = (m + M)V \implies (0.02)v_0 = (2.00)(1.9799)$$
+$$v_0 = \frac{3.9598}{0.02} = \mathbf{198.0\text{ m/s}} \quad (712.8\text{ km/h})$$
+
+---
+
+### 🔴 Tier 4 (Engineering Mastery): 2D Glancing Billiard Scattering
+**Problem:** A white cue ball of mass $m$ traveling at $u_1 = 6.0\text{ m/s}$ along $+x$ strikes a stationary red ball of identical mass $m$ in a frictionless elastic collision ($e = 1.0$). After impact, the white cue ball deflects at an angle of $\theta_1 = 30^\circ$ above the $+x$-axis.
+1. Determine the deflection angle $\theta_2$ of the red ball.
+2. Calculate the final speeds $v_1$ and $v_2$ of both balls.
+
+#### Step-by-Step Solution:
+**Part 1: Deflection Angle**
+By the $90^\circ$ Elastic Scattering Theorem proven in Level 5, identical masses colliding elastically always depart at an angle of $90^\circ$:
+$$\theta_1 + |\theta_2| = 90^\circ \implies |\theta_2| = 90^\circ - 30^\circ = \mathbf{60^\circ} \quad (\theta_2 = -60^\circ \text{ below } +x\text{-axis})$$
+
+**Part 2: Final Speeds**
+From the right-angled velocity vector triangle:
+$$v_1 = u_1 \cos(30^\circ) = 6.0 \times \frac{\sqrt{3}}{2} \approx \mathbf{5.196\text{ m/s}}$$
+$$v_2 = u_1 \sin(30^\circ) = 6.0 \times 0.50 = \mathbf{3.000\text{ m/s}}$$
+*Verification of Kinetic Energy:*
+$$K_f = \frac{1}{2}m(5.196)^2 + \frac{1}{2}m(3.0)^2 = \frac{1}{2}m(27 + 9) = \frac{1}{2}m(36) = \frac{1}{2}m(6.0)^2 = K_i \quad \blacksquare$$
+
+---
+
+### 🟣 Tier 5 (Computational / Algorithmic): Discrete Collision Overlap Correction
+**Problem:** In a physics simulation tick ($\Delta t = 0.016\text{ s}$), Sphere 1 ($m_1 = 2.0\text{ kg}, r_1 = 1.0\text{ m}$) at $(0, 0)$ moves with velocity $(4, 0)\text{ m/s}$. Sphere 2 ($m_2 = 1.0\text{ kg}, r_2 = 1.0\text{ m}$) at $(1.8, 0)$ is at rest. The coefficient of restitution is $e = 0.8$.
+1. Compute the penetration depth $d$.
+2. Calculate the post-collision velocities $v_1'$ and $v_2'$.
+3. Calculate the Baumgarte positional corrections for both spheres.
+
+#### Step-by-Step Solution:
+**Part 1: Penetration Depth**
+- Centers distance: $\Delta x = 1.8 - 0 = 1.8\text{ m}$.
+- Sum of radii: $r_1 + r_2 = 1.0 + 1.0 = 2.0\text{ m}$.
+- Penetration depth: $d = 2.0 - 1.8 = \mathbf{0.20\text{ m}}$.
+- Contact normal: $\hat{n} = (+1, 0)$.
+
+**Part 2: Impulse and Velocities**
+- Relative normal velocity: $v_{\text{rel}} = (4.0 - 0) \times 1 = 4.0\text{ m/s}$.
+- Inverse masses: $m_1^{-1} = \frac{1}{2.0} = 0.5, \, m_2^{-1} = \frac{1}{1.0} = 1.0 \implies \sum m^{-1} = 1.5$.
+- Impulse magnitude:
+  $$j = \frac{-(1 + e)v_{\text{rel}}}{\sum m^{-1}} = \frac{-(1 + 0.8)(4.0)}{1.5} = \frac{-7.2}{1.5} = \mathbf{-4.8\text{ N}\cdot\text{s}}$$
+- New velocities:
+  $$v_1' = v_1 + (j \cdot m_1^{-1}) = 4.0 + (-4.8 \times 0.5) = 4.0 - 2.4 = \mathbf{+1.60\text{ m/s}}$$
+  $$v_2' = v_2 - (j \cdot m_2^{-1}) = 0.0 - (-4.8 \times 1.0) = \mathbf{+4.80\text{ m/s}}$$
+- *Check:* Separation speed = $4.80 - 1.60 = 3.20\text{ m/s}$. Ratio: $\frac{3.20}{4.00} = 0.8 = e$!
+
+**Part 3: Baumgarte Positional Corrections**
+- Sphere 1 shift: $\Delta x_1 = -d \left(\frac{m_1^{-1}}{\sum m^{-1}}\right) = -0.20 \left(\frac{0.5}{1.5}\right) = \mathbf{-0.067\text{ m}} \implies x_1' = -0.067\text{ m}$.
+- Sphere 2 shift: $\Delta x_2 = +d \left(\frac{m_2^{-1}}{\sum m^{-1}}\right) = +0.20 \left(\frac{1.0}{1.5}\right) = \mathbf{+0.133\text{ m}} \implies x_2' = 1.933\text{ m}$.
+- New distance: $1.933 - (-0.067) = \mathbf{2.000\text{ m}}$ (perfect contact, zero overlap!).
+
+---
+
+# Level 9: Socratic Inquiry & Philosophical Horizons
+
+### 9.1 Emmy Noether's Revolution: Why is Momentum Conserved?
+*Question:* In high school physics, momentum conservation is taught as a consequence of Newton's Third Law. But why does Newton's Third Law hold? Why does nature conserve momentum?
+
+*Reflection:*
+In 1915, the mathematician **Emmy Noether** proved that every continuous conservation law is the direct consequence of a fundamental geometric symmetry of nature:
+- **Time Translational Symmetry** (physics is identical today, tomorrow, and a billion years ago) $\implies$ **Conservation of Energy**.
+- **Rotational Symmetry** (physics does not care which direction you face) $\implies$ **Conservation of Angular Momentum**.
+- **Spatial Translational Symmetry** (physics is identical in New York, Tokyo, Mars, or Andromeda) $\implies$ **Conservation of Linear Momentum**.
+
+If space were "lumpy" or had a preferred center point where physical laws differed, momentum would not be conserved! Because empty space is homogeneous, linear momentum is an inviolable cosmic constant.
+
+---
+
+### 9.2 The Bridge to the Next Horizon
+With your complete mastery of vectors, calculus, kinematics, dynamics, and momentum conservation, you have constructed the entire physical foundation of classical mechanics.
+- In **Module `cs-prog-fundamentals`**, we will step from continuous physics into the world of computer science, mastering memory, arrays, functions, and the 60 FPS deterministic game loop.
+- In **Module `cs-numerical-integration`**, we will combine this code architecture with our calculus derivatives to simulate energy-conserving physical universes.

@@ -40,3 +40,23 @@ questions:
       tolerance: 0.01
       unit: "Newtons"
     explanation: "Action-reaction pairs are strictly equal in magnitude and opposite in direction. The astronaut exerts exactly 700 N of gravitational pull upward on the Earth."
+
+  - id: "q-newt-04"
+    target_objective_id: "obj-newt-4"
+    prompt: "A 20 kg wooden crate rests on a horizontal concrete floor with coefficient of static friction mu_s = 0.40 (g = 9.8 m/s^2). What is the minimum horizontal force required to get the crate moving from rest?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 78.4
+      tolerance: 0.1
+      unit: "Newtons"
+    explanation: "Normal force N = mg = 20 * 9.8 = 196 N. Max static friction f_{s,max} = mu_s * N = 0.40 * 196 = 78.4 N. Any horizontal force exceeding 78.4 N will initiate sliding."
+
+  - id: "q-newt-05"
+    target_objective_id: "obj-newt-5"
+    prompt: "Two masses m1 = 3.0 kg and m2 = 5.0 kg are connected by a light string over an ideal frictionless pulley (Atwood machine, g = 9.8 m/s^2). What is the acceleration magnitude of the system?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 2.45
+      tolerance: 0.05
+      unit: "m/s^2"
+    explanation: "a = [(m2 - m1) / (m1 + m2)] * g = [(5 - 3) / (5 + 3)] * 9.8 = (2/8) * 9.8 = 2.45 m/s^2."

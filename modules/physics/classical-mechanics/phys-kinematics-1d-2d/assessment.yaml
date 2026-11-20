@@ -20,7 +20,7 @@ questions:
       value: 50.0
       tolerance: 0.1
       unit: "meters"
-    explanation: "Using v^2 = v_0^2 + 2*a*d with v = 0, v_0 = 20, a = -4: 0 = 400 - 8*d => 8*d = 400 => d = 50 meters."
+    explanation: "Using v^2 = v_0^2 + 2*a*d with v = 0, v_0 = 20, a = -4: 0 = 400 - 8*d ==> 8*d = 400 ==> d = 50 meters."
 
   - id: "q-kin-03"
     target_objective_id: "obj-kin-3"
@@ -40,3 +40,32 @@ questions:
         text: "It fluctuates according to the sine of the angle."
         is_correct: false
     explanation: "Gravity acts purely vertically (downwards). With zero horizontal force and zero air drag, horizontal acceleration is zero (a_x = 0), keeping v_x constant."
+
+  - id: "q-kin-04"
+    target_objective_id: "obj-kin-4"
+    prompt: "Under Newtonian quadratic air resistance (F_d = 0.5 * rho * C_d * A * v^2), by what factor does the aerodynamic drag force increase if an object's speed triples from 20 m/s to 60 m/s?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 9.0
+      tolerance: 0.01
+      unit: "factor"
+    explanation: "Because quadratic drag depends on velocity squared (v^2), tripling the speed (3x) scales the drag force by 3^2 = 9 times."
+
+  - id: "q-kin-05"
+    target_objective_id: "obj-kin-5"
+    prompt: "A projectile is launched from flat ground in a vacuum at initial speed v_0 = 50 m/s. Which launch angle theta achieves the absolute maximum horizontal range?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "45 degrees"
+        is_correct: true
+      - id: "opt-2"
+        text: "30 degrees"
+        is_correct: false
+      - id: "opt-3"
+        text: "60 degrees"
+        is_correct: false
+      - id: "opt-4"
+        text: "90 degrees"
+        is_correct: false
+    explanation: "Horizontal range is R = (v_0^2 * sin(2*theta)) / g. The sine function sin(2*theta) attains its maximum value of 1.0 when 2*theta = 90 deg ==> theta = 45 deg."

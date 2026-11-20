@@ -14,29 +14,58 @@ questions:
 
   - id: "q-mom-02"
     target_objective_id: "obj-mom-2"
-    prompt: "In a completely inelastic collision between two moving bodies with coefficient of restitution e = 0, what happens to the two bodies immediately following impact?"
-    type: "multiple_choice"
-    options:
-      - id: "opt-1"
-        text: "They stick together and move with a single common velocity, while total momentum is strictly conserved."
-        is_correct: true
-      - id: "opt-2"
-        text: "They bounce apart with zero loss of kinetic energy."
-        is_correct: false
-      - id: "opt-3"
-        text: "Total linear momentum drops to zero."
-        is_correct: false
-      - id: "opt-4"
-        text: "They explode into fragments."
-        is_correct: false
-    explanation: "By definition, e = 0 means relative separating velocity is 0, so the colliding bodies stick together and move with a shared velocity."
+    prompt: "A cart of mass m1 = 2.0 kg moving at v1 = 6.0 m/s collides head-on on a frictionless track with a stationary cart of mass m2 = 1.0 kg (v2 = 0). If the collision is perfectly elastic (e = 1), what is the post-collision velocity v1' of the first cart?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 2.0
+      tolerance: 0.05
+      unit: "m/s"
+    explanation: "Using 1D elastic formula: v1' = ((m1 - m2)/(m1 + m2))*v1 + (2*m2/(m1 + m2))*v2 = ((2 - 1)/(2 + 1))*6.0 + 0 = (1/3)*6.0 = 2.0 m/s."
 
   - id: "q-mom-03"
     target_objective_id: "obj-mom-3"
-    prompt: "A 3.0 kg object moving East at 4.0 m/s collides with a 1.0 kg object at rest. If the collision is completely inelastic (they stick together), what is their final combined speed?"
+    prompt: "Two identical billiard balls (m1 = m2) collide obliquely on a frictionless table. Ball 1 approaches at velocity v1, while Ball 2 is stationary. Assuming a perfectly elastic collision with no spin, what is the angle theta between their velocity vectors after impact?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Exactly 90 degrees (pi / 2 radians), because conservation of momentum (v1 = v1' + v2') and kinetic energy (v1^2 = v1'^2 + v2'^2) forces the dot product v1' . v2' = 0."
+        is_correct: true
+      - id: "opt-2"
+        text: "Exactly 45 degrees, split equally between the two identical masses."
+        is_correct: false
+      - id: "opt-3"
+        text: "Exactly 180 degrees, as the cue ball rebounds along its incident line."
+        is_correct: false
+      - id: "opt-4"
+        text: "The angle depends on the initial speed v1 and cannot be constant."
+        is_correct: false
+    explanation: "From momentum: v1^2 = |v1' + v2'|^2 = v1'^2 + v2'^2 + 2(v1' . v2'). From kinetic energy: v1^2 = v1'^2 + v2'^2. Subtracting yields 2(v1' . v2') = 0, proving v1' is perpendicular to v2' (90 degrees)."
+
+  - id: "q-mom-04"
+    target_objective_id: "obj-mom-4"
+    prompt: "A 3.0 kg object moving at 4.0 m/s collides head-on with a stationary 1.0 kg object. If the collision is completely inelastic (they latch together), what percentage of the initial kinetic energy is dissipated into thermal/acoustic energy?"
     type: "numerical_calculation"
     numerical_solution:
-      value: 3.0
-      tolerance: 0.05
-      unit: "m/s"
-    explanation: "P_initial = 3.0*4.0 + 1.0*0 = 12.0 kg*m/s. Total mass = 3.0 + 1.0 = 4.0 kg. V_final = P_initial / M_total = 12.0 / 4.0 = 3.0 m/s."
+      value: 25.0
+      tolerance: 0.5
+      unit: "%"
+    explanation: "Initial KE = 0.5 * 3.0 * (4.0)^2 = 24.0 J. Combined mass = 4.0 kg. Conservation of momentum: 3.0 * 4.0 = 4.0 * vf => vf = 3.0 m/s. Final KE = 0.5 * 4.0 * (3.0)^2 = 18.0 J. Energy lost = 24.0 - 18.0 = 6.0 J. Percentage lost = (6.0 / 24.0) * 100 = 25.0%."
+
+  - id: "q-mom-05"
+    target_objective_id: "obj-mom-5"
+    prompt: "Why is a pure velocity-level impulse resolution formula J = -(1+e) * v_rel / (1/m1 + 1/m2) insufficient on its own in a discrete real-time physics engine, and what stabilization technique cures it?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Discrete time-stepping allows bodies to overlap prior to detection; Baumgarte stabilization (or split-impulse position correction) introduces a penetration penalty velocity to push intersecting surfaces apart without adding spurious kinetic energy."
+        is_correct: true
+      - id: "opt-2"
+        text: "The formula violates Newton's Third Law when mass ratios exceed 10:1, requiring double precision floats."
+        is_correct: false
+      - id: "opt-3"
+        text: "Impulse is a scalar and cannot alter vector components in three dimensions without quaternion integration."
+        is_correct: false
+      - id: "opt-4"
+        text: "The coefficient of restitution e varies quadratically with frame rate, causing division by zero."
+        is_correct: false
+    explanation: "Because dt > 0, colliders penetrate before the contact is caught. A velocity-only impulse halts inward motion but leaves bodies embedded. Baumgarte stabilization adds a bias proportional to penetration depth d/dt (or Baumgarte factor beta) to resolve positional overlap."

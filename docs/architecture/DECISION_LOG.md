@@ -92,3 +92,13 @@
   5. Implemented a production-grade TypeScript `CalculusEngine` with central differences, second derivatives, Richardson extrapolation, and Newton-Raphson root finding.
   6. Integrated the interactive `#calculusLabBox` visualizer into the Reader Studio on `http://localhost:3000`, enabling users to manipulate $x_0$, change functions, and click "⚡ Shrink h → 0" to watch secant lines pivot onto tangent lines in real time.
 - **Consequences:** Provides an accessible, rigorous, and verifiable foundation for all subsequent physics and robotics pathways.
+
+
+## ADR-008: Elevation of Classical Mechanics Foundation Modules (Kinematics, Newton's Laws, Momentum Conservation) to GSMS-10
+- **Context:** Modules 3, 4, and 5 (`phys-kinematics-1d-2d`, `phys-newtons-laws`, `phys-momentum-conservation`) form the mechanical spine connecting foundational mathematics (`math-vectors-2d`, `math-calculus-derivatives`) to computational simulation (`cs-numerical-integration`, `cs-collision-detection`). They required elevation from basic formulas to the 10/10 Gold Standard Module Specification.
+- **Decision:**
+  1. Grounded each module in intuitive historical and physical paradoxes (Galileo's Leaning Tower and Apollo 15 hammer-feather drop for kinematics; Aristotle's cart friction illusion and horse-cart paradox for Newton's laws; ice-skater push-off and Newton's cradle collision mystery for momentum).
+  2. Provided complete step-by-step mathematical proofs without skipped steps: calculus and trapezoid area derivations of the four golden kinematic equations, parabolic trajectory parameter elimination, Coulomb friction on inclined planes, coupled Atwood systems, Noether's spatial translation symmetry proving internal force cancellation, 1D elastic collisions via center-of-mass and restitution frames, and 2D oblique billiard $90^\circ$ scattering via dot products.
+  3. Provided production-grade TypeScript engines: `KinematicsEngine` (analytical & numerical ballistic solvers with quadratic drag), `NewtonianBody` (force accumulator, inverse mass, static/kinetic friction), and `MomentumCollisionResolver` (normal impulse scalar $J$, restitution $e$, and Baumgarte penetration stabilization).
+  4. Created 5-tier multi-level practice problem sets with complete step-by-step arithmetic solutions and updated YAML manifests with 5 Bloom taxonomy levels and 5 tiered assessment questions.
+- **Consequences:** All 3 modules achieve full GSMS-10 compliance, passing `npm run validate`, `npm run module:lint`, and `npm run test:ts`.
