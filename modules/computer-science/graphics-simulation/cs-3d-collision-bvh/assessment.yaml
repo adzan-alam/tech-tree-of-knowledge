@@ -4,48 +4,86 @@ passing_threshold_percent: 75
 questions:
   - id: "q-bvh-01"
     target_objective_id: "obj-bvh-1"
-    prompt: "In the Surface Area Heuristic (SAH) for BVH construction, what property of a bounding box determines the statistical probability that a random ray will traverse into it?"
+    prompt: "Why do 3D physical simulations and ray tracers favor hierarchical trees (like BVH) over uniform 3D spatial grids in large environments?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "The surface area of the bounding box"
+        text: "3D space scales cubically (L^3), causing uniform grids to consume massive memory with >99% empty cells, whereas BVH trees adaptively wrap only existing geometry, providing O(log N) queries."
         is_correct: true
       - id: "opt-2"
-        text: "The volume of the bounding box"
+        text: "Uniform grids cannot handle triangles with more than three vertices."
         is_correct: false
       - id: "opt-3"
-        text: "The length of the main diagonal"
+        text: "BVH trees convert 3D coordinates into 2D screen pixels automatically."
         is_correct: false
       - id: "opt-4"
-        text: "The number of vertices in the mesh"
+        text: "The speed of light limits grid lookups in computer RAM."
         is_correct: false
-    explanation: "By geometric probability and Crofton's theorem, the probability of a random line intersecting a convex shape is directly proportional to its surface area."
+    explanation: "Because volume scales as L^3, a uniform 3D grid with fine resolution consumes gigabytes of mostly empty RAM. BVH trees partition non-empty geometry hierarchically, pruning non-colliding branches in O(log N) time."
 
   - id: "q-bvh-02"
     target_objective_id: "obj-bvh-2"
-    prompt: "In the Möller-Trumbore ray-triangle algorithm, what mathematical condition on barycentric coordinates u and v confirms that the hit point lies inside the triangle boundary?"
+    prompt: "In the Möller-Trumbore ray-triangle intersection algorithm, under what condition does the algorithm confirm a valid intersection inside the triangle boundary?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "u >= 0, v >= 0, and u + v <= 1"
+        text: "Barycentric coordinates satisfy u >= 0, v >= 0, u + v <= 1, and hit distance t > 0."
         is_correct: true
       - id: "opt-2"
-        text: "u > 1 and v > 1"
+        text: "The dot product of the ray direction and triangle normal is strictly positive."
         is_correct: false
       - id: "opt-3"
-        text: "u^2 + v^2 == 1"
+        text: "Barycentric coordinates satisfy u + v + t = 0."
         is_correct: false
       - id: "opt-4"
-        text: "u - v == 0"
+        text: "The triangle area is greater than the ray's bounding box volume."
         is_correct: false
-    explanation: "For any interior point of a triangle, the barycentric weights must be non-negative and sum to less than or equal to 1: u >= 0, v >= 0, and (1 - u - v) >= 0."
+    explanation: "A point is interior to a triangle if and only if its barycentric weights satisfy u >= 0, v >= 0, and u + v <= 1. t > 0 ensures the hit lies forward along the ray."
 
   - id: "q-bvh-03"
     target_objective_id: "obj-bvh-3"
-    prompt: "How many total candidate separating axes must be tested to rigorously determine if two 3D Oriented Bounding Boxes (OBBs) intersect under the Separating Axis Theorem?"
+    prompt: "How many total candidate axes must be tested by the Separating Axis Theorem (SAT) to definitively determine if two 3D Oriented Bounding Boxes (OBBs) are colliding?"
     type: "numerical_calculation"
     numerical_solution:
       value: 15.0
-      tolerance: 0.01
+      tolerance: 0.1
       unit: "axes"
-    explanation: "3 face normals of box A + 3 face normals of box B + (3 x 3 = 9) pairwise edge cross products = 15 total axes."
+    explanation: "3 face normals of Box A + 3 face normals of Box B + 9 pairwise edge cross products (3 x 3) = 15 axes total."
+
+  - id: "q-bvh-04"
+    target_objective_id: "obj-bvh-4"
+    prompt: "In the Surface Area Heuristic (SAH), why is the probability of a random ray striking an internal bounding box A within parent box P proportional to SA(A) / SA(P)?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "By Cauchy's theorem of integral geometry, the measure of straight lines intersecting a convex 3D body is proportional to its outer surface area."
+        is_correct: true
+      - id: "opt-2"
+        text: "Surface area is proportional to the number of memory bits allocated in GPU VRAM."
+        is_correct: false
+      - id: "opt-3"
+        text: "The speed of the ray decreases in proportion to the volume of the box."
+        is_correct: false
+      - id: "opt-4"
+        text: "Parent boxes are required to have exactly twice the surface area of their children."
+        is_correct: false
+    explanation: "In geometric probability, the flux of isotropic lines traversing a convex volume is directly proportional to its surface area, making surface area ratio the optimal estimator for ray hit probability."
+
+  - id: "q-bvh-05"
+    target_objective_id: "obj-bvh-5"
+    prompt: "In a high-performance linear BVH (Flat LBVH), why are nodes laid out in depth-first search (DFS) order in a single contiguous typed array?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "It eliminates pointer dereferencing and RAM fragmentation, packing the left child at index i+1 and enabling sequential CPU cache line streaming."
+        is_correct: true
+      - id: "opt-2"
+        text: "It allows rays to travel backwards in time without violating causality."
+        is_correct: false
+      - id: "opt-3"
+        text: "It eliminates the need to calculate the Möller-Trumbore determinant."
+        is_correct: false
+      - id: "opt-4"
+        text: "DFS ordering converts 3D floating point coordinates into 8-bit integers."
+        is_correct: false
+    explanation: "Tree pointer chasing across dynamic memory causes constant cache misses. Flat linear arrays in DFS order guarantee the left child is always at i+1, maximizing L1 cache prefetching bandwidth."

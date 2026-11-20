@@ -4,39 +4,68 @@ passing_threshold_percent: 75
 questions:
   - id: "q-v3d-01"
     target_objective_id: "obj-v3d-1"
-    prompt: "Given vector A = (2, -3, 6), calculate its Euclidean magnitude ||A||."
+    prompt: "A vector in 3D space has components v = (2.0, 3.0, 6.0). What is its Euclidean magnitude ||v||?"
     type: "numerical_calculation"
     numerical_solution:
       value: 7.0
       tolerance: 0.01
       unit: "scalar"
-    explanation: "||A|| = sqrt(2^2 + (-3)^2 + 6^2) = sqrt(4 + 9 + 36) = sqrt(49) = 7.0."
+    explanation: "||v|| = sqrt(2^2 + 3^2 + 6^2) = sqrt(4 + 9 + 36) = sqrt(49) = 7.0."
 
   - id: "q-v3d-02"
     target_objective_id: "obj-v3d-2"
-    prompt: "Compute the cross product u x v for u = (1, 0, 0) and v = (0, 1, 0) in a standard right-handed coordinate system. What is the resulting vector?"
+    prompt: "Given vector u = (1, 0, 0) and vector v = (0, 1, 0), what is the cross product vector w = u x v?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "(0, 0, 1)"
+        text: "(0, 0, 1), pointing along the positive Z-axis according to the right-hand rule."
         is_correct: true
       - id: "opt-2"
-        text: "(0, 0, -1)"
+        text: "(0, 0, -1), pointing along the negative Z-axis."
         is_correct: false
       - id: "opt-3"
-        text: "(1, 1, 0)"
+        text: "(1, 1, 0), pointing along the XY diagonal."
         is_correct: false
       - id: "opt-4"
-        text: "(0, 0, 0)"
+        text: "0, a scalar zero."
         is_correct: false
-    explanation: "By the right-hand rule, i x j = k = (0, 0, 1)."
+    explanation: "i x j = k = (0, 0, 1). Curling fingers of the right hand from +X (i) to +Y (j) points thumb along +Z (k)."
 
   - id: "q-v3d-03"
     target_objective_id: "obj-v3d-3"
-    prompt: "A flat triangular polygon in 3D has edges e1 = (2, 0, 0) and e2 = (0, 3, 0). What is the area of this triangle?"
+    prompt: "A flat plane passes through the origin (0, 0, 0) with unit surface normal n = (0, 0, 1). What is the perpendicular signed distance from point Q(5, 7, 4) to this plane?"
     type: "numerical_calculation"
     numerical_solution:
-      value: 3.0
+      value: 4.0
       tolerance: 0.01
-      unit: "square units"
-    explanation: "Area = 0.5 * ||e1 x e2||. e1 x e2 = (0, 0, 6), magnitude is 6. Half of 6 is 3.0."
+      unit: "meters"
+    explanation: "d = n . Q + D. Since plane passes through origin, D = 0. d = (0)(5) + (0)(7) + (1)(4) + 0 = 4.0 meters."
+
+  - id: "q-v3d-04"
+    target_objective_id: "obj-v3d-4"
+    prompt: "Three vectors u, v, and w in R^3 evaluate to a Triple Scalar Product u . (v x w) = 0. What geometric conclusion follows with certainty?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The three vectors are coplanar (they lie entirely in the same 2D flat plane, spanning zero 3D volume)."
+        is_correct: true
+      - id: "opt-2"
+        text: "All three vectors must have zero magnitude."
+        is_correct: false
+      - id: "opt-3"
+        text: "The three vectors are mutually perpendicular."
+        is_correct: false
+      - id: "opt-4"
+        text: "The vectors form an equilateral triangle."
+        is_correct: false
+    explanation: "The triple scalar product measures the volume of the spanned parallelepiped. A volume of zero proves the vectors are linearly dependent and lie in a shared plane."
+
+  - id: "q-v3d-05"
+    target_objective_id: "obj-v3d-5"
+    prompt: "A ray originates at P_ray = (0, 10, 0) with direction d = (0, -1, 0). It strikes a ground plane passing through point P0(0, 2, 0) with surface normal n = (0, 1, 0). At what distance parameter t does the ray hit the plane?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 8.0
+      tolerance: 0.01
+      unit: "meters"
+    explanation: "t = [n . (P0 - P_ray)] / [n . d] = [(0)(0) + (1)(2 - 10) + (0)(0)] / [(0)(0) + (1)(-1) + (0)(0)] = -8 / -1 = 8.0 meters."

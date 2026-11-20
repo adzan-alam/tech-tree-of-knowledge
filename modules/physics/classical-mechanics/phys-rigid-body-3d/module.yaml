@@ -4,7 +4,7 @@ title: "3D Rigid Body Dynamics, Inertia Tensors, and Angular Momentum"
 summary: "Six degrees of freedom dynamics, 3x3 inertia tensors, torque, angular momentum vectors, Euler's equations of rotational motion, and the Dzhanibekov effect."
 version: "1.0.0"
 created_at: "2026-11-20T10:30:00Z"
-updated_at: "2026-11-20T10:30:00Z"
+updated_at: "2026-11-20T19:59:00Z"
 
 classification:
   discipline: "physics"
@@ -35,19 +35,28 @@ relationships:
 
 learning_objectives:
   - id: "obj-rb3d-1"
-    statement: "Calculate the 3x3 inertia tensor matrix for canonical 3D geometric solids and transform it to world coordinates."
-    bloom_level: "apply"
+    statement: "Explain the six degrees of freedom of a 3D rigid body and how rotational mass is modeled as a 3x3 inertia tensor matrix."
+    bloom_level: "understand"
   - id: "obj-rb3d-2"
-    statement: "Analyze and decompose Euler's rotational equations of motion relating torque to angular acceleration."
-    bloom_level: "analyze"
+    statement: "Calculate the 3x3 inertia tensor matrix for canonical 3D geometric solids and transform it to world coordinates via similarity transform."
+    bloom_level: "apply"
   - id: "obj-rb3d-3"
-    statement: "Evaluate and assess the rotational instability of the intermediate principal axis (the Dzhanibekov Effect)."
+    statement: "Analyze Euler's rotational equations of motion to prove the intermediate principal axis instability (the Dzhanibekov Effect)."
+    bloom_level: "analyze"
+  - id: "obj-rb3d-4"
+    statement: "Evaluate gyroscopic precession rates and off-center impact impulse responses on free-floating rigid bodies."
     bloom_level: "evaluate"
+  - id: "obj-rb3d-5"
+    statement: "Synthesize a 6-DoF numerical rigid-body simulation engine integrating linear momentum, angular momentum, and quaternion attitude updates."
+    bloom_level: "create"
 
 practical_applications:
   - title: "Spacecraft and Drone Attitude Dynamics Simulation"
     type: "computational_simulation"
     description: "Simulate tumbling satellites, gyroscopes, and multi-rotor drones by integrating torque, angular momentum, and quaternion orientations."
+  - title: "Robotics 6-DoF Manipulator Inertia Balancing"
+    type: "engineering_design"
+    description: "Design robotic end-effector mass distributions to minimize off-diagonal inertia products and eliminate motor torque cross-coupling."
 
 provenance:
   sources:
@@ -59,11 +68,16 @@ provenance:
         "Euler equations of rotational motion",
         "Intermediate axis instability theorem"
       ]
-    - id: "src-baraff-siggraph"
-      citation: "Baraff, D. (1997). Physically Based Modeling: Rigid Body Simulation. SIGGRAPH Course Notes."
-      url: "https://www.cs.cmu.edu/~baraff/sigcourse/notesd1.pdf"
+    - id: "src-landau-lifshitz-mechanics"
+      citation: "Landau, L. D., & Lifshitz, E. M. (1976). Mechanics: Course of Theoretical Physics, Vol. 1 (3rd ed.). Butterworth-Heinemann, Chapter 6: Motion of a Rigid Body."
+      isbn: "978-0750628969"
       claims_supported: [
-        "Quaternion orientation state derivative",
-        "World vs body space inertia tensor caching",
-        "Numerical integration pipeline for 3D rigid bodies"
+        "Moments of inertia of canonical bodies",
+        "Poinsot construction of torque-free rotation"
       ]
+
+discovery_context:
+  historical_significance: "From Leonhard Euler's 1758 equations of rotational motion to the discovery of the Dzhanibekov effect in 1985, 3D rigid body dynamics revealed the rich geometry of rotational space."
+  historical_influences:
+    - discovery_id: "disc-euler-rigid-body-1758"
+    - discovery_id: "disc-dzhanibekov-effect-1985"

@@ -4,48 +4,77 @@ passing_threshold_percent: 75
 questions:
   - id: "q-rb3d-01"
     target_objective_id: "obj-rb3d-1"
-    prompt: "A solid sphere has mass M = 10.0 kg and radius R = 2.0 m. What is its moment of inertia I about any diameter passing through its center?"
-    type: "numerical_calculation"
-    numerical_solution:
-      value: 16.0
-      tolerance: 0.05
-      unit: "kg*m^2"
-    explanation: "I = (2/5) * M * R^2 = 0.4 * 10.0 * (2.0)^2 = 4.0 * 4 = 16.0 kg*m^2."
+    prompt: "Why can rotational inertia in three dimensions NOT be represented by a single scalar number like mass in linear motion?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "In 3D, rotation can occur around infinitely many spatial axes; the mass distribution varies across directions, requiring a 3x3 symmetric tensor matrix I where L = I * omega."
+        is_correct: true
+      - id: "opt-2"
+        text: "Rotational mass changes whenever an object translates faster than the speed of light."
+        is_correct: false
+      - id: "opt-3"
+        text: "Scalar mass is forbidden in classical Hamiltonian mechanics."
+        is_correct: false
+      - id: "opt-4"
+        text: "The Earth's gravity converts scalar inertia into vector components."
+        is_correct: false
+    explanation: "Because an extended body has mass distributed non-uniformly across three spatial dimensions, rotating it around different axes encounters different inertial resistances, encapsulated in a 3x3 tensor matrix."
 
   - id: "q-rb3d-02"
     target_objective_id: "obj-rb3d-2"
-    prompt: "In Euler's rotational equations of motion, what causes angular acceleration in a torque-free system with non-identical principal moments of inertia?"
-    type: "multiple_choice"
-    options:
-      - id: "opt-1"
-        text: "Nonlinear cross-coupling terms (I_j - I_k) * omega_j * omega_k"
-        is_correct: true
-      - id: "opt-2"
-        text: "Linear air friction"
-        is_correct: false
-      - id: "opt-3"
-        text: "Gravitational torque"
-        is_correct: false
-      - id: "opt-4"
-        text: "Loss of total angular momentum"
-        is_correct: false
-    explanation: "Euler's equations: I_1 * d(omega_1)/dt + (I_3 - I_2) * omega_2 * omega_3 = tau_1. When tau = 0, the cross-coupling gyroscopic term drives angular velocity changes."
+    prompt: "A uniform solid sphere has mass M = 10.0 kg and radius R = 2.0 m. What is its moment of inertia about any axis passing through its center of mass?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 16.0
+      tolerance: 0.1
+      unit: "kg*m^2"
+    explanation: "For a uniform solid sphere: I = (2/5) * M * R^2 = (2/5) * (10.0) * (2.0^2) = 4.0 * 4.0 = 16.0 kg*m^2."
 
   - id: "q-rb3d-03"
     target_objective_id: "obj-rb3d-3"
-    prompt: "According to the Tennis Racket Theorem, rotation of an asymmetric rigid body (I1 < I2 < I3) is unstable about which principal axis?"
+    prompt: "What mathematical property explains the Tennis Racket Theorem (Dzhanibekov Effect), where rotation around the intermediate principal axis is unstable?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "The intermediate principal axis (I2)"
+        text: "Perturbing the intermediate axis I2 in Euler's equations yields a second-order differential equation with a positive eigenvalue (+lambda^2), creating exponential perturbation growth that flips the body 180 degrees."
         is_correct: true
       - id: "opt-2"
-        text: "The minor principal axis (I1)"
+        text: "Air friction exerts an asymmetric torque on the tennis racket handle."
         is_correct: false
       - id: "opt-3"
-        text: "The major principal axis (I3)"
+        text: "Angular momentum is not conserved when an object rotates in three dimensions."
         is_correct: false
       - id: "opt-4"
-        text: "All three principal axes are equally unstable"
+        text: "The intermediate moment of inertia matrix has a negative determinant."
         is_correct: false
-    explanation: "Perturbations around the intermediate principal axis (I2) have positive real eigenvalues, causing exponential divergence and periodic 180-degree flipping."
+    explanation: "When linearized about the intermediate axis I2, the perturbation equation is d2(epsilon)/dt2 = [(I3 - I2)(I2 - I1)/(I1*I3)] * Omega0^2 * epsilon. Because I1 < I2 < I3, both factors in the numerator are positive, yielding real exponential growth."
+
+  - id: "q-rb3d-04"
+    target_objective_id: "obj-rb3d-4"
+    prompt: "A spinning top with angular momentum L = 5.0 kg*m^2/s experiences a horizontal gravitational torque tau = 2.5 N*m. What is the angular velocity of gyroscopic precession Omega_p?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 0.5
+      tolerance: 0.01
+      unit: "rad/s"
+    explanation: "Omega_p = tau / L = 2.5 / 5.0 = 0.5 rad/s."
+
+  - id: "q-rb3d-05"
+    target_objective_id: "obj-rb3d-5"
+    prompt: "In a real-time 3D rigid body simulator, why must the orientation quaternion be normalized after each numerical integration step q = q + 0.5 * omega * q * dt?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Discrete numerical integration introduces truncation error that causes ||q|| to deviate from 1.0; an unnormalized quaternion introduces artificial spatial scaling that causes 3D meshes to swell or shrink."
+        is_correct: true
+      - id: "opt-2"
+        text: "Unnormalized quaternions cause the CPU to invert the sign of gravitational acceleration."
+        is_correct: false
+      - id: "opt-3"
+        text: "The GPU cannot rasterize polygons unless the quaternion norm equals 0."
+        is_correct: false
+      - id: "opt-4"
+        text: "Normalizing quaternions converts them into 4x4 translation vectors."
+        is_correct: false
+    explanation: "Rotations are pure isometric mappings represented strictly by unit quaternions (||q|| = 1 on S^3). If the norm drifts above or below 1, transformation matrices will distort the physical scale of the simulated geometry."

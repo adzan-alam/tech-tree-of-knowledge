@@ -4,48 +4,95 @@ passing_threshold_percent: 75
 questions:
   - id: "q-mq-01"
     target_objective_id: "obj-mq-1"
-    prompt: "In 4x4 homogeneous transformation matrices, what value must be placed in the w-component of a directional displacement vector to make it invariant to translation?"
+    prompt: "Why can 3D translation NOT be represented by a standard 3x3 matrix multiplication, and how do 4x4 homogeneous coordinates solve this?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "w = 0"
+        text: "Translation moves the origin (T(0) != 0) and is therefore affine, not linear; adding a 4th coordinate w = 1 lifts 3D space into a 4D projective space where translation becomes linear matrix multiplication."
         is_correct: true
       - id: "opt-2"
-        text: "w = 1"
+        text: "3x3 matrices are limited to integer values, whereas translation requires floating point numbers."
         is_correct: false
       - id: "opt-3"
-        text: "w = -1"
+        text: "Translation violates conservation of momentum in 3D Euclidean space."
         is_correct: false
       - id: "opt-4"
-        text: "w = infinity"
+        text: "The determinant of a 3x3 translation matrix would always equal zero."
         is_correct: false
-    explanation: "Directional vectors have w = 0 so that translation column t is multiplied by 0 and ignored; spatial points have w = 1 so that translation t is added."
+    explanation: "Linear transformations must preserve the origin (T(0) = 0). Translation shifts the origin to t, making it an affine map. 4x4 homogeneous matrices turn affine shifts into linear shears in 4D projective space."
 
   - id: "q-mq-02"
     target_objective_id: "obj-mq-2"
-    prompt: "Under an Euler angle system with pitch-yaw-roll order, at what pitch angle does Gimbal Lock occur?"
+    prompt: "A 4x4 homogeneous translation matrix translates points by (3, -2, 5). If applied to a directional vector v with homogeneous coordinate w = 0, what is the output vector?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "±90 degrees (pitching straight up or straight down)"
+        text: "The vector v is completely unchanged, because directional vectors have w = 0 and are invariant to translation."
         is_correct: true
       - id: "opt-2"
-        text: "0 degrees (level horizon)"
+        text: "The vector v has (3, -2, 5) added to its components."
         is_correct: false
       - id: "opt-3"
-        text: "45 degrees"
+        text: "The vector is scaled by a factor of 15."
         is_correct: false
       - id: "opt-4"
-        text: "180 degrees"
+        text: "The vector collapses to the zero vector."
         is_correct: false
-    explanation: "At pitch = ±90 degrees, the roll and yaw rotation axes become parallel, eliminating one rotational degree of freedom."
+    explanation: "Because w = 0 for directional vectors, the 4th column of the translation matrix is multiplied by 0, leaving directional vectors unaffected by translational origin shifts."
 
   - id: "q-mq-03"
     target_objective_id: "obj-mq-3"
-    prompt: "A unit quaternion represents a rotation of angle theta = 180 degrees around a unit axis u. What is its scalar real part w?"
-    type: "numerical_calculation"
-    numerical_solution:
-      value: 0.0
-      tolerance: 0.01
-      unit: "scalar"
-    explanation: "w = cos(theta / 2). For theta = 180 degrees, theta / 2 = 90 degrees, and cos(90°) = 0."
+    prompt: "In a Z-Y-X Euler angle rotation system, what catastrophic geometric event occurs when the pitch angle theta reaches exactly +90 degrees?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Gimbal Lock: the Yaw and Roll axes become collinear (coplanar), locking into the combined difference (psi - phi) and permanently losing one degree of rotational freedom."
+        is_correct: true
+      - id: "opt-2"
+        text: "The rotation matrix determinant flips from +1 to -1, reflecting the object like a mirror."
+        is_correct: false
+      - id: "opt-3"
+        text: "The object's kinetic energy jumps to infinity due to division by zero."
+        is_correct: false
+      - id: "opt-4"
+        text: "The Euler angles automatically convert into Cartesian coordinates."
+        is_correct: false
+    explanation: "At theta = 90 deg, cos(theta) = 0. The composite matrix degenerates into functions of (psi - phi) only, merging Yaw and Roll into a single coincident axis."
+
+  - id: "q-mq-04"
+    target_objective_id: "obj-mq-4"
+    prompt: "Why do both unit quaternions +q and -q represent the exact same physical rotation in 3D space?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "In the sandwich product v' = q * p * q*, substituting -q introduces two negative signs (-q * p * -q* = (-1)^2 * q * p * q*) which cancel identically to +1."
+        is_correct: true
+      - id: "opt-2"
+        text: "Quaternions cannot have negative numbers in their vector components."
+        is_correct: false
+      - id: "opt-3"
+        text: "The 4D hypersphere S^3 is homeomorphic to a flat 2D torus."
+        is_correct: false
+      - id: "opt-4"
+        text: "Negative quaternions are automatically converted to identity by the CPU ALU."
+        is_correct: false
+    explanation: "The sandwich product uses q and q* symmetrically. (-q) * p * (-q*) = (-1)(-1) * q * p * q* = q * p * q*, proving S^3 double-covers SO(3)."
+
+  - id: "q-mq-05"
+    target_objective_id: "obj-mq-5"
+    prompt: "In Spherical Linear Interpolation (SLERP) between orientations q1 and q2, why is the antipodal check (if dot < 0 then q2 = -q2) critical?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Without it, if the 4D dot product is negative, the interpolation would take the long path (> 180 degrees) around the sphere instead of the shortest rotational path."
+        is_correct: true
+      - id: "opt-2"
+        text: "A negative dot product causes the square root in the normalization to become imaginary (NaN)."
+        is_correct: false
+      - id: "opt-3"
+        text: "It forces the object to translate along the negative Z-axis."
+        is_correct: false
+      - id: "opt-4"
+        text: "It prevents the quaternion from exceeding 64 bits of precision."
+        is_correct: false
+    explanation: "Because +q2 and -q2 are physically identical orientations, when dot < 0, +q2 lies on the far side of the 4D sphere. Negating q2 selects the closer antipodal representation, guaranteeing the shortest arc."

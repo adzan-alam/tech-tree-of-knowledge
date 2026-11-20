@@ -4,20 +4,20 @@ title: "3D Vectors, Cross Products, and Spatial Geometry"
 summary: "Three-dimensional Euclidean space, right-handed coordinates, vector cross products, triple scalar products, surface normal vectors, and plane equations."
 version: "1.0.0"
 created_at: "2026-11-20T10:00:00Z"
-updated_at: "2026-11-20T10:00:00Z"
+updated_at: "2026-11-20T19:54:00Z"
 
 classification:
   discipline: "mathematics"
   domain: "linear-algebra"
   proficiency_tier: 2
   difficulty_score: 0.45
-  estimated_duration_minutes: 75
+  estimated_duration_minutes: 80
 
 verification:
   status: "technically-verified"
   reviewed_by: ["math-verifier-01", "graphics-auditor-02"]
   verification_date: "2026-11-20"
-  notes: "Determinant identities for cross product and plane-normal equations verified against standard 3D graphics geometry texts."
+  notes: "Determinant identities for cross product, triple scalar volume, and plane-normal equations verified against standard 3D graphics geometry texts."
 
 relationships:
   prerequisites:
@@ -32,18 +32,27 @@ relationships:
 learning_objectives:
   - id: "obj-v3d-1"
     statement: "Represent vectors in 3D Cartesian coordinates and calculate Euclidean magnitudes and unit direction vectors."
-    bloom_level: "apply"
+    bloom_level: "understand"
   - id: "obj-v3d-2"
     statement: "Calculate the vector cross product algebraically using determinants and apply the right-hand rule geometrically."
     bloom_level: "apply"
   - id: "obj-v3d-3"
     statement: "Analyze and derive the surface normal of a 3D polygonal triangle and construct the implicit plane equation."
     bloom_level: "analyze"
+  - id: "obj-v3d-4"
+    statement: "Evaluate coplanarity and spatial volume of three 3D vectors using the Triple Scalar Product."
+    bloom_level: "evaluate"
+  - id: "obj-v3d-5"
+    statement: "Synthesize a 3D spatial geometry pipeline incorporating triangle surface normal generation and analytical ray-plane intersection."
+    bloom_level: "create"
 
 practical_applications:
   - title: "Surface Normal Generation in 3D Rendering & Physics"
     type: "computational_simulation"
     description: "Calculate face normals and vertex normals of 3D meshes to evaluate lighting shaders and collision contact planes."
+  - title: "Robotics 3D Ray-Plane Sensor Targeting"
+    type: "engineering_design"
+    description: "Design an analytical ray-plane intersection algorithm for LIDAR rangefinding and autonomous landing plane detection."
 
 provenance:
   sources:
@@ -59,7 +68,12 @@ provenance:
       citation: "Akenine-Möller, T., Haines, E., & Hoffman, N. (2018). Real-Time Rendering (4th ed.). CRC Press, Chapter 4: Transforms and Geometry."
       isbn: "978-1138627000"
       claims_supported: [
-        "Right-handed coordinate systems",
-        "Triangle surface normal derivation",
-        "Implicit plane equations"
+        "Ray-plane analytical intersection",
+        "Triangle face normal derivation"
       ]
+
+discovery_context:
+  historical_significance: "Formalized in the 19th century by J. Willard Gibbs and Oliver Heaviside, 3D vector algebra unified classical electromagnetism and Newtonian mechanics."
+  historical_influences:
+    - discovery_id: "disc-gibbs-vector-analysis"
+    - discovery_id: "disc-heaviside-electromagnetism"
