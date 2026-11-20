@@ -33,19 +33,28 @@ relationships:
 
 learning_objectives:
   - id: "obj-ik-1"
-    statement: "Formulate forward kinematics of a multi-link serial manipulator using Denavit-Hartenberg (DH) parameters."
-    bloom_level: "create"
+    statement: "Explain the distinction between Task Space and Configuration Space, and the duality between Forward and Inverse Kinematics."
+    bloom_level: "understand"
   - id: "obj-ik-2"
+    statement: "Calculate the forward kinematics position of an articulated arm using trigonometric chaining and Denavit-Hartenberg matrices."
+    bloom_level: "apply"
+  - id: "obj-ik-3"
     statement: "Analyze and differentiate the geometric Jacobian matrix relating joint velocities to end-effector Cartesian velocities and identify kinematic singularities."
     bloom_level: "analyze"
-  - id: "obj-ik-3"
-    statement: "Implement numerical Inverse Kinematics using Jacobian Transpose and Damped Least Squares (DLS) algorithms."
-    bloom_level: "apply"
+  - id: "obj-ik-4"
+    statement: "Evaluate the singularity damping behavior of Damped Least Squares versus the Moore-Penrose pseudoinverse."
+    bloom_level: "evaluate"
+  - id: "obj-ik-5"
+    statement: "Construct a robust numerical Inverse Kinematics solver using Damped Least Squares with joint limits."
+    bloom_level: "create"
 
 practical_applications:
   - title: "Robotic Arm Motion Planning and Object Manipulation"
     type: "computational_simulation"
     description: "Calculate required joint motor angles for industrial robotic arms and humanoid limbs to reach, grasp, and move targets in 3D space."
+  - title: "6-DoF Industrial Manipulator Trajectory Planner and Singularity Avoidance System"
+    type: "engineering_design"
+    description: "Design real-time joint-space motor control loops for 6-axis welding and pick-and-place robots to avoid mechanical singularities."
 
 provenance:
   sources:

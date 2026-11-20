@@ -4,48 +4,86 @@ passing_threshold_percent: 75
 questions:
   - id: "q-ik-01"
     target_objective_id: "obj-ik-1"
-    prompt: "In the Denavit-Hartenberg (DH) robotics convention, how many geometric parameters are used to fully specify the coordinate transformation between two adjacent links?"
-    type: "numerical_calculation"
-    numerical_solution:
-      value: 4.0
-      tolerance: 0.01
-      unit: "parameters"
-    explanation: "The DH convention uses exactly 4 parameters per link: link length (a), link twist (alpha), link offset (d), and joint angle (theta)."
+    prompt: "What is the primary conceptual difference between Task Space (Operational Space) and Configuration Space (Joint Space) in robotics?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Task Space describes the external 3D Cartesian position and orientation of the end-effector in SE(3), whereas Configuration Space describes the internal motor joint angles theta in Q"
+        is_correct: true
+      - id: "opt-2"
+        text: "Task Space is measured in radians, while Configuration Space is measured in meters"
+        is_correct: false
+      - id: "opt-3"
+        text: "Task Space applies only to wheeled mobile robots, while Configuration Space applies only to drones"
+        is_correct: false
+      - id: "opt-4"
+        text: "Task Space ignores time, while Configuration Space measures CPU clock cycles"
+        is_correct: false
+    explanation: "Configuration Space represents the internal degrees of freedom of the robot's motorized joints (theta_1, ..., theta_n), while Task Space represents the operational workspace pose (x, y, z, roll, pitch, yaw) of the tool."
 
   - id: "q-ik-02"
     target_objective_id: "obj-ik-2"
-    prompt: "For a 2-link planar arm with link lengths L1 and L2, the determinant of the Jacobian matrix is det(J) = L1 * L2 * sin(theta2). At what joint angle theta2 does a kinematic singularity occur?"
-    type: "multiple_choice"
-    options:
-      - id: "opt-1"
-        text: "theta2 = 0 degrees (arm fully straightened to maximum reach)"
-        is_correct: true
-      - id: "opt-2"
-        text: "theta2 = 90 degrees"
-        is_correct: false
-      - id: "opt-3"
-        text: "theta2 = 45 degrees"
-        is_correct: false
-      - id: "opt-4"
-        text: "theta2 = -45 degrees"
-        is_correct: false
-    explanation: "When theta2 = 0 degrees, sin(0) = 0, so det(J) = 0. The arm is fully extended and cannot produce Cartesian velocity pointing radially outward."
+    prompt: "A 2-link planar arm has link lengths L_1 = 3.0 meters and L_2 = 2.0 meters. The base joint is at theta_1 = 0 degrees and the elbow joint is at theta_2 = 90 degrees. What is the Cartesian x-coordinate of the end-effector using x = L_1 * cos(theta_1) + L_2 * cos(theta_1 + theta_2)?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 3.0
+      tolerance: 0.05
+      unit: "meters"
+    explanation: "x = 3.0 * cos(0) + 2.0 * cos(0 + 90) = 3.0 * 1.0 + 2.0 * 0.0 = 3.0 meters."
 
   - id: "q-ik-03"
     target_objective_id: "obj-ik-3"
-    prompt: "Why is the Damped Least Squares (DLS) algorithm preferred over the pure Moore-Penrose pseudoinverse in numerical inverse kinematics?"
+    prompt: "For a 2-link planar arm with link lengths L_1 and L_2, the determinant of the Jacobian matrix is det(J) = L_1 * L_2 * sin(theta_2). At what joint angle theta_2 does a boundary kinematic singularity occur where the arm is locked at maximum reach?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "The damping term lambda^2 * I prevents matrix inversion singularities and suppresses violent joint velocity spikes"
+        text: "theta_2 = 0 degrees (sin(0) = 0, causing the arm to form a straight line of length L_1 + L_2)"
         is_correct: true
       - id: "opt-2"
-        text: "It eliminates the need for computing the Jacobian matrix"
+        text: "theta_2 = 90 degrees"
         is_correct: false
       - id: "opt-3"
-        text: "It guarantees zero tracking error on the very first iteration"
+        text: "theta_2 = 45 degrees"
         is_correct: false
       - id: "opt-4"
-        text: "It converts revolute joints into prismatic joints"
+        text: "theta_2 = 270 degrees"
         is_correct: false
-    explanation: "DLS regularizes the inversion (J*J^T + lambda^2 * I)^-1, ensuring the inverted matrix remains non-singular even at kinematic singularities."
+    explanation: "When theta_2 = 0 degrees, sin(theta_2) = 0, so det(J) = 0. The arm is fully extended to its boundary reach and cannot produce Cartesian velocity pointing radially outward."
+
+  - id: "q-ik-04"
+    target_objective_id: "obj-ik-4"
+    prompt: "Why is the Damped Least Squares (DLS) formulation Delta theta = J^T (J J^T + lambda^2 I)^{-1} e preferred over the unregularized Moore-Penrose pseudoinverse in real-world robot controllers?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The damping term lambda^2 * I guarantees that the matrix remains strictly non-singular and well-conditioned near singularities, preventing dangerous joint velocity explosions"
+        is_correct: true
+      - id: "opt-2"
+        text: "It eliminates the need for sensor calibration"
+        is_correct: false
+      - id: "opt-3"
+        text: "It guarantees that all joint angles remain strictly positive"
+        is_correct: false
+      - id: "opt-4"
+        text: "It reduces matrix multiplication from O(n^3) to O(1)"
+        is_correct: false
+    explanation: "Near kinematic singularities, det(J J^T) approaches zero, causing unregularized pseudoinverse solutions to command massive velocities. DLS adds Tikhonov regularization lambda^2 * I to keep the inversion stable."
+
+  - id: "q-ik-05"
+    target_objective_id: "obj-ik-5"
+    prompt: "In numerical Inverse Kinematics, what happens if an analytical solver attempts to compute elbow angle theta_2 = arccos((x^2 + y^2 - L_1^2 - L_2^2) / (2 L_1 L_2)) for a target coordinate (x, y) whose distance from origin exceeds (L_1 + L_2)?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The argument inside arccos exceeds 1.0, returning NaN (Not a Number) unless explicitly clamped to the valid interval [-1.0, 1.0]"
+        is_correct: true
+      - id: "opt-2"
+        text: "The robot arm links physically stretch to reach the target"
+        is_correct: false
+      - id: "opt-3"
+        text: "The joint motors automatically switch to reverse polarity"
+        is_correct: false
+      - id: "opt-4"
+        text: "The trigonometric function wraps around modulo 2*pi"
+        is_correct: false
+    explanation: "When the target lies outside the reachable workspace annulus, the cosine ratio exceeds 1.0. In software, Math.acos(> 1.0) returns NaN, which corrupts the control loop unless workspace boundary clamping is applied."
