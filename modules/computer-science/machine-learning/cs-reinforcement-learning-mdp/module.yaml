@@ -33,19 +33,28 @@ relationships:
 
 learning_objectives:
   - id: "obj-mdp-1"
-    statement: "Formulate a sequential decision-making problem as a formal Markov Decision Process (S, A, P, R, gamma)."
-    bloom_level: "create"
+    statement: "Explain the agent-environment interaction loop, the Markov property, and the necessity of discounted cumulative return."
+    bloom_level: "understand"
   - id: "obj-mdp-2"
+    statement: "Calculate the state values, action values, and discounted infinite-horizon returns for stochastic decision paths."
+    bloom_level: "apply"
+  - id: "obj-mdp-3"
     statement: "Analyze and decompose the Bellman Optimality Equations for state values V*(s) and action values Q*(s, a)."
     bloom_level: "analyze"
-  - id: "obj-mdp-3"
-    statement: "Implement Value Iteration and Tabular Q-Learning to solve optimal control in a discrete simulated environment."
-    bloom_level: "apply"
+  - id: "obj-mdp-4"
+    statement: "Evaluate the convergence of Value Iteration using the Banach Fixed-Point contraction mapping theorem."
+    bloom_level: "evaluate"
+  - id: "obj-mdp-5"
+    statement: "Construct a model-free tabular Q-learning software agent with epsilon-greedy exploration and temporal difference learning."
+    bloom_level: "create"
 
 practical_applications:
   - title: "Autonomous Navigation and Game Playing Agents"
     type: "computational_simulation"
     description: "Train software agents to navigate maze environments, avoid obstacles, and optimize reward collection without human demonstration."
+  - title: "Optimal Industrial Robotics and Inventory Dispatch Controller"
+    type: "engineering_design"
+    description: "Design automated inventory restocking and robotic picking controllers using dynamic programming and discrete MDP policies."
 
 provenance:
   sources:

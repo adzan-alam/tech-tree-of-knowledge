@@ -4,48 +4,77 @@ passing_threshold_percent: 75
 questions:
   - id: "q-mdp-01"
     target_objective_id: "obj-mdp-1"
-    prompt: "What mathematical property states that the conditional probability of future states depends only on the present state and action, independent of past history?"
+    prompt: "What mathematical property asserts that the probability distribution over future states and rewards depends solely upon the current state and action, independent of the preceding historical path?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "The Markov Property"
+        text: "The Markov Property: P(S_{t+1}, R_{t+1} | S_t, A_t, S_{t-1}, ...) = P(S_{t+1}, R_{t+1} | S_t, A_t)"
         is_correct: true
       - id: "opt-2"
-        text: "The Lyapunov Stability Criterion"
-        is_correct: false
-      - id: "opt-3"
         text: "The Central Limit Theorem"
         is_correct: false
-      - id: "opt-4"
-        text: "The Fourier Inversion Theorem"
+      - id: "opt-3"
+        text: "The Law of Conservation of Energy"
         is_correct: false
-    explanation: "The Markov property states that P(S_{t+1} | S_t, A_t, ..., S_0, A_0) = P(S_{t+1} | S_t, A_t)."
+      - id: "opt-4"
+        text: "The Banach Separation Theorem"
+        is_correct: false
+    explanation: "The Markov property states that the present state is an informational sufficient statistic for the future, making the trajectory history conditionally independent."
 
   - id: "q-mdp-02"
     target_objective_id: "obj-mdp-2"
-    prompt: "In the Bellman Optimality Equation V*(s) = max_a sum_{s'} P(s'|s, a) [r + gamma * V*(s')], what is the mathematical role of discount factor gamma < 1?"
-    type: "multiple_choice"
-    options:
-      - id: "opt-1"
-        text: "It ensures the Bellman backup operator is a contraction mapping that guarantees convergence to a unique fixed point"
-        is_correct: true
-      - id: "opt-2"
-        text: "It speeds up matrix multiplication"
-        is_correct: false
-      - id: "opt-3"
-        text: "It eliminates negative numbers from reward signals"
-        is_correct: false
-      - id: "opt-4"
-        text: "It guarantees that all states have identical values"
-        is_correct: false
-    explanation: "By the Banach Fixed-Point Theorem, gamma < 1 makes the Bellman operator a gamma-contraction in infinity norm, ensuring geometric convergence to V*."
+    prompt: "An agent in an infinite-horizon task receives a constant reward R = +4.0 at every time step t = 1, 2, 3, ... with discount factor gamma = 0.75. What is the exact discounted cumulative return G_0 = sum_{k=0}^inf gamma^k R?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 16.0
+      tolerance: 0.05
+      unit: "return"
+    explanation: "G_0 = R * sum_{k=0}^inf (0.75)^k = 4.0 * (1 / (1 - 0.75)) = 4.0 * (1 / 0.25) = 4.0 * 4 = 16.0."
 
   - id: "q-mdp-03"
     target_objective_id: "obj-mdp-3"
-    prompt: "In Q-learning with alpha = 0.5 and gamma = 0.9, current Q(s, a) = 4.0. The agent gets reward r = 1.0 and lands in state s' where max_a' Q(s', a') = 10.0. What is the updated Q(s, a)?"
+    prompt: "In the Bellman Optimality Equation V*(s) = max_a sum_{s'} P(s' | s, a) [R(s, a, s') + gamma V*(s')], why does the max operator replace the policy distribution sum sum_a pi(a | s) seen in the Bellman Expectation Equation?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Under an optimal policy pi*, the agent deterministically and greedily selects the action that maximizes expected future return rather than acting probabilistically"
+        is_correct: true
+      - id: "opt-2"
+        text: "The summation operator causes floating-point overflow on modern CPUs"
+        is_correct: false
+      - id: "opt-3"
+        text: "The max operator forces the reward function to become strictly non-negative"
+        is_correct: false
+      - id: "opt-4"
+        text: "The transition probabilities P(s' | s, a) are assumed to be zero for non-optimal actions"
+        is_correct: false
+    explanation: "By definition, the optimal policy achieves the maximum possible value at every state, so it assigns probability 1.0 to the action achieving max_a Q*(s, a)."
+
+  - id: "q-mdp-04"
+    target_objective_id: "obj-mdp-4"
+    prompt: "What mathematical theorem guarantees that iterative application of the Bellman backup operator V_{k+1} = T V_k will converge exponentially to a unique optimal value function V* from any arbitrary initial vector V_0 when gamma < 1?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The Banach Fixed-Point Contraction Mapping Theorem under the infinity norm ||T U - T V||_inf <= gamma ||U - V||_inf"
+        is_correct: true
+      - id: "opt-2"
+        text: "The Spectral Theorem for Hermitian matrices"
+        is_correct: false
+      - id: "opt-3"
+        text: "Taylor's Theorem with Lagrange remainder"
+        is_correct: false
+      - id: "opt-4"
+        text: "Noether's Theorem on continuous symmetry"
+        is_correct: false
+    explanation: "The Bellman backup operator is a gamma-contraction in the infinity norm. Since the state space is a complete metric space and gamma < 1, Banach's Fixed-Point Theorem guarantees exponential convergence to a unique fixed point."
+
+  - id: "q-mdp-05"
+    target_objective_id: "obj-mdp-5"
+    prompt: "In tabular Q-learning with learning rate alpha = 0.2 and discount factor gamma = 0.9, current Q(s, a) = 5.0. The agent executes action a, receives reward R = +2.0, and transitions to non-terminal state s' where max_{a'} Q(s', a') = 10.0. What is the updated value Q_new(s, a)?"
     type: "numerical_calculation"
     numerical_solution:
-      value: 7.0
+      value: 6.2
       tolerance: 0.05
       unit: "Q-value"
-    explanation: "Target = r + gamma * max Q = 1.0 + 0.9 * 10.0 = 10.0. TD error = 10.0 - 4.0 = 6.0. Q_new = 4.0 + 0.5 * 6.0 = 7.0."
+    explanation: "TD Target = R + gamma * max Q(s', a') = 2.0 + (0.9 * 10.0) = 2.0 + 9.0 = 11.0. TD Error delta = 11.0 - 5.0 = 6.0. Q_new = 5.0 + 0.2 * 6.0 = 5.0 + 1.2 = 6.2."
