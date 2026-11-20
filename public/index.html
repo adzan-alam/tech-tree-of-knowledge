@@ -943,6 +943,64 @@
           </p>
         </div>
 
+        <!-- Interactive Vector Lab Sandbox (Mounted dynamically for math-vectors-2d) -->
+        <div id="vectorLabBox" style="display:none; background:#111827; border:1px solid #374151; border-radius:12px; padding:1.2rem; margin-bottom:2rem; box-shadow:0 10px 25px -5px rgba(0,0,0,0.5);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem; border-bottom:1px solid #1f2937; padding-bottom:0.6rem;">
+            <div>
+              <span style="font-size:0.75rem; text-transform:uppercase; font-weight:700; color:var(--accent-math); letter-spacing:0.05em;">Interactive Laboratory</span>
+              <h3 style="font-size:1.1rem; font-weight:700; margin:0.2rem 0; color:#fff;">2D Vector Coordinate, Pythagoras & Dot Product Playground</h3>
+            </div>
+            <span style="font-size:0.75rem; color:#9ca3af;">Drag the Cyan (u) or Emerald (v) arrowheads on the canvas</span>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 310px; gap:1.2rem;">
+            <div>
+              <canvas id="vectorLabCanvas" width="560" height="380" style="background:#0b0f19; border:1px solid #1f2937; border-radius:8px; cursor:crosshair; width:100%; height:auto; display:block;"></canvas>
+              <div style="display:flex; gap:0.5rem; margin-top:0.6rem; flex-wrap:wrap;">
+                <button class="sim-btn" id="btnLabPythagoras" style="font-size:0.75rem; padding:0.3rem 0.6rem;">Pythagoras (3, 4, 5)</button>
+                <button class="sim-btn" id="btnLabOrthogonal" style="font-size:0.75rem; padding:0.3rem 0.6rem;">Perpendicular (90°)</button>
+                <button class="sim-btn" id="btnLabOpposing" style="font-size:0.75rem; padding:0.3rem 0.6rem;">Opposing (180°)</button>
+                <button class="sim-btn" id="btnLabNormalize" style="font-size:0.75rem; padding:0.3rem 0.6rem;">Normalize Both</button>
+              </div>
+            </div>
+
+            <!-- Live Math HUD -->
+            <div style="background:#131b2e; border:1px solid #1e293b; border-radius:8px; padding:0.8rem; font-size:0.8rem; display:flex; flex-direction:column; gap:0.6rem;">
+              <div>
+                <strong style="color:#38bdf8;">Vector u (Cyan):</strong><br>
+                Components: <span id="labUComp" style="font-family:monospace; color:#fff;">(3.0, 4.0)</span><br>
+                Length: ||u|| = sqrt(x² + y²) = <span id="labULen" style="font-family:monospace; color:#38bdf8; font-weight:700;">5.00</span>
+              </div>
+
+              <div style="border-top:1px solid #1e293b; padding-top:0.5rem;">
+                <strong style="color:#34d399;">Vector v (Emerald):</strong><br>
+                Components: <span id="labVComp" style="font-family:monospace; color:#fff;">(4.0, 1.0)</span><br>
+                Length: ||v|| = sqrt(x² + y²) = <span id="labVLen" style="font-family:monospace; color:#34d399; font-weight:700;">4.12</span>
+              </div>
+
+              <div style="border-top:1px solid #1e293b; padding-top:0.5rem;">
+                <strong style="color:#fbbf24;">Tip-to-Tail Sum u + v (Dashed Amber):</strong><br>
+                Resultant: <span id="labSumComp" style="font-family:monospace; color:#fbbf24;">(7.0, 5.0)</span><br>
+                Resultant Length: <span id="labSumLen" style="font-family:monospace; color:#fbbf24; font-weight:700;">8.60</span>
+              </div>
+
+              <div style="border-top:1px solid #1e293b; padding-top:0.5rem;">
+                <strong>Teamwork Meter (Dot Product):</strong><br>
+                <span style="font-size:0.75rem; color:#9ca3af;">u · v = u_x v_x + u_y v_y</span><br>
+                Value: <span id="labDotVal" style="font-size:1.1rem; font-weight:800; font-family:monospace; color:#10b981;">+16.00</span><br>
+                Status: <span id="labDotStatus" style="font-weight:700; color:#10b981;">Acute (Helping)</span>
+              </div>
+
+              <div style="border-top:1px solid #1e293b; padding-top:0.5rem;">
+                <strong>2D Cross Product (Steering):</strong><br>
+                <span style="font-size:0.75rem; color:#9ca3af;">u × v = u_x v_y - u_y v_x</span><br>
+                Value: <span id="labCrossVal" style="font-family:monospace; font-weight:700;">-13.00</span><br>
+                Steering: <span id="labCrossStatus" style="font-weight:700; color:#ef4444;">↷ Steer Right</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div id="readerBody" class="reader-body">
           <!-- Dynamically populated with text and KaTeX formulas -->
         </div>
@@ -1120,11 +1178,15 @@
             <p><strong>The Unit Vector (Direction Only):</strong> A vector of length exactly $1$ is a unit vector, written with a hat: $\\hat{v}$. To extract pure direction from any vector, divide it by its own length (normalization):</p>
             <div class="math-card">$$ \\hat{v} = \\frac{\\vec{v}}{\\|\\vec{v}\\|} = \\begin{bmatrix} \\frac{v_x}{\\sqrt{v_x^2 + v_y^2}} \\\\ \\frac{v_y}{\\sqrt{v_x^2 + v_y^2}} \\end{bmatrix} $$</div>
             <p>The standard basis steps are $\\hat{i} = (1, 0)$ (1 step East) and $\\hat{j} = (0, 1)$ (1 step North). Every vector is just: $\\vec{v} = v_x \\hat{i} + v_y \\hat{j}$.</p>
+            <div style="background:rgba(245, 158, 11, 0.1); border-left:4px solid var(--accent-cs); padding:0.8rem; border-radius:4px; margin:1rem 0; font-size:0.85rem;">
+              <strong>🎮 Video Game Bug Case Study: The Quake Strafe-Running Glitch:</strong><br>
+              In early FPS games (Quake, Doom, GoldenEye), pressing W set forward velocity $(0, 1)$ and pressing D set strafe velocity $(1, 0)$. Pressing W+D together gave vector $(1, 1)$, whose speed was $\\sqrt{1^2 + 1^2} = \\sqrt{2} \\approx 1.414$ ($41.4\\%$ faster!). Players exploited this to bunny-hop at superhuman speeds because developers forgot to normalize the input vector before applying walking speed!
+            </div>
 
             <h2>Level 5: Angles & Navigation — Trigonometry Visualized</h2>
             <p>If you know magnitude $r$ and angle $\\theta$ (Polar form), you find the Cartesian steps using trigonometry:</p>
             <div class="math-card">$$ v_x = r \\cos\\theta, \\quad v_y = r \\sin\\theta $$</div>
-            <p>To recover the angle from components, use the two-argument arctangent function <code>atan2(y, x)</code> to correctly identify the quadrant:</p>
+            <p>To recover the angle from components, use the two-argument arctangent function <code>atan2(y, x)</code> to correctly identify the quadrant across all four quadrants ($-\\pi$ to $+\\pi$):</p>
             <div class="math-card">$$ \\theta = \\text{atan2}(v_y, v_x) $$</div>
 
             <h2>Level 6: The Dot Product — The "Teamwork Meter"</h2>
@@ -1136,13 +1198,15 @@
               <li><strong>Negative ($< 0$):</strong> Obtuse angle (opposing each other).</li>
             </ul>
             <p><strong>Law of Cosines Proof:</strong> In triangle $OAB$ with sides $\\vec{u}$, $\\vec{v}$, and $\\vec{w} = \\vec{u} - \\vec{v}$, the Law of Cosines states $\\|\\vec{w}\\|^2 = \\|\\vec{u}\\|^2 + \\|\\vec{v}\\|^2 - 2\\|\\vec{u}\\|\\|\\vec{v}\\|\\cos\\theta$. Expanding $\\|\\vec{u}-\\vec{v}\\|^2 = (u_x-v_x)^2 + (u_y-v_y)^2$ algebraically proves that $u_x v_x + u_y v_y = \\|\\vec{u}\\|\\|\\vec{v}\\|\\cos\\theta$.</p>
+            <p><strong>Mechanical Work:</strong> Work is the dot product of force and displacement: $W = \\vec{F} \\cdot \\vec{d} = \\|\\vec{F}\\|\\|\\vec{d}\\|\\cos\\theta$. Carrying a $100\\text{ N}$ backpack while walking horizontally along a flat floor does $0\\text{ Joules}$ of work against gravity because the angle is $90^\\circ$! </p>
+            <p><strong>Surface Bounce Formula:</strong> A ball with velocity $\\vec{v}$ bouncing off a surface with normal $\\hat{n}$ reflects as: $\\vec{v}_{\\text{reflect}} = \\vec{v} - 2(\\vec{v} \\cdot \\hat{n})\\hat{n}$.</p>
 
             <h2>Level 7: Turning $90^\\circ$ & The 2D Cross Product</h2>
             <p>To rotate any vector $\\vec{v} = (v_x, v_y)$ by $90^\\circ$ counter-clockwise without trigonometry, simply swap the components and negate:</p>
             <div class="math-card">$$ \\vec{v}^\\perp = \\begin{bmatrix} -v_y \\\\ v_x \\end{bmatrix} $$</div>
             <p>The <strong>2D Cross Product</strong> evaluates orientation (signed parallelogram area):</p>
             <div class="math-card">$$ \\vec{u} \\times \\vec{v} = u_x v_y - u_y v_x = \\|\\vec{u}\\| \\|\\vec{v}\\| \\sin\\theta $$</div>
-            <p><em>Robotics rule:</em> If $\\vec{u} \\times \\vec{v} > 0$, the target is to your <strong>Left</strong> (steer left). If $< 0$, it is to your <strong>Right</strong> (steer right).</p>
+            <p><em>Robotics Autonomous Steering Rule:</em> If $\\vec{u} \\times \\vec{v} > 0$, the target is to your <strong>Left</strong> (steer left $\\circlearrowleft$). If $< 0$, it is to your <strong>Right</strong> (steer right $\\circlearrowright$).</p>
 
             <h2>Level 8: The Computational Engine — TypeScript Vector2D</h2>
             <p>Here is how a real physics simulator implements vectors in clean code:</p>
@@ -1154,10 +1218,10 @@ export class Vector2D {
   sub(v: Vector2D): Vector2D { return new Vector2D(this.x - v.x, this.y - v.y); }
   scale(s: number): Vector2D { return new Vector2D(this.x * s, this.y * s); }
   mag(): number { return Math.hypot(this.x, this.y); }
-  magSq(): number { return this.x * this.x + this.y * this.y; } // Fast, no sqrt
+  magSq(): number { return this.x * this.x + this.y * this.y; } // Fast, avoids Math.sqrt!
   normalize(): Vector2D {
     const m = this.mag();
-    return m === 0 ? new Vector2D(0, 0) : new Vector2D(this.x / m, this.y / m);
+    return m < 1e-9 ? new Vector2D(0, 0) : new Vector2D(this.x / m, this.y / m);
   }
   dot(v: Vector2D): number { return this.x * v.x + this.y * v.y; }
   cross(v: Vector2D): number { return this.x * v.y - this.y * v.x; }
@@ -1167,6 +1231,13 @@ export class Vector2D {
   }
 }
             </pre>
+
+            <div style="background:rgba(139, 92, 246, 0.1); border-left:4px solid var(--accent-chem); padding:1rem; border-radius:4px; margin-top:1.5rem;">
+              <strong>🤔 Socratic Inquiry: Can You Divide By a Vector?</strong><br>
+              In scalar arithmetic, if $a \\cdot b = a \\cdot c$ and $a \\neq 0$, you divide by $a$ to get $b = c$.<br>
+              In vector math, if $\\vec{u} \\cdot \\vec{v} = \\vec{u} \\cdot \\vec{w}$, does $\\vec{v} = \\vec{w}$?<br>
+              <strong>NO!</strong> Rearranging gives $\\vec{u} \\cdot (\\vec{v} - \\vec{w}) = 0$, which merely proves that $(\\vec{v} - \\vec{w})$ is perpendicular to $\vec{u}$! There are infinite vectors that satisfy this. You can <em>never</em> divide by a vector!
+            </div>
           `,
           quiz: [
             {
@@ -2186,6 +2257,222 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
       }
     };
 
+    // =========================================================================
+    // INTERACTIVE 2D VECTOR LAB SANDBOX
+    // =========================================================================
+    let vecU = { x: 3.0, y: 4.0 };
+    let vecV = { x: 4.0, y: 1.0 };
+    let activeDragVector = null;
+    let labCanvasInitialized = false;
+
+    function initVectorLab() {
+      const canvas = document.getElementById('vectorLabCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const originX = canvas.width / 2;
+      const originY = canvas.height / 2;
+      const scale = 28; // 28 pixels per unit
+
+      function toScreen(x, y) {
+        return { x: originX + x * scale, y: originY - y * scale };
+      }
+
+      function toWorld(screenX, screenY) {
+        return {
+          x: Math.round(((screenX - originX) / scale) * 10) / 10,
+          y: Math.round(((originY - screenY) / scale) * 10) / 10
+        };
+      }
+
+      function drawArrow(fromX, fromY, toX, toY, color, isDashed = false) {
+        const headlen = 10;
+        const angle = Math.atan2(toY - fromY, toX - fromX);
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.lineWidth = 2.5;
+        if (isDashed) ctx.setLineDash([6, 4]);
+
+        ctx.beginPath();
+        ctx.moveTo(fromX, fromY);
+        ctx.lineTo(toX, toY);
+        ctx.stroke();
+
+        ctx.setLineDash([]);
+        ctx.beginPath();
+        ctx.moveTo(toX, toY);
+        ctx.lineTo(toX - headlen * Math.cos(angle - Math.PI / 6), toY - headlen * Math.sin(angle - Math.PI / 6));
+        ctx.lineTo(toX - headlen * Math.cos(angle + Math.PI / 6), toY - headlen * Math.sin(angle + Math.PI / 6));
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Grid lines
+        ctx.strokeStyle = '#1e293b';
+        ctx.lineWidth = 1;
+        for (let x = originX % scale; x < canvas.width; x += scale) {
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+        }
+        for (let y = originY % scale; y < canvas.height; y += scale) {
+          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+        }
+
+        // Axes
+        ctx.strokeStyle = '#475569';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(0, originY); ctx.lineTo(canvas.width, originY); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(originX, 0); ctx.lineTo(originX, canvas.height); ctx.stroke();
+
+        // Origin label
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '10px monospace';
+        ctx.fillText('(0, 0)', originX + 5, originY + 14);
+
+        const screenU = toScreen(vecU.x, vecU.y);
+        const screenV = toScreen(vecV.x, vecV.y);
+        const screenSum = toScreen(vecU.x + vecV.x, vecU.y + vecV.y);
+
+        // Tip-to-tail dashed v from tip of u
+        drawArrow(screenU.x, screenU.y, screenSum.x, screenSum.y, 'rgba(52, 211, 153, 0.45)', true);
+
+        // Resultant u + v
+        drawArrow(originX, originY, screenSum.x, screenSum.y, '#fbbf24', true);
+
+        // Primary Vector u
+        drawArrow(originX, originY, screenU.x, screenU.y, '#38bdf8');
+        ctx.beginPath(); ctx.arc(screenU.x, screenU.y, 6, 0, Math.PI * 2);
+        ctx.fillStyle = '#38bdf8'; ctx.fill();
+
+        // Primary Vector v
+        drawArrow(originX, originY, screenV.x, screenV.y, '#34d399');
+        ctx.beginPath(); ctx.arc(screenV.x, screenV.y, 6, 0, Math.PI * 2);
+        ctx.fillStyle = '#34d399'; ctx.fill();
+
+        // Labels
+        ctx.font = '12px bold sans-serif';
+        ctx.fillStyle = '#38bdf8';
+        ctx.fillText(`u (${vecU.x}, ${vecU.y})`, screenU.x + 8, screenU.y - 8);
+        ctx.fillStyle = '#34d399';
+        ctx.fillText(`v (${vecV.x}, ${vecV.y})`, screenV.x + 8, screenV.y - 8);
+        ctx.fillStyle = '#fbbf24';
+        ctx.fillText(`u + v`, screenSum.x + 8, screenSum.y - 8);
+
+        // Telemetry Update
+        const lenU = Math.hypot(vecU.x, vecU.y);
+        const lenV = Math.hypot(vecV.x, vecV.y);
+        const sumX = vecU.x + vecV.x;
+        const sumY = vecU.y + vecV.y;
+        const lenSum = Math.hypot(sumX, sumY);
+
+        const dot = vecU.x * vecV.x + vecU.y * vecV.y;
+        const cross = vecU.x * vecV.y - vecU.y * vecV.x;
+
+        document.getElementById('labUComp').textContent = `(${vecU.x.toFixed(1)}, ${vecU.y.toFixed(1)})`;
+        document.getElementById('labULen').textContent = lenU.toFixed(2);
+        document.getElementById('labVComp').textContent = `(${vecV.x.toFixed(1)}, ${vecV.y.toFixed(1)})`;
+        document.getElementById('labVLen').textContent = lenV.toFixed(2);
+        document.getElementById('labSumComp').textContent = `(${sumX.toFixed(1)}, ${sumY.toFixed(1)})`;
+        document.getElementById('labSumLen').textContent = lenSum.toFixed(2);
+
+        const dotEl = document.getElementById('labDotVal');
+        const dotStatEl = document.getElementById('labDotStatus');
+        dotEl.textContent = (dot >= 0 ? '+' : '') + dot.toFixed(2);
+
+        if (Math.abs(dot) < 0.2) {
+          dotEl.style.color = '#38bdf8';
+          dotStatEl.textContent = 'Perpendicular (90° Orthogonal - Zero Teamwork!)';
+          dotStatEl.style.color = '#38bdf8';
+        } else if (dot > 0) {
+          dotEl.style.color = '#10b981';
+          dotStatEl.textContent = 'Acute (Helping / Positive Alignment)';
+          dotStatEl.style.color = '#10b981';
+        } else {
+          dotEl.style.color = '#ef4444';
+          dotStatEl.textContent = 'Obtuse (Opposing Alignment)';
+          dotStatEl.style.color = '#ef4444';
+        }
+
+        const crossEl = document.getElementById('labCrossVal');
+        const crossStatEl = document.getElementById('labCrossStatus');
+        crossEl.textContent = (cross >= 0 ? '+' : '') + cross.toFixed(2);
+        if (Math.abs(cross) < 0.2) {
+          crossStatEl.textContent = 'Collinear (Straight Ahead/Behind)';
+          crossStatEl.style.color = '#94a3b8';
+        } else if (cross > 0) {
+          crossStatEl.textContent = '↶ Steer Left (Counter-Clockwise)';
+          crossStatEl.style.color = '#38bdf8';
+        } else {
+          crossStatEl.textContent = '↷ Steer Right (Clockwise)';
+          crossStatEl.style.color = '#f59e0b';
+        }
+      }
+
+      if (!labCanvasInitialized) {
+        labCanvasInitialized = true;
+
+        canvas.addEventListener('mousedown', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          const mouseX = e.clientX - rect.left;
+          const mouseY = e.clientY - rect.top;
+
+          const screenU = toScreen(vecU.x, vecU.y);
+          const screenV = toScreen(vecV.x, vecV.y);
+
+          const distU = Math.hypot(mouseX - screenU.x, mouseY - screenU.y);
+          const distV = Math.hypot(mouseX - screenV.x, mouseY - screenV.y);
+
+          if (distU < 22) activeDragVector = 'u';
+          else if (distV < 22) activeDragVector = 'v';
+        });
+
+        window.addEventListener('mousemove', (e) => {
+          if (!activeDragVector) return;
+          const rect = canvas.getBoundingClientRect();
+          const mouseX = e.clientX - rect.left;
+          const mouseY = e.clientY - rect.top;
+          const world = toWorld(mouseX, mouseY);
+
+          if (activeDragVector === 'u') vecU = world;
+          else if (activeDragVector === 'v') vecV = world;
+          draw();
+        });
+
+        window.addEventListener('mouseup', () => { activeDragVector = null; });
+
+        document.getElementById('btnLabPythagoras').onclick = () => {
+          vecU = { x: 3.0, y: 4.0 };
+          vecV = { x: 4.0, y: 0.0 };
+          draw();
+        };
+
+        document.getElementById('btnLabOrthogonal').onclick = () => {
+          vecU = { x: 4.0, y: 0.0 };
+          vecV = { x: 0.0, y: 3.0 };
+          draw();
+        };
+
+        document.getElementById('btnLabOpposing').onclick = () => {
+          vecU = { x: 4.0, y: 0.0 };
+          vecV = { x: -3.0, y: 0.0 };
+          draw();
+        };
+
+        document.getElementById('btnLabNormalize').onclick = () => {
+          const mU = Math.hypot(vecU.x, vecU.y) || 1;
+          const mV = Math.hypot(vecV.x, vecV.y) || 1;
+          vecU = { x: Math.round((vecU.x / mU) * 10) / 10, y: Math.round((vecU.y / mU) * 10) / 10 };
+          vecV = { x: Math.round((vecV.x / mV) * 10) / 10, y: Math.round((vecV.y / mV) * 10) / 10 };
+          draw();
+        };
+      }
+
+      draw();
+    }
+
     // Render Reader Studio
     function renderReaderModule(mod) {
       document.getElementById('readerTitle').textContent = mod.title;
@@ -2194,6 +2481,15 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
       document.getElementById('readerTierBadge').textContent = 'Tier ' + mod.proficiencyTier;
       document.getElementById('readerSummary').textContent = mod.summary;
       document.getElementById('readerBody').innerHTML = mod.content;
+
+      // Mount or unmount Interactive Vector Lab
+      const labBox = document.getElementById('vectorLabBox');
+      if (mod.slug === 'math-vectors-2d') {
+        labBox.style.display = 'block';
+        initVectorLab();
+      } else {
+        labBox.style.display = 'none';
+      }
 
       // Render KaTeX Math
       if (window.renderMathInElement) {

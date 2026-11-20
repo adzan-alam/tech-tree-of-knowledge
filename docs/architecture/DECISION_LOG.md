@@ -65,3 +65,15 @@
   3. Structure Phase 6 as the Advanced Generative Content phase (curating 3D Physics, Reinforcement Learning, and Embodied Robotics modules).
   4. Preserve all strict modularity invariants: every advanced module must remain sovereign and declare explicit prerequisites down to the foundational math/physics/CS layers.
 - **Consequences:** Elevates Version 1 from an educational pilot into an industry-grade knowledge infrastructure spanning first principles to modern autonomous systems.
+
+---
+
+## ADR-006: Adoption of the GSMS-10 Masterwork Module Standard (Zero-to-Mastery Progression)
+- **Status:** **Accepted**
+- **Date:** 2026-11-20
+- **Context:** Initial module content, while mathematically sound, suffered from premature abstraction—introducing college-level notation ($\mathbb{R}^2$, basis vectors, matrices, norms) without intuitive bridging from middle school foundations (Class 6). This alienates beginners and makes learning passive rather than generative.
+- **Decision:** Formally adopt the **Gold Standard Module Specification (GSMS-10)** as codified in `docs/standards/GOLD_STANDARD_MODULE_SPECIFICATION.md`:
+  1. Every foundational module must begin from absolute zero (assuming only basic arithmetic and everyday experience) using an Anchor Paradox (e.g., The Treasure Paradox).
+  2. Every module must construct an unbroken 9-level cognitive ladder spanning intuitive explanation, step-by-step mathematical derivation (no skipped steps), spatial demonstrations, misconception debunking, software edge cases, multi-disciplinary applications, complete production code, and multi-tiered mastery exercises (Class 6 to University level).
+  3. The web client must embed interactive graphical visualizers directly inside the reading experience to allow hands-on manipulation of concepts.
+- **Consequences:** Elevates every module from a standard textbook summary (6/10) to a world-class educational masterwork (10/10) that can teach any human being from first principles to creative mastery.
