@@ -4,39 +4,77 @@ passing_threshold_percent: 75
 questions:
   - id: "q-atom-01"
     target_objective_id: "obj-atom-1"
-    prompt: "Which subatomic particle possesses a negative unit charge and accounts for less than 0.06% of an atom's total mass?"
+    prompt: "In Ernest Rutherford's 1911 gold foil experiment, why did approximately 1 in 8,000 alpha particles bounce almost directly backward, disproving Thomson's plum pudding model?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "The Electron"
+        text: "The atom's positive charge and virtually all of its mass are concentrated in an extraordinarily dense, microscopic central nucleus rather than diffused evenly across the atom"
         is_correct: true
       - id: "opt-2"
-        text: "The Proton"
+        text: "The gold atoms underwent spontaneous nuclear fission upon impact"
         is_correct: false
       - id: "opt-3"
-        text: "The Neutron"
+        text: "Electrons formed a solid magnetic shield on the outer surface of the foil"
         is_correct: false
       - id: "opt-4"
-        text: "The Alpha Particle"
+        text: "The alpha particles collided with air molecules in front of the gold foil"
         is_correct: false
-    explanation: "Electrons carry a -1 elementary charge and have a mass of ~9.11e-31 kg (~1/1836 the mass of a proton or neutron)."
+    explanation: "Thomson's plum pudding model predicted negligible deflection. Rutherford's backward scattering proved that the atom's positive charge and mass are concentrated in a tiny nucleus (~10^-15 m), leaving the rest of the atom as empty space."
 
   - id: "q-atom-02"
     target_objective_id: "obj-atom-2"
-    prompt: "An isotope of Carbon has 6 protons and 8 neutrons (Carbon-14). What is its mass number A?"
+    prompt: "An isotope of Uranium has 92 protons and 143 neutrons (Uranium-235). What is its mass number A = Z + N?"
     type: "numerical_calculation"
     numerical_solution:
-      value: 14.0
+      value: 235.0
       tolerance: 0.01
       unit: "nucleons"
-    explanation: "Mass number A = Z (protons) + N (neutrons) = 6 + 8 = 14."
+    explanation: "Mass number A = Z (protons) + N (neutrons) = 92 + 143 = 235."
 
   - id: "q-atom-03"
     target_objective_id: "obj-atom-3"
-    prompt: "According to the Bohr model, how much energy (in eV) does an electron in the ground state (n = 1) of hydrogen possess?"
+    prompt: "Why does the first ionization energy of Nitrogen (Z = 7, [He] 2s^2 2p^3) exceed that of Oxygen (Z = 8, [He] 2s^2 2p^4), defying the general left-to-right periodic trend?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Nitrogen has an exceptionally stable half-filled 2p subshell with parallel spins; Oxygen contains a doubly-occupied 2p orbital where electron-electron electrostatic repulsion lowers the energy required for removal"
+        is_correct: true
+      - id: "opt-2"
+        text: "Nitrogen has more protons in its nucleus than Oxygen"
+        is_correct: false
+      - id: "opt-3"
+        text: "Oxygen atoms have a smaller atomic radius than Nitrogen"
+        is_correct: false
+      - id: "opt-4"
+        text: "Nitrogen electrons travel faster than the speed of light"
+        is_correct: false
+    explanation: "By Hund's rule, Nitrogen's three 2p electrons each occupy an orbital singly. In Oxygen, two electrons must pair up in the same 2p orbital, causing mutual electrostatic repulsion that makes the fourth electron easier to remove."
+
+  - id: "q-atom-04"
+    target_objective_id: "obj-atom-4"
+    prompt: "What fatal prediction did classical Maxwellian electrodynamics (Larmor formula) make regarding an electron orbiting a positive nucleus like a planet?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The accelerating electron would continuously radiate electromagnetic waves and spiral into the nucleus in approximately 10^{-11} seconds, making stable matter impossible"
+        is_correct: true
+      - id: "opt-2"
+        text: "The electron would gain mass until turning into a black hole"
+        is_correct: false
+      - id: "opt-3"
+        text: "The nucleus would spontaneously disintegrate into pure neutrons"
+        is_correct: false
+      - id: "opt-4"
+        text: "The atom would expand to infinite size within seconds"
+        is_correct: false
+    explanation: "Classical physics demands that any accelerating charge radiate power P = q^2 a^2 / (6 pi epsilon_0 c^3). Because centripetal acceleration is non-zero, an orbiting classical electron must collapse into the nucleus in picoseconds."
+
+  - id: "q-atom-05"
+    target_objective_id: "obj-atom-5"
+    prompt: "In the Bohr model of hydrogen, an electron transitions from excited state n = 2 to ground state n = 1 (Lyman-alpha transition). Using E_n = -13.606 / n^2 eV, what is the exact emitted photon energy Delta E = E_2 - E_1 in electron-volts (eV)?"
     type: "numerical_calculation"
     numerical_solution:
-      value: -13.6
-      tolerance: 0.1
+      value: 10.20
+      tolerance: 0.05
       unit: "eV"
-    explanation: "E_n = -13.6 / n^2 eV. For n = 1, E_1 = -13.6 / 1 = -13.6 eV."
+    explanation: "Delta E = 13.606 * (1/1^2 - 1/2^2) = 13.606 * (1 - 0.25) = 13.606 * 0.75 = 10.2045 eV."

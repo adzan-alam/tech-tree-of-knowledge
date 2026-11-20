@@ -30,16 +30,25 @@ learning_objectives:
     statement: "Describe the fundamental subatomic particles (protons, neutrons, electrons) including relative charges, masses, and spatial distribution."
     bloom_level: "understand"
   - id: "obj-atom-2"
-    statement: "Calculate atomic numbers, mass numbers, and isotopic abundances for elemental isotopes."
+    statement: "Calculate atomic numbers, mass numbers, isotopic abundances, and Bohr energy levels for elemental isotopes."
     bloom_level: "apply"
   - id: "obj-atom-3"
     statement: "Analyze electron configurations (Aufbau principle, Pauli exclusion principle, Hund's rule) to predict chemical valence."
     bloom_level: "analyze"
+  - id: "obj-atom-4"
+    statement: "Evaluate the classical electrodynamic collapse paradox of the planetary atom using Larmor's radiation formula."
+    bloom_level: "evaluate"
+  - id: "obj-atom-5"
+    statement: "Construct an analytical atomic physics simulator that predicts photon emission wavelengths across hydrogen spectral series."
+    bloom_level: "create"
 
 practical_applications:
   - title: "Bohr Orbital State Visualization"
     type: "computational_simulation"
     description: "Model energy level transitions (E = -13.6 eV / n^2) and photon emission wavelengths in hydrogen-like atoms."
+  - title: "Astronomical Spectroscopy Analyzer and Elemental Plasma Detector"
+    type: "engineering_design"
+    description: "Design optical spectroscopy algorithms to identify the chemical composition and redshift of distant stellar atmospheres and tokamak fusion plasmas."
 
 provenance:
   sources:
