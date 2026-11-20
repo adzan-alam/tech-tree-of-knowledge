@@ -33,12 +33,18 @@ relationships:
 
 learning_objectives:
   - id: "obj-kf-1"
-    statement: "Analyze and differentiate the optimal Kalman Gain matrix K that minimizes the trace of the posterior error covariance matrix."
-    bloom_level: "analyze"
+    statement: "Explain the distinction between hidden true states and noisy sensory measurements, and why naive dead-reckoning drifts over time."
+    bloom_level: "understand"
   - id: "obj-kf-2"
     statement: "Execute the discrete Kalman filter Predict and Update equations for a state estimation problem with process and measurement noise."
     bloom_level: "apply"
   - id: "obj-kf-3"
+    statement: "Analyze and differentiate the optimal Kalman Gain matrix K that minimizes the trace of the posterior error covariance matrix."
+    bloom_level: "analyze"
+  - id: "obj-kf-4"
+    statement: "Evaluate the limiting behavior of the Kalman Gain as measurement noise approaches zero or infinity."
+    bloom_level: "evaluate"
+  - id: "obj-kf-5"
     statement: "Construct linearized non-linear motion and observation models using Jacobian matrices in an Extended Kalman Filter (EKF)."
     bloom_level: "create"
 
@@ -46,6 +52,9 @@ practical_applications:
   - title: "Robotic Odometry and Spacecraft Navigation"
     type: "computational_simulation"
     description: "Fuse high-rate noisy accelerometer/gyroscope readings with low-rate GPS or visual position fixes to track robot pose in real time."
+  - title: "Autonomous Drone Flight IMU-Barometer-GPS Sensor Fusion System"
+    type: "engineering_design"
+    description: "Design multi-rate sensor fusion filters for unmanned aerial vehicles to maintain hover stability despite wind turbulence."
 
 provenance:
   sources:
