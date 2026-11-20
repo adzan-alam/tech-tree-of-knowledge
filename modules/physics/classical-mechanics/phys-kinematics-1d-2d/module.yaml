@@ -32,7 +32,7 @@ relationships:
 
 learning_objectives:
   - id: "obj-kin-1"
-    statement: "Differentiate between scalar distance/speed and vector displacement/velocity in one and two dimensions."
+    statement: "Explain and describe the physical differences between scalar distance/speed and vector displacement/velocity in one and two dimensions."
     bloom_level: "understand"
   - id: "obj-kin-2"
     statement: "Apply the standard constant-acceleration kinematic equations to solve one-dimensional motion problems."

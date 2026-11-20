@@ -1,0 +1,71 @@
+id: "b1000000-0000-0000-0000-000000000021"
+slug: "cs-neural-networks-foundations"
+title: "Artificial Neural Networks, Backpropagation, and Gradient Descent"
+summary: "Perceptrons, multi-layer networks, Universal Approximation Theorem, activation functions, loss functions, backpropagation derivation via calculus chain rule, and gradient descent."
+version: "1.0.0"
+created_at: "2026-11-20T11:15:00Z"
+updated_at: "2026-11-20T11:15:00Z"
+
+classification:
+  discipline: "computer-science"
+  domain: "machine-learning"
+  proficiency_tier: 3
+  difficulty_score: 0.65
+  estimated_duration_minutes: 95
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["cs-verifier-02", "ml-auditor-01"]
+  verification_date: "2026-11-20"
+  notes: "Multivariate chain rule backprop derivations, activation function derivatives, and XOR non-linear separability proofs verified against Goodfellow Deep Learning."
+
+relationships:
+  prerequisites:
+    - slug: "math-calculus-derivatives"
+      rationale: "Requires multivariable derivatives and chain rule for backpropagation."
+    - slug: "math-vectors-2d"
+      rationale: "Requires vector dot products and matrix-vector operations."
+    - slug: "cs-prog-fundamentals"
+      rationale: "Requires state representation, arrays, and iterative optimization loops."
+  related_modules:
+    - slug: "cs-reinforcement-learning-mdp"
+      relationship: "subsequent_concept"
+    - slug: "cs-deep-rl-agents"
+      relationship: "computational_application"
+    - slug: "cs-computer-vision-foundations"
+      relationship: "computational_application"
+
+learning_objectives:
+  - id: "obj-nn-1"
+    statement: "Analyze the non-linear separability limitation of single-layer perceptrons on the XOR problem."
+    bloom_level: "analyze"
+  - id: "obj-nn-2"
+    statement: "Evaluate and derive the backpropagation gradient equations for weights and biases in a multi-layer network using the multivariate chain rule."
+    bloom_level: "evaluate"
+  - id: "obj-nn-3"
+    statement: "Construct a multi-layer perceptron from scratch in software and train it using gradient descent."
+    bloom_level: "create"
+
+practical_applications:
+  - title: "Non-Linear Function Approximation & Physics Surrogates"
+    type: "computational_simulation"
+    description: "Train neural networks to approximate non-linear aerodynamic forces and robotic inverse dynamics from experimental data."
+
+provenance:
+  sources:
+    - id: "src-goodfellow-deeplearning"
+      citation: "Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep Learning. MIT Press, Chapter 6: Deep Feedforward Networks."
+      isbn: "978-0262035613"
+      claims_supported: [
+        "Universal Approximation Theorem formulation",
+        "Backpropagation algorithm multivariate chain rule derivation",
+        "Activation functions (ReLU, Sigmoid, Tanh) properties"
+      ]
+    - id: "src-rumelhart-backprop"
+      citation: "Rumelhart, D. E., Hinton, G. E., & Williams, R. J. (1986). Learning representations by back-propagating errors. Nature, 323(6088), 533-536."
+      url: "https://doi.org/10.1038/323533a0"
+      claims_supported: [
+        "Historical discovery of multi-layer backpropagation",
+        "Gradient descent on internal representations",
+        "Overcoming the XOR limitation"
+      ]

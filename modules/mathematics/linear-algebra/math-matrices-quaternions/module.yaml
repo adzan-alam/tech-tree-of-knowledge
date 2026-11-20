@@ -1,0 +1,67 @@
+id: "b1000000-0000-0000-0000-000000000011"
+slug: "math-matrices-quaternions"
+title: "Matrices, Spatial Transformations, and Quaternions"
+summary: "Linear transformations, 4x4 homogeneous coordinate matrices, Euler angle singularities (gimbal lock), Hamilton quaternions, and spherical linear interpolation (SLERP)."
+version: "1.0.0"
+created_at: "2026-11-20T10:15:00Z"
+updated_at: "2026-11-20T10:15:00Z"
+
+classification:
+  discipline: "mathematics"
+  domain: "linear-algebra"
+  proficiency_tier: 3
+  difficulty_score: 0.65
+  estimated_duration_minutes: 90
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["math-verifier-01", "robotics-auditor-03"]
+  verification_date: "2026-11-20"
+  notes: "Quaternion Hamilton product algebra, conjugate conjugation, and SLERP geometric proofs verified against spatial kinematics references."
+
+relationships:
+  prerequisites:
+    - slug: "math-vectors-3d"
+      rationale: "Requires 3D vector basis, cross products, and norms for quaternion axis-angle formulations."
+  related_modules:
+    - slug: "phys-rigid-body-3d"
+      relationship: "subsequent_concept"
+    - slug: "cs-computer-vision-foundations"
+      relationship: "computational_application"
+    - slug: "phys-robotics-inverse-kinematics"
+      relationship: "computational_application"
+
+learning_objectives:
+  - id: "obj-mq-1"
+    statement: "Compute and construct 4x4 homogeneous transformation matrices combining translation, 3D rotation, and uniform scaling."
+    bloom_level: "apply"
+  - id: "obj-mq-2"
+    statement: "Analyze the mathematical cause of Gimbal Lock in Euler angle parameterizations."
+    bloom_level: "analyze"
+  - id: "obj-mq-3"
+    statement: "Calculate 3D rotations using unit quaternions and perform vector rotations via the quaternion sandwich product."
+    bloom_level: "apply"
+
+practical_applications:
+  - title: "Robotics Orientation and Camera Smooth Tracking"
+    type: "computational_simulation"
+    description: "Interpolate orientations of spacecraft, drone gimbals, and robotic arms using SLERP without rotational singularities."
+
+provenance:
+  sources:
+    - id: "src-kuipers-quaternions"
+      citation: "Kuipers, J. B. (1999). Quaternions and Rotation Sequences: A Primer with Applications to Orbits, Aerospace, and Virtual Reality. Princeton University Press."
+      isbn: "978-0691058726"
+      claims_supported: [
+        "Quaternion algebra and Hamilton product",
+        "Gimbal lock mathematical singularity derivation",
+        "Spherical linear interpolation (SLERP) formulation"
+      ]
+    - id: "src-craig-robotics"
+      citation: "Craig, J. J. (2018). Introduction to Robotics: Mechanics and Control (4th ed.). Pearson, Chapter 2: Spatial Descriptions and Transformations."
+      isbn: "978-0133489798"
+      claims_supported: [
+        "4x4 homogeneous transformation matrix",
+        "Roll-pitch-yaw Euler angle conventions",
+        "Coordinate frame rotations"
+      ]

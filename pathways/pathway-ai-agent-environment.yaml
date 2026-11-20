@@ -1,0 +1,28 @@
+id: "b2000000-0000-0000-0000-000000000003"
+slug: "pathway-ai-agent-environment"
+title: "AI Agents in Simulated Environments Pathway"
+description: "From probability axioms and neural networks to autonomous decision-making: Markov Decision Processes, Bellman optimality, Deep Q-Networks (DQN), and Policy Gradient Actor-Critic algorithms."
+target_goal: "Train an autonomous neural network agent to navigate and optimize complex reward goals within an interactive physics simulation environment."
+target_proficiency_tier: 3
+
+capstone_project:
+  title: "Autonomous Agent CartPole / LunarLander Sandbox"
+  description: "An interactive browser-based reinforcement learning simulator where an autonomous neural network agent trains via Deep Q-Learning or Actor-Critic to stabilize a physical inverted pendulum or land a lunar module under simulated gravity."
+  deliverable_type: "interactive_simulation"
+
+modules:
+  - slug: "math-probability-statistics"
+    sequence_order: 1
+    curation_note: "Uncertainty foundations: Kolmogorov axioms, expectation, variance, Gaussian distributions, and Bayes' Theorem."
+
+  - slug: "cs-neural-networks-foundations"
+    sequence_order: 2
+    curation_note: "Function approximation: Multi-layer perceptrons, non-linear activation functions, backpropagation via multivariable chain rule, and gradient descent."
+
+  - slug: "cs-reinforcement-learning-mdp"
+    sequence_order: 3
+    curation_note: "Decision theory: Markov property, discounted returns, Bellman expectation and optimality equations, value iteration, and tabular Q-learning."
+
+  - slug: "cs-deep-rl-agents"
+    sequence_order: 4
+    curation_note: "Deep reinforcement learning: Overcoming the deadly triad, Deep Q-Networks (DQN), Experience Replay, Target Networks, and Actor-Critic advantage methods."

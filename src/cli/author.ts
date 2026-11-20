@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
 import * as path from 'path';
+import * as fs from 'fs';
 import { ModuleScaffolder } from '../authoring/scaffold.js';
 import { ProvenanceLinter } from '../authoring/provenance-linter.js';
 import { VerificationAuditor } from '../authoring/verification-auditor.js';
@@ -62,21 +63,59 @@ program
     console.log(`\n🔍 Provenance & Pedagogical Linter`);
     console.log(`Scanning: ${targetDir}\n`);
 
-    const result = ProvenanceLinter.auditModule(targetDir);
-    if (result.valid) {
-      console.log(`✅ [PASS] Module "${result.moduleSlug}" passes all provenance & pedagogical checks.`);
-      if (result.issues.length > 0) {
-        console.log(`\nWarnings:`);
-        for (const w of result.issues) {
-          console.log(`  ⚠️  ${w.field}: ${w.message}`);
+    // Check if targetDir is a single module or a collection directory
+    const moduleYamlPath = path.join(targetDir, 'module.yaml');
+    const moduleDirs: string[] = [];
+
+    if (fs.existsSync(moduleYamlPath)) {
+      moduleDirs.push(targetDir);
+    } else {
+      // Find all module directories recursively
+      const scan = (dir: string) => {
+        if (!fs.existsSync(dir)) return;
+        const entries = fs.readdirSync(dir, { withFileTypes: true });
+        for (const entry of entries) {
+          const fullPath = path.join(dir, entry.name);
+          if (entry.isDirectory()) {
+            if (entry.name !== 'node_modules' && entry.name !== '.git' && entry.name !== 'dist') {
+              if (fs.existsSync(path.join(fullPath, 'module.yaml'))) {
+                moduleDirs.push(fullPath);
+              } else {
+                scan(fullPath);
+              }
+            }
+          }
+        }
+      };
+      scan(targetDir);
+    }
+
+    if (moduleDirs.length === 0) {
+      console.error(`❌ No modules found to lint in ${targetDir}`);
+      process.exit(1);
+    }
+
+    let overallSuccess = true;
+    for (const mDir of moduleDirs) {
+      const result = ProvenanceLinter.auditModule(mDir);
+      if (result.valid) {
+        console.log(`✅ [PASS] ${result.moduleSlug}`);
+        if (result.issues.length > 0) {
+          for (const w of result.issues) {
+            console.log(`     ⚠️  ${w.field}: ${w.message}`);
+          }
+        }
+      } else {
+        overallSuccess = false;
+        console.error(`❌ [FAIL] ${result.moduleSlug}:`);
+        for (const err of result.issues) {
+          const icon = err.type === 'error' ? '🚫' : '⚠️ ';
+          console.log(`     ${icon} ${err.field}: ${err.message}`);
         }
       }
-    } else {
-      console.error(`❌ [FAIL] Module "${result.moduleSlug}" has provenance errors:`);
-      for (const err of result.issues) {
-        const icon = err.type === 'error' ? '🚫' : '⚠️ ';
-        console.log(`  ${icon} ${err.field}: ${err.message}`);
-      }
+    }
+
+    if (!overallSuccess) {
       process.exit(1);
     }
   });

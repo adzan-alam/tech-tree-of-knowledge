@@ -1,0 +1,28 @@
+id: "b2000000-0000-0000-0000-000000000002"
+slug: "pathway-3d-physics-engine"
+title: "The 3D Rigid Body Physics Engine Pathway"
+description: "Advance from 2D particles into full 6-DoF 3D spatial simulation: 3D vector algebra, homogeneous matrices, quaternion rotations, 3x3 inertia tensors, and Bounding Volume Hierarchies."
+target_goal: "Construct a 6-Degrees-of-Freedom 3D physics simulator supporting tumbling rigid bodies, torque, quaternion integration, and BVH-accelerated raycasting."
+target_proficiency_tier: 3
+
+capstone_project:
+  title: "Interactive 3D Rigid Body Sandbox"
+  description: "A 3D simulation environment demonstrating tumbling rigid boxes under gravity and torque, quaternion orientation integration without gimbal lock, and BVH-accelerated collision detection."
+  deliverable_type: "interactive_simulation"
+
+modules:
+  - slug: "math-vectors-3d"
+    sequence_order: 1
+    curation_note: "Spatial geometry foundation: 3D coordinates, cross products, triple products, and triangle surface normals."
+
+  - slug: "math-matrices-quaternions"
+    sequence_order: 2
+    curation_note: "Orientation and transform engine: 4x4 homogeneous matrices, Euler angle gimbal lock hazards, and Hamilton unit quaternions."
+
+  - slug: "phys-rigid-body-3d"
+    sequence_order: 3
+    curation_note: "Rotational dynamics: 3x3 inertia tensors, torque, angular momentum, Euler equations, and the Dzhanibekov effect."
+
+  - slug: "cs-3d-collision-bvh"
+    sequence_order: 4
+    curation_note: "3D Spatial acceleration: Bounding Volume Hierarchies (BVH), SAH splitting, Möller-Trumbore raycasting, and OBB SAT."

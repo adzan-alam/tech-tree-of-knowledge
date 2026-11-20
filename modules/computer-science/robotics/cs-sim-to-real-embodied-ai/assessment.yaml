@@ -1,0 +1,60 @@
+module_slug: "cs-sim-to-real-embodied-ai"
+passing_threshold_percent: 75
+
+questions:
+  - id: "q-s2r-01"
+    target_objective_id: "obj-s2r-1"
+    prompt: "What is the primary definition of the 'Reality Gap' in embodied robotics?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The performance drop when a policy trained in idealized simulation is deployed onto messy, noisy physical hardware"
+        is_correct: true
+      - id: "opt-2"
+        text: "The difference in monitor resolution between two graphics cards"
+        is_correct: false
+      - id: "opt-3"
+        text: "The financial cost of purchasing robotic hardware"
+        is_correct: false
+      - id: "opt-4"
+        text: "The time delay between writing code and compiling it"
+        is_correct: false
+    explanation: "The Reality Gap refers to the simulation-to-reality mismatch caused by unmodeled friction, gearbox backlash, sensor noise, and communication delays."
+
+  - id: "q-s2r-02"
+    target_objective_id: "obj-s2r-2"
+    prompt: "How does Domain Randomization (DR) enable zero-shot transfer of simulated reinforcement learning policies to physical robots?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "By training across a wide distribution of randomized physics and visual parameters so the real world appears as a familiar sample from that distribution"
+        is_correct: true
+      - id: "opt-2"
+        text: "By replacing the physical robot with a virtual hologram"
+        is_correct: false
+      - id: "opt-3"
+        text: "By setting friction and gravity to zero in the real world"
+        is_correct: false
+      - id: "opt-4"
+        text: "By eliminating the need for motors"
+        is_correct: false
+    explanation: "Domain Randomization trains policies to be invariant to physical variations, so real-world parameters fall within the randomized distribution."
+
+  - id: "q-s2r-03"
+    target_objective_id: "obj-s2r-3"
+    prompt: "In the complete sensorimotor control pipeline, what component fuses noisy vision detections with high-rate IMU accelerometer telemetry?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "An Extended Kalman Filter (EKF)"
+        is_correct: true
+      - id: "opt-2"
+        text: "A 2D graphics rasterizer"
+        is_correct: false
+      - id: "opt-3"
+        text: "An audio synthesizer"
+        is_correct: false
+      - id: "opt-4"
+        text: "A fixed-frequency clock divider"
+        is_correct: false
+    explanation: "The Kalman filter performs optimal state estimation and sensor fusion by combining physical motion propagation with noisy multi-sensor measurements."

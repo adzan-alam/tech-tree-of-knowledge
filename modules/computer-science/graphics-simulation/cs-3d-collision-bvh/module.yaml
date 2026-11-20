@@ -1,0 +1,67 @@
+id: "b1000000-0000-0000-0000-000000000013"
+slug: "cs-3d-collision-bvh"
+title: "3D Collision Detection and Bounding Volume Hierarchies (BVH)"
+summary: "3D spatial partitioning, Bounding Volume Hierarchies (BVH), Surface Area Heuristic (SAH), Möller-Trumbore ray-triangle intersection, and 15-axis SAT for OBBs."
+version: "1.0.0"
+created_at: "2026-11-20T10:45:00Z"
+updated_at: "2026-11-20T10:45:00Z"
+
+classification:
+  discipline: "computer-science"
+  domain: "graphics-simulation"
+  proficiency_tier: 3
+  difficulty_score: 0.70
+  estimated_duration_minutes: 90
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["cs-verifier-02", "graphics-auditor-02"]
+  verification_date: "2026-11-20"
+  notes: "Möller-Trumbore ray intersection derivation and SAH BVH tree partitioning verified against real-time rendering references."
+
+relationships:
+  prerequisites:
+    - slug: "cs-collision-detection"
+      rationale: "Requires 2D contact manifolds and spatial partitioning fundamentals."
+    - slug: "math-vectors-3d"
+      rationale: "Requires 3D cross products, dot products, and vector geometry."
+  related_modules:
+    - slug: "phys-rigid-body-3d"
+      relationship: "computational_application"
+    - slug: "cs-computer-vision-foundations"
+      relationship: "computational_application"
+
+learning_objectives:
+  - id: "obj-bvh-1"
+    statement: "Construct a Bounding Volume Hierarchy (BVH) tree using the Surface Area Heuristic (SAH)."
+    bloom_level: "create"
+  - id: "obj-bvh-2"
+    statement: "Implement the Möller-Trumbore fast ray-triangle intersection algorithm using barycentric coordinates."
+    bloom_level: "apply"
+  - id: "obj-bvh-3"
+    statement: "Decompose and analyze intersection tests between two Oriented Bounding Boxes (OBBs) using the 15-axis Separating Axis Theorem (SAT)."
+    bloom_level: "analyze"
+
+practical_applications:
+  - title: "Real-Time Ray Tracing and 3D Game Physics"
+    type: "computational_simulation"
+    description: "Accelerate collision queries against million-triangle 3D environments from O(N) to O(log N) using BVH trees."
+
+provenance:
+  sources:
+    - id: "src-ericson-collision"
+      citation: "Ericson, C. (2004). Real-Time Collision Detection. CRC Press, Chapter 4 & 6: Bounding Volumes and Spatial Partitioning."
+      isbn: "978-1558607323"
+      claims_supported: [
+        "Bounding Volume Hierarchy (BVH) construction",
+        "15-axis SAT for Oriented Bounding Boxes (OBB)",
+        "Ray-AABB slab intersection test"
+      ]
+    - id: "src-moller-trumbore"
+      citation: "Möller, T., & Trumbore, B. (1997). Fast, Minimum Storage Ray/Triangle Intersection. Journal of Graphics Tools, 2(1), 21-28."
+      url: "https://doi.org/10.1080/10867651.1997.10487468"
+      claims_supported: [
+        "Möller-Trumbore algorithm derivation",
+        "Cramer's rule for barycentric coordinates",
+        "Backface culling optimization"
+      ]

@@ -1,0 +1,51 @@
+module_slug: "phys-robotics-inverse-kinematics"
+passing_threshold_percent: 75
+
+questions:
+  - id: "q-ik-01"
+    target_objective_id: "obj-ik-1"
+    prompt: "In the Denavit-Hartenberg (DH) robotics convention, how many geometric parameters are used to fully specify the coordinate transformation between two adjacent links?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 4.0
+      tolerance: 0.01
+      unit: "parameters"
+    explanation: "The DH convention uses exactly 4 parameters per link: link length (a), link twist (alpha), link offset (d), and joint angle (theta)."
+
+  - id: "q-ik-02"
+    target_objective_id: "obj-ik-2"
+    prompt: "For a 2-link planar arm with link lengths L1 and L2, the determinant of the Jacobian matrix is det(J) = L1 * L2 * sin(theta2). At what joint angle theta2 does a kinematic singularity occur?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "theta2 = 0 degrees (arm fully straightened to maximum reach)"
+        is_correct: true
+      - id: "opt-2"
+        text: "theta2 = 90 degrees"
+        is_correct: false
+      - id: "opt-3"
+        text: "theta2 = 45 degrees"
+        is_correct: false
+      - id: "opt-4"
+        text: "theta2 = -45 degrees"
+        is_correct: false
+    explanation: "When theta2 = 0 degrees, sin(0) = 0, so det(J) = 0. The arm is fully extended and cannot produce Cartesian velocity pointing radially outward."
+
+  - id: "q-ik-03"
+    target_objective_id: "obj-ik-3"
+    prompt: "Why is the Damped Least Squares (DLS) algorithm preferred over the pure Moore-Penrose pseudoinverse in numerical inverse kinematics?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The damping term lambda^2 * I prevents matrix inversion singularities and suppresses violent joint velocity spikes"
+        is_correct: true
+      - id: "opt-2"
+        text: "It eliminates the need for computing the Jacobian matrix"
+        is_correct: false
+      - id: "opt-3"
+        text: "It guarantees zero tracking error on the very first iteration"
+        is_correct: false
+      - id: "opt-4"
+        text: "It converts revolute joints into prismatic joints"
+        is_correct: false
+    explanation: "DLS regularizes the inversion (J*J^T + lambda^2 * I)^-1, ensuring the inverted matrix remains non-singular even at kinematic singularities."

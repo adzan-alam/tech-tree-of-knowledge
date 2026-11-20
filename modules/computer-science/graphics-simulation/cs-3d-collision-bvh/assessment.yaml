@@ -1,0 +1,51 @@
+module_slug: "cs-3d-collision-bvh"
+passing_threshold_percent: 75
+
+questions:
+  - id: "q-bvh-01"
+    target_objective_id: "obj-bvh-1"
+    prompt: "In the Surface Area Heuristic (SAH) for BVH construction, what property of a bounding box determines the statistical probability that a random ray will traverse into it?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The surface area of the bounding box"
+        is_correct: true
+      - id: "opt-2"
+        text: "The volume of the bounding box"
+        is_correct: false
+      - id: "opt-3"
+        text: "The length of the main diagonal"
+        is_correct: false
+      - id: "opt-4"
+        text: "The number of vertices in the mesh"
+        is_correct: false
+    explanation: "By geometric probability and Crofton's theorem, the probability of a random line intersecting a convex shape is directly proportional to its surface area."
+
+  - id: "q-bvh-02"
+    target_objective_id: "obj-bvh-2"
+    prompt: "In the Möller-Trumbore ray-triangle algorithm, what mathematical condition on barycentric coordinates u and v confirms that the hit point lies inside the triangle boundary?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "u >= 0, v >= 0, and u + v <= 1"
+        is_correct: true
+      - id: "opt-2"
+        text: "u > 1 and v > 1"
+        is_correct: false
+      - id: "opt-3"
+        text: "u^2 + v^2 == 1"
+        is_correct: false
+      - id: "opt-4"
+        text: "u - v == 0"
+        is_correct: false
+    explanation: "For any interior point of a triangle, the barycentric weights must be non-negative and sum to less than or equal to 1: u >= 0, v >= 0, and (1 - u - v) >= 0."
+
+  - id: "q-bvh-03"
+    target_objective_id: "obj-bvh-3"
+    prompt: "How many total candidate separating axes must be tested to rigorously determine if two 3D Oriented Bounding Boxes (OBBs) intersect under the Separating Axis Theorem?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 15.0
+      tolerance: 0.01
+      unit: "axes"
+    explanation: "3 face normals of box A + 3 face normals of box B + (3 x 3 = 9) pairwise edge cross products = 15 total axes."

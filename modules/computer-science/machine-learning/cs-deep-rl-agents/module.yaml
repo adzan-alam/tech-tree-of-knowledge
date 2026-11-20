@@ -1,0 +1,65 @@
+id: "b1000000-0000-0000-0000-000000000023"
+slug: "cs-deep-rl-agents"
+title: "Deep Reinforcement Learning: DQN, Policy Gradients, and Actor-Critic"
+summary: "Function approximation in RL, Deep Q-Networks (DQN), Experience Replay, Target Networks, the Policy Gradient Theorem, REINFORCE, and Advantage Actor-Critic (A2C)."
+version: "1.0.0"
+created_at: "2026-11-20T11:45:00Z"
+updated_at: "2026-11-20T11:45:00Z"
+
+classification:
+  discipline: "computer-science"
+  domain: "machine-learning"
+  proficiency_tier: 3
+  difficulty_score: 0.80
+  estimated_duration_minutes: 105
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["cs-verifier-02", "deeprl-auditor-01"]
+  verification_date: "2026-11-20"
+  notes: "Policy Gradient Theorem derivation, Target Network Bellman loss, and Actor-Critic Advantage functions verified against DeepMind and OpenAI literature."
+
+relationships:
+  prerequisites:
+    - slug: "cs-reinforcement-learning-mdp"
+      rationale: "Requires formal MDP foundations, Bellman equations, and value functions."
+    - slug: "cs-neural-networks-foundations"
+      rationale: "Requires deep neural networks, backpropagation, and gradient descent."
+  related_modules:
+    - slug: "cs-sim-to-real-embodied-ai"
+      relationship: "computational_application"
+
+learning_objectives:
+  - id: "obj-drl-1"
+    statement: "Analyze the role of Experience Replay and Target Networks in stabilizing Deep Q-Networks (DQN)."
+    bloom_level: "analyze"
+  - id: "obj-drl-2"
+    statement: "Evaluate the Policy Gradient Theorem and formulate the REINFORCE loss with baseline variance reduction."
+    bloom_level: "evaluate"
+  - id: "obj-drl-3"
+    statement: "Construct an Actor-Critic architecture that simultaneously estimates policy distribution and state values."
+    bloom_level: "create"
+
+practical_applications:
+  - title: "Autonomous Vehicle Highway Navigation and Robot Locomotion"
+    type: "computational_simulation"
+    description: "Train continuous-state neural network agents to steer autonomous vehicles and balance bipedal walking robots in simulated physics engines."
+
+provenance:
+  sources:
+    - id: "src-mnih-dqn"
+      citation: "Mnih, V., Kavukcuoglu, K., Silver, D., et al. (2015). Human-level control through deep reinforcement learning. Nature, 518(7540), 529-533."
+      url: "https://doi.org/10.1038/nature14236"
+      claims_supported: [
+        "Deep Q-Network (DQN) architecture",
+        "Experience replay buffer for i.i.d. sampling",
+        "Target network stabilization of moving Bellman targets"
+      ]
+    - id: "src-sutton-policygradient"
+      citation: "Sutton, R. S., McAllester, D., Singh, S., & Mansour, Y. (2000). Policy gradient methods for reinforcement learning with function approximation. Advances in Neural Information Processing Systems (NeurIPS 12)."
+      url: "https://proceedings.neurips.cc/paper/1999/hash/464d828b85b0bed98e80ade0a5c43b0f-Abstract.html"
+      claims_supported: [
+        "Policy Gradient Theorem derivation",
+        "Likelihood ratio gradient formulation",
+        "Advantage function baseline variance reduction"
+      ]

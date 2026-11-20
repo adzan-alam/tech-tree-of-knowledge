@@ -1,0 +1,69 @@
+id: "b1000000-0000-0000-0000-000000000012"
+slug: "phys-rigid-body-3d"
+title: "3D Rigid Body Dynamics, Inertia Tensors, and Angular Momentum"
+summary: "Six degrees of freedom dynamics, 3x3 inertia tensors, torque, angular momentum vectors, Euler's equations of rotational motion, and the Dzhanibekov effect."
+version: "1.0.0"
+created_at: "2026-11-20T10:30:00Z"
+updated_at: "2026-11-20T10:30:00Z"
+
+classification:
+  discipline: "physics"
+  domain: "classical-mechanics"
+  proficiency_tier: 3
+  difficulty_score: 0.75
+  estimated_duration_minutes: 100
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["phys-verifier-01", "aerospace-auditor-04"]
+  verification_date: "2026-11-20"
+  notes: "Inertia tensor formulas, Euler equations, and intermediate axis theorem proofs verified against Goldstein classical mechanics."
+
+relationships:
+  prerequisites:
+    - slug: "phys-newtons-laws"
+      rationale: "Requires Newton's Second Law for translational and rotational dynamics."
+    - slug: "phys-momentum-conservation"
+      rationale: "Requires conservation of linear and angular momentum principles."
+    - slug: "math-matrices-quaternions"
+      rationale: "Requires unit quaternions and 3D rotation transformations."
+  related_modules:
+    - slug: "cs-3d-collision-bvh"
+      relationship: "computational_application"
+    - slug: "cs-sim-to-real-embodied-ai"
+      relationship: "computational_application"
+
+learning_objectives:
+  - id: "obj-rb3d-1"
+    statement: "Calculate the 3x3 inertia tensor matrix for canonical 3D geometric solids and transform it to world coordinates."
+    bloom_level: "apply"
+  - id: "obj-rb3d-2"
+    statement: "Analyze and decompose Euler's rotational equations of motion relating torque to angular acceleration."
+    bloom_level: "analyze"
+  - id: "obj-rb3d-3"
+    statement: "Evaluate and assess the rotational instability of the intermediate principal axis (the Dzhanibekov Effect)."
+    bloom_level: "evaluate"
+
+practical_applications:
+  - title: "Spacecraft and Drone Attitude Dynamics Simulation"
+    type: "computational_simulation"
+    description: "Simulate tumbling satellites, gyroscopes, and multi-rotor drones by integrating torque, angular momentum, and quaternion orientations."
+
+provenance:
+  sources:
+    - id: "src-goldstein-mechanics"
+      citation: "Goldstein, H., Poole, C., & Safko, J. (2001). Classical Mechanics (3rd ed.). Addison-Wesley, Chapter 5: The Rigid Body Equations of Motion."
+      isbn: "978-0201657029"
+      claims_supported: [
+        "Inertia tensor matrix definition and transformation",
+        "Euler equations of rotational motion",
+        "Intermediate axis instability theorem"
+      ]
+    - id: "src-baraff-siggraph"
+      citation: "Baraff, D. (1997). Physically Based Modeling: Rigid Body Simulation. SIGGRAPH Course Notes."
+      url: "https://www.cs.cmu.edu/~baraff/sigcourse/notesd1.pdf"
+      claims_supported: [
+        "Quaternion orientation state derivative",
+        "World vs body space inertia tensor caching",
+        "Numerical integration pipeline for 3D rigid bodies"
+      ]

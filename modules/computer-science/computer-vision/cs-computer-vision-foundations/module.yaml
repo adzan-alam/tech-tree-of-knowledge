@@ -1,0 +1,67 @@
+id: "b1000000-0000-0000-0000-000000000030"
+slug: "cs-computer-vision-foundations"
+title: "Computer Vision: Convolutions, Camera Geometry, and Visual Perception"
+summary: "Spatial 2D convolutions, Sobel edge gradients, Canny detector, Convolutional Neural Networks (CNNs), pinhole camera perspective projection, and intrinsic calibration matrices."
+version: "1.0.0"
+created_at: "2026-11-20T12:00:00Z"
+updated_at: "2026-11-20T12:00:00Z"
+
+classification:
+  discipline: "computer-science"
+  domain: "computer-vision"
+  proficiency_tier: 3
+  difficulty_score: 0.75
+  estimated_duration_minutes: 95
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["cs-verifier-02", "vision-auditor-01"]
+  verification_date: "2026-11-20"
+  notes: "Pinhole projection matrix derivations, convolution algebra, and Sobel gradient filters verified against Hartley & Zisserman Multiple View Geometry."
+
+relationships:
+  prerequisites:
+    - slug: "math-matrices-quaternions"
+      rationale: "Requires 4x4 homogeneous transformation matrices for camera pose and projections."
+    - slug: "cs-neural-networks-foundations"
+      rationale: "Requires feedforward neural networks and backpropagation for CNN architectures."
+  related_modules:
+    - slug: "phys-robotics-inverse-kinematics"
+      relationship: "subsequent_concept"
+    - slug: "cs-sim-to-real-embodied-ai"
+      relationship: "computational_application"
+
+learning_objectives:
+  - id: "obj-cv-1"
+    statement: "Apply 2D discrete image convolutions and calculate gradient magnitude and orientation using Sobel operators."
+    bloom_level: "apply"
+  - id: "obj-cv-2"
+    statement: "Decompose the pinhole camera perspective projection model relating 3D world coordinates to 2D image plane pixels."
+    bloom_level: "analyze"
+  - id: "obj-cv-3"
+    statement: "Evaluate translation equivariance and weight sharing in Convolutional Neural Networks."
+    bloom_level: "evaluate"
+
+practical_applications:
+  - title: "Robotic Visual Perception and Obstacle Detection"
+    type: "computational_simulation"
+    description: "Process camera video frames to extract obstacle edges and project 3D physical world coordinates onto 2D display and perception planes."
+
+provenance:
+  sources:
+    - id: "src-hartley-zisserman"
+      citation: "Hartley, R., & Zisserman, A. (2003). Multiple View Geometry in Computer Vision (2nd ed.). Cambridge University Press, Chapter 6: Camera Models."
+      isbn: "978-0521540513"
+      claims_supported: [
+        "Pinhole camera model and intrinsic calibration matrix K",
+        "Extrinsic world-to-camera Euclidean transformation",
+        "Perspective projection homogeneous formulation"
+      ]
+    - id: "src-szeliski-vision"
+      citation: "Szeliski, R. (2022). Computer Vision: Algorithms and Applications (2nd ed.). Springer, Chapter 3 & 7: Image Processing and Feature Detection."
+      isbn: "978-3030343712"
+      claims_supported: [
+        "2D spatial convolution and Gaussian blurring filters",
+        "Sobel and Canny edge detection algorithms",
+        "CNN convolutional layers and receptive fields"
+      ]

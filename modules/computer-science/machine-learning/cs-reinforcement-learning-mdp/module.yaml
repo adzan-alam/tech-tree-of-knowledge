@@ -1,0 +1,67 @@
+id: "b1000000-0000-0000-0000-000000000022"
+slug: "cs-reinforcement-learning-mdp"
+title: "Markov Decision Processes, Bellman Optimality, and Value Iteration"
+summary: "Formal MDP definition, Markov property, return discount factor, policy functions, Bellman optimality equations, value iteration, and tabular Q-learning."
+version: "1.0.0"
+created_at: "2026-11-20T11:30:00Z"
+updated_at: "2026-11-20T11:30:00Z"
+
+classification:
+  discipline: "computer-science"
+  domain: "machine-learning"
+  proficiency_tier: 3
+  difficulty_score: 0.70
+  estimated_duration_minutes: 90
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["cs-verifier-02", "rl-auditor-01"]
+  verification_date: "2026-11-20"
+  notes: "Bellman contraction mapping proof, value iteration convergence, and Q-learning updates verified against Sutton & Barto Reinforcement Learning."
+
+relationships:
+  prerequisites:
+    - slug: "math-probability-statistics"
+      rationale: "Requires conditional probability, expectation, and stochastic processes."
+    - slug: "cs-prog-fundamentals"
+      rationale: "Requires state representation, arrays, and iterative loops."
+  related_modules:
+    - slug: "cs-neural-networks-foundations"
+      relationship: "subsequent_concept"
+    - slug: "cs-deep-rl-agents"
+      relationship: "subsequent_concept"
+
+learning_objectives:
+  - id: "obj-mdp-1"
+    statement: "Formulate a sequential decision-making problem as a formal Markov Decision Process (S, A, P, R, gamma)."
+    bloom_level: "create"
+  - id: "obj-mdp-2"
+    statement: "Analyze and decompose the Bellman Optimality Equations for state values V*(s) and action values Q*(s, a)."
+    bloom_level: "analyze"
+  - id: "obj-mdp-3"
+    statement: "Implement Value Iteration and Tabular Q-Learning to solve optimal control in a discrete simulated environment."
+    bloom_level: "apply"
+
+practical_applications:
+  - title: "Autonomous Navigation and Game Playing Agents"
+    type: "computational_simulation"
+    description: "Train software agents to navigate maze environments, avoid obstacles, and optimize reward collection without human demonstration."
+
+provenance:
+  sources:
+    - id: "src-sutton-barto"
+      citation: "Sutton, R. S., & Barto, A. G. (2018). Reinforcement Learning: An Introduction (2nd ed.). MIT Press, Chapter 3 & 4: Finite Markov Decision Processes and Dynamic Programming."
+      isbn: "978-0262039246"
+      claims_supported: [
+        "Markov property and MDP 5-tuple definition",
+        "Bellman expectation and optimality equations",
+        "Value iteration and policy iteration algorithms"
+      ]
+    - id: "src-watkins-qlearning"
+      citation: "Watkins, C. J., & Dayan, P. (1992). Q-learning. Machine Learning, 8(3), 279-292."
+      url: "https://doi.org/10.1007/BF00992698"
+      claims_supported: [
+        "Tabular Q-learning update equation",
+        "Convergence proof to optimal Q-values",
+        "Off-policy temporal difference learning"
+      ]

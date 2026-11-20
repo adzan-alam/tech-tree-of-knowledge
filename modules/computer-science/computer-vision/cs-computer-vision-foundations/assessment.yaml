@@ -1,0 +1,51 @@
+module_slug: "cs-computer-vision-foundations"
+passing_threshold_percent: 75
+
+questions:
+  - id: "q-cv-01"
+    target_objective_id: "obj-cv-1"
+    prompt: "A horizontal Sobel operator computes Gx = 40.0 and vertical operator computes Gy = 30.0 at a pixel. What is the total gradient magnitude?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 50.0
+      tolerance: 0.05
+      unit: "intensity gradient"
+    explanation: "Magnitude = sqrt(Gx^2 + Gy^2) = sqrt(40^2 + 30^2) = sqrt(1600 + 900) = sqrt(2500) = 50.0."
+
+  - id: "q-cv-02"
+    target_objective_id: "obj-cv-2"
+    prompt: "In the pinhole camera perspective projection model u = fx * (X / Z) + cx, why do distant objects project to smaller sizes on the 2D sensor?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Depth Z appears in the denominator, scaling coordinates inversely with distance"
+        is_correct: true
+      - id: "opt-2"
+        text: "Camera lenses absorb more photons from distant objects"
+        is_correct: false
+      - id: "opt-3"
+        text: "Atmospheric fog shrinks pixels"
+        is_correct: false
+      - id: "opt-4"
+        text: "The camera shutter speed decreases"
+        is_correct: false
+    explanation: "By similar triangles, image plane coordinate x = f * (X / Z). Because depth Z is in the denominator, as distance Z increases, image size shrinks."
+
+  - id: "q-cv-03"
+    target_objective_id: "obj-cv-3"
+    prompt: "What mathematical property of Convolutional Neural Networks guarantees that an edge detector learned in one part of an image will recognize that same edge anywhere in the frame?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Translation Equivariance via Weight Sharing"
+        is_correct: true
+      - id: "opt-2"
+        text: "Rotational Invariance"
+        is_correct: false
+      - id: "opt-3"
+        text: "Linear Interpolation"
+        is_correct: false
+      - id: "opt-4"
+        text: "Fourier Phase Cancellation"
+        is_correct: false
+    explanation: "By sliding the exact same kernel weights across all pixel locations, CNNs achieve translation equivariance: shifting the input shifts the feature map identically."

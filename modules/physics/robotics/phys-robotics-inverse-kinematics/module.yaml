@@ -1,0 +1,67 @@
+id: "b1000000-0000-0000-0000-000000000031"
+slug: "phys-robotics-inverse-kinematics"
+title: "Robot Kinematics: Forward Kinematics, DH Parameters, and Inverse Kinematics"
+summary: "Robotic manipulator geometry, Denavit-Hartenberg (DH) parameters, forward kinematics chains, inverse kinematics, robot Jacobian matrices, and Damped Least Squares."
+version: "1.0.0"
+created_at: "2026-11-20T12:15:00Z"
+updated_at: "2026-11-20T12:15:00Z"
+
+classification:
+  discipline: "physics"
+  domain: "robotics"
+  proficiency_tier: 3
+  difficulty_score: 0.75
+  estimated_duration_minutes: 100
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["phys-verifier-01", "robotics-auditor-03"]
+  verification_date: "2026-11-20"
+  notes: "Denavit-Hartenberg transformation matrices, Jacobian derivations, and Damped Least Squares pseudo-inversion verified against standard robotics texts."
+
+relationships:
+  prerequisites:
+    - slug: "math-matrices-quaternions"
+      rationale: "Requires 4x4 homogeneous matrices and coordinate frame rotations."
+    - slug: "phys-kinematics-1d-2d"
+      rationale: "Requires vector kinematics, positions, and angular velocity vectors."
+  related_modules:
+    - slug: "cs-computer-vision-foundations"
+      relationship: "subsequent_concept"
+    - slug: "cs-sim-to-real-embodied-ai"
+      relationship: "computational_application"
+
+learning_objectives:
+  - id: "obj-ik-1"
+    statement: "Formulate forward kinematics of a multi-link serial manipulator using Denavit-Hartenberg (DH) parameters."
+    bloom_level: "create"
+  - id: "obj-ik-2"
+    statement: "Analyze and differentiate the geometric Jacobian matrix relating joint velocities to end-effector Cartesian velocities and identify kinematic singularities."
+    bloom_level: "analyze"
+  - id: "obj-ik-3"
+    statement: "Implement numerical Inverse Kinematics using Jacobian Transpose and Damped Least Squares (DLS) algorithms."
+    bloom_level: "apply"
+
+practical_applications:
+  - title: "Robotic Arm Motion Planning and Object Manipulation"
+    type: "computational_simulation"
+    description: "Calculate required joint motor angles for industrial robotic arms and humanoid limbs to reach, grasp, and move targets in 3D space."
+
+provenance:
+  sources:
+    - id: "src-lynch-park-robotics"
+      citation: "Lynch, K. M., & Park, F. C. (2017). Modern Robotics: Mechanics, Planning, and Control. Cambridge University Press, Chapter 4 & 5: Forward and Inverse Kinematics."
+      isbn: "978-1107156302"
+      claims_supported: [
+        "Forward kinematics homogenous transformations",
+        "Geometric Jacobian and kinematic singularity analysis",
+        "Numerical inverse kinematics and Damped Least Squares"
+      ]
+    - id: "src-siciliano-robotics"
+      citation: "Siciliano, B., Sciavicco, L., Villani, L., & Oriolo, G. (2010). Robotics: Modelling, Planning and Control. Springer, Chapter 2 & 3: Kinematics and Differential Kinematics."
+      isbn: "978-1846286414"
+      claims_supported: [
+        "Denavit-Hartenberg convention rules",
+        "Analytical inverse kinematics solutions for 2-link and 3-link arms",
+        "Jacobian pseudoinverse Moore-Penrose formulation"
+      ]

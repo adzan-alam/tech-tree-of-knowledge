@@ -35,7 +35,7 @@ learning_objectives:
     statement: "Calculate the vector sum, difference, and scalar multiple geometrically and algebraically."
     bloom_level: "apply"
   - id: "obj-vec-3"
-    statement: "Compute the dot product of two vectors to determine orthogonality and calculate the scalar projection of one vector onto another."
+    statement: "Analyze the dot product of two vectors to differentiate orthogonality and decompose projections."
     bloom_level: "analyze"
 
 practical_applications:

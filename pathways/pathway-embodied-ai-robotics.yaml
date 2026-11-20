@@ -1,0 +1,36 @@
+id: "b2000000-0000-0000-0000-000000000004"
+slug: "pathway-embodied-ai-robotics"
+title: "Embodied AI and Autonomous Physical Robotics Pathway"
+description: "The grand synthesis of modern cyber-physical intelligence: uniting 3D rigid body physics, computer vision, robotic kinematics, Kalman state estimation, and deep reinforcement learning into physical agents capable of zero-shot Sim-to-Real transfer."
+target_goal: "Design and implement a complete closed-loop embodied AI agent that perceives simulated sensor streams, estimates 3D physical states, plans motor trajectories, and executes robust physical manipulation."
+target_proficiency_tier: 4
+
+capstone_project:
+  title: "Closed-Loop Embodied Robotic Manipulation Sandbox"
+  description: "An advanced interactive multi-stage sandbox where an autonomous robotic arm perceives an object via camera projection, tracks position under noisy telemetry with an Extended Kalman Filter, solves inverse kinematics via Damped Least Squares, and grasps the object using a policy trained under Domain Randomization."
+  deliverable_type: "interactive_simulation"
+
+modules:
+  - slug: "phys-rigid-body-3d"
+    sequence_order: 1
+    curation_note: "Physical body foundation: 6-DoF dynamics, inertia tensors, torque, and rotational angular momentum."
+
+  - slug: "cs-computer-vision-foundations"
+    sequence_order: 2
+    curation_note: "Visual perception: Spatial convolutions, Sobel edge gradients, CNN architectures, and pinhole camera perspective projections."
+
+  - slug: "phys-robotics-inverse-kinematics"
+    sequence_order: 3
+    curation_note: "Kinematic articulation: Denavit-Hartenberg parameters, forward kinematics chains, robot Jacobian matrices, and Damped Least Squares."
+
+  - slug: "math-kalman-filtering"
+    sequence_order: 4
+    curation_note: "Optimal state estimation: Fusing high-rate noisy inertial telemetry with visual fixes via the discrete Kalman filter predict-update cycle."
+
+  - slug: "cs-deep-rl-agents"
+    sequence_order: 5
+    curation_note: "Decision intelligence: Policy gradient actor-critic networks mapping filtered sensory states to continuous motor torque actions."
+
+  - slug: "cs-sim-to-real-embodied-ai"
+    sequence_order: 6
+    curation_note: "The master synthesis: Conquering the Reality Gap via Dynamics Domain Randomization, residual physics, and closed-loop sensorimotor control."

@@ -1,0 +1,42 @@
+module_slug: "math-probability-statistics"
+passing_threshold_percent: 75
+
+questions:
+  - id: "q-prob-01"
+    target_objective_id: "obj-prob-1"
+    prompt: "A discrete random variable X takes value 0 with probability 0.4 and value 10 with probability 0.6. What is the expected value E[X]?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 6.0
+      tolerance: 0.01
+      unit: "scalar"
+    explanation: "E[X] = 0 * 0.4 + 10 * 0.6 = 0 + 6.0 = 6.0."
+
+  - id: "q-prob-02"
+    target_objective_id: "obj-prob-2"
+    prompt: "In Bayes' Theorem P(A|B) = [P(B|A) * P(A)] / P(B), what is the technical name for the term P(B|A)?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The Likelihood"
+        is_correct: true
+      - id: "opt-2"
+        text: "The Prior"
+        is_correct: false
+      - id: "opt-3"
+        text: "The Posterior"
+        is_correct: false
+      - id: "opt-4"
+        text: "The Marginal Evidence"
+        is_correct: false
+    explanation: "P(A) is the Prior, P(B|A) is the Likelihood, P(B) is the Marginal Evidence, and P(A|B) is the Posterior."
+
+  - id: "q-prob-03"
+    target_objective_id: "obj-prob-3"
+    prompt: "Two independent Gaussian sensors measure an object's position with variances sigma1^2 = 2.0 and sigma2^2 = 2.0. What is the variance of their optimal fused estimate?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 1.0
+      tolerance: 0.01
+      unit: "variance"
+    explanation: "1 / sigma_fused^2 = 1/2.0 + 1/2.0 = 1.0. Therefore, sigma_fused^2 = 1.0."

@@ -1,0 +1,51 @@
+module_slug: "cs-deep-rl-agents"
+passing_threshold_percent: 75
+
+questions:
+  - id: "q-drl-01"
+    target_objective_id: "obj-drl-1"
+    prompt: "Why does Deep Q-Learning (DQN) sample random mini-batches from an Experience Replay Buffer instead of training directly on sequential real-time transitions?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "To break the strong temporal correlation between consecutive states and restore i.i.d. sampling assumptions"
+        is_correct: true
+      - id: "opt-2"
+        text: "To reduce memory consumption"
+        is_correct: false
+      - id: "opt-3"
+        text: "To eliminate the need for backpropagation"
+        is_correct: false
+      - id: "opt-4"
+        text: "To make the policy deterministic"
+        is_correct: false
+    explanation: "Consecutive transitions in a physical trajectory are highly correlated. Replay buffers decorrelate training samples, stabilizing gradient updates."
+
+  - id: "q-drl-02"
+    target_objective_id: "obj-drl-2"
+    prompt: "In the Policy Gradient Theorem grad_theta J = E[grad_theta log pi(a|s) * Q(s, a)], what happens to an action's probability when its advantage is positive (A > 0)?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The probability of selecting that action in state s increases"
+        is_correct: true
+      - id: "opt-2"
+        text: "The probability decreases to zero"
+        is_correct: false
+      - id: "opt-3"
+        text: "The probability remains completely unaffected"
+        is_correct: false
+      - id: "opt-4"
+        text: "The action is removed from the action space"
+        is_correct: false
+    explanation: "Positive advantage indicates the action performed better than the average state baseline, so gradient ascent pushes parameters to increase its log-probability."
+
+  - id: "q-drl-03"
+    target_objective_id: "obj-drl-3"
+    prompt: "In an Actor-Critic architecture with gamma = 0.9, the Critic predicts V(s) = 5.0 and V(s') = 8.0. The agent receives immediate reward r = 2.0. What is the computed Advantage A(s, a)?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 4.2
+      tolerance: 0.05
+      unit: "Advantage"
+    explanation: "A(s, a) = r + gamma * V(s') - V(s) = 2.0 + 0.9 * 8.0 - 5.0 = 2.0 + 7.2 - 5.0 = 4.2."

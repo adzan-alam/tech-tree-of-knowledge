@@ -1,0 +1,42 @@
+module_slug: "math-vectors-3d"
+passing_threshold_percent: 75
+
+questions:
+  - id: "q-v3d-01"
+    target_objective_id: "obj-v3d-1"
+    prompt: "Given vector A = (2, -3, 6), calculate its Euclidean magnitude ||A||."
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 7.0
+      tolerance: 0.01
+      unit: "scalar"
+    explanation: "||A|| = sqrt(2^2 + (-3)^2 + 6^2) = sqrt(4 + 9 + 36) = sqrt(49) = 7.0."
+
+  - id: "q-v3d-02"
+    target_objective_id: "obj-v3d-2"
+    prompt: "Compute the cross product u x v for u = (1, 0, 0) and v = (0, 1, 0) in a standard right-handed coordinate system. What is the resulting vector?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "(0, 0, 1)"
+        is_correct: true
+      - id: "opt-2"
+        text: "(0, 0, -1)"
+        is_correct: false
+      - id: "opt-3"
+        text: "(1, 1, 0)"
+        is_correct: false
+      - id: "opt-4"
+        text: "(0, 0, 0)"
+        is_correct: false
+    explanation: "By the right-hand rule, i x j = k = (0, 0, 1)."
+
+  - id: "q-v3d-03"
+    target_objective_id: "obj-v3d-3"
+    prompt: "A flat triangular polygon in 3D has edges e1 = (2, 0, 0) and e2 = (0, 3, 0). What is the area of this triangle?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 3.0
+      tolerance: 0.01
+      unit: "square units"
+    explanation: "Area = 0.5 * ||e1 x e2||. e1 x e2 = (0, 0, 6), magnitude is 6. Half of 6 is 3.0."

@@ -765,7 +765,7 @@
           <div class="sidebar-section">
             <h3>Filter Discipline</h3>
             <div class="filter-pills">
-              <button class="filter-pill active" data-disc="all">All (9)</button>
+              <button class="filter-pill active" data-disc="all">All (21)</button>
               <button class="filter-pill" data-disc="math">Math</button>
               <button class="filter-pill" data-disc="phys">Physics</button>
               <button class="filter-pill" data-disc="cs">CS</button>
@@ -778,7 +778,7 @@
             <div class="progress-card">
               <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:600;">
                 <span>Completed:</span>
-                <span id="progressText">0 / 9 Modules</span>
+                <span id="progressText">0 / 21 Modules</span>
               </div>
               <div class="progress-bar-bg">
                 <div id="progressBar" class="progress-bar-fill"></div>
@@ -1304,13 +1304,418 @@ $$ \\vec{v}_{k+1} = \\vec{v}_k + \\frac{1}{2} (\\vec{a}_k + \\vec{a}_{k+1}) \\De
           sources: [
             { citation: "Zumdahl, S. S. (2018). Chemical Principles (8th ed.).", isbn: "978-1305581982" }
           ]
+        },
+        {
+          id: "b1000000-0000-0000-0000-000000000010",
+          slug: "math-vectors-3d",
+          title: "3D Vectors & Cross Products",
+          discipline: "mathematics",
+          domain: "linear-algebra",
+          proficiencyTier: 2,
+          duration: 75,
+          summary: "Three-dimensional Euclidean space, right-handed coordinates, vector cross products, triple scalar products, surface normal vectors, and plane equations.",
+          prerequisites: ["math-vectors-2d"],
+          x: 340, y: 660,
+          content: `
+            <h2>1. The 3D Vector Cross Product</h2>
+            <p>Maps two 3D vectors to a third vector orthogonal to both via the right-hand rule:</p>
+            <div class="math-card">$$ \\vec{u} \\times \\vec{v} = \\det \\begin{bmatrix} \\hat{i} & \\hat{j} & \\hat{k} \\\\ u_x & u_y & u_z \\\\ v_x & v_y & v_z \\end{bmatrix} = \\begin{bmatrix} u_y v_z - u_z v_y \\\\ u_z v_x - u_x v_z \\\\ u_x v_y - u_y v_x \\end{bmatrix} $$</div>
+            <p>Magnitude equals the area of the spanned parallelogram: $\\|\\vec{u} \\times \\vec{v}\\| = \\|\\vec{u}\\| \\|\\vec{v}\\| \\sin\\theta$.</p>
+          `,
+          quiz: [
+            {
+              prompt: "What is the cross product of unit vectors (1, 0, 0) x (0, 1, 0)?",
+              options: ["(0, 0, 1)", "(0, 0, -1)", "(1, 1, 0)", "(0, 0, 0)"],
+              correctIndex: 0,
+              explanation: "In a right-handed system, i x j = k = (0, 0, 1)."
+            }
+          ],
+          sources: [
+            { citation: "Strang, G. (2016). Introduction to Linear Algebra (5th ed.). Wellesley-Cambridge Press.", isbn: "978-0980232776" }
+          ]
+        },
+        {
+          id: "b1000000-0000-0000-0000-000000000011",
+          slug: "math-matrices-quaternions",
+          title: "Matrices & Quaternions",
+          discipline: "mathematics",
+          domain: "linear-algebra",
+          proficiencyTier: 3,
+          duration: 90,
+          summary: "Linear transformations, 4x4 homogeneous coordinate matrices, Euler angle singularities (gimbal lock), Hamilton quaternions, and spherical linear interpolation (SLERP).",
+          prerequisites: ["math-vectors-3d"],
+          x: 600, y: 480,
+          content: `
+            <h2>1. Quaternions & Singularity-Free 3D Rotations</h2>
+            <p>Hamilton quaternions ($i^2 = j^2 = k^2 = ijk = -1$) represent rotations without gimbal lock:</p>
+            <div class="math-card">$$ q = \\left[ \\cos\\left(\\frac{\\theta}{2}\\right), \\, \\hat{u} \\sin\\left(\\frac{\\theta}{2}\\right) \\right], \\quad \\vec{v}' = q \\vec{v} q^* $$</div>
+            <h2>2. Spherical Linear Interpolation (SLERP)</h2>
+            <p>Glides along the 4-sphere at constant angular speed:</p>
+            <div class="math-card">$$ \\text{SLERP}(q_1, q_2; t) = \\frac{\\sin((1 - t)\\Omega)}{\\sin\\Omega} q_1 + \\frac{\\sin(t\\Omega)}{\\sin\\Omega} q_2 $$</div>
+          `,
+          quiz: [
+            {
+              prompt: "What catastrophe occurs when an Euler-angle gimbal pitches to ±90 degrees?",
+              options: ["Gimbal Lock (loss of one rotational degree of freedom)", "Memory leak", "Division by zero in CPU clock", "The quaternion becomes negative"],
+              correctIndex: 0,
+              explanation: "At pitch ±90°, yaw and roll axes become coplanar, causing gimbal lock."
+            }
+          ],
+          sources: [
+            { citation: "Kuipers, J. B. (1999). Quaternions and Rotation Sequences. Princeton University Press.", isbn: "978-0691058726" }
+          ]
+        },
+        {
+          id: "b1000000-0000-0000-0000-000000000012",
+          slug: "phys-rigid-body-3d",
+          title: "3D Rigid Body Dynamics",
+          discipline: "physics",
+          domain: "classical-mechanics",
+          proficiencyTier: 3,
+          duration: 100,
+          summary: "Six degrees of freedom dynamics, 3x3 inertia tensors, torque, angular momentum vectors, Euler's equations of rotational motion, and the Dzhanibekov effect.",
+          prerequisites: ["phys-newtons-laws", "phys-momentum-conservation", "math-matrices-quaternions"],
+          x: 860, y: 300,
+          content: `
+            <h2>1. The 3x3 Inertia Tensor</h2>
+            <p>Relates angular velocity to angular momentum in 3D:</p>
+            <div class="math-card">$$ \\vec{L} = I \\vec{\\omega}, \\quad I = \\begin{bmatrix} I_{xx} & I_{xy} & I_{xz} \\\\ I_{yx} & I_{yy} & I_{yz} \\\\ I_{zx} & I_{zy} & I_{zz} \\end{bmatrix} $$</div>
+            <h2>2. Euler's Equations of Motion</h2>
+            <p>Torque-free rotation around the intermediate principal axis is unstable (Dzhanibekov Effect):</p>
+            <div class="math-card">$$ I_1 \\dot{\\omega}_1 + (I_3 - I_2) \\omega_2 \\omega_3 = \\tau_1 $$</div>
+          `,
+          quiz: [
+            {
+              prompt: "Under the Tennis Racket Theorem, rotation of an asymmetric body is unstable about which axis?",
+              options: ["The intermediate principal axis", "The minor axis", "The major axis", "All axes equally"],
+              correctIndex: 0,
+              explanation: "Perturbations around the intermediate axis have positive real eigenvalues, causing periodic flipping."
+            }
+          ],
+          sources: [
+            { citation: "Goldstein, H. (2001). Classical Mechanics (3rd ed.). Addison-Wesley.", isbn: "978-0201657029" }
+          ]
+        },
+        {
+          id: "b1000000-0000-0000-0000-000000000013",
+          slug: "cs-3d-collision-bvh",
+          title: "3D Collision & BVH Trees",
+          discipline: "computer-science",
+          domain: "graphics-simulation",
+          proficiencyTier: 3,
+          duration: 90,
+          summary: "3D spatial partitioning, Bounding Volume Hierarchies (BVH), Surface Area Heuristic (SAH), Möller-Trumbore ray-triangle intersection, and 15-axis SAT for OBBs.",
+          prerequisites: ["cs-collision-detection", "math-vectors-3d"],
+          x: 860, y: 480,
+          content: `
+            <h2>1. Möller-Trumbore Fast Ray-Triangle Intersection</h2>
+            <p>Calculates ray-triangle intersection using barycentric coordinates without plane equations:</p>
+            <div class="math-card">$$ \\begin{bmatrix} t \\\\ u \\\\ v \\end{bmatrix} = \\frac{1}{\\det[-D, \\vec{e}_1, \\vec{e}_2]} \\begin{bmatrix} \\det[\\vec{s}, \\vec{e}_1, \\vec{e}_2] \\\\ \\det[-D, \\vec{s}, \\vec{e}_2] \\\\ \\det[-D, \\vec{e}_1, \\vec{s}] \\end{bmatrix} $$</div>
+          `,
+          quiz: [
+            {
+              prompt: "How many separating axes must be tested for two 3D Oriented Bounding Boxes (OBBs)?",
+              options: ["15 axes", "6 axes", "9 axes", "3 axes"],
+              correctIndex: 0,
+              explanation: "3 face normals of A + 3 face normals of B + 9 edge cross products = 15 axes."
+            }
+          ],
+          sources: [
+            { citation: "Ericson, C. (2004). Real-Time Collision Detection. CRC Press.", isbn: "978-1558607323" }
+          ]
+        },
+        {
+          id: "b1000000-0000-0000-0000-000000000020",
+          slug: "math-probability-statistics",
+          title: "Probability & Bayes' Theorem",
+          discipline: "mathematics",
+          domain: "probability-statistics",
+          proficiencyTier: 2,
+          duration: 80,
+          summary: "Foundations of probability, Kolmogorov axioms, continuous random variables, expectation, variance, Gaussian distributions, and Bayes' Theorem.",
+          prerequisites: ["math-calculus-derivatives"],
+          x: 340, y: 480,
+          content: `
+            <h2>1. Bayes' Theorem</h2>
+            <p>Inverting conditional probabilities to update beliefs from evidence:</p>
+            <div class="math-card">$$ P(\\theta \\mid D) = \\frac{P(D \\mid \\theta) P(\\theta)}{P(D)} = \\frac{\\text{Likelihood} \\times \\text{Prior}}{\\text{Evidence}} $$</div>
+            <h2>2. The Gaussian Distribution</h2>
+            <div class="math-card">$$ p(x) = \\frac{1}{\\sigma \\sqrt{2\\pi}} \\exp\\left( -\\frac{(x - \\mu)^2}{2\\sigma^2} \\right) $$</div>
+          `,
+          quiz: [
+            {
+              prompt: "What does the Central Limit Theorem state about the sum of independent random variables?",
+              options: ["Their normalized sum converges to a Gaussian distribution", "Their sum equals zero", "Their variance becomes infinite", "They become non-random"],
+              correctIndex: 0,
+              explanation: "As sample size grows, the sum of i.i.d. random variables asymptotically approaches a normal distribution."
+            }
+          ],
+          sources: [
+            { citation: "Ross, S. M. (2014). Introduction to Probability Models (11th ed.).", isbn: "978-0124079489" }
+          ]
+        },
+        {
+          id: "b1000000-0000-0000-0000-000000000021",
+          slug: "cs-neural-networks-foundations",
+          title: "Neural Networks & Backprop",
+          discipline: "computer-science",
+          domain: "machine-learning",
+          proficiencyTier: 3,
+          duration: 95,
+          summary: "Perceptrons, multi-layer networks, Universal Approximation Theorem, activation functions, loss functions, backpropagation derivation via calculus chain rule, and gradient descent.",
+          prerequisites: ["math-calculus-derivatives", "math-vectors-2d", "cs-prog-fundamentals"],
+          x: 600, y: 660,
+          content: `
+            <h2>1. Universal Approximation Theorem</h2>
+            <p>Multi-layer feedforward networks can approximate any continuous function given non-linear activations.</p>
+            <h2>2. Backpropagation via Multivariate Chain Rule</h2>
+            <div class="math-card">$$ \\delta^L = (a^L - y) \\odot \\sigma'(z^L), \\quad \\delta^l = ((W^{l+1})^T \\delta^{l+1}) \\odot \\sigma'(z^l) $$
+$$ \\frac{\\partial \\mathcal{L}}{\\partial W^l} = \\delta^l (a^{l-1})^T, \\quad W^l \\gets W^l - \\alpha \\frac{\\partial \\mathcal{L}}{\\partial W^l} $$</div>
+          `,
+          quiz: [
+            {
+              prompt: "Why did single-layer perceptrons fail to compute the XOR logic function?",
+              options: ["XOR is not linearly separable in the input plane", "They lacked floating point chips", "Calculus was not invented yet", "XOR requires 3D space"],
+              correctIndex: 0,
+              explanation: "Minsky and Papert (1969) proved single-layer perceptrons can only form linear decision boundaries."
+            }
+          ],
+          sources: [
+            { citation: "Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep Learning. MIT Press.", isbn: "978-0262035613" }
+          ]
+        },
+        {
+          id: "b1000000-0000-0000-0000-000000000022",
+          slug: "cs-reinforcement-learning-mdp",
+          title: "MDPs & Value Iteration",
+          discipline: "computer-science",
+          domain: "machine-learning",
+          proficiencyTier: 3,
+          duration: 90,
+          summary: "Formal MDP definition, Markov property, return discount factor, policy functions, Bellman optimality equations, value iteration, and tabular Q-learning.",
+          prerequisites: ["math-probability-statistics", "cs-prog-fundamentals"],
+          x: 860, y: 660,
+          content: `
+            <h2>1. Bellman Optimality Equations</h2>
+            <p>The optimal value of a state equals the immediate reward plus the discounted optimal value of the next state:</p>
+            <div class="math-card">$$ V^*(s) = \\max_{a} \\sum_{s'} \\mathcal{P}(s' \\mid s, a) [r + \\gamma V^*(s')] $$</div>
+            <h2>2. Tabular Q-Learning</h2>
+            <div class="math-card">$$ Q(S, A) \\gets Q(S, A) + \\alpha [R + \\gamma \\max_{a'} Q(S', a') - Q(S, A)] $$</div>
+          `,
+          quiz: [
+            {
+              prompt: "What mathematical property ensures Value Iteration converges to a unique optimal value function?",
+              options: ["The Bellman backup is a gamma-contraction mapping (Banach Fixed-Point)", "Linear interpolation", "Euler's identity", "Gaussian noise cancellation"],
+              correctIndex: 0,
+              explanation: "Because gamma < 1, the Bellman backup operator is a contraction mapping with a unique fixed point."
+            }
+          ],
+          sources: [
+            { citation: "Sutton, R. S., & Barto, A. G. (2018). Reinforcement Learning (2nd ed.). MIT Press.", isbn: "978-0262039246" }
+          ]
+        },
+        {
+          id: "b1000000-0000-0000-0000-000000000023",
+          slug: "cs-deep-rl-agents",
+          title: "Deep RL (DQN & Actor-Critic)",
+          discipline: "computer-science",
+          domain: "machine-learning",
+          proficiencyTier: 3,
+          duration: 105,
+          summary: "Function approximation in RL, Deep Q-Networks (DQN), Experience Replay, Target Networks, the Policy Gradient Theorem, REINFORCE, and Advantage Actor-Critic (A2C).",
+          prerequisites: ["cs-reinforcement-learning-mdp", "cs-neural-networks-foundations"],
+          x: 1120, y: 200,
+          content: `
+            <h2>1. Deep Q-Networks (DQN)</h2>
+            <p>Stabilized via Experience Replay Buffer and Frozen Target Network $\\theta^-$:</p>
+            <div class="math-card">$$ \\mathcal{L}(\\theta) = \\mathbb{E} \\left[ \\left( r + \\gamma \\max_{a'} Q(s', a'; \\theta^-) - Q(s, a; \\theta) \\right)^2 \\right] $$</div>
+            <h2>2. The Policy Gradient Theorem</h2>
+            <div class="math-card">$$ \\nabla_\\theta J(\\theta) = \\mathbb{E}_{\\pi_\\theta} [ \\nabla_\\theta \\log \\pi_\\theta(a \\mid s) A(s, a) ] $$</div>
+          `,
+          quiz: [
+            {
+              prompt: "Why does DQN use an Experience Replay Buffer?",
+              options: ["To break temporal correlation between consecutive states", "To save hard drive space", "To speed up network downloading", "To convert continuous states into discrete"],
+              correctIndex: 0,
+              explanation: "Sampling random past transitions restores i.i.d. assumptions and prevents catastrophic forgetting."
+            }
+          ],
+          sources: [
+            { citation: "Mnih, V., et al. (2015). Human-level control through deep reinforcement learning. Nature.", url: "https://doi.org/10.1038/nature14236" }
+          ]
+        },
+        {
+          id: "b1000000-0000-0000-0000-000000000030",
+          slug: "cs-computer-vision-foundations",
+          title: "Computer Vision & Convolutions",
+          discipline: "computer-science",
+          domain: "computer-vision",
+          proficiencyTier: 3,
+          duration: 95,
+          summary: "Spatial 2D convolutions, Sobel edge gradients, Canny detector, Convolutional Neural Networks (CNNs), pinhole camera perspective projection, and intrinsic calibration matrices.",
+          prerequisites: ["math-matrices-quaternions", "cs-neural-networks-foundations"],
+          x: 1120, y: 380,
+          content: `
+            <h2>1. 2D Spatial Convolution & Image Gradients</h2>
+            <p>Sobel operators estimate spatial intensity gradients $\\nabla I = [G_x, G_y]^T$:</p>
+            <div class="math-card">$$ \\|\\nabla I\\| = \\sqrt{G_x^2 + G_y^2}, \\quad \\theta = \\text{atan2}(G_y, G_x) $$</div>
+            <h2>2. Pinhole Camera Perspective Projection</h2>
+            <div class="math-card">$$ \\tilde{p}_{\\text{pixel}} \\sim K [R \\mid \\vec{t}] \\tilde{P}_{\\text{world}}, \\quad K = \\begin{bmatrix} f_x & 0 & c_x \\\\ 0 & f_y & c_y \\\\ 0 & 0 & 1 \\end{bmatrix} $$</div>
+          `,
+          quiz: [
+            {
+              prompt: "In pinhole camera geometry, why do distant objects project to smaller sizes?",
+              options: ["Depth Z appears in the denominator, scaling coordinates inversely", "Sensors absorb less light from afar", "Pixels shrink dynamically", "The shutter speed changes"],
+              correctIndex: 0,
+              explanation: "By similar triangles, u = fx * (X / Z) + cx. Depth Z in the denominator scales size inversely."
+            }
+          ],
+          sources: [
+            { citation: "Hartley, R., & Zisserman, A. (2003). Multiple View Geometry in Computer Vision. Cambridge Univ Press.", isbn: "978-0521540513" }
+          ]
+        },
+        {
+          id: "b1000000-0000-0000-0000-000000000031",
+          slug: "phys-robotics-inverse-kinematics",
+          title: "Robot Inverse Kinematics",
+          discipline: "physics",
+          domain: "robotics",
+          proficiencyTier: 3,
+          duration: 100,
+          summary: "Robotic manipulator geometry, Denavit-Hartenberg (DH) parameters, forward kinematics chains, inverse kinematics, robot Jacobian matrices, and Damped Least Squares.",
+          prerequisites: ["math-matrices-quaternions", "phys-kinematics-1d-2d"],
+          x: 1120, y: 560,
+          content: `
+            <h2>1. The Robot Jacobian Matrix</h2>
+            <p>Maps joint velocities to end-effector Cartesian velocities:</p>
+            <div class="math-card">$$ \\dot{\\vec{x}} = J(\\vec{\\theta}) \\dot{\\vec{\\theta}} $$</div>
+            <h2>2. Damped Least Squares (DLS) Inverse Kinematics</h2>
+            <p>Suppresses velocity spikes near kinematic singularities:</p>
+            <div class="math-card">$$ \\Delta \\vec{\\theta} = J^T (J J^T + \\lambda^2 I)^{-1} \\vec{e} $$</div>
+          `,
+          quiz: [
+            {
+              prompt: "What happens to joint velocities near a kinematic singularity in naive pseudoinverse IK?",
+              options: ["They explode toward infinity", "They drop to zero", "They reverse direction cleanly", "They turn into translations"],
+              correctIndex: 0,
+              explanation: "Near singularities det(JJ^T) -> 0, causing the inverted matrix and joint velocities to explode."
+            }
+          ],
+          sources: [
+            { citation: "Lynch, K. M., & Park, F. C. (2017). Modern Robotics. Cambridge University Press.", isbn: "978-1107156302" }
+          ]
+        },
+        {
+          id: "b1000000-0000-0000-0000-000000000032",
+          slug: "math-kalman-filtering",
+          title: "Kalman Filter & State Estimation",
+          discipline: "mathematics",
+          domain: "applied-mathematics",
+          proficiencyTier: 3,
+          duration: 90,
+          summary: "Linear quadratic estimation, discrete Kalman filter predict-update cycle, Kalman Gain derivation, process and measurement noise covariance, and Extended Kalman Filter (EKF).",
+          prerequisites: ["math-probability-statistics", "math-matrices-quaternions"],
+          x: 1120, y: 740,
+          content: `
+            <h2>1. The Predict-Update Cycle</h2>
+            <div class="math-card">$$ \\text{Predict: } \\hat{x}_{k|k-1} = F \\hat{x}_{k-1}, \\quad P_{k|k-1} = F P_{k-1} F^T + Q $$
+$$ \\text{Kalman Gain: } K_k = P_{k|k-1} H^T (H P_{k|k-1} H^T + R)^{-1} $$
+$$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k|k-1}), \\quad P_{k|k} = (I - K_k H) P_{k|k-1} $$</div>
+          `,
+          quiz: [
+            {
+              prompt: "What happens to the Kalman Gain K when sensor measurement noise R approaches infinity?",
+              options: ["K approaches 0, relying completely on physics prediction", "K approaches 1, relying only on sensor", "The filter crashes with division by zero", "K becomes imaginary"],
+              correctIndex: 0,
+              explanation: "When R -> infinity, K -> 0, so x_hat = x_predict; the filter ignores the useless sensor."
+            }
+          ],
+          sources: [
+            { citation: "Kalman, R. E. (1960). A New Approach to Linear Filtering. J. Basic Eng.", url: "https://doi.org/10.1115/1.3662552" }
+          ]
+        },
+        {
+          id: "b1000000-0000-0000-0000-000000000033",
+          slug: "cs-sim-to-real-embodied-ai",
+          title: "Embodied AI & Sim-to-Real",
+          discipline: "computer-science",
+          domain: "robotics",
+          proficiencyTier: 4,
+          duration: 120,
+          summary: "Master synthesis of physical robotics and artificial intelligence: the Reality Gap, Dynamics and Visual Domain Randomization, residual physics, and closed-loop sensorimotor control.",
+          prerequisites: ["phys-rigid-body-3d", "cs-deep-rl-agents", "cs-computer-vision-foundations", "phys-robotics-inverse-kinematics", "math-kalman-filtering"],
+          x: 1380, y: 450,
+          content: `
+            <h2>1. The Reality Gap & Domain Randomization</h2>
+            <p>Training policies across an ensemble of randomized physics (mass, friction, delays):</p>
+            <div class="math-card">$$ m \\sim \\mathcal{U}(0.8m_0, 1.25m_0), \\quad \\mu \\sim \\mathcal{U}(0.2, 1.1), \\quad \\tau_{\\text{delay}} \\sim \\mathcal{U}(0, 40\\text{ms}) $$</div>
+            <h2>2. Closed-Loop Sensorimotor Pipeline</h2>
+            <p>Camera Pixels ➔ CNN Perception ➔ Kalman State Belief ➔ RL Policy ➔ DLS Inverse Kinematics ➔ Motor Torques.</p>
+          `,
+          quiz: [
+            {
+              prompt: "What is the core philosophy of Domain Randomization for sim-to-real transfer?",
+              options: ["Train on a randomized distribution of simulators so the real world looks like a familiar sample", "Build an atom-by-atom simulator", "Eliminate all physical friction", "Train the robot without any sensors"],
+              correctIndex: 0,
+              explanation: "Domain Randomization embraces uncertainty by training across varied dynamics and visual textures."
+            }
+          ],
+          sources: [
+            { citation: "Tobin, J., et al. (2017). Domain Randomization for Transferring Deep Neural Networks. IEEE IROS.", url: "https://doi.org/10.1109/IROS.2017.8202133" }
+          ]
         }
-      ]
+      ],
+      pathways: {
+        "2d-physics": {
+          title: "2D Physics Simulator",
+          slugs: [
+            "math-vectors-2d",
+            "math-calculus-derivatives",
+            "phys-kinematics-1d-2d",
+            "phys-newtons-laws",
+            "phys-momentum-conservation",
+            "cs-prog-fundamentals",
+            "cs-numerical-integration",
+            "cs-collision-detection"
+          ]
+        },
+        "3d-physics": {
+          title: "3D Physics Engine & Quaternions",
+          slugs: [
+            "math-vectors-3d",
+            "math-matrices-quaternions",
+            "phys-rigid-body-3d",
+            "cs-3d-collision-bvh"
+          ]
+        },
+        "ai-agent": {
+          title: "AI in Simulated Environments",
+          slugs: [
+            "math-probability-statistics",
+            "cs-neural-networks-foundations",
+            "cs-reinforcement-learning-mdp",
+            "cs-deep-rl-agents"
+          ]
+        },
+        "embodied-ai": {
+          title: "Embodied AI & Robotics Master Synthesis",
+          slugs: [
+            "phys-rigid-body-3d",
+            "cs-computer-vision-foundations",
+            "phys-robotics-inverse-kinematics",
+            "math-kalman-filtering",
+            "cs-deep-rl-agents",
+            "cs-sim-to-real-embodied-ai"
+          ]
+        }
+      }
     };
 
     // State
     let completedModules = new Set();
     let selectedModule = REPO_DATA.modules[3]; // Default to phys-newtons-laws
+    let activeDisciplineFilter = 'all';
+    let activePathwayKey = '2d-physics';
     let zoomLevel = 1.0;
     let panOffset = { x: 50, y: 50 };
     let isDragging = false;
@@ -1339,7 +1744,7 @@ $$ \\vec{v}_{k+1} = \\vec{v}_k + \\frac{1}{2} (\\vec{a}_k + \\vec{a}_{k+1}) \\De
       });
     });
 
-    // Color Token Helper
+    // Color Token & Filter Helpers
     function getDiscColor(disc) {
       switch(disc) {
         case 'mathematics': return '#3b82f6';
@@ -1348,6 +1753,15 @@ $$ \\vec{v}_{k+1} = \\vec{v}_k + \\frac{1}{2} (\\vec{a}_k + \\vec{a}_{k+1}) \\De
         case 'chemistry': return '#8b5cf6';
         default: return '#6b7280';
       }
+    }
+
+    function matchesDisciplineFilter(modDiscipline, filter) {
+      if (!filter || filter === 'all') return true;
+      if (filter === 'math' && modDiscipline === 'mathematics') return true;
+      if (filter === 'phys' && modDiscipline === 'physics') return true;
+      if (filter === 'cs' && modDiscipline === 'computer-science') return true;
+      if (filter === 'chem' && modDiscipline === 'chemistry') return true;
+      return false;
     }
 
     // Render SVG Graph Canvas
@@ -1375,6 +1789,15 @@ $$ \\vec{v}_{k+1} = \\vec{v}_k + \\frac{1}{2} (\\vec{a}_k + \\vec{a}_{k+1}) \\De
             path.setAttribute('class', 'edge-line');
             path.setAttribute('marker-end', 'url(#arrow)');
             path.setAttribute('id', `edge-${source.slug}-${target.slug}`);
+
+            const srcMatch = matchesDisciplineFilter(source.discipline, activeDisciplineFilter);
+            const tgtMatch = matchesDisciplineFilter(target.discipline, activeDisciplineFilter);
+            if (activeDisciplineFilter !== 'all' && (!srcMatch || !tgtMatch)) {
+              path.setAttribute('opacity', '0.12');
+            } else {
+              path.setAttribute('opacity', '1.0');
+            }
+
             edgesGroup.appendChild(path);
           }
         });
@@ -1382,10 +1805,16 @@ $$ \\vec{v}_{k+1} = \\vec{v}_k + \\frac{1}{2} (\\vec{a}_k + \\vec{a}_{k+1}) \\De
 
       // Draw nodes
       REPO_DATA.modules.forEach(mod => {
+        const isMatch = matchesDisciplineFilter(mod.discipline, activeDisciplineFilter);
         const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
         g.setAttribute('class', 'graph-node' + (completedModules.has(mod.slug) ? ' completed' : '') + (selectedModule?.slug === mod.slug ? ' selected' : ''));
         g.setAttribute('transform', `translate(${mod.x}, ${mod.y})`);
         g.setAttribute('data-slug', mod.slug);
+        if (!isMatch) {
+          g.setAttribute('opacity', '0.22');
+        } else {
+          g.setAttribute('opacity', '1.0');
+        }
 
         const color = getDiscColor(mod.discipline);
 
@@ -1573,16 +2002,9 @@ $$ \\vec{v}_{k+1} = \\vec{v}_k + \\frac{1}{2} (\\vec{a}_k + \\vec{a}_{k+1}) \\De
       const container = document.getElementById('pathwayTimeline');
       container.innerHTML = '';
 
-      const pathwaySlugs = [
-        "math-vectors-2d",
-        "math-calculus-derivatives",
-        "phys-kinematics-1d-2d",
-        "phys-newtons-laws",
-        "phys-momentum-conservation",
-        "cs-prog-fundamentals",
-        "cs-numerical-integration",
-        "cs-collision-detection"
-      ];
+      const pData = REPO_DATA.pathways[activePathwayKey] || REPO_DATA.pathways['2d-physics'];
+      const pathwaySlugs = pData.slugs;
+      document.getElementById('pathwayTitle').textContent = `Sequenced Pathway: ${pData.title}`;
 
       const nodeMap = new Map();
       REPO_DATA.modules.forEach(m => nodeMap.set(m.slug, m));
@@ -1606,6 +2028,26 @@ $$ \\vec{v}_{k+1} = \\vec{v}_k + \\frac{1}{2} (\\vec{a}_k + \\vec{a}_{k+1}) \\De
         container.appendChild(card);
       });
     }
+
+    // Pathway Selector Interactivity
+    document.querySelectorAll('.pathway-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.pathway-card').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        activePathwayKey = card.getAttribute('data-pathway');
+        renderTimeline();
+      });
+    });
+
+    // Discipline Filter Pills Interactivity
+    document.querySelectorAll('.filter-pills .filter-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.filter-pills .filter-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeDisciplineFilter = pill.getAttribute('data-disc');
+        renderGraph();
+      });
+    });
 
     window.openModuleBySlug = function(slug) {
       const mod = REPO_DATA.modules.find(m => m.slug === slug);

@@ -6,6 +6,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.7.0] - 2026-11-20 (Phase 6: Gold Standard Content & Multi-Tiered Curriculum Expansion)
+
+### Added
+- **Gold Standard Module Content (GSMC-1.0):**
+  - Elevated all 9 foundational modules with historical epistemology, limit calculus derivations, ASCII geometry, misconception debunking, and runnable simulation scripts.
+- **Track A: 3D Physics Engine & Spatial Computing (4 Modules + Pathway):**
+  - `modules/mathematics/linear-algebra/math-vectors-3d/`: 3D Cartesian vectors, cross products, right-hand rule, and plane geometry.
+  - `modules/mathematics/linear-algebra/math-matrices-quaternions/`: Matrix transformations, homogeneous coordinates, gimbal lock, and Hamilton's quaternions.
+  - `modules/physics/classical-mechanics/phys-rigid-body-3d/`: 3D rotational dynamics, moment of inertia tensors, and Euler's rotational equations.
+  - `modules/computer-science/graphics-simulation/cs-3d-collision-bvh/`: 3D spatial partitioning, Bounding Volume Hierarchies (BVH), and Surface Area Heuristics.
+  - `pathways/pathway-3d-physics-engine.yaml`: Sequenced pathway to develop a 3D rigid body physics engine.
+- **Track B: AI in Simulated Environments (4 Modules + Pathway):**
+  - `modules/mathematics/probability-statistics/math-probability-statistics/`: Probability axioms, Bayes' theorem, distributions, and maximum likelihood.
+  - `modules/computer-science/machine-learning/cs-neural-networks-foundations/`: Perceptrons, feedforward networks, backpropagation calculus, and SGD.
+  - `modules/computer-science/machine-learning/cs-reinforcement-learning-mdp/`: Markov Decision Processes, Bellman equations, and Value/Policy Iteration.
+  - `modules/computer-science/machine-learning/cs-deep-rl-agents/`: Deep Q-Networks (DQN), REINFORCE policy gradients, and Actor-Critic (A2C).
+  - `pathways/pathway-ai-agent-environment.yaml`: Sequenced pathway for autonomous intelligent agents in simulated physics worlds.
+- **Track C: Embodied AI & Physical Robotics Master Synthesis (4 Modules + Pathway):**
+  - `modules/computer-science/computer-vision/cs-computer-vision-foundations/`: Spatial convolutions, pinhole cameras, camera calibration, and visual features.
+  - `modules/physics/robotics/phys-robotics-inverse-kinematics/`: Kinematic chains, Denavit-Hartenberg (DH) parameters, Jacobian matrices, and IK solvers.
+  - `modules/mathematics/applied-mathematics/math-kalman-filtering/`: State-space dynamical models, Gaussian propagation, and optimal Kalman gain sensor fusion.
+  - `modules/computer-science/robotics/cs-sim-to-real-embodied-ai/`: Capstone synthesis combining 3D physics engines, Deep RL control, domain randomization, and sim-to-real deployment.
+  - `pathways/pathway-embodied-ai-robotics.yaml`: 17-step, 1,480-minute master synthesis pathway.
+- **Web Interface Enhancements (`public/index.html`):**
+  - Dynamic pathway selector switching timeline sequences across all 4 pathways.
+  - Interactive discipline filter pills (Math, Physics, CS, Chemistry, All 21) with opacity dimming preserving edge connectivity.
+- **CLI & Tooling Enhancements:**
+  - `src/cli/author.ts`: Enhanced linter to recursively scan directory trees and evaluate Bloom taxonomy active verbs.
+  - `src/cli/validate.ts`: Configured directory scanner to omit unit test invalid fixtures when validating the repository.
+
+---
+
 ## [0.6.0] - 2026-11-20 (Phase 5: Learner Interface & Interactive Tech Tree Visualizer)
 
 ### Added

@@ -1,0 +1,67 @@
+id: "b1000000-0000-0000-0000-000000000020"
+slug: "math-probability-statistics"
+title: "Probability Theory, Random Variables, and Bayesian Inference"
+summary: "Foundations of probability, Kolmogorov axioms, continuous random variables, expectation, variance, Gaussian distributions, and Bayes' Theorem."
+version: "1.0.0"
+created_at: "2026-11-20T11:00:00Z"
+updated_at: "2026-11-20T11:00:00Z"
+
+classification:
+  discipline: "mathematics"
+  domain: "probability-statistics"
+  proficiency_tier: 2
+  difficulty_score: 0.50
+  estimated_duration_minutes: 80
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["math-verifier-01", "ml-auditor-01"]
+  verification_date: "2026-11-20"
+  notes: "Kolmogorov axioms, Bayes' theorem derivations, and Gaussian PDF integrals verified against standard probability texts."
+
+relationships:
+  prerequisites:
+    - slug: "math-calculus-derivatives"
+      rationale: "Requires integration and differentiation for continuous probability density functions and expectations."
+  related_modules:
+    - slug: "cs-neural-networks-foundations"
+      relationship: "subsequent_concept"
+    - slug: "cs-reinforcement-learning-mdp"
+      relationship: "subsequent_concept"
+    - slug: "math-kalman-filtering"
+      relationship: "computational_application"
+
+learning_objectives:
+  - id: "obj-prob-1"
+    statement: "Calculate mathematical expectation and variance for discrete and continuous probability density functions."
+    bloom_level: "apply"
+  - id: "obj-prob-2"
+    statement: "Apply Bayes' Theorem to update belief distributions given prior probabilities and observed sensor evidence."
+    bloom_level: "apply"
+  - id: "obj-prob-3"
+    statement: "Construct Monte Carlo random sampling algorithms to estimate expectations and integrals."
+    bloom_level: "create"
+
+practical_applications:
+  - title: "Sensor Noise Modeling and State Estimation"
+    type: "computational_simulation"
+    description: "Model robotic sensor uncertainty and stochastic environment transitions using Gaussian distributions and Bayesian updates."
+
+provenance:
+  sources:
+    - id: "src-ross-probability"
+      citation: "Ross, S. M. (2014). Introduction to Probability Models (11th ed.). Academic Press, Chapter 1 & 2: Elements of Probability."
+      isbn: "978-0124079489"
+      claims_supported: [
+        "Kolmogorov probability axioms",
+        "Expectation and variance definitions",
+        "Bayes' theorem formulation"
+      ]
+    - id: "src-bishop-prml"
+      citation: "Bishop, C. M. (2006). Pattern Recognition and Machine Learning. Springer, Chapter 1: Introduction to Probability Distributions."
+      isbn: "978-0387310732"
+      claims_supported: [
+        "Gaussian normal distribution PDF",
+        "Frequentist vs Bayesian paradigms",
+        "Prior, likelihood, and posterior relationships"
+      ]

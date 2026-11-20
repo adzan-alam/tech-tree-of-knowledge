@@ -1,0 +1,51 @@
+module_slug: "math-matrices-quaternions"
+passing_threshold_percent: 75
+
+questions:
+  - id: "q-mq-01"
+    target_objective_id: "obj-mq-1"
+    prompt: "In 4x4 homogeneous transformation matrices, what value must be placed in the w-component of a directional displacement vector to make it invariant to translation?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "w = 0"
+        is_correct: true
+      - id: "opt-2"
+        text: "w = 1"
+        is_correct: false
+      - id: "opt-3"
+        text: "w = -1"
+        is_correct: false
+      - id: "opt-4"
+        text: "w = infinity"
+        is_correct: false
+    explanation: "Directional vectors have w = 0 so that translation column t is multiplied by 0 and ignored; spatial points have w = 1 so that translation t is added."
+
+  - id: "q-mq-02"
+    target_objective_id: "obj-mq-2"
+    prompt: "Under an Euler angle system with pitch-yaw-roll order, at what pitch angle does Gimbal Lock occur?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "±90 degrees (pitching straight up or straight down)"
+        is_correct: true
+      - id: "opt-2"
+        text: "0 degrees (level horizon)"
+        is_correct: false
+      - id: "opt-3"
+        text: "45 degrees"
+        is_correct: false
+      - id: "opt-4"
+        text: "180 degrees"
+        is_correct: false
+    explanation: "At pitch = ±90 degrees, the roll and yaw rotation axes become parallel, eliminating one rotational degree of freedom."
+
+  - id: "q-mq-03"
+    target_objective_id: "obj-mq-3"
+    prompt: "A unit quaternion represents a rotation of angle theta = 180 degrees around a unit axis u. What is its scalar real part w?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 0.0
+      tolerance: 0.01
+      unit: "scalar"
+    explanation: "w = cos(theta / 2). For theta = 180 degrees, theta / 2 = 90 degrees, and cos(90°) = 0."

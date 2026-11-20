@@ -1,0 +1,51 @@
+module_slug: "math-kalman-filtering"
+passing_threshold_percent: 75
+
+questions:
+  - id: "q-kf-01"
+    target_objective_id: "obj-kf-1"
+    prompt: "In a 1D scalar Kalman filter with prior variance P = 6.0 and measurement noise variance R = 2.0 (with H = 1.0), what is the optimal Kalman Gain K?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 0.75
+      tolerance: 0.01
+      unit: "gain"
+    explanation: "K = P / (P + R) = 6.0 / (6.0 + 2.0) = 6.0 / 8.0 = 0.75."
+
+  - id: "q-kf-02"
+    target_objective_id: "obj-kf-2"
+    prompt: "During which phase of the discrete Kalman filter cycle does state uncertainty covariance P increase due to process noise Q?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The Predict (Time Update) step"
+        is_correct: true
+      - id: "opt-2"
+        text: "The Measurement Update step"
+        is_correct: false
+      - id: "opt-3"
+        text: "The Initialization step"
+        is_correct: false
+      - id: "opt-4"
+        text: "The Innovation calculation"
+        is_correct: false
+    explanation: "In the Predict step, P = F*P*F^T + Q; adding process noise Q increases the state estimation uncertainty."
+
+  - id: "q-kf-03"
+    target_objective_id: "obj-kf-3"
+    prompt: "How does the Extended Kalman Filter (EKF) handle non-linear state transitions x_k = f(x_{k-1}) and measurement functions z_k = h(x_k)?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "It computes local first-order Taylor series linearizations using Jacobian matrices"
+        is_correct: true
+      - id: "opt-2"
+        text: "It ignores non-linear terms completely"
+        is_correct: false
+      - id: "opt-3"
+        text: "It replaces all matrices with random Gaussian numbers"
+        is_correct: false
+      - id: "opt-4"
+        text: "It switches from matrix multiplication to numerical division"
+        is_correct: false
+    explanation: "The EKF computes Jacobian matrices F = df/dx and H = dh/dx evaluated at the current state estimate to locally linearize non-linear systems."

@@ -1,0 +1,67 @@
+id: "b1000000-0000-0000-0000-000000000032"
+slug: "math-kalman-filtering"
+title: "Optimal State Estimation and Kalman Filtering"
+summary: "Linear quadratic estimation, discrete Kalman filter predict-update cycle, Kalman Gain derivation, process and measurement noise covariance, and Extended Kalman Filter (EKF)."
+version: "1.0.0"
+created_at: "2026-11-20T12:30:00Z"
+updated_at: "2026-11-20T12:30:00Z"
+
+classification:
+  discipline: "mathematics"
+  domain: "applied-mathematics"
+  proficiency_tier: 3
+  difficulty_score: 0.70
+  estimated_duration_minutes: 90
+
+verification:
+  status: "technically-verified"
+  reviewed_by: ["math-verifier-01", "robotics-auditor-03"]
+  verification_date: "2026-11-20"
+  notes: "Kalman gain algebraic derivation, Riccati equation covariance updates, and EKF Jacobian linearizations verified against Gelb Applied Optimal Estimation."
+
+relationships:
+  prerequisites:
+    - slug: "math-probability-statistics"
+      rationale: "Requires Gaussian distributions, covariance matrices, and Bayesian inference."
+    - slug: "math-matrices-quaternions"
+      rationale: "Requires matrix inversion, transpositions, and linear state transformations."
+  related_modules:
+    - slug: "phys-robotics-inverse-kinematics"
+      relationship: "subsequent_concept"
+    - slug: "cs-sim-to-real-embodied-ai"
+      relationship: "computational_application"
+
+learning_objectives:
+  - id: "obj-kf-1"
+    statement: "Analyze and differentiate the optimal Kalman Gain matrix K that minimizes the trace of the posterior error covariance matrix."
+    bloom_level: "analyze"
+  - id: "obj-kf-2"
+    statement: "Execute the discrete Kalman filter Predict and Update equations for a state estimation problem with process and measurement noise."
+    bloom_level: "apply"
+  - id: "obj-kf-3"
+    statement: "Construct linearized non-linear motion and observation models using Jacobian matrices in an Extended Kalman Filter (EKF)."
+    bloom_level: "create"
+
+practical_applications:
+  - title: "Robotic Odometry and Spacecraft Navigation"
+    type: "computational_simulation"
+    description: "Fuse high-rate noisy accelerometer/gyroscope readings with low-rate GPS or visual position fixes to track robot pose in real time."
+
+provenance:
+  sources:
+    - id: "src-kalman-1960"
+      citation: "Kalman, R. E. (1960). A New Approach to Linear Filtering and Prediction Problems. Journal of Basic Engineering, 82(1), 35-45."
+      url: "https://doi.org/10.1115/1.3662552"
+      claims_supported: [
+        "Optimal linear estimator discrete formulation",
+        "Riccati algebraic covariance propagation",
+        "Orthogonality principle of innovation residuals"
+      ]
+    - id: "src-thrun-probabilistic-robotics"
+      citation: "Thrun, S., Burgard, W., & Fox, D. (2005). Probabilistic Robotics. MIT Press, Chapter 3: Gaussian Filters."
+      isbn: "978-0262201629"
+      claims_supported: [
+        "Discrete Kalman filter predict-update algorithm",
+        "Extended Kalman Filter (EKF) Jacobian linearizations",
+        "IMU and GPS sensor fusion architectures"
+      ]
