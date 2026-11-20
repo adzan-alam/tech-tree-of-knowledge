@@ -4,57 +4,86 @@ passing_threshold_percent: 75
 questions:
   - id: "q-s2r-01"
     target_objective_id: "obj-s2r-1"
-    prompt: "What is the primary definition of the 'Reality Gap' in embodied robotics?"
+    prompt: "What is the primary definition and cause of the 'Reality Gap' in embodied robotics?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "The performance drop when a policy trained in idealized simulation is deployed onto messy, noisy physical hardware"
+        text: "The catastrophic failure when an AI policy trained in an idealized physics simulator is transferred to physical hardware due to unmodeled friction, gear backlash, thermal motor effects, and communication latency"
         is_correct: true
       - id: "opt-2"
-        text: "The difference in monitor resolution between two graphics cards"
+        text: "The difference in monitor resolution between an operator display and a robot's onboard screen"
         is_correct: false
       - id: "opt-3"
-        text: "The financial cost of purchasing robotic hardware"
+        text: "The financial cost barrier of purchasing titanium robot limbs"
         is_correct: false
       - id: "opt-4"
-        text: "The time delay between writing code and compiling it"
+        text: "The delay between compiling a TypeScript file and running it in Node.js"
         is_correct: false
-    explanation: "The Reality Gap refers to the simulation-to-reality mismatch caused by unmodeled friction, gearbox backlash, sensor noise, and communication delays."
+    explanation: "The Reality Gap is the performance degradation that occurs when transferring policies from simulation to physical reality due to micro-mechanical friction, gear backlash, motor heating, and hardware latency."
 
   - id: "q-s2r-02"
     target_objective_id: "obj-s2r-2"
-    prompt: "How does Domain Randomization (DR) enable zero-shot transfer of simulated reinforcement learning policies to physical robots?"
-    type: "multiple_choice"
-    options:
-      - id: "opt-1"
-        text: "By training across a wide distribution of randomized physics and visual parameters so the real world appears as a familiar sample from that distribution"
-        is_correct: true
-      - id: "opt-2"
-        text: "By replacing the physical robot with a virtual hologram"
-        is_correct: false
-      - id: "opt-3"
-        text: "By setting friction and gravity to zero in the real world"
-        is_correct: false
-      - id: "opt-4"
-        text: "By eliminating the need for motors"
-        is_correct: false
-    explanation: "Domain Randomization trains policies to be invariant to physical variations, so real-world parameters fall within the randomized distribution."
+    prompt: "A robotic joint controller has proportional gain K_p = 60.0 N*m/rad and derivative gain K_d = 4.0 N*m*s/rad. If the current position error is (theta_target - theta) = 0.15 radians and joint angular velocity is 1.5 rad/s, what is the commanded torque tau = K_p * error - K_d * velocity in N*m?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 3.0
+      tolerance: 0.05
+      unit: "N*m"
+    explanation: "Proportional torque = 60.0 * 0.15 = 9.0 N*m. Damping torque = 4.0 * 1.5 = 6.0 N*m. Commanded torque tau = 9.0 - 6.0 = 3.0 N*m."
 
   - id: "q-s2r-03"
     target_objective_id: "obj-s2r-3"
-    prompt: "In the complete sensorimotor control pipeline, what component fuses noisy vision detections with high-rate IMU accelerometer telemetry?"
+    prompt: "Why does unmodeled communication latency (such as a 20 millisecond CAN-bus or EtherCAT delay) frequently cause physical robotic limbs to oscillate violently or go unstable?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "An Extended Kalman Filter (EKF)"
+        text: "Transport delay introduces a negative phase shift Delta phi = -omega * tau into the feedback loop, eroding the phase margin and turning stabilizing negative feedback into destabilizing positive feedback"
         is_correct: true
       - id: "opt-2"
-        text: "A 2D graphics rasterizer"
+        text: "Latency permanently demagnetizes the stator magnets inside the brushless motors"
         is_correct: false
       - id: "opt-3"
-        text: "An audio synthesizer"
+        text: "Delayed packets cause the CPU to invert the sign of its floating point calculations"
         is_correct: false
       - id: "opt-4"
-        text: "A fixed-frequency clock divider"
+        text: "Communication cables experience physical thermal expansion when transmitting delayed signals"
         is_correct: false
-    explanation: "The Kalman filter performs optimal state estimation and sensor fusion by combining physical motion propagation with noisy multi-sensor measurements."
+    explanation: "A transport delay e^{-s tau} introduces phase lag directly proportional to frequency and delay. At high frequencies, this phase lag pushes phase margin below zero, causing unbounded control oscillations."
+
+  - id: "q-s2r-04"
+    target_objective_id: "obj-s2r-4"
+    prompt: "Why is log-uniform sampling x ~ exp(U(ln a, ln b)) mathematically superior to linear uniform sampling x ~ U(a, b) when randomizing scale-invariant physical parameters like link mass, friction, or viscosity?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Log-uniform sampling provides exact multiplicative scale symmetry, giving identical 50% probability to halving the parameter (0.5x) or doubling it (2.0x), preventing large-value bias"
+        is_correct: true
+      - id: "opt-2"
+        text: "Log-uniform sampling guarantees that all sampled numbers are prime integers"
+        is_correct: false
+      - id: "opt-3"
+        text: "Linear uniform sampling produces division-by-zero errors on GPU hardware"
+        is_correct: false
+      - id: "opt-4"
+        text: "Logarithms prevent electric motors from consuming electrical power"
+        is_correct: false
+    explanation: "Because physical scale parameters act multiplicatively, linear uniform sampling heavily biases training toward larger numbers. Log-uniform sampling treats relative ratios symmetrically."
+
+  - id: "q-s2r-05"
+    target_objective_id: "obj-s2r-5"
+    prompt: "In the Teacher-Student distillation paradigm for Sim-to-Real transfer, why is the Critic network trained with privileged simulator state (exact friction, mass, obstacle locations) while the Actor is constrained to realistic noisy sensor history?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The Critic is discarded after training and never deployed on physical hardware, allowing it to provide low-variance value guidance, while the Actor must run on real hardware with only onboard sensors"
+        is_correct: true
+      - id: "opt-2"
+        text: "The Critic requires less RAM than the Actor network"
+        is_correct: false
+      - id: "opt-3"
+        text: "Privileged states cause GPU memory bus saturation if passed to the Actor"
+        is_correct: false
+      - id: "opt-4"
+        text: "The Actor network is designed to control only simulated graphics"
+        is_correct: false
+    explanation: "Asymmetric actor-critic exploits simulation omniscience for the Critic to evaluate states accurately during training, while enforcing strict sensory realism on the Actor so it can deploy zero-shot to physical hardware."

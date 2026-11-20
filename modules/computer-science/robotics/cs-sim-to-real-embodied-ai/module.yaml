@@ -35,19 +35,28 @@ relationships:
 
 learning_objectives:
   - id: "obj-s2r-1"
+    statement: "Explain the causes of the Reality Gap, including dynamics discrepancies, sensory artifacts, and temporal latency queues."
+    bloom_level: "understand"
+  - id: "obj-s2r-2"
+    statement: "Calculate the phase lag, communication delay distances, and low-level PD motor torques for physical robotic joints."
+    bloom_level: "apply"
+  - id: "obj-s2r-3"
     statement: "Diagnose the physical, sensory, and latency sources of the Reality Gap in robotic simulation."
     bloom_level: "analyze"
-  - id: "obj-s2r-2"
+  - id: "obj-s2r-4"
+    statement: "Evaluate the mathematical properties of log-uniform sampling and privileged teacher-student policy distillation."
+    bloom_level: "evaluate"
+  - id: "obj-s2r-5"
     statement: "Design Domain Randomization distributions across mass, friction, and motor latency to train robust policies."
-    bloom_level: "create"
-  - id: "obj-s2r-3"
-    statement: "Synthesize vision perception, Kalman state filtering, deep RL policies, and inverse kinematics into a complete closed-loop sensorimotor controller."
     bloom_level: "create"
 
 practical_applications:
   - title: "Autonomous Quadruped Locomotion and Dexterous Robotic Grasping"
     type: "computational_simulation"
     description: "Train complex multi-legged walking robots and dexterous robotic hands in simulated physics engines and deploy zero-shot to physical hardware."
+  - title: "Sim-to-Real Deployment Pipeline for Multi-Legged Autonomous Field Robots"
+    type: "engineering_design"
+    description: "Design automated domain randomization suites and CAN-bus latency buffers to bridge the reality gap for autonomous field inspection robots."
 
 provenance:
   sources:
