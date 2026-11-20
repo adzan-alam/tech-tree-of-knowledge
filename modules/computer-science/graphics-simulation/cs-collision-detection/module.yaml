@@ -1,10 +1,10 @@
 id: "a1000000-0000-0000-0000-000000000008"
 slug: "cs-collision-detection"
-title: "Collision Detection and Contact Manifold Resolution"
-summary: "Geometric collision algorithms: Circle-Circle, Axis-Aligned Bounding Box (AABB), penetration depth calculation, positional separation, and restitution impulses."
+title: "Collision Detection: Broadphase Spatial Grids, SAT Geometry, and Contact Manifolds"
+summary: "Geometric collision algorithms: Circle-Circle, Axis-Aligned Bounding Box (AABB), Separating Axis Theorem (SAT), Spatial Hash Grids, and Baumgarte contact resolution."
 version: "1.0.0"
 created_at: "2026-11-19T01:30:00Z"
-updated_at: "2026-11-19T01:30:00Z"
+updated_at: "2026-11-20T19:50:00Z"
 
 classification:
   discipline: "computer-science"
@@ -16,8 +16,8 @@ classification:
 verification:
   status: "technically-verified"
   reviewed_by: ["cs-verifier-01", "phys-verifier-01"]
-  verification_date: "2026-11-19"
-  notes: "Separating axis theorem, penetration displacement, and positional correction to prevent sinking verified."
+  verification_date: "2026-11-20"
+  notes: "Separating axis theorem, spatial hash grid hashing, penetration displacement, and positional Baumgarte correction verified."
 
 relationships:
   prerequisites:
@@ -36,19 +36,28 @@ relationships:
 
 learning_objectives:
   - id: "obj-col-1"
-    statement: "Explain the distinction between the broad-phase and narrow-phase collision detection pipelines."
+    statement: "Explain the distinction between the broad-phase and narrow-phase collision detection pipelines and the O(N^2) pairwise problem."
     bloom_level: "understand"
   - id: "obj-col-2"
-    statement: "Implement circle-circle and circle-line intersection tests and calculate contact penetration depths."
+    statement: "Calculate circle-circle and circle-AABB intersection geometry including penetration depth and unit contact normal."
     bloom_level: "apply"
   - id: "obj-col-3"
-    statement: "Construct a complete collision resolution pipeline including positional correction (Baumgarte stabilization) and restitution impulses."
+    statement: "Analyze convex polygon collisions using the Separating Axis Theorem (SAT) to identify separating axes and the Minimum Translation Vector."
+    bloom_level: "analyze"
+  - id: "obj-col-4"
+    statement: "Evaluate spatial partitioning techniques including uniform spatial hash grids and continuous collision detection (CCD) for tunneling prevention."
+    bloom_level: "evaluate"
+  - id: "obj-col-5"
+    statement: "Synthesize a complete 2D collision detection and resolution pipeline integrating broadphase hashing, SAT narrowphase, and Baumgarte contact stabilization."
     bloom_level: "create"
 
 practical_applications:
   - title: "Real-time Bouncing Ball Simulator"
     type: "computational_simulation"
-    description: "Detect multiple bouncing spheres colliding with floor, walls, and each other without sinking or overlapping."
+    description: "Detect multiple bouncing spheres colliding with floor, walls, and each other without sinking or overlapping using spatial hash acceleration."
+  - title: "Robotics Obstacle Avoidance Manifold"
+    type: "engineering_design"
+    description: "Design an interactive collision avoidance pipeline using the Separating Axis Theorem to generate Minimum Translation Vectors for autonomous navigation."
 
 provenance:
   sources:
@@ -58,18 +67,20 @@ provenance:
       claims_supported: [
         "Sphere-sphere intersection condition",
         "AABB overlap predicate",
-        "Penetration depth and contact normal computation"
+        "Separating Axis Theorem for convex polyhedra",
+        "Spatial hashing and broadphase partitioning"
       ]
-    - id: "src-carden-game-physics-engine-development"
-      citation: "Millington, I. (2010). Game Physics Engine Development (2nd ed.). CRC Press, Chapter 12: Particle Contact Resolution."
-      isbn: "978-0123819765"
+    - id: "src-catto-box2d"
+      citation: "Catto, E. (2006). Fast and Simple Physics using Sequential Impulses. Game Developers Conference."
+      url: "https://box2d.org/files/ErinCatto_SequentialImpulses_GDC2006.pdf"
       claims_supported: [
-        "Impulse resolution along contact normal",
-        "Interpenetration removal and Baumgarte stabilization"
+        "Contact manifold generation",
+        "Baumgarte positional stabilization and slop parameter",
+        "Linear projection to prevent sinking in resting contact"
       ]
 
 discovery_context:
-  historical_significance: "Early computer graphics and CAD pioneers in the 1960s-1970s developed computational geometry algorithms, foundational to modern video games and aerospace simulations."
+  historical_significance: "From early computer graphics clipping in the 1970s to modern rigid-body physics engines, collision detection forms the geometric bridge between mathematical state and physical touch."
   historical_influences:
-    - discovery_id: "disc-sutherland-sketchpad-1963"
-    - discovery_id: "disc-computational-geometry-1970s"
+    - discovery_id: "disc-hyperplane-separation-theorem"
+    - discovery_id: "disc-spatial-hashing-algorithms"

@@ -4,48 +4,77 @@ passing_threshold_percent: 75
 questions:
   - id: "q-num-01"
     target_objective_id: "obj-num-1"
-    prompt: "Why is the naive Explicit (Forward) Euler algorithm generally considered unsuitable for long-term physics simulations of planetary orbits or springs?"
+    prompt: "Why does Explicit (Forward) Euler cause a simulated mass on a spring to spiral outward into an exponential energy explosion?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "It is non-symplectic and artificially injects energy into oscillatory systems each step, causing orbits to spiral outward uncontrollably."
+        text: "The determinant of its state transition matrix is det(M) = 1 + omega^2 * dt^2 > 1, expanding phase-space area and pumping artificial energy on every tick."
         is_correct: true
       - id: "opt-2"
-        text: "It cannot handle positive numbers."
+        text: "Explicit Euler uses IEEE-754 32-bit floats which truncate negative signs."
         is_correct: false
       - id: "opt-3"
-        text: "It requires quantum computers to compile."
+        text: "Newton's laws are invalid when integrated using forward differences."
         is_correct: false
       - id: "opt-4"
-        text: "It violates Newton's First Law only on weekends."
+        text: "The spring constant k becomes complex-valued when multiplied by delta t."
         is_correct: false
-    explanation: "Explicit Euler systematically overestimates velocity and position in convex potential wells, artificially inflating total mechanical energy over time."
+    explanation: "Because det(M) = 1 + omega^2 * dt^2 > 1, the transformation stretches phase space on every step, violating Liouville's theorem and multiplying total mechanical energy exponentially."
 
   - id: "q-num-02"
     target_objective_id: "obj-num-2"
-    prompt: "In Semi-Implicit (Symplectic) Euler, what is the crucial sequencing difference compared to Explicit Euler?"
-    type: "multiple_choice"
-    options:
-      - id: "opt-1"
-        text: "Velocity is updated first using acceleration, and then position is updated using the NEW velocity (x_{k+1} = x_k + v_{k+1}*dt)."
-        is_correct: true
-      - id: "opt-2"
-        text: "Position is updated first using past velocity, then velocity is deleted."
-        is_correct: false
-      - id: "opt-3"
-        text: "Acceleration is ignored entirely."
-        is_correct: false
-      - id: "opt-4"
-        text: "Time dt is set to zero."
-        is_correct: false
-    explanation: "Using the updated velocity v_{k+1} to compute x_{k+1} makes the transform symplectic, conserving phase space area."
+    prompt: "For a simple harmonic oscillator with omega = 1 rad/s, what is the determinant of the 2x2 state transition matrix for the Semi-Implicit (Euler-Cromer) method?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 1.0
+      tolerance: 0.0001
+      unit: "scalar"
+    explanation: "det(M_SIE) = (1 - omega^2 * dt^2)*(1) - (dt)*(-omega^2 * dt) = 1 - omega^2 * dt^2 + omega^2 * dt^2 = 1.0 exactly."
 
   - id: "q-num-03"
     target_objective_id: "obj-num-3"
-    prompt: "A particle with initial x = 0, initial v = 10 m/s undergoes constant acceleration a = 4 m/s^2. Using the Verlet position formula x = x_0 + v_0*dt + 0.5*a*(dt)^2 with dt = 2 seconds, what is x?"
+    prompt: "In the Velocity Verlet algorithm, why do the local truncation errors cancel out to produce a second-order global convergence O(dt^2)?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Adding the forward x(t + dt) and backward x(t - dt) Taylor series causes all odd-power derivative terms (velocity and jerk) to cancel identically."
+        is_correct: true
+      - id: "opt-2"
+        text: "It computes four intermediate force evaluations using Simpson's rule."
+        is_correct: false
+      - id: "opt-3"
+        text: "It restricts integration exclusively to circular orbital paths."
+        is_correct: false
+      - id: "opt-4"
+        text: "The acceleration is integrated backwards in time."
+        is_correct: false
+    explanation: "x(t+dt) + x(t-dt) = 2x(t) + a(t)*dt^2 + O(dt^4). The odd terms v(t)*dt and b(t)*dt^3 cancel out, upgrading accuracy from first order to second order."
+
+  - id: "q-num-04"
+    target_objective_id: "obj-num-4"
+    prompt: "A stiff spring-mass system has natural angular frequency omega = 50 rad/s. What is the maximum stable timestep dt_max for Semi-Implicit Euler under the CFL stability limit (omega * dt < 2)?"
     type: "numerical_calculation"
     numerical_solution:
-      value: 28.0
-      tolerance: 0.05
-      unit: "meters"
-    explanation: "x = 0 + 10*(2) + 0.5*(4)*(2^2) = 20 + 0.5*4*4 = 20 + 8 = 28 meters."
+      value: 0.04
+      tolerance: 0.001
+      unit: "seconds"
+    explanation: "dt_max = 2 / omega = 2 / 50 = 0.04 seconds (40 ms)."
+
+  - id: "q-num-05"
+    target_objective_id: "obj-num-5"
+    prompt: "Why is 2nd-order Velocity Verlet preferred over 4th-order Runge-Kutta (RK4) for multi-year planetary orbital simulations?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Velocity Verlet is symplectic and conserves a nearby shadow Hamiltonian, locking orbital energy in a bounded envelope, whereas RK4's non-symplectic truncation error causes secular energy drift."
+        is_correct: true
+      - id: "opt-2"
+        text: "RK4 cannot calculate gravitational forces in two dimensions."
+        is_correct: false
+      - id: "opt-3"
+        text: "Velocity Verlet runs on GPU shaders whereas RK4 only runs on main CPU registers."
+        is_correct: false
+      - id: "opt-4"
+        text: "RK4 violates Kepler's Third Law when eccentricity exceeds 0.05."
+        is_correct: false
+    explanation: "Non-symplectic integrators like RK4 suffer from secular energy dissipation or gain over long horizons. Symplectic integrators preserve phase-space volume, ensuring that orbital semi-major axes remain stable over millions of orbits."

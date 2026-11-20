@@ -102,3 +102,13 @@
   3. Provided production-grade TypeScript engines: `KinematicsEngine` (analytical & numerical ballistic solvers with quadratic drag), `NewtonianBody` (force accumulator, inverse mass, static/kinetic friction), and `MomentumCollisionResolver` (normal impulse scalar $J$, restitution $e$, and Baumgarte penetration stabilization).
   4. Created 5-tier multi-level practice problem sets with complete step-by-step arithmetic solutions and updated YAML manifests with 5 Bloom taxonomy levels and 5 tiered assessment questions.
 - **Consequences:** All 3 modules achieve full GSMS-10 compliance, passing `npm run validate`, `npm run module:lint`, and `npm run test:ts`.
+
+
+## ADR-009: Elevation of CS Foundation Modules (Programming Fundamentals, Numerical Integration, Collision Detection) to GSMS-10
+- **Context:** Modules 6, 7, and 8 (`cs-prog-fundamentals`, `cs-numerical-integration`, `cs-collision-detection`) provide the foundational bridge between physical laws and discrete computational realization. They complete the core requirements of Pathway 1 (`pathway-2d-physics-simulator.yaml`).
+- **Decision:**
+  1. Grounded each module in historical/everyday anchor paradoxes (The Flipbook Illusion & Wall Glitch for programming; The Exploding Trampoline for numerical integration; The Ghost in the Wall & Jittering Stack for collision detection).
+  2. Provided complete step-by-step mathematical proofs without skipped steps: CPU memory cache lines (64-byte burst reads) and SoA vs AoS memory bandwidth analysis, Liouville's phase-space volume conservation theorem, Explicit Euler's determinant expansion proof ($\det = 1 + \omega^2\Delta t^2 > 1$), Semi-Implicit Euler's exact symplecticity proof ($\det \equiv 1.0$), Velocity Verlet's symmetric Taylor series cancellation of odd derivative powers ($O(\Delta t^2)$ global accuracy), the CFL stability criterion ($\omega\Delta t < 2$), Separating Axis Theorem (SAT) interval projection, and Baumgarte positional stabilization with slop tolerance.
+  3. Provided production-grade TypeScript engines: `DeterministicSimulationEngine` with fixed-timestep accumulator, temporal interpolation, and circular ring-buffer rollback; `NumericalIntegratorSuite` benchmarking Explicit Euler, Symplectic Euler, Velocity Verlet, and RK4 with live energy telemetry; and `CollisionPipeline2D` with spatial hash grid broadphase, SAT polygon narrowphase, and Baumgarte contact resolution.
+  4. Authored 5-tier multi-level practice problem sets with complete step-by-step arithmetic solutions and updated YAML manifests with 5 Bloom taxonomy levels and 5 tiered assessment questions.
+- **Consequences:** All 3 modules achieve full GSMS-10 compliance, passing schema validation, provenance linting, and unit test suites.

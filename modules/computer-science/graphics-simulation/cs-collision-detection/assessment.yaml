@@ -4,48 +4,86 @@ passing_threshold_percent: 75
 questions:
   - id: "q-col-01"
     target_objective_id: "obj-col-1"
-    prompt: "In a computational physics pipeline with thousands of bodies, what is the role of the broad-phase collision detection step?"
+    prompt: "Why do professional physics engines split collision detection into a broadphase and narrowphase pipeline?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "Quickly discard pairs of objects that are nowhere near each other using cheap bounding volumes, avoiding expensive O(N^2) narrow-phase geometric tests."
+        text: "Checking all pairs of N bodies naively requires O(N^2) tests, which becomes computationally impossible for large scenes; broadphase filters out 99% of distant pairs in O(N) time."
         is_correct: true
       - id: "opt-2"
-        text: "Directly calculate exact contact manifolds and friction forces."
+        text: "Narrowphase only works on 64-bit operating systems."
         is_correct: false
       - id: "opt-3"
-        text: "Render textures to the GPU."
+        text: "Broadphase calculates the restitution impulse, while narrowphase calculates friction."
         is_correct: false
       - id: "opt-4"
-        text: "Delete overlapping bodies from memory."
+        text: "The GPU requires all collision polygons to have exactly three vertices."
         is_correct: false
-    explanation: "Broad-phase collision detection uses spatial partitioning or bounding boxes to rapidly prune distant pairs before exact shape tests."
+    explanation: "Pairwise checking scales as N(N-1)/2 = O(N^2). Broadphase spatial partitioning (grids, BVH) quickly eliminates distant pairs, leaving only a tiny candidate subset for exact O(1) narrowphase geometry."
 
   - id: "q-col-02"
     target_objective_id: "obj-col-2"
-    prompt: "Circle A has center at (0, 0) and radius 5. Circle B has center at (3, 4) and radius 3. What is the penetration depth between them?"
+    prompt: "Circle 1 has center P1(1.0, 1.0) and radius r1 = 3.0 m. Circle 2 has center P2(4.0, 5.0) and radius r2 = 3.0 m. What is the penetration depth between these two circles?"
     type: "numerical_calculation"
     numerical_solution:
-      value: 3.0
-      tolerance: 0.05
-      unit: "units"
-    explanation: "Distance between centers = sqrt(3^2 + 4^2) = 5. Sum of radii = 5 + 3 = 8. Penetration = 8 - 5 = 3 units."
+      value: 1.0
+      tolerance: 0.01
+      unit: "meters"
+    explanation: "Distance between centers d = sqrt((4-1)^2 + (5-1)^2) = sqrt(9 + 16) = 5.0 m. Sum of radii = 3.0 + 3.0 = 6.0 m. Penetration depth = 6.0 - 5.0 = 1.0 m."
 
   - id: "q-col-03"
     target_objective_id: "obj-col-3"
-    prompt: "Why is positional correction (moving overlapping bodies apart) necessary in addition to applying an elastic velocity impulse?"
+    prompt: "According to the Separating Axis Theorem (SAT), when two convex 2D polygons are intersecting, how is the contact normal and penetration depth determined?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "Because without positional correction, finite numerical time-steps cause objects to remain partially embedded, creating jitter or sinking."
+        text: "The candidate axis with the minimum projection overlap is chosen as the contact normal, and that minimal overlap is the penetration depth (Minimum Translation Vector)."
         is_correct: true
       - id: "opt-2"
-        text: "Because Newton's Third Law is only true when objects are at rest."
+        text: "The candidate axis with the maximum projection overlap is chosen."
         is_correct: false
       - id: "opt-3"
-        text: "To increase the framerate of the monitor."
+        text: "The contact normal is always strictly vertical along the Y-axis."
         is_correct: false
       - id: "opt-4"
-        text: "Positional correction is actually never used in physics engines."
+        text: "The average of all non-zero projection overlaps determines the normal."
         is_correct: false
-    explanation: "Due to discrete time steps, bodies penetrate before a collision is detected. Velocity impulses alone don't instantly remove the positional overlap, causing objects to sink."
+    explanation: "The direction requiring the least amount of displacement to separate the intersecting shapes is the axis with minimal overlap, known as the Minimum Translation Vector (MTV)."
+
+  - id: "q-col-04"
+    target_objective_id: "obj-col-4"
+    prompt: "What is the primary cause of 'tunneling' (the bullet-through-paper problem) in discrete collision detection, and what technique resolves it?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "High velocity relative to frame duration causes an object to jump completely across an obstacle in a single dt step without overlapping at discrete sampling endpoints; Continuous Collision Detection (CCD) solves it via swept volumes or raycasting."
+        is_correct: true
+      - id: "opt-2"
+        text: "Tunneling is caused by division by zero in the square root instruction of the CPU."
+        is_correct: false
+      - id: "opt-3"
+        text: "Tunneling occurs only when both colliding bodies have equal mass."
+        is_correct: false
+      - id: "opt-4"
+        text: "The Separating Axis Theorem is invalid when polygons have more than 4 edges."
+        is_correct: false
+    explanation: "If displacement v * dt exceeds the obstacle's thickness, the object transitions from before the wall to after the wall between consecutive frames. CCD calculates the continuous Time-of-Impact (TOI) to catch intersections."
+
+  - id: "q-col-05"
+    target_objective_id: "obj-col-5"
+    prompt: "Why is a penetration slop parameter (e.g. 0.01 m) included in Baumgarte positional stabilization?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "To allow a microscopic tolerance band that prevents resting stacked bodies from jittering violently due to numerical truncation and continuous gravitational acceleration."
+        is_correct: true
+      - id: "opt-2"
+        text: "To permanently disable collision checking between stationary bodies."
+        is_correct: false
+      - id: "opt-3"
+        text: "To convert 2D coordinates into 3D homogeneous coordinates."
+        is_correct: false
+      - id: "opt-4"
+        text: "To ensure the coefficient of restitution is multiplied by mass."
+        is_correct: false
+    explanation: "Without slop, minuscule floating-point overlaps constantly trigger corrective positional impulses, creating visible trembling and jittering in stacked resting objects."

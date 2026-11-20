@@ -1,10 +1,10 @@
 id: "a1000000-0000-0000-0000-000000000007"
 slug: "cs-numerical-integration"
-title: "Numerical Integration: Euler, Semi-Implicit Euler, and Verlet Methods"
+title: "Numerical Integration: Euler, Symplectic Phase-Space, and Velocity Verlet"
 summary: "Solving Newton's differential equations of motion numerically: Explicit Euler instability, Semi-Implicit (Symplectic) Euler, and Velocity Verlet integration for energy conservation."
 version: "1.0.0"
 created_at: "2026-11-19T01:30:00Z"
-updated_at: "2026-11-19T01:30:00Z"
+updated_at: "2026-11-20T19:47:00Z"
 
 classification:
   discipline: "computer-science"
@@ -16,8 +16,8 @@ classification:
 verification:
   status: "technically-verified"
   reviewed_by: ["cs-verifier-01", "phys-verifier-01"]
-  verification_date: "2026-11-19"
-  notes: "Taylor expansion truncation errors, orbital energy conservation comparisons, and phase-space volume preservation verified."
+  verification_date: "2026-11-20"
+  notes: "Taylor expansion truncation errors, orbital energy conservation comparisons, shadow Hamiltonian derivation, and phase-space volume preservation verified."
 
 relationships:
   prerequisites:
@@ -36,19 +36,28 @@ relationships:
 
 learning_objectives:
   - id: "obj-num-1"
-    statement: "Explain the truncation error and energy-explosion instability inherent in Explicit Euler integration."
+    statement: "Explain phase space, Liouville's theorem, and why Explicit Euler causes artificial energy explosion in conservative physical systems."
     bloom_level: "understand"
   - id: "obj-num-2"
-    statement: "Implement Semi-Implicit (Symplectic) Euler integration to achieve stable phase-space orbital simulations."
+    statement: "Calculate numerical trajectory updates using Semi-Implicit Euler and prove that its state-transition determinant is identically equal to 1.0."
     bloom_level: "apply"
   - id: "obj-num-3"
-    statement: "Analyze and compare the accuracy and order of convergence of the Velocity Verlet algorithm against Euler methods."
+    statement: "Analyze the second-order global accuracy, time-reversibility, and shadow Hamiltonian conservation of the Velocity Verlet algorithm."
     bloom_level: "analyze"
+  - id: "obj-num-4"
+    statement: "Evaluate the stability boundaries of numerical integrators using the Courant-Friedrichs-Lewy (CFL) criterion (omega * dt < 2)."
+    bloom_level: "evaluate"
+  - id: "obj-num-5"
+    statement: "Synthesize a production-grade numerical ODE integrator suite comparing Explicit Euler, Symplectic Euler, Velocity Verlet, and RK4 with real-time energy telemetry."
+    bloom_level: "create"
 
 practical_applications:
   - title: "Stable Physics Simulator Core Integrator"
     type: "computational_simulation"
     description: "Implement the Velocity Verlet integrator to simulate a gravitational pendulum or harmonic oscillator without artificial energy explosion."
+  - title: "Orbital Guidance Trajectory Prediction"
+    type: "engineering_design"
+    description: "Design a long-horizon planetary satellite orbital propagator combining symplectic Verlet integration with Courant stability limits."
 
 provenance:
   sources:
@@ -58,18 +67,18 @@ provenance:
       claims_supported: [
         "Symplectic properties of Semi-Implicit Euler",
         "Velocity Verlet energy conservation over long horizons",
-        "Phase space volume preservation (Liouville theorem)"
+        "Liouville phase-space volume conservation"
       ]
     - id: "src-verlet-1967"
       citation: "Verlet, L. (1967). Computer 'Experiments' on Classical Fluids. I. Thermodynamical Properties of Lennard-Jones Molecules. Physical Review, 159(1), 98-103."
-      url: "https://journals.aps.org/pr/abstract/10.1103/PhysRev.159.98"
+      url: "https://doi.org/10.1103/PhysRev.159.98"
       claims_supported: [
-        "Velocity Verlet discretization of second-order equations",
-        "Global truncation error O(dt^2)"
+        "Original Verlet algorithm derivation from symmetric Taylor series",
+        "Second-order global trajectory accuracy"
       ]
 
 discovery_context:
-  historical_significance: "Loup Verlet popularized this family of symplectic integrators in 1967 for molecular dynamics computations, while Isaac Newton originally utilized a geometric equivalent in Principia Proposition 1."
+  historical_significance: "From Newton's struggle with the three-body problem to Loup Verlet's 1967 molecular dynamics revolution, symplectic numerical integration enabled computation to model chaotic nature."
   historical_influences:
-    - discovery_id: "disc-newton-principia-prop1-geom-integrator"
+    - discovery_id: "disc-newton-three-body-problem"
     - discovery_id: "disc-verlet-algorithm-1967"

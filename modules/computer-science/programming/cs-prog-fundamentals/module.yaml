@@ -1,23 +1,23 @@
 id: "a1000000-0000-0000-0000-000000000006"
 slug: "cs-prog-fundamentals"
-title: "Programming Fundamentals: State, Loops, and Discrete Simulation"
-summary: "Variables, state mutation, iterative control flow, functions, discrete time-stepping, and structuring software loops for real-time simulations."
+title: "Programming Fundamentals: State, Memory Architecture, and Discrete Simulation"
+summary: "Variables, state mutation, iterative control flow, memory hierarchy, cache lines, fixed delta-time accumulator loops, and deterministic simulation architecture."
 version: "1.0.0"
 created_at: "2026-11-19T01:30:00Z"
-updated_at: "2026-11-19T01:30:00Z"
+updated_at: "2026-11-20T19:45:00Z"
 
 classification:
   discipline: "computer-science"
   domain: "programming"
   proficiency_tier: 1
   difficulty_score: 0.3
-  estimated_duration_minutes: 60
+  estimated_duration_minutes: 75
 
 verification:
   status: "technically-verified"
   reviewed_by: ["cs-verifier-01", "pedagogy-auditor-02"]
-  verification_date: "2026-11-19"
-  notes: "Discrete simulation loop mechanics, deterministic state update equations, and array iterations verified."
+  verification_date: "2026-11-20"
+  notes: "Discrete simulation loop mechanics, deterministic state update equations, cache locality, and ring-buffer rollback verified."
 
 relationships:
   prerequisites: []
@@ -29,19 +29,28 @@ relationships:
 
 learning_objectives:
   - id: "obj-prog-1"
-    statement: "Explain the concept of program state and how discrete variables evolve iteratively across discrete time steps."
+    statement: "Explain the concept of program state, variables in hardware memory, and how discrete difference equations model physical systems."
     bloom_level: "understand"
   - id: "obj-prog-2"
-    statement: "Implement functions and structured loops to iterate over collections of simulation entities."
+    statement: "Calculate discrete state updates across iterative loops using deterministic difference equations."
     bloom_level: "apply"
   - id: "obj-prog-3"
-    statement: "Construct a deterministic simulation update loop with fixed delta time (dt)."
+    statement: "Analyze the differences between Array-of-Structures (AoS) and Structure-of-Arrays (SoA) in terms of CPU cache lines and memory bandwidth."
+    bloom_level: "analyze"
+  - id: "obj-prog-4"
+    statement: "Evaluate numerical software traps including floating-point non-associativity, time-drift accumulation, and the simulation spiral of death."
+    bloom_level: "evaluate"
+  - id: "obj-prog-5"
+    statement: "Synthesize a deterministic simulation engine with fixed-timestep accumulator pacing, sub-tick interpolation, and ring-buffer rollback capability."
     bloom_level: "create"
 
 practical_applications:
   - title: "Deterministic 60Hz Physics Tick Loop"
     type: "computational_simulation"
-    description: "Build a fixed time-step simulation loop separating rendering framerate from computational physics updates."
+    description: "Build a fixed time-step simulation loop separating rendering framerate from computational physics updates with sub-tick interpolation."
+  - title: "High-Performance Data-Oriented Particle System"
+    type: "engineering_design"
+    description: "Design a Structure-of-Arrays (SoA) particle memory pool to maximize CPU L1 cache line hit rates and enable SIMD auto-vectorization."
 
 provenance:
   sources:
@@ -59,9 +68,17 @@ provenance:
         "Computational processes and program state",
         "Procedural abstraction and iteration"
       ]
+    - id: "src-fiedler-fix-your-timestep"
+      citation: "Fiedler, G. (2004). Fix Your Timestep! Gaffer on Games."
+      url: "https://gafferongames.com/post/fix_your_timestep/"
+      claims_supported: [
+        "Accumulator pattern for fixed time-step physics",
+        "Temporal interpolation for sub-tick visual rendering",
+        "Spiral of death time clamping"
+      ]
 
 discovery_context:
-  historical_significance: "The concept of discrete state machine simulation originates from Alan Turing's 1936 universal computing machine and John von Neumann's stored-program architecture."
+  historical_significance: "From Alan Turing's 1936 universal computing machine to John von Neumann's 1945 stored-program architecture, discrete state machines became the foundation for modeling continuous physical reality."
   historical_influences:
-    - discovery_id: "disc-turing-computability-1936"
+    - discovery_id: "disc-turing-machine-1936"
     - discovery_id: "disc-von-neumann-architecture-1945"

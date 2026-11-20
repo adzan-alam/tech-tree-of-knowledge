@@ -4,22 +4,22 @@ passing_threshold_percent: 75
 questions:
   - id: "q-prog-01"
     target_objective_id: "obj-prog-1"
-    prompt: "Why do physics simulations favor a fixed time-step (e.g. dt = 1/60s) over a variable delta time tied directly to the monitor framerate?"
+    prompt: "Why do physics simulations require a fixed time-step (e.g. dt = 1/60s) with an accumulator rather than integrating directly with variable frame duration dt = (currentTime - lastTime)?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "Fixed time-steps ensure deterministic, stable, and reproducible numerical integration regardless of framerate fluctuations."
+        text: "Variable delta time destroys determinism, introduces non-reproducible trajectories, and causes catastrophic tunneling or physics explosions when frame drops occur."
         is_correct: true
       - id: "opt-2"
-        text: "Computers can only calculate numbers divisible by 60."
+        text: "Operating systems forbid CPU arithmetic using fractions not divisible by 60."
         is_correct: false
       - id: "opt-3"
-        text: "Variable delta time is forbidden by the operating system kernel."
+        text: "A fixed time step eliminates all frictional resistance in simulation."
         is_correct: false
       - id: "opt-4"
-        text: "A fixed time step eliminates the need to calculate friction."
+        text: "Hardware monitors cannot display pixels unless the physics engine runs at 60 Hz."
         is_correct: false
-    explanation: "Variable time steps introduce non-deterministic numerical drift and instability when frame drops occur. Fixed time-stepping guarantees reproducible physics."
+    explanation: "Variable time steps introduce non-deterministic numerical drift, render replays impossible, and cause objects to blow through boundaries when an OS background task causes frame stutter. Fixed time-stepping guarantees reproducible physics."
 
   - id: "q-prog-02"
     target_objective_id: "obj-prog-2"
@@ -33,10 +33,57 @@ questions:
 
   - id: "q-prog-03"
     target_objective_id: "obj-prog-3"
-    prompt: "If a simulation runs at 120 ticks per second, what is the fixed delta time dt in seconds?"
-    type: "numerical_calculation"
-    numerical_solution:
-      value: 0.008333
-      tolerance: 0.0001
-      unit: "seconds"
-    explanation: "dt = 1 / frequency = 1 / 120 = 0.008333... seconds."
+    prompt: "In a high-performance particle simulator updating 100,000 entities, why does a Structure of Arrays (SoA) layout outperform an Object-Oriented Array of Structures (AoS) layout?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "SoA packs identical data fields contiguously in RAM, maximizing 64-byte CPU cache line utilization, prefetching efficiency, and enabling SIMD auto-vectorization."
+        is_correct: true
+      - id: "opt-2"
+        text: "SoA automatically converts all floating-point numbers into 128-bit exact rational fractions."
+        is_correct: false
+      - id: "opt-3"
+        text: "AoS is forbidden in compiled programming languages due to heap alignment restrictions."
+        is_correct: false
+      - id: "opt-4"
+        text: "SoA eliminates the need to allocate memory in system RAM entirely."
+        is_correct: false
+    explanation: "In AoS, fetching a position pulls unused fields (color, name, mass) into the precious 64-byte L1 cache line. In SoA, consecutive positions sit shoulder-to-shoulder, ensuring 100% cache line utility and seamless SIMD vector processing."
+
+  - id: "q-prog-04"
+    target_objective_id: "obj-prog-4"
+    prompt: "In IEEE-754 double precision floating point, why does (1e20 + (-1e20)) + 1 equal 1, whereas 1e20 + ((-1e20) + 1) equals 0?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Floating-point addition is non-associative; when adding 1 to -1e20, the 53-bit mantissa lacks precision to retain the unit, swallowing it completely."
+        is_correct: true
+      - id: "opt-2"
+        text: "The CPU Arithmetic Logic Unit swaps signs when negative exponents exceed 16."
+        is_correct: false
+      - id: "opt-3"
+        text: "JavaScript engines convert numbers larger than 1e16 into integer strings."
+        is_correct: false
+      - id: "opt-4"
+        text: "Subnormal underflow traps cause the stack pointer to pop unexpectedly."
+        is_correct: false
+    explanation: "A 64-bit float has 53 bits of precision (~15-17 decimal digits). Adding 1 to 10^20 requires shifting the mantissa by 67 bit positions, completely discarding the 1. Hence (-1e20 + 1) evaluates to -1e20, leaving 1e20 + (-1e20) = 0."
+
+  - id: "q-prog-05"
+    target_objective_id: "obj-prog-5"
+    prompt: "A simulation runs with a fixed physics timestep of dt = 1/60s (16.667 ms). A rendering frame arrives with 50.0 ms in the accumulator. How many physics ticks run during this frame, and what is the final remaining accumulator time?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "3 physics ticks execute (consuming 50.0 ms), leaving an accumulator remainder of 0.0 ms (alpha = 0)."
+        is_correct: true
+      - id: "opt-2"
+        text: "1 physics tick executes, leaving 33.333 ms in the accumulator."
+        is_correct: false
+      - id: "opt-3"
+        text: "60 physics ticks execute instantaneously to match the monitor refresh rate."
+        is_correct: false
+      - id: "opt-4"
+        text: "0 physics ticks execute because 50 ms triggers a spiral of death shutdown."
+        is_correct: false
+    explanation: "Floor(50.0 / 16.6667) = 3 ticks. Consumed time = 3 * (1/60) = 50.0 ms. Remainder = 50.0 - 50.0 = 0.0 ms."
