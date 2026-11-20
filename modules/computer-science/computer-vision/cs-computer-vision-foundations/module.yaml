@@ -33,19 +33,28 @@ relationships:
 
 learning_objectives:
   - id: "obj-cv-1"
+    statement: "Explain the pinhole camera geometry, the causes of perspective shrinkage, and the semantic gap between raw pixel arrays and physical semantics."
+    bloom_level: "understand"
+  - id: "obj-cv-2"
     statement: "Apply 2D discrete image convolutions and calculate gradient magnitude and orientation using Sobel operators."
     bloom_level: "apply"
-  - id: "obj-cv-2"
+  - id: "obj-cv-3"
     statement: "Decompose the pinhole camera perspective projection model relating 3D world coordinates to 2D image plane pixels."
     bloom_level: "analyze"
-  - id: "obj-cv-3"
-    statement: "Evaluate translation equivariance and weight sharing in Convolutional Neural Networks."
+  - id: "obj-cv-4"
+    statement: "Evaluate translation equivariance, weight sharing, and parameter compression in Convolutional Neural Networks."
     bloom_level: "evaluate"
+  - id: "obj-cv-5"
+    statement: "Construct a stereo depth recovery pipeline that computes metric 3D distances from camera baseline and pixel disparity."
+    bloom_level: "create"
 
 practical_applications:
   - title: "Robotic Visual Perception and Obstacle Detection"
     type: "computational_simulation"
     description: "Process camera video frames to extract obstacle edges and project 3D physical world coordinates onto 2D display and perception planes."
+  - title: "Autonomous Stereo Camera Depth Calibration & Object Localizer"
+    type: "engineering_design"
+    description: "Design stereo baseline optical rigs and real-time disparity disparity estimation software for mobile robotic navigation."
 
 provenance:
   sources:

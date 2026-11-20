@@ -4,48 +4,77 @@ passing_threshold_percent: 75
 questions:
   - id: "q-cv-01"
     target_objective_id: "obj-cv-1"
-    prompt: "A horizontal Sobel operator computes Gx = 40.0 and vertical operator computes Gy = 30.0 at a pixel. What is the total gradient magnitude?"
-    type: "numerical_calculation"
-    numerical_solution:
-      value: 50.0
-      tolerance: 0.05
-      unit: "intensity gradient"
-    explanation: "Magnitude = sqrt(Gx^2 + Gy^2) = sqrt(40^2 + 30^2) = sqrt(1600 + 900) = sqrt(2500) = 50.0."
+    prompt: "In a pinhole camera model, why does light passing through a tiny pinhole aperture invert the projected image upside-down and left-to-right?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Photons travel along straight Euclidean rays, so rays from the top of an object can only reach the bottom of the screen through the single aperture point"
+        is_correct: true
+      - id: "opt-2"
+        text: "Electromagnetic diffraction through small openings reverses the magnetic polarity of photons"
+        is_correct: false
+      - id: "opt-3"
+        text: "The sensor readout circuitry addresses rows from bottom to top"
+        is_correct: false
+      - id: "opt-4"
+        text: "Atmospheric air pressure bends light rays by 180 degrees at the aperture"
+        is_correct: false
+    explanation: "Because light travels along straight rays, rays from the upper half of a scene must cross through the pinhole point and strike the lower half of the sensor plane, inverting the image geometrically."
 
   - id: "q-cv-02"
     target_objective_id: "obj-cv-2"
-    prompt: "In the pinhole camera perspective projection model u = fx * (X / Z) + cx, why do distant objects project to smaller sizes on the 2D sensor?"
-    type: "multiple_choice"
-    options:
-      - id: "opt-1"
-        text: "Depth Z appears in the denominator, scaling coordinates inversely with distance"
-        is_correct: true
-      - id: "opt-2"
-        text: "Camera lenses absorb more photons from distant objects"
-        is_correct: false
-      - id: "opt-3"
-        text: "Atmospheric fog shrinks pixels"
-        is_correct: false
-      - id: "opt-4"
-        text: "The camera shutter speed decreases"
-        is_correct: false
-    explanation: "By similar triangles, image plane coordinate x = f * (X / Z). Because depth Z is in the denominator, as distance Z increases, image size shrinks."
+    prompt: "A horizontal Sobel operator computes G_x = 60.0 and a vertical Sobel operator computes G_y = 80.0 at a pixel. What is the total gradient magnitude ||grad I|| = sqrt(G_x^2 + G_y^2)?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 100.0
+      tolerance: 0.05
+      unit: "gradient magnitude"
+    explanation: "Magnitude = sqrt(60^2 + 80^2) = sqrt(3600 + 6400) = sqrt(10000) = 100.0."
 
   - id: "q-cv-03"
     target_objective_id: "obj-cv-3"
-    prompt: "What mathematical property of Convolutional Neural Networks guarantees that an edge detector learned in one part of an image will recognize that same edge anywhere in the frame?"
+    prompt: "In the pinhole camera perspective projection model u = f_x * (X / Z) + c_x, why does depth Z appear in the denominator?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "Translation Equivariance via Weight Sharing"
+        text: "Similar triangles geometry dictates that the ratio of sensor size to focal length equals the ratio of real-world size to depth: x_s / f = X / Z"
         is_correct: true
       - id: "opt-2"
-        text: "Rotational Invariance"
+        text: "Photons lose energy linearly with distance travelled"
         is_correct: false
       - id: "opt-3"
-        text: "Linear Interpolation"
+        text: "Floating-point processors require division to compute aspect ratios"
         is_correct: false
       - id: "opt-4"
-        text: "Fourier Phase Cancellation"
+        text: "The camera shutter speed scales inversely with scene distance"
         is_correct: false
-    explanation: "By sliding the exact same kernel weights across all pixel locations, CNNs achieve translation equivariance: shifting the input shifts the feature map identically."
+    explanation: "By Euclidean similar triangles formed between the scene point, optical center, and sensor plane, x_s / f = X / Z, which means projected size scales strictly as 1 / Z."
+
+  - id: "q-cv-04"
+    target_objective_id: "obj-cv-4"
+    prompt: "What mathematical property of Convolutional Neural Networks guarantees that an edge detector or feature filter learned in one corner of an image will recognize that same feature anywhere in the frame without retraining?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Translation Equivariance via Weight Sharing: f(T_{Delta x}(I)) = T_{Delta x}(f(I))"
+        is_correct: true
+      - id: "opt-2"
+        text: "Rotational Symmetry via Quaternions"
+        is_correct: false
+      - id: "opt-3"
+        text: "Dropout Regularization"
+        is_correct: false
+      - id: "opt-4"
+        text: "Batch Normalization running variance scaling"
+        is_correct: false
+    explanation: "Sweeping the exact same kernel weights across all pixel locations ensures translation equivariance: shifting the input image translates the resulting feature activations identically."
+
+  - id: "q-cv-05"
+    target_objective_id: "obj-cv-5"
+    prompt: "A stereo camera rig with baseline B = 0.40 meters and focal length f_x = 1000 pixels detects an obstacle. The obstacle appears at u_L = 750 pixels in the left camera and u_R = 670 pixels in the right camera. What is the calculated metric depth Z in meters using Z = (f * B) / d?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 5.0
+      tolerance: 0.05
+      unit: "meters"
+    explanation: "Disparity d = u_L - u_R = 750 - 670 = 80 pixels. Depth Z = (1000 * 0.40) / 80 = 400 / 80 = 5.0 meters."
