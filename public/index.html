@@ -1042,32 +1042,161 @@
           title: "2D Cartesian Vectors & Algebra",
           discipline: "mathematics",
           domain: "linear-algebra",
-          proficiencyTier: 1,
-          duration: 60,
-          summary: "Foundational mathematics of two-dimensional Euclidean vectors, Cartesian representations, vector arithmetic, dot products, norms, and orthogonal projections.",
+          duration: 90,
+          summary: "A comprehensive first-principles guide to 2D vectors: from basic grid paper and the Treasure Paradox (Class 6 level) to vector arithmetic, trigonometry, dot products, 2D cross products, and computational physics simulation.",
           prerequisites: [],
           x: 100, y: 150,
           content: `
-            <h2>1. Vectors in Euclidean Space</h2>
-            <p>A two-dimensional vector represents directed quantity. In Cartesian components, it is defined as:</p>
-            <div class="math-card">$$ \\vec{v} = v_x \\hat{i} + v_y \\hat{j} = \\begin{bmatrix} v_x \\\\ v_y \\end{bmatrix} $$</div>
-            <p>The Euclidean norm (magnitude) is calculated by Pythagorean theorem:</p>
-            <div class="math-card">$$ \\|\\vec{v}\\| = \\sqrt{v_x^2 + v_y^2} $$</div>
-            <h2>2. The Dot Product & Orthogonality</h2>
-            <p>The dot product evaluates directional alignment:</p>
+            <div style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--accent-math); padding: 1rem; border-radius: 4px; margin-bottom: 1.5rem;">
+              <strong>🎯 Pedagogical Journey:</strong> This module starts from absolute zero—assuming only basic arithmetic and graph paper—and builds an unbroken cognitive ladder to university-level computational physics.
+            </div>
+
+            <h2>Level 0: The Scalar World & The Treasure Paradox</h2>
+            <p>In standard school arithmetic, you deal almost exclusively with <strong>scalars</strong>: quantities that are completely described by a single number and a unit of measurement.</p>
+            <ul>
+              <li><strong>Mass:</strong> $5\\text{ kg}$ (a rock has mass, but its mass doesn't point in a direction).</li>
+              <li><strong>Time:</strong> $12\\text{ seconds}$ (time advances forward).</li>
+              <li><strong>Temperature:</strong> $24^\\circ\\text{C}$ (a room is warm or cold, but temperature has no spatial angle).</li>
+            </ul>
+            <p><strong>The Treasure Paradox:</strong> Imagine an old treasure map gives you a single instruction: <em>"The gold is buried exactly 50 meters away from this oak tree."</em></p>
+            <p>Can you find it? <strong>No!</strong> You could walk 50 meters North, 50 meters South, or anywhere along a circle of 50-meter radius. A single scalar number is completely useless for physical navigation without <strong>direction</strong>.</p>
+
+            <h2>Level 1: Stepping into 2D — The Grid & The First Arrow</h2>
+            <p>In 1637, René Descartes invented the coordinate plane by crossing two number lines at an Origin $O(0, 0)$: a horizontal $X$-axis and a vertical $Y$-axis.</p>
+            <p>Crucially, understand the difference between a <strong>Point</strong> and a <strong>Vector</strong>:</p>
+            <ul>
+              <li>A <strong>Point</strong> $P(x, y)$ is a fixed place (where you are).</li>
+              <li>A <strong>Vector</strong> $\\vec{v}$ is an action or journey (how you move from one point to another).</li>
+            </ul>
+            <pre style="background:#111827; padding:0.8rem; border-radius:6px; font-family:monospace; color:#60a5fa; font-size:0.85rem;">
+       Y ^
+         |           Point B (4, 4)
+       4 |            ●
+       3 |           ^
+       2 |          /  Vector v: "Walk 3 East, 4 North"
+       1 |         /
+       0 +--------+----+----> X
+         0  1  2  3  4
+        Point A (1, 0)
+            </pre>
+            <p>We write a 2D vector as two components: how far it steps horizontally ($v_x$) and vertically ($v_y$):</p>
+            <div class="math-card">$$ \\vec{v} = (v_x, v_y) = \\begin{bmatrix} v_x \\\\ v_y \\end{bmatrix} $$</div>
+
+            <h2>Level 2: The Secret of Length — Pythagoras Unlocked</h2>
+            <p>If you walk 3 steps East and then 4 steps North, you have carved out a right-angled triangle. But how far are you from home in a straight line?</p>
+            <p>Pythagoras discovered that for any right-angled triangle, $\\text{base}^2 + \\text{height}^2 = \\text{hypotenuse}^2$. Applying this to our vector components:</p>
+            <div class="math-card">$$ \\text{Length}^2 = v_x^2 + v_y^2 \\implies \\|\\vec{v}\\| = \\sqrt{v_x^2 + v_y^2} $$</div>
+            <p>We call this straight-line length the <strong>Magnitude</strong> (written $\\|\\vec{v}\\|$ or $|\\vec{v}|$).</p>
+            <p><em>Example:</em> For $\\vec{v} = (3, 4)$, the length is $\\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$.</p>
+            <p><em>Notice:</em> Because $(-a)^2 = +a^2$, negative components always yield a strictly positive length: $\\sqrt{(-6)^2 + (-8)^2} = \\sqrt{36 + 64} = 10$.</p>
+
+            <h2>Level 3: Combining Journeys — Vector Addition & Forces</h2>
+            <p>What happens when you take two trips in succession? Suppose you walk $\\vec{u} = (4, 2)$ and then walk $\\vec{v} = (3, 5)$.</p>
+            <p>Your total Eastward progress is $4 + 3 = 7$, and your total Northward progress is $2 + 5 = 7$. To add vectors, simply add their components:</p>
+            <div class="math-card">$$ \\vec{u} + \\vec{v} = \\begin{bmatrix} u_x + v_x \\\\ u_y + v_y \\end{bmatrix} $$</div>
+            <p><strong>The Tip-to-Tail Rule:</strong> Place the tail of the second arrow at the tip of the first arrow. The resultant arrow $\\vec{u} + \\vec{v}$ connects the starting point to the final destination.</p>
+            <pre style="background:#111827; padding:0.8rem; border-radius:6px; font-family:monospace; color:#34d399; font-size:0.85rem;">
+                         (Resultant Tip)
+                               ●
+                              /|
+                           v / |
+                            /  |  Resultant R = u + v
+                           ●   |
+                          /    |
+                       u /     |
+                        /      |
+                       ●-------+
+                   (Start)
+            </pre>
+            <p><strong>Physics Airplane Example:</strong> An airplane flies North at $200\\text{ km/h}$ while an East storm wind blows at $60\\text{ km/h}$. The true velocity over the ground is $(60, 200)\\text{ km/h}$, producing a ground speed of $\\sqrt{60^2 + 200^2} \\approx 208.8\\text{ km/h}$.</p>
+
+            <h2>Level 4: Stretching, Reversing & Unit Vectors</h2>
+            <p>Multiplying a vector by a scalar number $k$ scales its length by $|k|$:</p>
+            <div class="math-card">$$ k\\vec{v} = \\begin{bmatrix} k v_x \\\\ k v_y \\end{bmatrix}, \\quad \\|k\\vec{v}\\| = |k| \\|\\vec{v}\\| $$</div>
+            <ul>
+              <li>$2\\vec{v}$: Twice as long in the same direction.</li>
+              <li>$-1\\vec{v}$: The exact same length, but flipped $180^\\circ$ in reverse!</li>
+            </ul>
+            <p><strong>The Unit Vector (Direction Only):</strong> A vector of length exactly $1$ is a unit vector, written with a hat: $\\hat{v}$. To extract pure direction from any vector, divide it by its own length (normalization):</p>
+            <div class="math-card">$$ \\hat{v} = \\frac{\\vec{v}}{\\|\\vec{v}\\|} = \\begin{bmatrix} \\frac{v_x}{\\sqrt{v_x^2 + v_y^2}} \\\\ \\frac{v_y}{\\sqrt{v_x^2 + v_y^2}} \\end{bmatrix} $$</div>
+            <p>The standard basis steps are $\\hat{i} = (1, 0)$ (1 step East) and $\\hat{j} = (0, 1)$ (1 step North). Every vector is just: $\\vec{v} = v_x \\hat{i} + v_y \\hat{j}$.</p>
+
+            <h2>Level 5: Angles & Navigation — Trigonometry Visualized</h2>
+            <p>If you know magnitude $r$ and angle $\\theta$ (Polar form), you find the Cartesian steps using trigonometry:</p>
+            <div class="math-card">$$ v_x = r \\cos\\theta, \\quad v_y = r \\sin\\theta $$</div>
+            <p>To recover the angle from components, use the two-argument arctangent function <code>atan2(y, x)</code> to correctly identify the quadrant:</p>
+            <div class="math-card">$$ \\theta = \\text{atan2}(v_y, v_x) $$</div>
+
+            <h2>Level 6: The Dot Product — The "Teamwork Meter"</h2>
+            <p>The <strong>Dot Product</strong> measures how much two vectors help each other:</p>
             <div class="math-card">$$ \\vec{u} \\cdot \\vec{v} = u_x v_x + u_y v_y = \\|\\vec{u}\\| \\|\\vec{v}\\| \\cos\\theta $$</div>
-            <p>Two non-zero vectors are perpendicular if and only if $\\vec{u} \\cdot \\vec{v} = 0$.</p>
+            <ul>
+              <li><strong>Positive ($> 0$):</strong> Acute angle (working together in the same general direction).</li>
+              <li><strong>Zero ($= 0$):</strong> Strictly perpendicular ($90^\\circ$). Zero teamwork! Pushing a cart sideways doesn't speed it up or slow it down.</li>
+              <li><strong>Negative ($< 0$):</strong> Obtuse angle (opposing each other).</li>
+            </ul>
+            <p><strong>Law of Cosines Proof:</strong> In triangle $OAB$ with sides $\\vec{u}$, $\\vec{v}$, and $\\vec{w} = \\vec{u} - \\vec{v}$, the Law of Cosines states $\\|\\vec{w}\\|^2 = \\|\\vec{u}\\|^2 + \\|\\vec{v}\\|^2 - 2\\|\\vec{u}\\|\\|\\vec{v}\\|\\cos\\theta$. Expanding $\\|\\vec{u}-\\vec{v}\\|^2 = (u_x-v_x)^2 + (u_y-v_y)^2$ algebraically proves that $u_x v_x + u_y v_y = \\|\\vec{u}\\|\\|\\vec{v}\\|\\cos\\theta$.</p>
+
+            <h2>Level 7: Turning $90^\\circ$ & The 2D Cross Product</h2>
+            <p>To rotate any vector $\\vec{v} = (v_x, v_y)$ by $90^\\circ$ counter-clockwise without trigonometry, simply swap the components and negate:</p>
+            <div class="math-card">$$ \\vec{v}^\\perp = \\begin{bmatrix} -v_y \\\\ v_x \\end{bmatrix} $$</div>
+            <p>The <strong>2D Cross Product</strong> evaluates orientation (signed parallelogram area):</p>
+            <div class="math-card">$$ \\vec{u} \\times \\vec{v} = u_x v_y - u_y v_x = \\|\\vec{u}\\| \\|\\vec{v}\\| \\sin\\theta $$</div>
+            <p><em>Robotics rule:</em> If $\\vec{u} \\times \\vec{v} > 0$, the target is to your <strong>Left</strong> (steer left). If $< 0$, it is to your <strong>Right</strong> (steer right).</p>
+
+            <h2>Level 8: The Computational Engine — TypeScript Vector2D</h2>
+            <p>Here is how a real physics simulator implements vectors in clean code:</p>
+            <pre style="background:#111827; padding:1rem; border-radius:6px; font-family:monospace; color:#e5e7eb; font-size:0.8rem; overflow-x:auto;">
+export class Vector2D {
+  constructor(public x: number = 0, public y: number = 0) {}
+
+  add(v: Vector2D): Vector2D { return new Vector2D(this.x + v.x, this.y + v.y); }
+  sub(v: Vector2D): Vector2D { return new Vector2D(this.x - v.x, this.y - v.y); }
+  scale(s: number): Vector2D { return new Vector2D(this.x * s, this.y * s); }
+  mag(): number { return Math.hypot(this.x, this.y); }
+  magSq(): number { return this.x * this.x + this.y * this.y; } // Fast, no sqrt
+  normalize(): Vector2D {
+    const m = this.mag();
+    return m === 0 ? new Vector2D(0, 0) : new Vector2D(this.x / m, this.y / m);
+  }
+  dot(v: Vector2D): number { return this.x * v.x + this.y * v.y; }
+  cross(v: Vector2D): number { return this.x * v.y - this.y * v.x; }
+  reflect(normal: Vector2D): Vector2D {
+    const n = normal.normalize();
+    return this.sub(n.scale(2 * this.dot(n)));
+  }
+}
+            </pre>
           `,
           quiz: [
             {
-              prompt: "What is the Euclidean magnitude of a vector with components (6, -8)?",
-              options: ["10.0", "14.0", "48.0", "7.0"],
+              prompt: "A delivery drone starts at P(2, 5) and flies to B(8, 13). What is the straight-line distance (Euclidean magnitude) it traveled?",
+              options: ["10.0 units", "14.0 units", "48.0 units", "7.0 units"],
               correctIndex: 0,
-              explanation: "sqrt(6^2 + (-8)^2) = sqrt(36 + 64) = sqrt(100) = 10."
+              explanation: "Displacement dx = 8 - 2 = 6, dy = 13 - 5 = 8. Magnitude = sqrt(6^2 + 8^2) = sqrt(36 + 64) = sqrt(100) = 10.0 units."
+            },
+            {
+              prompt: "An airplane flies with airspeed vector (0, 200) km/h North while a crosswind blows (60, 0) km/h East. What is the ground velocity vector?",
+              options: ["(60, 200) km/h", "(200, 60) km/h", "(140, 0) km/h", "(260, 260) km/h"],
+              correctIndex: 0,
+              explanation: "Ground velocity is the vector sum: (0 + 60, 200 + 0) = (60, 200) km/h."
+            },
+            {
+              prompt: "If the dot product between two non-zero vectors u and v equals zero (u · v = 0), what does this tell us geometrically?",
+              options: ["The vectors are perpendicular (orthogonal at 90°).", "The vectors point in the exact same direction.", "The vectors have identical lengths.", "The vectors are anti-parallel (180°)."],
+              correctIndex: 0,
+              explanation: "u · v = ||u|| ||v|| cos(theta) = 0 requires cos(theta) = 0, which means theta = 90° (strictly perpendicular)."
+            },
+            {
+              prompt: "A self-driving robot faces along direction u = (1, 0) and wants to reach waypoint v = (2, 3). Using the 2D cross product u × v, which way should it steer?",
+              options: ["Steer Left (cross product is positive +3).", "Steer Right (cross product is negative).", "Maintain straight heading.", "Reverse backwards."],
+              correctIndex: 0,
+              explanation: "u × v = (1)(3) - (0)(2) = +3. A positive 2D cross product indicates the target lies counter-clockwise (to the Left)."
             }
           ],
           sources: [
-            { citation: "Strang, G. (2016). Introduction to Linear Algebra (5th ed.). Wellesley-Cambridge Press.", isbn: "978-0980232776" }
+            { citation: "Strang, G. (2016). Introduction to Linear Algebra (5th ed.). Wellesley-Cambridge Press.", isbn: "978-0980232776" },
+            { citation: "Feynman, R. P. (1963). The Feynman Lectures on Physics, Vol. I, Ch. 11: Vectors.", url: "https://www.feynmanlectures.caltech.edu/I_11.html" }
           ]
         },
         {
