@@ -4,48 +4,86 @@ passing_threshold_percent: 75
 questions:
   - id: "q-nn-01"
     target_objective_id: "obj-nn-1"
-    prompt: "Why did Minsky and Papert's 1969 proof about the XOR function trigger the First AI Winter?"
+    prompt: "What primary computational function do non-linear activation functions (such as ReLU, Sigmoid, or Tanh) serve in a deep neural network?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "It proved single-layer perceptrons cannot separate non-linearly separable functions"
+        text: "They enable the multi-layer network to approximate non-linear functions rather than collapsing into a single equivalent linear transformation W_total * x + b_total"
         is_correct: true
       - id: "opt-2"
-        text: "It showed computer hardware could never multiply floating-point numbers"
+        text: "They ensure all intermediate memory states fit into 64-byte L1 CPU cache lines"
         is_correct: false
       - id: "opt-3"
-        text: "It proved neural networks require infinite training data"
+        text: "They eliminate the need for computing gradients during backpropagation"
         is_correct: false
       - id: "opt-4"
-        text: "It proved gradient descent always diverges to infinity"
+        text: "They constrain floating-point values strictly to integers between 0 and 255"
         is_correct: false
-    explanation: "Minsky and Papert demonstrated that single-layer perceptrons are strictly limited to linear decision boundaries, failing on basic non-linear logic like XOR."
+    explanation: "Without non-linear activation functions, the composition of arbitrary linear layers f(x) = W_2(W_1 x + b_1) + b_2 simplifies to W_eff x + b_eff, collapsing the expressive power of deep networks to that of a single linear regression model."
 
   - id: "q-nn-02"
     target_objective_id: "obj-nn-2"
-    prompt: "In backpropagation, how is the weight gradient dL/dW_ij^l computed from the layer error delta_i^l and activation a_j^(l-1)?"
-    type: "multiple_choice"
-    options:
-      - id: "opt-1"
-        text: "dL/dW_ij^l = delta_i^l * a_j^(l-1)"
-        is_correct: true
-      - id: "opt-2"
-        text: "dL/dW_ij^l = delta_i^l + a_j^(l-1)"
-        is_correct: false
-      - id: "opt-3"
-        text: "dL/dW_ij^l = delta_i^l / a_j^(l-1)"
-        is_correct: false
-      - id: "opt-4"
-        text: "dL/dW_ij^l = (delta_i^l)^2 * a_j^(l-1)"
-        is_correct: false
-    explanation: "By the multivariable chain rule: dL/dW_ij = (dL/dz_i) * (dz_i/dW_ij) = delta_i * a_j."
+    prompt: "A single neuron has input vector x = [2.0, -1.0], weights W = [1.5, 3.0], and bias b = 0.5. If the activation function is ReLU(z) = max(0, z), what is the output activation a?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 0.5
+      tolerance: 0.01
+      unit: "activation"
+    explanation: "Linear combination z = (2.0 * 1.5) + (-1.0 * 3.0) + 0.5 = 3.0 - 3.0 + 0.5 = 0.5. Activation a = max(0, 0.5) = 0.5."
 
   - id: "q-nn-03"
     target_objective_id: "obj-nn-3"
-    prompt: "What is the derivative of the ReLU activation function f(z) = max(0, z) for any strictly positive input z > 0?"
-    type: "numerical_calculation"
-    numerical_solution:
-      value: 1.0
-      tolerance: 0.01
-      unit: "slope"
-    explanation: "For z > 0, f(z) = z, whose first derivative df/dz = 1.0."
+    prompt: "Why is the XOR (exclusive OR) boolean function fundamentally impossible to classify with a single-layer perceptron with weights [w1, w2] and bias b?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The four points (0,0), (0,1), (1,0), (1,1) require simultaneous inequalities b < 0, w2 + b >= 0, w1 + b >= 0, and w1 + w2 + b < 0, which algebraically sum to b > 0, creating a mathematical contradiction"
+        is_correct: true
+      - id: "opt-2"
+        text: "The XOR function has inputs that cannot be represented in binary notation"
+        is_correct: false
+      - id: "opt-3"
+        text: "The perceptron learning rule only works for 3-dimensional data points"
+        is_correct: false
+      - id: "opt-4"
+        text: "Floating-point precision limits single-layer perceptrons to fewer than 3 operations"
+        is_correct: false
+    explanation: "Summing the active conditions gives w1 + w2 + 2b >= 0. Substituting w1 + w2 + b < 0 forces b > 0, which contradicts the inactive condition for (0,0) where b < 0. Thus no single linear hyperplane exists."
+
+  - id: "q-nn-04"
+    target_objective_id: "obj-nn-4"
+    prompt: "In backpropagation, how is the gradient of the scalar loss L with respect to the weight matrix W^l of layer l formulated using the layer error vector delta^l and previous layer activation a^(l-1)?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "dL/dW^l = delta^l (a^(l-1))^T (the outer product of the error vector and the input activation transpose)"
+        is_correct: true
+      - id: "opt-2"
+        text: "dL/dW^l = delta^l + (a^(l-1))^T"
+        is_correct: false
+      - id: "opt-3"
+        text: "dL/dW^l = (delta^l)^T a^(l-1)"
+        is_correct: false
+      - id: "opt-4"
+        text: "dL/dW^l = delta^l / a^(l-1)"
+        is_correct: false
+    explanation: "By the multivariate chain rule, dL/dW_ij^l = (dL/dz_i^l) * (dz_i^l / dW_ij^l) = delta_i^l * a_j^(l-1), which in matrix notation is the outer product delta^l (a^(l-1))^T."
+
+  - id: "q-nn-05"
+    target_objective_id: "obj-nn-5"
+    prompt: "When training a deep network with gradient descent, why does initializing all weights to identical constant values (e.g., all 0.0 or all 1.0) prevent the network from learning complex features?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Symmetry trap: all hidden units compute identical activations and receive identical backpropagated gradients, preventing feature specialization"
+        is_correct: true
+      - id: "opt-2"
+        text: "Zero weights immediately cause CPU division-by-zero floating-point exceptions"
+        is_correct: false
+      - id: "opt-3"
+        text: "Constant weights cause GPU memory bus saturation"
+        is_correct: false
+      - id: "opt-4"
+        text: "The learning rate alpha automatically multiplies by zero and halts optimization"
+        is_correct: false
+    explanation: "Identical initial weights preserve exact mathematical symmetry across all neurons in a layer. During backpropagation, every neuron in that layer receives the exact same gradient update, meaning they will forever remain identical and fail to learn distinct feature detectors (symmetry breaking requires random initialization like He or Xavier)."

@@ -4,14 +4,14 @@ title: "Probability Theory, Random Variables, and Bayesian Inference"
 summary: "Foundations of probability, Kolmogorov axioms, continuous random variables, expectation, variance, Gaussian distributions, and Bayes' Theorem."
 version: "1.0.0"
 created_at: "2026-11-20T11:00:00Z"
-updated_at: "2026-11-20T11:00:00Z"
+updated_at: "2026-11-20T20:05:00Z"
 
 classification:
   discipline: "mathematics"
   domain: "probability-statistics"
   proficiency_tier: 2
   difficulty_score: 0.50
-  estimated_duration_minutes: 80
+  estimated_duration_minutes: 85
 
 verification:
   status: "technically-verified"
@@ -33,19 +33,28 @@ relationships:
 
 learning_objectives:
   - id: "obj-prob-1"
-    statement: "Calculate mathematical expectation and variance for discrete and continuous probability density functions."
-    bloom_level: "apply"
+    statement: "Explain the distinction between frequentist and Bayesian probability and the Kolmogorov axiomatic foundation."
+    bloom_level: "understand"
   - id: "obj-prob-2"
-    statement: "Apply Bayes' Theorem to update belief distributions given prior probabilities and observed sensor evidence."
+    statement: "Calculate mathematical expectation and variance for discrete and continuous probability distributions."
     bloom_level: "apply"
   - id: "obj-prob-3"
-    statement: "Construct Monte Carlo random sampling algorithms to estimate expectations and integrals."
+    statement: "Analyze Gaussian normal distributions and apply the Central Limit Theorem to explain measurement noise."
+    bloom_level: "analyze"
+  - id: "obj-prob-4"
+    statement: "Evaluate posterior beliefs using Bayes' Theorem to resolve base-rate fallacies and fuse noisy sensor measurements."
+    bloom_level: "evaluate"
+  - id: "obj-prob-5"
+    statement: "Synthesize a probabilistic simulation engine integrating Box-Muller Gaussian sampling, Bayesian sensor fusion, and Monte Carlo integration."
     bloom_level: "create"
 
 practical_applications:
   - title: "Sensor Noise Modeling and State Estimation"
     type: "computational_simulation"
     description: "Model robotic sensor uncertainty and stochastic environment transitions using Gaussian distributions and Bayesian updates."
+  - title: "Autonomous Vehicle Multi-Sensor Fusion"
+    type: "engineering_design"
+    description: "Design an optimal sensor fusion pipeline using closed-form Gaussian Bayesian updates to combine noisy GPS and wheel odometry readings."
 
 provenance:
   sources:
@@ -58,10 +67,16 @@ provenance:
         "Bayes' theorem formulation"
       ]
     - id: "src-bishop-prml"
-      citation: "Bishop, C. M. (2006). Pattern Recognition and Machine Learning. Springer, Chapter 1: Introduction to Probability Distributions."
+      citation: "Bishop, C. M. (2006). Pattern Recognition and Machine Learning. Springer, Chapter 1 & 2: Probability Distributions."
       isbn: "978-0387310732"
       claims_supported: [
-        "Gaussian normal distribution PDF",
-        "Frequentist vs Bayesian paradigms",
-        "Prior, likelihood, and posterior relationships"
+        "Gaussian distribution and Central Limit Theorem",
+        "Bayesian inference and Maximum Likelihood Estimation",
+        "Linear Gaussian sensor fusion derivation"
       ]
+
+discovery_context:
+  historical_significance: "From Thomas Bayes' 1763 essay to Andrey Kolmogorov's 1933 formal axioms, probability theory transformed how science quantifies uncertainty."
+  historical_influences:
+    - discovery_id: "disc-bayes-theorem-1763"
+    - discovery_id: "disc-kolmogorov-axioms-1933"

@@ -4,39 +4,77 @@ passing_threshold_percent: 75
 questions:
   - id: "q-prob-01"
     target_objective_id: "obj-prob-1"
-    prompt: "A discrete random variable X takes value 0 with probability 0.4 and value 10 with probability 0.6. What is the expected value E[X]?"
-    type: "numerical_calculation"
-    numerical_solution:
-      value: 6.0
-      tolerance: 0.01
-      unit: "scalar"
-    explanation: "E[X] = 0 * 0.4 + 10 * 0.6 = 0 + 6.0 = 6.0."
-
-  - id: "q-prob-02"
-    target_objective_id: "obj-prob-2"
-    prompt: "In Bayes' Theorem P(A|B) = [P(B|A) * P(A)] / P(B), what is the technical name for the term P(B|A)?"
+    prompt: "According to Kolmogorov's third axiom of probability, what is the probability of the union of an infinite sequence of mutually disjoint events A1, A2, A3...?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "The Likelihood"
+        text: "The exact infinite sum of their individual probabilities: sum_{i=1}^inf P(A_i)."
         is_correct: true
       - id: "opt-2"
-        text: "The Prior"
+        text: "The product of their individual probabilities: prod_{i=1}^inf P(A_i)."
         is_correct: false
       - id: "opt-3"
-        text: "The Posterior"
+        text: "1.0, regardless of the individual events."
         is_correct: false
       - id: "opt-4"
-        text: "The Marginal Evidence"
+        text: "Zero, because an infinite union cannot be measured."
         is_correct: false
-    explanation: "P(A) is the Prior, P(B|A) is the Likelihood, P(B) is the Marginal Evidence, and P(A|B) is the Posterior."
+    explanation: "Kolmogorov's Countable Additivity axiom states that for mutually disjoint events, the probability of their union equals the sum of their individual probabilities."
+
+  - id: "q-prob-02"
+    target_objective_id: "obj-prob-2"
+    prompt: "A discrete random variable X takes value 0 with probability 0.4 and value 10 with probability 0.6. What is the variance Var(X)?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 24.0
+      tolerance: 0.1
+      unit: "scalar"
+    explanation: "E[X] = 0(0.4) + 10(0.6) = 6.0. E[X^2] = 0^2(0.4) + 10^2(0.6) = 100(0.6) = 60.0. Var(X) = E[X^2] - (E[X])^2 = 60.0 - 6.0^2 = 60.0 - 36.0 = 24.0."
 
   - id: "q-prob-03"
     target_objective_id: "obj-prob-3"
-    prompt: "Two independent Gaussian sensors measure an object's position with variances sigma1^2 = 2.0 and sigma2^2 = 2.0. What is the variance of their optimal fused estimate?"
+    prompt: "Why does the Central Limit Theorem (CLT) make the Gaussian normal distribution ubiquitous in physical sensor measurements and natural processes?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "The normalized sum of many independent random variables from almost ANY underlying distribution naturally converges to a Gaussian distribution as sample size grows."
+        is_correct: true
+      - id: "opt-2"
+        text: "Computer processors are hardwired to truncate all probability distributions into parabolas."
+        is_correct: false
+      - id: "opt-3"
+        text: "Newton's laws of motion require all accelerations to be Gaussian."
+        is_correct: false
+      - id: "opt-4"
+        text: "Sensors are physically manufactured using Gaussian laser optics."
+        is_correct: false
+    explanation: "The CLT proves that whenever an observed variable is the cumulative result of many small, independent underlying fluctuations, the aggregate distribution converges to a Gaussian bell curve."
+
+  - id: "q-prob-04"
+    target_objective_id: "obj-prob-4"
+    prompt: "A robot's position is estimated by fusing prior belief N(10.0, 4.0) with independent sensor observation N(12.0, 4.0). What is the fused posterior variance sigma_post^2?"
     type: "numerical_calculation"
     numerical_solution:
-      value: 1.0
-      tolerance: 0.01
-      unit: "variance"
-    explanation: "1 / sigma_fused^2 = 1/2.0 + 1/2.0 = 1.0. Therefore, sigma_fused^2 = 1.0."
+      value: 2.0
+      tolerance: 0.05
+      unit: "m^2"
+    explanation: "1 / sigma_post^2 = 1/4.0 + 1/4.0 = 2/4.0 = 0.5. Therefore sigma_post^2 = 1 / 0.5 = 2.0 m^2."
+
+  - id: "q-prob-05"
+    target_objective_id: "obj-prob-5"
+    prompt: "In a medical diagnostic test for a disease with prevalence 0.001 (0.1%), the test has 99% sensitivity and 2% false positive rate. If a person tests positive, why is their actual probability of having the disease only ~4.7%?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Because the disease is rare, the 2% false positives among the 99.9% healthy population vastly outnumber the true positives (Base-Rate Fallacy)."
+        is_correct: true
+      - id: "opt-2"
+        text: "Because the laboratory equipment lost calibration during the trial."
+        is_correct: false
+      - id: "opt-3"
+        text: "Because Bayes' Theorem is only valid for discrete coin flips."
+        is_correct: false
+      - id: "opt-4"
+        text: "Because the patient took the test during an odd hour of the day."
+        is_correct: false
+    explanation: "P(D|+) = (0.99 * 0.001) / [(0.99 * 0.001) + (0.02 * 0.999)] = 0.00099 / 0.02097 = 4.72%. The overwhelming majority of the population is healthy, so false alarms dominate positive results."

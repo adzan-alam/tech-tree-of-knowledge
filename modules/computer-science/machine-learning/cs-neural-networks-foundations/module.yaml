@@ -37,19 +37,28 @@ relationships:
 
 learning_objectives:
   - id: "obj-nn-1"
-    statement: "Analyze the non-linear separability limitation of single-layer perceptrons on the XOR problem."
-    bloom_level: "analyze"
+    statement: "Explain the biological inspiration of artificial neurons, linear combinations of inputs, and the mathematical definition of activation functions."
+    bloom_level: "understand"
   - id: "obj-nn-2"
-    statement: "Evaluate and derive the backpropagation gradient equations for weights and biases in a multi-layer network using the multivariate chain rule."
-    bloom_level: "evaluate"
+    statement: "Calculate the forward propagation outputs of a multi-layer perceptron given input vectors, weight matrices, and bias vectors."
+    bloom_level: "apply"
   - id: "obj-nn-3"
-    statement: "Construct a multi-layer perceptron from scratch in software and train it using gradient descent."
+    statement: "Analyze and prove algebraically why a single-layer perceptron cannot classify the XOR logic function."
+    bloom_level: "analyze"
+  - id: "obj-nn-4"
+    statement: "Evaluate and derive the backpropagation gradient equations for weights and biases across arbitrary layers using the multivariate calculus chain rule."
+    bloom_level: "evaluate"
+  - id: "obj-nn-5"
+    statement: "Construct a production-grade multi-layer perceptron training pipeline implementing gradient descent with loss computation and numerical stability checks."
     bloom_level: "create"
 
 practical_applications:
   - title: "Non-Linear Function Approximation & Physics Surrogates"
     type: "computational_simulation"
     description: "Train neural networks to approximate non-linear aerodynamic forces and robotic inverse dynamics from experimental data."
+  - title: "Autonomous Decision Boundary & Control Policy Network Design"
+    type: "engineering_design"
+    description: "Design multi-layer neural network architectures that map sensor telemetry to continuous actuator control signals for robotics."
 
 provenance:
   sources:
