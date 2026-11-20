@@ -4,48 +4,77 @@ passing_threshold_percent: 75
 questions:
   - id: "q-drl-01"
     target_objective_id: "obj-drl-1"
-    prompt: "Why does Deep Q-Learning (DQN) sample random mini-batches from an Experience Replay Buffer instead of training directly on sequential real-time transitions?"
+    prompt: "Which three elements constitute the 'Deadly Triad' that historically caused reinforcement learning with function approximation to diverge?"
     type: "multiple_choice"
     options:
       - id: "opt-1"
-        text: "To break the strong temporal correlation between consecutive states and restore i.i.d. sampling assumptions"
+        text: "Function Approximation (neural nets), Bootstrapping (updating from next-state value estimates), and Off-Policy learning"
         is_correct: true
       - id: "opt-2"
-        text: "To reduce memory consumption"
+        text: "Convolutional layers, max pooling, and dropout"
         is_correct: false
       - id: "opt-3"
-        text: "To eliminate the need for backpropagation"
+        text: "Float32 precision, CPU L1 cache misses, and ring buffers"
         is_correct: false
       - id: "opt-4"
-        text: "To make the policy deterministic"
+        text: "Stochastic policies, Gaussian noise, and learning rate decay"
         is_correct: false
-    explanation: "Consecutive transitions in a physical trajectory are highly correlated. Replay buffers decorrelate training samples, stabilizing gradient updates."
+    explanation: "Sutton & Barto define the Deadly Triad as the dangerous combination of function approximation, bootstrapping, and off-policy training, which DQN stabilizes via replay buffers and frozen target networks."
 
   - id: "q-drl-02"
     target_objective_id: "obj-drl-2"
-    prompt: "In the Policy Gradient Theorem grad_theta J = E[grad_theta log pi(a|s) * Q(s, a)], what happens to an action's probability when its advantage is positive (A > 0)?"
-    type: "multiple_choice"
-    options:
-      - id: "opt-1"
-        text: "The probability of selecting that action in state s increases"
-        is_correct: true
-      - id: "opt-2"
-        text: "The probability decreases to zero"
-        is_correct: false
-      - id: "opt-3"
-        text: "The probability remains completely unaffected"
-        is_correct: false
-      - id: "opt-4"
-        text: "The action is removed from the action space"
-        is_correct: false
-    explanation: "Positive advantage indicates the action performed better than the average state baseline, so gradient ascent pushes parameters to increase its log-probability."
+    prompt: "An agent transitions from state s to non-terminal s' with immediate reward R = 4.0 and gamma = 0.90. The Target Network predicts max_{a'} Q(s', a'; theta^-) = 10.0. If the Online Network predicts Q(s, a; theta) = 11.0, what is the TD Error delta = Target - Q(s, a; theta)?"
+    type: "numerical_calculation"
+    numerical_solution:
+      value: 2.0
+      tolerance: 0.05
+      unit: "error"
+    explanation: "TD Target y = R + gamma * max Q = 4.0 + (0.90 * 10.0) = 4.0 + 9.0 = 13.0. TD Error delta = 13.0 - 11.0 = 2.0."
 
   - id: "q-drl-03"
     target_objective_id: "obj-drl-3"
-    prompt: "In an Actor-Critic architecture with gamma = 0.9, the Critic predicts V(s) = 5.0 and V(s') = 8.0. The agent receives immediate reward r = 2.0. What is the computed Advantage A(s, a)?"
+    prompt: "Why does Deep Q-Networks (DQN) sample random mini-batches from an Experience Replay Buffer instead of training directly on sequential real-time transitions?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "To break the strong temporal autocorrelation between consecutive physical states and satisfy the i.i.d. training assumption of gradient descent"
+        is_correct: true
+      - id: "opt-2"
+        text: "To eliminate the need for an activation function in the hidden layers"
+        is_correct: false
+      - id: "opt-3"
+        text: "To force the policy to become purely deterministic"
+        is_correct: false
+      - id: "opt-4"
+        text: "To prevent the GPU from running out of virtual memory"
+        is_correct: false
+    explanation: "Sequential transitions in dynamic environments are highly correlated. The experience replay buffer uniform sampling decorrelates training data, preventing catastrophic forgetting and weight oscillations."
+
+  - id: "q-drl-04"
+    target_objective_id: "obj-drl-4"
+    prompt: "Why does subtracting a state-dependent baseline b(s) = V(s) from the return in policy gradients reduce variance without introducing any mathematical bias to the expected gradient?"
+    type: "multiple_choice"
+    options:
+      - id: "opt-1"
+        text: "Because the expectation of grad_theta log pi(a|s) * b(s) across the action distribution evaluates identically to zero: b(s) * grad_theta(sum_a pi(a|s)) = b(s) * grad_theta(1) = 0"
+        is_correct: true
+      - id: "opt-2"
+        text: "Because baseline subtraction forces the learning rate alpha to increase by 10x"
+        is_correct: false
+      - id: "opt-3"
+        text: "Because the Critic network weights are frozen permanently"
+        is_correct: false
+      - id: "opt-4"
+        text: "Because it converts stochastic policies into discrete lookup tables"
+        is_correct: false
+    explanation: "Since the sum of action probabilities over all actions is always 1.0, the gradient of that constant sum is zero. Thus, subtracting any baseline depending only on state leaves the expected policy gradient perfectly unshifted."
+
+  - id: "q-drl-05"
+    target_objective_id: "obj-drl-5"
+    prompt: "In an Advantage Actor-Critic (A2C) architecture with gamma = 0.95, the Critic network predicts state values V(S_t) = 8.0 and V(S_{t+1}) = 12.0. The environment yields reward R_{t+1} = 2.0. What is the computed Advantage A(S_t, A_t)?"
     type: "numerical_calculation"
     numerical_solution:
-      value: 4.2
+      value: 5.4
       tolerance: 0.05
       unit: "Advantage"
-    explanation: "A(s, a) = r + gamma * V(s') - V(s) = 2.0 + 0.9 * 8.0 - 5.0 = 2.0 + 7.2 - 5.0 = 4.2."
+    explanation: "Advantage A(S_t, A_t) = R_{t+1} + gamma * V(S_{t+1}) - V(S_t) = 2.0 + (0.95 * 12.0) - 8.0 = 2.0 + 11.4 - 8.0 = 13.4 - 8.0 = 5.4."

@@ -31,12 +31,18 @@ relationships:
 
 learning_objectives:
   - id: "obj-drl-1"
-    statement: "Analyze the role of Experience Replay and Target Networks in stabilizing Deep Q-Networks (DQN)."
-    bloom_level: "analyze"
+    statement: "Explain the Deadly Triad of reinforcement learning and why naive deep Q-learning diverges without experience replay or target networks."
+    bloom_level: "understand"
   - id: "obj-drl-2"
+    statement: "Calculate Bellman targets, temporal difference errors, and Huber loss values for deep Q-network transitions."
+    bloom_level: "apply"
+  - id: "obj-drl-3"
+    statement: "Analyze the role of Experience Replay in breaking temporal correlation and Target Networks in stabilizing moving optimization targets."
+    bloom_level: "analyze"
+  - id: "obj-drl-4"
     statement: "Evaluate the Policy Gradient Theorem and formulate the REINFORCE loss with baseline variance reduction."
     bloom_level: "evaluate"
-  - id: "obj-drl-3"
+  - id: "obj-drl-5"
     statement: "Construct an Actor-Critic architecture that simultaneously estimates policy distribution and state values."
     bloom_level: "create"
 
@@ -44,6 +50,9 @@ practical_applications:
   - title: "Autonomous Vehicle Highway Navigation and Robot Locomotion"
     type: "computational_simulation"
     description: "Train continuous-state neural network agents to steer autonomous vehicles and balance bipedal walking robots in simulated physics engines."
+  - title: "Continuous Robotics Joint Torque & Flight Attitude Controller"
+    type: "engineering_design"
+    description: "Design real-time neural network control loops outputting continuous actuator voltages and torques for aerial drones and robotic manipulators."
 
 provenance:
   sources:
