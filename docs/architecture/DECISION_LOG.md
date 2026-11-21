@@ -148,3 +148,23 @@
   3. Built production-grade TypeScript engines: `PinholeCamera` & `VisionProcessor` (projection with near-plane clipping, separable Gaussian blur, Sobel edge gradients), `KalmanFilter2D` (4x4 matrix kinematic state estimation with symmetrization), `Planar2LinkRobot` (analytical FK/IK, DLS numerical solver, Jacobian), `SimToRealEnvironment` (ADR dynamics sampling, circular latency delay queue, sensor corruption, low-level PD joint torque control), and `AtomicPhysicsEngine` (Bohr radius, Rydberg spectral calculator, electron configuration generator with Hund/Aufbau rules).
   4. Authored 5-tier practice problem sets (Class 6 to University/Research) with complete step-by-step arithmetic solutions, and updated all YAML manifests to 5 Bloom levels and 5 tiered assessment questions.
 - **Consequences:** Every single one of the 21 modules in the Tech Tree of Knowledge is now at 10/10 Gold Standard (GSMS-10). All 49 schema targets validate with zero errors, the pedagogical linter reports zero warnings across all 21 modules, the prerequisite DAG is verified strictly acyclic, and the full test suite passes at 100%.
+
+---
+
+## ADR-013: Sovereign Master Treatise Standard (SMTS-40K) — Modular 40,000+ Word Pedagogical Architecture
+- **Status:** **Accepted**
+- **Date:** 2026-11-21
+- **Context:** While the initial elevation achieved 10/10 Gold Standard metrics (~4,000 to 8,500 words per module), moving a student seamlessly from Class 6 (absolute beginner with zero prior algebra) to university-level research mastery requires an unhurried, exhaustive, deep-learning textbook tome (40,000+ words). Rushing through 50 complex formulas in 4,000 words creates cognitive friction. Furthermore, learners require granular, chapter-by-chapter consolidation with 10 worked examples and 10 progressive practice exercises per chapter before transitioning to the next concept.
+- **Decision:**
+  1. Enacted the **Sovereign Master Treatise Standard (SMTS-40K)** codified in `docs/standards/SOVEREIGN_MASTER_TREATISE_STANDARD.md`.
+  2. Mandated that every module is composed of modular, standalone chapter files in `modules/<slug>/chapters/` that can be downloaded and studied independently, while concatenating seamlessly into the unified `content.md`.
+  3. Mandated that every chapter includes:
+     - Absolute Layman Entry & Physical Anchor Paradox.
+     - Socratic Dialogue (Alice & The Vectorist).
+     - Full mathematical derivations with zero skipped algebraic steps.
+     - 10 full worked numerical examples with complete step-by-step arithmetic.
+     - Debunked misconceptions, edge cases, and software implementation traps.
+     - Historical easter eggs and human drama.
+     - Chapter-specific Mastery Problem Set with 10 progressive exercises (Tiers 1–5) and complete written arithmetic solutions.
+  4. Initiated the supreme expansion starting with Genesis Root Node 1: `math-vectors-2d` (2D Cartesian Vectors & Algebra) under Pathway 1 (2D Physics Simulator).
+- **Consequences:** Modules become definitive, sovereign, self-contained educational treatises of world-class quality (~40,000+ words), establishing an unmatched benchmark in open-access scientific pedagogy.
