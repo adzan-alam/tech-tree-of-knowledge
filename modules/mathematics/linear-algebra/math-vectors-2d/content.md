@@ -916,7 +916,7 @@ export class Vector2D {
 
 # Comprehensive Mastery Problem Set (Class 6 to University)
 
-### Problem 1: Foundations (Class 6–7)
+### Tier 1: Foundations (Class 6–7)
 A drone starts at charging pad $P_0(5, 10)$. It executes three consecutive flights:
 1. $\vec{d}_1 = (12, -4)$
 2. $\vec{d}_2 = (-7, 8)$
@@ -936,7 +936,7 @@ A drone starts at charging pad $P_0(5, 10)$. It executes three consecutive fligh
 
 ---
 
-### Problem 2: Geometry & Normalization (Class 8–9)
+### Tier 2: Geometry & Normalization (Class 8–9)
 A submarine sonar detects an underwater drone at displacement $\vec{s} = (-15, 20)\text{ km}$.
 1. What is the straight-line distance to the drone?
 2. Calculate the unit vector $\hat{s}$ pointing from the submarine toward the drone.
@@ -953,7 +953,7 @@ A submarine sonar detects an underwater drone at displacement $\vec{s} = (-15, 2
 
 ---
 
-### Problem 3: Trigonometry & Components (Class 10)
+### Tier 3: Trigonometry & Components (Class 10)
 A soccer player kicks a ball with an initial speed of $25\text{ m/s}$ at an angle of $37^\circ$ above the horizontal. (Use $\cos 37^\circ \approx 0.80$, $\sin 37^\circ \approx 0.60$).
 1. Find horizontal velocity $v_x$ and vertical velocity $v_y$.
 2. If gravity accelerates the ball downward at $a_y = -9.8\text{ m/s}^2$ while horizontal velocity remains constant, what is the ball's velocity vector $\vec{v}$ after $t = 2.0\text{ seconds}$?
@@ -970,7 +970,7 @@ A soccer player kicks a ball with an initial speed of $25\text{ m/s}$ at an angl
 
 ---
 
-### Problem 4: Dot Product & Mechanical Work (Class 11–12)
+### Tier 4: Dot Product & Mechanical Work (Class 11–12)
 A locomotive pulls a freight railcar along a straight track pointing East with displacement $\vec{d} = (100, 0)\text{ meters}$. The coupling cable exerts a pulling force $\vec{F} = (8000, 6000)\text{ Newtons}$.
 1. Find the magnitude of the pulling force $\|\vec{F}\|$.
 2. Calculate the mechanical work done: $W = \vec{F} \cdot \vec{d}$.
@@ -988,7 +988,7 @@ A locomotive pulls a freight railcar along a straight track pointing East with d
 
 ---
 
-### Problem 5: Robotics Steering & Reflection (University / Engineering)
+### Tier 5: Robotics Steering & Reflection (University / Engineering)
 An autonomous vacuum cleaner robot moves forward with velocity $\vec{v} = (5, 5)\text{ m/s}$. It collides with a slanted wall whose surface normal vector is $\hat{n} = (-0.6, 0.8)$.
 1. Confirm that $\hat{n}$ is a unit vector.
 2. Calculate the dot product $\vec{v} \cdot \hat{n}$.

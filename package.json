@@ -15,6 +15,7 @@
     "module:create": "tsx src/cli/author.ts create",
     "module:lint": "tsx src/cli/author.ts lint",
     "module:audit": "tsx src/cli/author.ts audit",
+    "build:data": "tsx scripts/build-data.ts",
     "serve": "tsx src/web/server.ts",
     "lint": "tsc --noEmit"
   },
