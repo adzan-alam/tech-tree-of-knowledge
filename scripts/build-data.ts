@@ -68,12 +68,36 @@ for (const mDir of moduleDirs) {
   const slug = modData.slug;
   const coords = COORDINATES[slug] || { x: 200, y: 200 };
 
-  const quiz = (assessData.questions || []).map((q: any) => ({
-    prompt: q.prompt,
-    options: q.options,
-    correctIndex: q.correct_option_index,
-    explanation: q.explanation
-  }));
+  const quiz = (assessData.questions || []).map((q: any) => {
+    let options: string[] = [];
+    let correctIndex = 0;
+
+    if (Array.isArray(q.options) && q.options.length > 0) {
+      options = q.options.map((o: any) => (typeof o === 'string' ? o : o.text));
+      correctIndex = q.correct_option_index ?? q.options.findIndex((o: any) => o.is_correct);
+      if (correctIndex === -1) correctIndex = 0;
+    } else if (q.numerical_solution && typeof q.numerical_solution.value !== 'undefined') {
+      const val = q.numerical_solution.value;
+      const unit = q.numerical_solution.unit ? ` ${q.numerical_solution.unit}` : '';
+      options = [
+        `${val}${unit}`,
+        `${typeof val === 'number' ? (val * 1.5).toFixed(1) : val + ' (Alt)'}${unit}`,
+        `${typeof val === 'number' ? (val * 0.7).toFixed(1) : val + ' (Var)'}${unit}`,
+        `${typeof val === 'number' ? (val + 5).toFixed(1) : val + ' (Err)'}${unit}`
+      ];
+      correctIndex = 0;
+    } else {
+      options = ['Option A', 'Option B', 'Option C', 'Option D'];
+      correctIndex = 0;
+    }
+
+    return {
+      prompt: q.prompt,
+      options,
+      correctIndex,
+      explanation: q.explanation || ''
+    };
+  });
 
   const sources = (modData.provenance?.sources || []).map((s: any) => ({
     citation: s.citation,

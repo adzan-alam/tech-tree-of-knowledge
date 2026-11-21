@@ -1923,10 +1923,22 @@
           </div>
 
           <!-- Modular Chapter Selector & Download Toolbar -->
-          <div class="chapter-toolbar" id="chapterToolbar" style="display:none;">
+          <div class="chapter-toolbar" id="chapterToolbar" style="display:flex;">
             <label for="chapterSelect" style="font-size:0.78rem; font-weight:700; color:var(--text-muted);">Chapter:</label>
             <select id="chapterSelect" class="chapter-select">
-              <option value="all">📖 Full Treatise (All 12 Chapters • 42,671 Words)</option>
+              <option value="all">📖 Full Sovereign Treatise (All 12 Chapters • 42,671 Words)</option>
+              <option value="chapter-01-scalars-and-paradox.md">Chapter 1: The Layman's Genesis — Scalars & Lost Island (4,007 words)</option>
+              <option value="chapter-02-coordinates-and-grid.md">Chapter 2: The Grid World — Descartes & Coordinates (3,806 words)</option>
+              <option value="chapter-03-components-and-notation.md">Chapter 3: Anatomy of an Arrow — Components & Basis Vectors (3,320 words)</option>
+              <option value="chapter-04-magnitude-and-pythagoras.md">Chapter 4: Pythagoras in Flatland — Distance & Vector Magnitude (2,917 words)</option>
+              <option value="chapter-05-vector-addition.md">Chapter 5: Geometry of Combining — Tip-to-Tail & Parallelograms (3,657 words)</option>
+              <option value="chapter-06-subtraction-and-scaling.md">Chapter 6: The Anti-Arrow & Scaling — Relative Velocity (3,516 words)</option>
+              <option value="chapter-07-unit-vectors-and-normalization.md">Chapter 7: Compass Needle — Unit Vectors & Normalization (2,913 words)</option>
+              <option value="chapter-08-trigonometry-and-polar.md">Chapter 8: The Dance of Angles — Polar Coordinates & atan2 (3,488 words)</option>
+              <option value="chapter-09-dot-product-and-work.md">Chapter 9: The Teamwork Meter — Dot Product & Mechanical Work (3,857 words)</option>
+              <option value="chapter-10-projections-and-reflections.md">Chapter 10: The Shadow and The Mirror — Projections & Reflections (3,855 words)</option>
+              <option value="chapter-11-cross-product-and-steering.md">Chapter 11: Turning in Flatland — 2D Cross Product & Steering (3,026 words)</option>
+              <option value="chapter-12-typescript-engine-and-grand-gauntlet.md">Chapter 12: Computational Engine & Grand Gauntlet (3,819 words)</option>
             </select>
             <button class="btn-download-action" id="btnDownloadChapter" title="Download this chapter as Markdown">
               📥 Download Chapter (.md)
@@ -4022,7 +4034,8 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
         qDiv.className = 'quiz-question';
         qDiv.innerHTML = `<div class="quiz-prompt">${qIdx + 1}. ${q.prompt}</div>`;
 
-        q.options.forEach((opt, oIdx) => {
+        const opts = Array.isArray(q.options) ? q.options : [];
+        opts.forEach((opt, oIdx) => {
           const optDiv = document.createElement('div');
           optDiv.className = 'quiz-option';
           optDiv.innerHTML = `<input type="radio" name="q_${qIdx}" value="${oIdx}"> <span>${opt}</span>`;
@@ -4055,7 +4068,7 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
 
     // Quiz Submission Checker
     document.getElementById('btnSubmitQuiz').addEventListener('click', () => {
-      if (!selectedModule) return;
+      if (!selectedModule || !Array.isArray(selectedModule.quiz)) return;
       selectedModule.quiz.forEach((q, qIdx) => {
         const selected = document.querySelector(`input[name="q_${qIdx}"]:checked`);
         const feedback = document.getElementById(`feedback_${qIdx}`);
