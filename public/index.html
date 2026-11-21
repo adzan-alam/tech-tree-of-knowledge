@@ -4505,6 +4505,20 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
         { file: 'chapter-10-projections-and-reflections.md', title: "Chapter 10: The Shadow and The Mirror — Projections & Reflections", words: '3,855' },
         { file: 'chapter-11-cross-product-and-steering.md', title: "Chapter 11: Turning in Flatland — 2D Cross Product & Steering", words: '3,026' },
         { file: 'chapter-12-typescript-engine-and-grand-gauntlet.md', title: "Chapter 12: Computational Engine & Civilizational Grand Gauntlet", words: '3,819' }
+      ],
+      'math-calculus-derivatives': [
+        { file: 'chapter-01-zeno-and-speedometer-paradox.md', title: "Chapter 1: The Speedometer Paradox — Zeno, Instantaneous Speed, and the Limit", words: '5,624' },
+        { file: 'chapter-02-secant-slopes-and-average-rates.md', title: "Chapter 2: The Secant Line & Average Rate of Change", words: '3,860' },
+        { file: 'chapter-03-vanishing-step-and-limits.md', title: "Chapter 3: The Vanishing Step — Limits, Infinitesimals, and the Tangent Line", words: '5,033' },
+        { file: 'chapter-04-formal-derivative-definition.md', title: "Chapter 4: The Formal Definition of the Derivative — First Principles & Notation", words: '4,549' },
+        { file: 'chapter-05-linearity-constant-power-sum-rules.md', title: "Chapter 5: Linearity, the Power Rule, and Polynomial Calculus", words: '3,708' },
+        { file: 'chapter-06-product-and-quotient-rules.md', title: "Chapter 6: The Product and Quotient Rules — Geometry of Compounding Rates", words: '3,890' },
+        { file: 'chapter-07-chain-rule-and-implicit-differentiation.md', title: "Chapter 7: The Chain Rule and Implicit Differentiation — The Nested Gearbox", words: '3,569' },
+        { file: 'chapter-08-trigonometric-derivatives.md', title: "Chapter 8: Trigonometric Derivatives and Oscillatory Mechanics", words: '3,255' },
+        { file: 'chapter-09-physical-hierarchy-of-motion.md', title: "Chapter 9: The Physical Hierarchy of Motion — Position, Velocity, Acceleration, Jerk, Snap", words: '4,026' },
+        { file: 'chapter-10-extrema-optimization-concavity.md', title: "Chapter 10: Extrema, Concavity, and the Geometry of Optimization", words: '5,191' },
+        { file: 'chapter-11-numerical-differentiation-and-floating-point.md', title: "Chapter 11: Numerical Differentiation, Taylor Series, and Floating-Point Error", words: '4,270' },
+        { file: 'chapter-12-typescript-calculus-engine-and-grand-gauntlet.md', title: "Chapter 12: Production TypeScript Calculus Engine & Civilizational Grand Gauntlet", words: '3,856' }
       ]
     };
 
@@ -4516,7 +4530,8 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
       const chapters = CHAPTERS_METADATA[modSlug];
       if (chapters && chapters.length > 0) {
         toolbar.style.display = 'flex';
-        select.innerHTML = '<option value="all">📖 Full Sovereign Treatise (All 12 Chapters • 42,671 Words)</option>';
+        const totalWords = chapters.reduce((sum, ch) => sum + parseInt(ch.words.replace(/,/g, ''), 10), 0);
+        select.innerHTML = `<option value="all">📖 Full Sovereign Treatise (All ${chapters.length} Chapters • ${totalWords.toLocaleString()} Words)</option>`;
         chapters.forEach(ch => {
           const opt = document.createElement('option');
           opt.value = ch.file;
@@ -4560,12 +4575,14 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
           const chIndex = CHAPTERS_METADATA[selectedModule.slug]?.findIndex(c => c.file === activeChapterFile) ?? -1;
           if (chIndex !== -1) {
             const chNum = chIndex + 1;
-            const marker = `# CHAPTER ${chNum}:`;
-            const nextMarker = `# CHAPTER ${chNum + 1}:`;
-            const start = full.indexOf(marker);
-            if (start !== -1) {
-              let end = nextMarker ? full.indexOf(nextMarker) : -1;
-              if (end === -1) end = full.length;
+            const markerRegex = new RegExp(`(^|\\n)#\\s*chapter\\s*${chNum}\\b`, 'i');
+            const nextMarkerRegex = new RegExp(`(^|\\n)#\\s*chapter\\s*${chNum + 1}\\b`, 'i');
+            const matchStart = full.search(markerRegex);
+            if (matchStart !== -1) {
+              const start = matchStart + (full[matchStart] === '\n' ? 1 : 0);
+              const remainder = full.slice(start);
+              const matchEnd = remainder.search(nextMarkerRegex);
+              let end = matchEnd !== -1 ? start + matchEnd : full.length;
               const chText = full.slice(start, end).replace(/---\s*$/, '').trim();
               currentChapterRawContent = chText;
               renderMarkdownBody(chText);

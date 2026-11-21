@@ -2,22 +2,22 @@ id: "a1000000-0000-0000-0000-000000000002"
 slug: "math-calculus-derivatives"
 title: "Differential Calculus: Rates of Change and Derivatives"
 summary: "A comprehensive first-principles guide to differential calculus: from Zeno's Arrow Paradox (Class 6 level) and secant-to-tangent limits to algebraic differentiation rules, the kinematic motion hierarchy, optimization, and high-precision numerical engines."
-version: "2.0.0"
+version: "3.0.0"
 created_at: "2026-11-19T01:30:00Z"
-updated_at: "2026-11-20T18:30:00Z"
+updated_at: "2026-11-21T22:45:00Z"
 
 classification:
   discipline: "mathematics"
   domain: "calculus"
   proficiency_tier: 2
   difficulty_score: 0.4
-  estimated_duration_minutes: 90
+  estimated_duration_minutes: 360
 
 verification:
   status: "technically-verified"
   reviewed_by: ["math-verifier-01", "pedagogy-auditor-02"]
-  verification_date: "2026-11-20"
-  notes: "Formal limit definition, full binomial power rule proofs, kinematic hierarchy, and numerical engines verified against GSMS-10 standard."
+  verification_date: "2026-11-21"
+  notes: "Elevated to Sovereign Master Treatise Standard (SMTS-40K): 50,831 words across 12 standalone chapters, 120 worked numerical examples, and 120 solved exercises."
 
 relationships:
   prerequisites: []
