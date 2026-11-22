@@ -2767,7 +2767,7 @@ $$ \\vec{v}_{k+1} = \\vec{v}_k + \\frac{1}{2} (\\vec{a}_k + \\vec{a}_{k+1}) \\De
           discipline: "physics",
           domain: "classical-mechanics",
           proficiencyTier: 3,
-          duration: 100,
+          duration: 360,
           summary: "Six degrees of freedom dynamics, 3x3 inertia tensors, torque, angular momentum vectors, Euler's equations of rotational motion, and the Dzhanibekov effect.",
           prerequisites: ["phys-newtons-laws", "phys-momentum-conservation", "math-matrices-quaternions"],
           x: 860, y: 300,
@@ -2976,7 +2976,7 @@ $$ \\frac{\\partial \\mathcal{L}}{\\partial W^l} = \\delta^l (a^{l-1})^T, \\quad
           discipline: "physics",
           domain: "robotics",
           proficiencyTier: 3,
-          duration: 100,
+          duration: 360,
           summary: "Robotic manipulator geometry, Denavit-Hartenberg (DH) parameters, forward kinematics chains, inverse kinematics, robot Jacobian matrices, and Damped Least Squares.",
           prerequisites: ["math-matrices-quaternions", "phys-kinematics-1d-2d"],
           x: 1120, y: 560,
@@ -3249,6 +3249,20 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
         { file: 'chapter-10-spherical-linear-interpolation-slerp.md', title: "Chapter 10: Spherical Linear Interpolation (SLERP) & Orientation Curves", words: '4,435' },
         { file: 'chapter-11-quaternion-kinematics-and-angular-velocity.md', title: "Chapter 11: Quaternion Kinematics & Angular Velocity Integration", words: '4,314' },
         { file: 'chapter-12-production-typescript-spatial-engine-and-grand-gauntlet.md', title: "Chapter 12: Production TypeScript Spatial Math Engine & Grand Gauntlet", words: '6,175' }
+      ],
+      'phys-rigid-body-3d': [
+        { file: 'chapter-01-the-geometry-of-mass-and-rigidity.md', title: "Chapter 1: The Geometry of Mass: Center of Mass and Discrete-to-Continuum Rigidity", words: '5,666' },
+        { file: 'chapter-02-the-inertia-tensor-and-rotational-mass.md', title: "Chapter 2: The Inertia Tensor: Why Rotational Mass is a 3x3 Matrix", words: '4,574' },
+        { file: 'chapter-03-parallel-axis-theorem-and-coordinate-shifts.md', title: "Chapter 3: The Parallel Axis Theorem (Steiner's Theorem) and Coordinate Shifts", words: '4,876' },
+        { file: 'chapter-04-canonical-inertia-tensors-of-physical-solids.md', title: "Chapter 4: Canonical Inertia Tensors of Physical Solids", words: '4,426' },
+        { file: 'chapter-05-principal-axes-and-tensor-diagonalization.md', title: "Chapter 5: Principal Axes of Inertia and Tensor Diagonalization", words: '4,165' },
+        { file: 'chapter-06-world-vs-body-frames-and-tensor-transforms.md', title: "Chapter 6: Spatial Transformations: World vs. Body Frames of Inertia", words: '3,936' },
+        { file: 'chapter-07-torque-angular-momentum-and-newton-euler.md', title: "Chapter 7: Torque, Angular Momentum, and Newton-Euler Dynamics", words: '3,764' },
+        { file: 'chapter-08-eulers-rotational-equations-of-motion.md', title: "Chapter 8: Euler's Rotational Equations of Motion", words: '4,072' },
+        { file: 'chapter-09-the-dzhanibekov-effect-and-intermediate-axis-instability.md', title: "Chapter 9: The Dzhanibekov Effect and Intermediate Axis Instability", words: '4,161' },
+        { file: 'chapter-10-gyroscopic-dynamics-precession-and-nutation.md', title: "Chapter 10: Gyroscopic Dynamics, Precession, and Nutation", words: '3,590' },
+        { file: 'chapter-11-collision-impulses-and-contact-dynamics.md', title: "Chapter 11: Collision Impulses and Contact Dynamics", words: '7,574' },
+        { file: 'chapter-12-production-typescript-rigid-body-engine-and-grand-gauntlet.md', title: "Chapter 12: Production TypeScript Rigid Body Engine and the Grand Gauntlet", words: '7,416' }
       ]
     };
 
