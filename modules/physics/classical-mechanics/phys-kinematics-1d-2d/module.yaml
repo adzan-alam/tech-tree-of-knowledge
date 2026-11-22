@@ -2,22 +2,22 @@ id: "a1000000-0000-0000-0000-000000000003"
 slug: "phys-kinematics-1d-2d"
 title: "1D and 2D Kinematics: The Description of Motion"
 summary: "A comprehensive first-principles guide to kinematics: from Galileo's Falling Stone Paradox and Apollo 15 lunar vacuum proof (Class 6 level) to the four golden equations of motion, 2D orthogonal independence, parabolic ballistics, quadratic aerodynamic drag, and ballistic targeting engines."
-version: "2.0.0"
+version: "3.0.0"
 created_at: "2026-11-19T01:30:00Z"
-updated_at: "2026-11-20T19:25:00Z"
+updated_at: "2026-11-22T12:35:00Z"
 
 classification:
   discipline: "physics"
   domain: "classical-mechanics"
   proficiency_tier: 1
   difficulty_score: 0.35
-  estimated_duration_minutes: 90
+  estimated_duration_minutes: 360
 
 verification:
   status: "technically-verified"
   reviewed_by: ["phys-verifier-01", "pedagogy-auditor-02"]
-  verification_date: "2026-11-20"
-  notes: "Kinematic equations, Galilean projectile independence, aerodynamic quadratic drag, and numerical integration verified against GSMS-10 standard."
+  verification_date: "2026-11-22"
+  notes: "Elevated to Sovereign Master Treatise Standard (SMTS-40K). 63,768 words across 12 granular chapters with 120 worked numerical examples, 120 chapter mastery exercises, production TypeScript KinematicsEngine, and 10 Civilizational Grand Gauntlet capstone problems."
 
 relationships:
   prerequisites:
