@@ -2,22 +2,22 @@ id: "a1000000-0000-0000-0000-000000000004"
 slug: "phys-newtons-laws"
 title: "Newton's Laws of Motion & Classical Dynamics"
 summary: "A comprehensive first-principles guide to Newtonian dynamics: from Aristotle's Friction Fallacy (Class 6 level) and inertial frames to F = dp/dt, action-reaction pairs, Coulomb friction, Atwood machines, and 2D force accumulator engines."
-version: "2.0.0"
+version: "3.0.0"
 created_at: "2026-11-19T01:30:00Z"
-updated_at: "2026-11-20T19:32:00Z"
+updated_at: "2026-11-22T08:10:00Z"
 
 classification:
   discipline: "physics"
   domain: "classical-mechanics"
   proficiency_tier: 2
   difficulty_score: 0.45
-  estimated_duration_minutes: 90
+  estimated_duration_minutes: 360
 
 verification:
   status: "technically-verified"
   reviewed_by: ["phys-verifier-01", "pedagogy-auditor-02"]
-  verification_date: "2026-11-20"
-  notes: "Free-body diagrams, vector force summation, Coulomb friction models, and force accumulator patterns verified against GSMS-10 standard."
+  verification_date: "2026-11-22"
+  notes: "Sovereign Master Treatise Standard (SMTS-40K) verified. 70,402 words across 12 granular chapters, 120 progressive numerical worked examples, 120 chapter exercises with full step-by-step written solutions, zero-dependency TypeScript DynamicsEngine, and 10 Grand Gauntlet capstone problems."
 
 relationships:
   prerequisites:
