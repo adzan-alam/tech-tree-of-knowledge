@@ -172,6 +172,48 @@
       --error: #ef4444;
     }
 
+    [data-theme="kyoto"] {
+      --bg-primary: #fcfbf7;
+      --bg-secondary: #f4f1e8;
+      --bg-card: #ffffff;
+      --bg-card-hover: #ece8db;
+      --text-main: #1f2328;
+      --text-muted: #59636e;
+      --accent-math: #0969da;
+      --accent-phys: #1a7f37;
+      --accent-cs: #bc4c00;
+      --accent-chem: #8250df;
+      --accent-gold: #9a6700;
+      --accent-cyan: #0550ae;
+      --border-color: #d0d7de;
+      --canvas-bg: radial-gradient(circle at 50% 50%, #ffffff 0%, #edebe3 100%);
+      --code-bg: #f6f8fa;
+      --card-shadow: 0 4px 14px rgba(31, 35, 40, 0.08);
+      --success: #1a7f37;
+      --error: #cf222e;
+    }
+
+    [data-theme="dracula"] {
+      --bg-primary: #21222c;
+      --bg-secondary: #282a36;
+      --bg-card: #343746;
+      --bg-card-hover: #44475a;
+      --text-main: #f8f8f2;
+      --text-muted: #6272a4;
+      --accent-math: #8be9fd;
+      --accent-phys: #50fa7b;
+      --accent-cs: #ffb86c;
+      --accent-chem: #bd93f9;
+      --accent-gold: #f1fa8c;
+      --accent-cyan: #8be9fd;
+      --border-color: #44475a;
+      --canvas-bg: radial-gradient(circle at 50% 50%, #282a36 0%, #191a21 100%);
+      --code-bg: #1e1f29;
+      --card-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+      --success: #50fa7b;
+      --error: #ff5555;
+    }
+
     /* =========================================================================
        TYPOGRAPHY SELECTION
        ========================================================================= */
@@ -1388,6 +1430,63 @@
       border-color: var(--accent-math);
     }
 
+    .btn-download-action:disabled, .sim-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .chapter-pagination-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 2.5rem 0 1.5rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      box-shadow: var(--card-shadow);
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Dashboard Modules Explorer */
+    .dashboard-modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .dash-module-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .dash-module-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-math);
+      transform: translateY(-2px);
+      box-shadow: var(--card-shadow);
+    }
+
+    .dash-module-card.certified {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, var(--bg-card) 100%);
+    }
+
+    .dash-module-card.certified:hover {
+      border-color: var(--accent-phys);
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);
+    }
+
   </style>
 </head>
 <body>
@@ -1423,6 +1522,8 @@
           <option value="tokyo">🌸 Tokyo Midnight</option>
           <option value="solarized">🔬 Solarized Dark</option>
           <option value="matrix">📟 Matrix CRT</option>
+          <option value="kyoto">⛩️ Kyoto Minimal (Light)</option>
+          <option value="dracula">🧛 Dracula Royalty</option>
         </select>
       </div>
 
@@ -1461,26 +1562,36 @@
             An unbroken cognitive ladder starting from Grade 6 intuitive foundations to university-grade mechanics, robotics, and computational physics engines. Rigorous, self-contained, and 100% offline-autonomous.
           </p>
 
-          <!-- Continue Learning Card -->
-          <div class="continue-card" id="dashContinueCard">
-            <div class="continue-meta">
-              <span class="continue-tag">🔥 Active Sovereign Master Treatise</span>
-              <h2 class="continue-title" id="dashContinueTitle">2D Cartesian Vectors and Vector Algebra</h2>
-              <p class="continue-sub" id="dashContinueSub">
-                From the Pirate Island Paradox and René Descartes' fly to 2D vector algebra, dot products, projections, reflections, and full TypeScript physics engine.
+          <!-- Pathway 1 Milestone Trophy Card -->
+          <div class="continue-card" id="dashMilestoneCard" style="border: 1px solid var(--accent-phys); background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, var(--bg-card) 100%); box-shadow: 0 0 25px rgba(16, 185, 129, 0.2);">
+            <div class="continue-meta" style="flex: 1 1 500px;">
+              <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                <span class="continue-tag" style="color:var(--accent-phys); font-weight:800;">🏆 CIVILIZATIONAL MILESTONE REACHED</span>
+                <span class="stat-pill" style="color:var(--accent-phys); border-color:var(--accent-phys); font-weight:700;">100% SMTS-40K Certified</span>
+              </div>
+              <h2 class="continue-title" style="color:var(--text-main); font-size:1.5rem; margin-top:0.3rem;">Pathway 1: 2D Computational Physics Engine</h2>
+              <p class="continue-sub" style="line-height:1.6; margin-top:0.25rem;">
+                All 8 foundational treatises have ascended to the Sovereign Master Treatise Standard (SMTS-40K). 
+                From coordinate geometry and differential calculus to Newton's laws, Verlet numerical integration, and SAT collision manifolds.
               </p>
-              <div class="continue-stats">
-                <span class="stat-pill" style="color:var(--accent-math); font-weight:700;">📖 42,671 Words</span>
-                <span class="stat-pill" style="color:var(--accent-phys); font-weight:700;">🧩 12 Sovereign Chapters</span>
-                <span class="stat-pill" style="color:var(--accent-cs); font-weight:700;">⚡ 120 Worked Examples</span>
-                <span class="stat-pill" style="color:var(--accent-gold); font-weight:700;">📝 120 Solved Exercises</span>
+              <div class="continue-stats" style="margin-top:0.75rem;">
+                <span class="stat-pill" style="color:var(--accent-math); font-weight:700; border-color:rgba(56, 189, 248, 0.4);">📖 511,518 Certified Words</span>
+                <span class="stat-pill" style="color:var(--accent-phys); font-weight:700; border-color:rgba(16, 185, 129, 0.4);">🧩 96 Granular Chapters</span>
+                <span class="stat-pill" style="color:var(--accent-cs); font-weight:700; border-color:rgba(245, 158, 11, 0.4);">⚡ 960 Worked Examples</span>
+                <span class="stat-pill" style="color:var(--accent-gold); font-weight:700; border-color:rgba(251, 191, 36, 0.4);">📝 960 Solved Exercises</span>
+                <span class="stat-pill" style="color:var(--accent-cyan); font-weight:700; border-color:rgba(6, 182, 212, 0.4);">🧪 Complete TypeScript Engine Suite</span>
               </div>
             </div>
-            <div style="display:flex; flex-direction:column; gap:0.5rem; align-items:flex-end;">
-              <button class="sim-btn primary" id="dashBtnResume" style="padding:0.75rem 1.5rem; font-size:0.95rem;">
-                ▶ Open in Reader Studio
+            <div style="display:flex; flex-direction:column; gap:0.6rem; align-items:flex-end; justify-content:center; min-width:240px;">
+              <button class="sim-btn primary" id="dashBtnResume" style="padding:0.85rem 1.75rem; font-size:0.95rem; width:100%; font-weight:700;">
+                🗺️ Explore 2D Physics Roadmap
               </button>
-              <span style="font-size:0.75rem; color:var(--text-muted);">Includes Interactive Vector Playground</span>
+              <button class="sim-btn" id="dashBtnStartCh1" style="padding:0.6rem 1.25rem; font-size:0.85rem; width:100%;">
+                📖 Read Module 1: 2D Vectors
+              </button>
+              <button class="sim-btn" id="dashBtnLaunchLab" style="padding:0.6rem 1.25rem; font-size:0.85rem; width:100%;">
+                🧪 Launch 2D Physics Lab
+              </button>
             </div>
           </div>
         </section>
@@ -1488,31 +1599,31 @@
         <!-- Executive Metrics Grid -->
         <section class="dashboard-metrics-grid">
           <div class="metric-card">
-            <div class="metric-icon-box metric-icon-math">📐</div>
+            <div class="metric-icon-box metric-icon-math">📖</div>
             <div>
-              <div class="metric-num" id="dashCountModules">21</div>
-              <div class="metric-label">Sovereign Modules (Acyclic Verified)</div>
+              <div class="metric-num">511,518</div>
+              <div class="metric-label">Certified Words (Pathway 1 Complete)</div>
             </div>
           </div>
           <div class="metric-card">
-            <div class="metric-icon-box metric-icon-phys">🗺️</div>
+            <div class="metric-icon-box metric-icon-phys">🏆</div>
             <div>
-              <div class="metric-num" id="dashCountPathways">4</div>
-              <div class="metric-label">Goal-Oriented Creative Pathways</div>
+              <div class="metric-num">8 / 8</div>
+              <div class="metric-label">SMTS-40K Treatises (100% Complete)</div>
             </div>
           </div>
           <div class="metric-card">
             <div class="metric-icon-box metric-icon-cs">📝</div>
             <div>
-              <div class="metric-num">240+</div>
-              <div class="metric-label">Progressive Solved Exercises</div>
+              <div class="metric-num">960+</div>
+              <div class="metric-label">Progressive Solved Exercises & Gauntlets</div>
             </div>
           </div>
           <div class="metric-card">
             <div class="metric-icon-box metric-icon-chem">🧪</div>
             <div>
               <div class="metric-num">2</div>
-              <div class="metric-label">Interactive Scientific Laboratories</div>
+              <div class="metric-label">Interactive Scientific Simulators</div>
             </div>
           </div>
         </section>
@@ -1528,13 +1639,13 @@
           </div>
 
           <div class="pathway-selector-grid">
-            <div class="pathway-card active" onclick="jumpToPathway('2d-physics')">
-              <span class="pathway-tag tag-active">Active V1 Pilot</span>
+            <div class="pathway-card active" onclick="jumpToPathway('2d-physics')" style="border-color:var(--accent-phys); box-shadow:0 0 16px rgba(16, 185, 129, 0.2);">
+              <span class="pathway-tag tag-active" style="background:var(--accent-phys); color:#000; font-weight:800;">✓ 100% Certified</span>
               <h3 style="font-size:1.05rem; font-weight:700;">2D Physics Simulator</h3>
               <p style="font-size:0.8rem; color:var(--text-muted);">
-                Vectors, kinematics, Newton's laws, Verlet integration, and restitution collisions.
+                Vectors, kinematics, Newton's laws, momentum, programming, Verlet integration, and SAT collisions.
               </p>
-              <span style="font-size:0.75rem; color:var(--accent-phys); font-weight:600;">8 Modules • ~8.5 Hours</span>
+              <span style="font-size:0.75rem; color:var(--accent-phys); font-weight:700;">8 Modules • 511K Words • ~14.5 Hours</span>
             </div>
 
             <div class="pathway-card" onclick="jumpToPathway('3d-physics')">
@@ -1561,147 +1672,30 @@
               <p style="font-size:0.8rem; color:var(--text-muted);">
                 Inverse kinematics, sim-to-real transfer, domain randomization, and real-time control.
               </p>
-              <span style="font-size:0.75rem; color:var(--accent-chem); font-weight:600;">Terminal Synthesis Track • 4 Modules</span>
+              <span style="font-size:0.75rem; color:var(--accent-chem); font-weight:600;">Terminal Synthesis Track • 6 Modules</span>
             </div>
           </div>
         </section>
 
-        <!-- Knowledge Disciplines Hub -->
+        <!-- Knowledge Disciplines Explorer -->
         <section>
           <div class="section-header-row">
             <div>
-              <h2 class="section-title">📚 Sovereign Disciplines Hub</h2>
-              <p class="section-desc">Select any module directly to read in the Reader Studio or inspect in the Constellation Graph.</p>
+              <h2 class="section-title">📚 Sovereign Disciplines Explorer</h2>
+              <p class="section-desc">Browse treatises filtered by discipline or explore the 8 SMTS-40K verified masterworks.</p>
+            </div>
+            <div class="disc-filter-toolbar" id="dashDiscFilterBar" style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+              <button class="filter-pill active" data-dash-disc="certified">✨ SMTS-40K Certified (8)</button>
+              <button class="filter-pill" data-dash-disc="all">All Modules (21)</button>
+              <button class="filter-pill" data-dash-disc="mathematics">📐 Mathematics (6)</button>
+              <button class="filter-pill" data-dash-disc="physics">⚛️ Physics (5)</button>
+              <button class="filter-pill" data-dash-disc="computer-science">💻 Computer Science (9)</button>
+              <button class="filter-pill" data-dash-disc="chemistry">🧪 Physical Chemistry (1)</button>
             </div>
           </div>
 
-          <div class="disciplines-hub-grid">
-            <!-- Math -->
-            <div class="discipline-hub-card" style="border-top: 3px solid var(--accent-math);">
-              <div class="disc-card-head">
-                <span class="disc-card-name" style="color:var(--accent-math);">📐 Mathematics</span>
-                <span class="disc-card-count">6 Modules</span>
-              </div>
-              <ul class="disc-mod-list">
-                <li class="disc-mod-item" onclick="openModuleBySlug('math-vectors-2d')">
-                  <span>2D Cartesian Vectors & Algebra</span>
-                  <span style="color:var(--accent-math); font-size:0.72rem; font-weight:700;">42K Words</span>
-                </li>
-                <li class="disc-mod-item" onclick="openModuleBySlug('math-vectors-3d')">
-                  <span>3D Cartesian Vectors & Norms</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 1</span>
-                </li>
-                <li class="disc-mod-item" onclick="openModuleBySlug('math-matrices-quaternions')">
-                  <span>Matrices, Rotations & Quaternions</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 2</span>
-                </li>
-                <li class="disc-mod-item" onclick="openModuleBySlug('math-calculus-derivatives')">
-                  <span>Calculus: Derivatives & Rates</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 1</span>
-                </li>
-                <li class="disc-mod-item" onclick="openModuleBySlug('math-probability-statistics')">
-                  <span>Probability & Stochastic Modeling</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 1</span>
-                </li>
-                <li class="disc-mod-item" onclick="openModuleBySlug('math-kalman-filtering')">
-                  <span>State Estimation & Kalman Filters</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 3</span>
-                </li>
-              </ul>
-            </div>
-
-            <!-- Physics -->
-            <div class="discipline-hub-card" style="border-top: 3px solid var(--accent-phys);">
-              <div class="disc-card-head">
-                <span class="disc-card-name" style="color:var(--accent-phys);">⚛️ Physics</span>
-                <span class="disc-card-count">5 Modules</span>
-              </div>
-              <ul class="disc-mod-list">
-                <li class="disc-mod-item" onclick="openModuleBySlug('phys-kinematics-1d-2d')">
-                  <span>Kinematics in 1D & 2D</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 1</span>
-                </li>
-                <li class="disc-mod-item" onclick="openModuleBySlug('phys-newtons-laws')">
-                  <span>Newton's Laws & Dynamics</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 2</span>
-                </li>
-                <li class="disc-mod-item" onclick="openModuleBySlug('phys-momentum-conservation')">
-                  <span>Momentum & Collisions</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 2</span>
-                </li>
-                <li class="disc-mod-item" onclick="openModuleBySlug('phys-rigid-body-3d')">
-                  <span>3D Rigid Body Dynamics</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 3</span>
-                </li>
-                <li class="disc-mod-item" onclick="openModuleBySlug('phys-robotics-inverse-kinematics')">
-                  <span>Inverse Kinematics & Robotics</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 3</span>
-                </li>
-              </ul>
-            </div>
-
-            <!-- Computer Science -->
-            <div class="discipline-hub-card" style="border-top: 3px solid var(--accent-cs);">
-              <div class="disc-card-head">
-                <span class="disc-card-name" style="color:var(--accent-cs);">💻 Computer Science</span>
-                <span class="disc-card-count">9 Modules</span>
-              </div>
-              <ul class="disc-mod-list">
-                <li class="disc-mod-item" onclick="openModuleBySlug('cs-prog-fundamentals')">
-                  <span>Programming Fundamentals</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 0</span>
-                </li>
-                <li class="disc-mod-item" onclick="openModuleBySlug('cs-numerical-integration')">
-                  <span>Numerical Integration (Verlet)</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 2</span>
-                </li>
-                <li class="disc-mod-item" onclick="openModuleBySlug('cs-collision-detection')">
-                  <span>2D Collision Detection & SAT</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 2</span>
-                </li>
-                <li class="disc-mod-item" onclick="openModuleBySlug('cs-3d-collision-bvh')">
-                  <span>3D Collision Detection & BVH</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 3</span>
-                </li>
-                <li class="disc-mod-item" onclick="openModuleBySlug('cs-computer-vision-foundations')">
-                  <span>Computer Vision Foundations</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 2</span>
-                </li>
-                <li class="disc-mod-item" onclick="openModuleBySlug('cs-neural-networks-foundations')">
-                  <span>Neural Networks & Autodiff</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 2</span>
-                </li>
-                <li class="disc-mod-item" onclick="openModuleBySlug('cs-reinforcement-learning-mdp')">
-                  <span>Reinforcement Learning (MDP)</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 2</span>
-                </li>
-                <li class="disc-mod-item" onclick="openModuleBySlug('cs-deep-rl-agents')">
-                  <span>Deep RL Agents (DQN / PPO)</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 3</span>
-                </li>
-                <li class="disc-mod-item" onclick="openModuleBySlug('cs-sim-to-real-embodied-ai')">
-                  <span>Sim-to-Real Embodied AI</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 3</span>
-                </li>
-              </ul>
-            </div>
-
-            <!-- Chemistry -->
-            <div class="discipline-hub-card" style="border-top: 3px solid var(--accent-chem);">
-              <div class="disc-card-head">
-                <span class="disc-card-name" style="color:var(--accent-chem);">🧪 Physical Chemistry</span>
-                <span class="disc-card-count">1 Module</span>
-              </div>
-              <ul class="disc-mod-list">
-                <li class="disc-mod-item" onclick="openModuleBySlug('chem-atomic-structure')">
-                  <span>Atomic Structure & Orbitals</span>
-                  <span style="color:var(--text-muted); font-size:0.72rem;">Tier 1</span>
-                </li>
-              </ul>
-              <div style="font-size:0.75rem; color:var(--text-muted); line-height:1.4; margin-top:auto; padding-top:1rem;">
-                Cross-domain link: provides quantum energy transitions and orbital mathematics grounding atomic physics.
-              </div>
-            </div>
+          <div class="dashboard-modules-grid" id="dashModulesGrid">
+            <!-- Dynamically populated by JS based on filter selection -->
           </div>
         </section>
 
@@ -1923,31 +1917,19 @@
           </div>
 
           <!-- Modular Chapter Selector & Download Toolbar -->
-          <div class="chapter-toolbar" id="chapterToolbar" style="display:flex;">
+          <div class="chapter-toolbar" id="chapterToolbar" style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+            <button class="btn-download-action" id="btnPrevChapterTop" title="Previous Chapter">⬅ Prev</button>
             <label for="chapterSelect" style="font-size:0.78rem; font-weight:700; color:var(--text-muted);">Chapter:</label>
-            <select id="chapterSelect" class="chapter-select">
-              <option value="all">📖 Full Sovereign Treatise (All 12 Chapters • 42,671 Words)</option>
-              <option value="chapter-01-scalars-and-paradox.md">Chapter 1: The Layman's Genesis — Scalars & Lost Island (4,007 words)</option>
-              <option value="chapter-02-coordinates-and-grid.md">Chapter 2: The Grid World — Descartes & Coordinates (3,806 words)</option>
-              <option value="chapter-03-components-and-notation.md">Chapter 3: Anatomy of an Arrow — Components & Basis Vectors (3,320 words)</option>
-              <option value="chapter-04-magnitude-and-pythagoras.md">Chapter 4: Pythagoras in Flatland — Distance & Vector Magnitude (2,917 words)</option>
-              <option value="chapter-05-vector-addition.md">Chapter 5: Geometry of Combining — Tip-to-Tail & Parallelograms (3,657 words)</option>
-              <option value="chapter-06-subtraction-and-scaling.md">Chapter 6: The Anti-Arrow & Scaling — Relative Velocity (3,516 words)</option>
-              <option value="chapter-07-unit-vectors-and-normalization.md">Chapter 7: Compass Needle — Unit Vectors & Normalization (2,913 words)</option>
-              <option value="chapter-08-trigonometry-and-polar.md">Chapter 8: The Dance of Angles — Polar Coordinates & atan2 (3,488 words)</option>
-              <option value="chapter-09-dot-product-and-work.md">Chapter 9: The Teamwork Meter — Dot Product & Mechanical Work (3,857 words)</option>
-              <option value="chapter-10-projections-and-reflections.md">Chapter 10: The Shadow and The Mirror — Projections & Reflections (3,855 words)</option>
-              <option value="chapter-11-cross-product-and-steering.md">Chapter 11: Turning in Flatland — 2D Cross Product & Steering (3,026 words)</option>
-              <option value="chapter-12-typescript-engine-and-grand-gauntlet.md">Chapter 12: Computational Engine & Grand Gauntlet (3,819 words)</option>
-            </select>
+            <select id="chapterSelect" class="chapter-select" style="min-width:260px;"></select>
+            <button class="btn-download-action" id="btnNextChapterTop" title="Next Chapter">Next ➔</button>
             <button class="btn-download-action" id="btnDownloadChapter" title="Download this chapter as Markdown">
-              📥 Download Chapter (.md)
+              📥 Download (.md)
             </button>
             <button class="btn-download-action" id="btnDownloadExercises" title="Download chapter exercises as standalone worksheet">
-              📝 Download Exercises (.md)
+              📝 Exercises (.md)
             </button>
             <button class="btn-download-action" id="btnPrintReader" title="Print or Save as PDF">
-              🖨️ Print / PDF
+              🖨️ Print
             </button>
           </div>
 
@@ -2077,6 +2059,16 @@
 
         <div id="readerBody" class="reader-body">
           <!-- Dynamically populated with text and KaTeX formulas -->
+        </div>
+
+        <!-- Chapter Pagination Bottom Navigation -->
+        <div class="chapter-pagination-footer" id="chapterPaginationFooter">
+          <button class="sim-btn" id="btnFooterPrevChapter" style="min-width: 150px;">⬅ Previous Chapter</button>
+          <div style="text-align:center;">
+            <div id="footerChapterNumber" style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--accent-math); font-weight:700;">Chapter Navigation</div>
+            <div id="footerChapterTitle" style="font-size:0.95rem; font-weight:700; color:var(--text-main); margin-top:0.2rem;">Chapter 1 of 12</div>
+          </div>
+          <button class="sim-btn primary" id="btnFooterNextChapter" style="min-width: 150px;">Next Chapter ➔</button>
         </div>
 
         <!-- Interactive Self-Assessment Quiz -->
@@ -3114,15 +3106,146 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
       }
     };
 
+    // =========================================================================
+    // SOVEREIGN MASTER TREATISE STANDARD (SMTS-40K) CHAPTER METADATA
+    // =========================================================================
+    const CHAPTERS_METADATA = {
+      'math-vectors-2d': [
+        { file: 'chapter-01-scalars-and-paradox.md', title: "Chapter 1: The Layman's Genesis — The Scalar Illusion & The Lost Island", words: '4,007' },
+        { file: 'chapter-02-coordinates-and-grid.md', title: "Chapter 2: The Grid World — Descartes, The Fly, and Coordinates", words: '3,806' },
+        { file: 'chapter-03-components-and-notation.md', title: "Chapter 3: The Anatomy of an Arrow — Components & Basis Vectors", words: '3,320' },
+        { file: 'chapter-04-magnitude-and-pythagoras.md', title: "Chapter 4: Pythagoras in Flatland — Distance & Vector Magnitude", words: '2,917' },
+        { file: 'chapter-05-vector-addition.md', title: "Chapter 5: The Geometry of Combining — Tip-to-Tail & Parallelograms", words: '3,657' },
+        { file: 'chapter-06-subtraction-and-scaling.md', title: "Chapter 6: The Anti-Arrow & Scaling — Relative Velocity", words: '3,516' },
+        { file: 'chapter-07-unit-vectors-and-normalization.md', title: "Chapter 7: The Compass Needle — Unit Vectors & Normalization", words: '2,913' },
+        { file: 'chapter-08-trigonometry-and-polar.md', title: "Chapter 8: The Dance of Angles — Polar Coordinates & atan2", words: '3,488' },
+        { file: 'chapter-09-dot-product-and-work.md', title: "Chapter 9: The Teamwork Meter — Dot Product & Mechanical Work", words: '3,857' },
+        { file: 'chapter-10-projections-and-reflections.md', title: "Chapter 10: The Shadow and The Mirror — Projections & Reflections", words: '3,855' },
+        { file: 'chapter-11-cross-product-and-steering.md', title: "Chapter 11: Turning in Flatland — 2D Cross Product & Steering", words: '3,026' },
+        { file: 'chapter-12-typescript-engine-and-grand-gauntlet.md', title: "Chapter 12: Computational Engine & Civilizational Grand Gauntlet", words: '3,819' }
+      ],
+      'math-calculus-derivatives': [
+        { file: 'chapter-01-zeno-and-speedometer-paradox.md', title: "Chapter 1: The Speedometer Paradox — Zeno, Instantaneous Speed, and the Limit", words: '5,624' },
+        { file: 'chapter-02-secant-slopes-and-average-rates.md', title: "Chapter 2: The Secant Line & Average Rate of Change", words: '3,860' },
+        { file: 'chapter-03-vanishing-step-and-limits.md', title: "Chapter 3: The Vanishing Step — Limits, Infinitesimals, and the Tangent Line", words: '5,033' },
+        { file: 'chapter-04-formal-derivative-definition.md', title: "Chapter 4: The Formal Definition of the Derivative — First Principles & Notation", words: '4,549' },
+        { file: 'chapter-05-linearity-constant-power-sum-rules.md', title: "Chapter 5: Linearity, the Power Rule, and Polynomial Calculus", words: '3,708' },
+        { file: 'chapter-06-product-and-quotient-rules.md', title: "Chapter 6: The Product and Quotient Rules — Geometry of Compounding Rates", words: '3,890' },
+        { file: 'chapter-07-chain-rule-and-implicit-differentiation.md', title: "Chapter 7: The Chain Rule and Implicit Differentiation — The Nested Gearbox", words: '3,569' },
+        { file: 'chapter-08-trigonometric-derivatives.md', title: "Chapter 8: Trigonometric Derivatives and Oscillatory Mechanics", words: '3,255' },
+        { file: 'chapter-09-physical-hierarchy-of-motion.md', title: "Chapter 9: The Physical Hierarchy of Motion — Position, Velocity, Acceleration, Jerk, Snap", words: '4,026' },
+        { file: 'chapter-10-extrema-optimization-concavity.md', title: "Chapter 10: Extrema, Concavity, and the Geometry of Optimization", words: '5,191' },
+        { file: 'chapter-11-numerical-differentiation-and-floating-point.md', title: "Chapter 11: Numerical Differentiation, Taylor Series, and Floating-Point Error", words: '4,270' },
+        { file: 'chapter-12-typescript-calculus-engine-and-grand-gauntlet.md', title: "Chapter 12: Production TypeScript Calculus Engine & Civilizational Grand Gauntlet", words: '3,856' }
+      ],
+      'phys-kinematics-1d-2d': [
+        { file: 'chapter-01-space-time-and-reference-frames.md', title: "Chapter 1: The Layman's Genesis — Space, Time, and Reference Frames", words: '4,373' },
+        { file: 'chapter-02-velocity-and-average-speed.md', title: "Chapter 2: Velocity vs. Average Speed & The Harmonic Mean Paradox", words: '4,616' },
+        { file: 'chapter-03-instantaneous-velocity-acceleration-graphs.md', title: "Chapter 3: Instantaneous Velocity, Acceleration & The Graph Trinity", words: '5,285' },
+        { file: 'chapter-04-four-sacred-kinematic-equations.md', title: "Chapter 4: The Four Sacred Kinematic Equations of Constant Acceleration", words: '4,944' },
+        { file: 'chapter-05-free-fall-and-gravitational-acceleration.md', title: "Chapter 5: Free Fall, Gravity, and the Vacuum Equivalence Theorem", words: '4,592' },
+        { file: 'chapter-06-two-dimensional-vector-kinematics.md', title: "Chapter 6: Two-Dimensional Motion and Galileo's Orthogonal Independence", words: '4,749' },
+        { file: 'chapter-07-projectile-motion-and-parabolic-trajectories.md', title: "Chapter 7: Projectile Motion & Parabolic Trajectories", words: '6,630' },
+        { file: 'chapter-08-asymmetric-launches-inclines-and-targeting.md', title: "Chapter 8: Asymmetric Launches, Inclines, & Inverse Ballistic Targeting", words: '6,094' },
+        { file: 'chapter-09-relative-motion-and-galilean-transformations.md', title: "Chapter 9: Relative Motion & Galilean Transformations", words: '5,795' },
+        { file: 'chapter-10-circular-motion-centripetal-acceleration.md', title: "Chapter 10: Circular Motion & Centripetal Acceleration", words: '5,153' },
+        { file: 'chapter-11-calculus-based-kinematics-and-drag.md', title: "Chapter 11: Calculus-Based Kinematics & Aerodynamic Drag", words: '6,636' },
+        { file: 'chapter-12-typescript-kinematics-simulator-and-grand-gauntlet.md', title: "Chapter 12: Production TypeScript Kinematics Engine & Civilizational Grand Gauntlet", words: '4,901' }
+      ],
+      'phys-newtons-laws': [
+        { file: 'chapter-01-aristotles-fallacy-and-the-dawn-of-inertia.md', title: "Chapter 1: Aristotle's Fallacy and the Dawn of Inertia", words: '6,321' },
+        { file: 'chapter-02-mass-force-and-vector-equilibrium.md', title: "Chapter 2: Mass, Force, and Vector Equilibrium", words: '5,515' },
+        { file: 'chapter-03-second-law-and-force-acceleration-dynamics.md', title: "Chapter 3: The Second Law and Force-Acceleration Dynamics", words: '5,219' },
+        { file: 'chapter-04-free-body-diagrams-and-normal-forces.md', title: "Chapter 4: Free-Body Diagrams and the Normal Force Constraint", words: '5,053' },
+        { file: 'chapter-05-third-law-action-reaction-symmetries.md', title: "Chapter 5: The Third Law and Action-Reaction Symmetries", words: '6,721' },
+        { file: 'chapter-06-coulomb-friction-static-kinetic-stick-slip.md', title: "Chapter 6: Coulomb Friction — Static, Kinetic, and Stick-Slip Dynamics", words: '5,903' },
+        { file: 'chapter-07-dynamics-on-inclined-planes.md', title: "Chapter 7: Dynamics on Inclined Planes — Coordinate Transformations & Gravity Dilution", words: '7,298' },
+        { file: 'chapter-08-coupled-multi-body-systems-and-atwood-machines.md', title: "Chapter 8: Coupled Multi-Body Systems and Atwood Machines", words: '6,660' },
+        { file: 'chapter-09-elastic-restitution-springs-and-hookes-law.md', title: "Chapter 9: Elastic Restitution, Springs, and Hooke's Law", words: '6,133' },
+        { file: 'chapter-10-non-inertial-reference-frames-and-fictitious-forces.md', title: "Chapter 10: Non-Inertial Reference Frames and Fictitious Forces", words: '5,675' },
+        { file: 'chapter-11-drag-damping-and-resisted-force-fields.md', title: "Chapter 11: Drag, Damping, and Resisted Force Fields", words: '5,076' },
+        { file: 'chapter-12-typescript-dynamics-engine-and-grand-gauntlet.md', title: "Chapter 12: Production TypeScript Dynamics Engine & Civilizational Grand Gauntlet", words: '4,828' }
+      ],
+      'phys-momentum-conservation': [
+        { file: 'chapter-01-the-quantity-of-motion-and-the-momentum-axiom.md', title: "Chapter 1: The Quantity of Motion & The Momentum Axiom", words: '5,031' },
+        { file: 'chapter-02-the-impulse-momentum-theorem-and-impact-mechanics.md', title: "Chapter 2: The Impulse-Momentum Theorem & Impact Mechanics", words: '4,923' },
+        { file: 'chapter-03-conservation-of-momentum-in-isolated-systems.md', title: "Chapter 3: Conservation of Momentum in Isolated Systems", words: '4,991' },
+        { file: 'chapter-04-center-of-mass-kinematics-and-dynamics.md', title: "Chapter 4: Center-of-Mass Kinematics & Koenig's Theorem", words: '5,145' },
+        { file: 'chapter-05-one-dimensional-elastic-collisions.md', title: "Chapter 5: One-Dimensional Elastic Collisions & Relative Speed Invariance", words: '5,365' },
+        { file: 'chapter-06-inelastic-collisions-and-the-coefficient-of-restitution.md', title: "Chapter 6: Inelastic Collisions & The Coefficient of Restitution", words: '4,738' },
+        { file: 'chapter-07-two-dimensional-oblique-collisions.md', title: "Chapter 7: Two-Dimensional Oblique Collisions & Planar Scattering", words: '7,026' },
+        { file: 'chapter-08-variable-mass-systems-and-rocket-propulsion.md', title: "Chapter 8: Variable-Mass Systems & Rocket Propulsion", words: '6,221' },
+        { file: 'chapter-09-scattering-theory-cross-sections-and-impact-parameters.md', title: "Chapter 9: Classical Scattering Theory & Cross Sections", words: '5,334' },
+        { file: 'chapter-10-energy-partitioning-and-thermodynamics-of-impact.md', title: "Chapter 10: Energy Partitioning & Thermodynamics of Impact", words: '5,474' },
+        { file: 'chapter-11-computational-impulse-resolution-and-contact-solvers.md', title: "Chapter 11: Computational Impulse Resolution & Contact Solvers", words: '6,306' },
+        { file: 'chapter-12-typescript-momentum-engine-and-grand-gauntlet.md', title: "Chapter 12: Production TypeScript Momentum Engine & Civilizational Grand Gauntlet", words: '4,914' }
+      ],
+      'cs-prog-fundamentals': [
+        { file: 'chapter-01-the-genesis-of-discrete-state-machines.md', title: "Chapter 1: The Genesis of Discrete State Machines & Silicon Computation", words: '6,643' },
+        { file: 'chapter-02-variables-data-primitives-and-memory-hierarchy.md', title: "Chapter 2: Variables, Data Primitives, and the Memory Hierarchy", words: '5,814' },
+        { file: 'chapter-03-discrete-state-mutation-and-control-flow.md', title: "Chapter 3: Discrete State Mutation & Branch Prediction", words: '4,984' },
+        { file: 'chapter-04-iterative-loops-algorithmic-invariants-and-halting.md', title: "Chapter 4: Iterative Loops, Algorithmic Invariants, and the Halting Problem", words: '5,045' },
+        { file: 'chapter-05-functions-stack-frames-and-procedural-abstraction.md', title: "Chapter 5: Functions, Stack Frames, and Procedural Abstraction", words: '4,919' },
+        { file: 'chapter-06-pointers-references-and-dynamic-memory.md', title: "Chapter 6: Pointers, References, and Dynamic Memory Architecture", words: '4,758' },
+        { file: 'chapter-07-data-oriented-design-and-cache-locality.md', title: "Chapter 7: Data-Oriented Design, Cache Locality, and Memory Streaming", words: '4,765' },
+        { file: 'chapter-08-floating-point-arithmetic-and-numerical-traps.md', title: "Chapter 8: Floating-Point Arithmetic and Numerical Traps in Simulation", words: '4,658' },
+        { file: 'chapter-09-determinism-prng-and-floating-point-drift.md', title: "Chapter 9: Determinism, PRNG, and Floating-Point Drift", words: '6,730' },
+        { file: 'chapter-10-the-discrete-simulation-loop-and-the-spiral-of-death.md', title: "Chapter 10: The Discrete Simulation Loop & The Spiral of Death", words: '6,855' },
+        { file: 'chapter-11-sub-tick-temporal-interpolation-and-rollback-architecture.md', title: "Chapter 11: Sub-Tick Temporal Interpolation & Rollback Architecture", words: '5,569' },
+        { file: 'chapter-12-production-typescript-simulation-engine-and-grand-gauntlet.md', title: "Chapter 12: Production TypeScript Simulation Engine & Civilizational Grand Gauntlet", words: '4,878' }
+      ],
+      'cs-numerical-integration': [
+        { file: 'chapter-01-the-differential-abyss-continuous-physics-meets-discrete-silicon.md', title: "Chapter 1: The Differential Abyss: Continuous Physics Meets Discrete Silicon", words: '5,780' },
+        { file: 'chapter-02-taylor-series-foundations-and-the-calculus-of-truncation-errors.md', title: "Chapter 2: Taylor Series Foundations & Calculus of Truncation Errors", words: '5,894' },
+        { file: 'chapter-03-explicit-forward-euler-the-seductive-trap-of-first-order-discretization.md', title: "Chapter 3: Explicit Forward Euler: Seductive Trap of First-Order Discretization", words: '6,283' },
+        { file: 'chapter-04-implicit-backward-euler-stiff-equations-and-artificial-damping.md', title: "Chapter 4: Implicit Backward Euler: Stiff Equations & Artificial Damping", words: '6,311' },
+        { file: 'chapter-05-hamiltonian-mechanics-phase-space-and-liouvilles-theorem.md', title: "Chapter 5: Hamiltonian Mechanics, Phase Space & Liouville's Theorem", words: '6,403' },
+        { file: 'chapter-06-semi-implicit-symplectic-euler-the-magic-of-asynchronous-stepping.md', title: "Chapter 6: Semi-Implicit Symplectic Euler: Asynchronous Stepping", words: '6,325' },
+        { file: 'chapter-07-the-verlet-algorithm-family-position-verlet-and-stormer-verlet.md', title: "Chapter 7: The Verlet Family: Position Verlet & Størmer-Verlet", words: '5,241' },
+        { file: 'chapter-08-velocity-verlet-and-leapfrog-integration-the-gold-standard.md', title: "Chapter 8: Velocity Verlet & Leapfrog: The Gold Standard", words: '5,382' },
+        { file: 'chapter-09-higher-order-integrators-runge-kutta-vs-symplectic-compositions.md', title: "Chapter 9: Higher-Order Integrators: Runge-Kutta vs Symplectic Compositions", words: '5,790' },
+        { file: 'chapter-10-stability-analysis-eigenvalues-and-the-cfl-condition.md', title: "Chapter 10: Linear Stability Analysis, Eigenvalues & The CFL Condition", words: '8,199' },
+        { file: 'chapter-11-dissipative-forces-velocity-dependent-damping-and-stiff-constraints.md', title: "Chapter 11: Dissipative Forces, Velocity Damping & Stiff Constraints", words: '6,818' },
+        { file: 'chapter-12-production-typescript-integrator-suite-and-grand-gauntlet.md', title: "Chapter 12: Production TypeScript Integrator Suite & Grand Gauntlet", words: '5,856' }
+      ],
+      'cs-collision-detection': [
+        { file: 'chapter-01-the-collision-detection-pipeline-complexity-and-spatial-philosophy.md', title: "Chapter 1: The Collision Detection Pipeline, Complexity & Spatial Philosophy", words: '7,122' },
+        { file: 'chapter-02-bounding-volume-foundations-spheres-and-aabbs.md', title: "Chapter 2: Bounding Volume Foundations: Spheres and AABBs", words: '7,311' },
+        { file: 'chapter-03-primitive-narrow-phase-geometry-circles-lines-and-aabbs.md', title: "Chapter 3: Primitive Narrow-Phase Geometry: Circles, Lines, and AABBs", words: '6,209' },
+        { file: 'chapter-04-convexity-and-the-hyperplane-separation-theorem.md', title: "Chapter 4: Convexity and the Hyperplane Separation Theorem", words: '6,368' },
+        { file: 'chapter-05-the-separating-axis-theorem-sat-for-2d-polygons.md', title: "Chapter 5: The Separating Axis Theorem (SAT) for 2D Polygons", words: '6,270' },
+        { file: 'chapter-06-contact-manifold-generation-reference-and-incident-edges.md', title: "Chapter 6: Contact Manifold Generation: Reference and Incident Edges", words: '5,990' },
+        { file: 'chapter-07-broad-phase-spatial-partitioning-uniform-spatial-hash-grids.md', title: "Chapter 7: Broad-Phase Spatial Partitioning: Uniform Spatial Hash Grids", words: '5,420' },
+        { file: 'chapter-08-hierarchical-broad-phase-dynamic-bounding-volume-hierarchies.md', title: "Chapter 8: Hierarchical Broad-Phase: Dynamic Bounding Volume Hierarchies", words: '5,313' },
+        { file: 'chapter-09-continuous-collision-detection-and-tunneling-mitigation.md', title: "Chapter 9: Continuous Collision Detection & Tunneling Mitigation", words: '8,619' },
+        { file: 'chapter-10-positional-correction-baumgarte-stabilization-and-slop.md', title: "Chapter 10: Positional Correction, Baumgarte Stabilization & Slop", words: '6,736' },
+        { file: 'chapter-11-friction-stiction-and-sequential-impulse-solvers.md', title: "Chapter 11: Friction, Stiction & Sequential Impulse Solvers", words: '6,465' },
+        { file: 'chapter-12-production-typescript-collision-engine-and-grand-gauntlet.md', title: "Chapter 12: Production TypeScript Collision Engine & Grand Gauntlet", words: '6,646' }
+      ]
+    };
+
     // State
     let completedModules = new Set();
-    let selectedModule = REPO_DATA.modules[3]; // Default to phys-newtons-laws
+    let selectedModule = (window.TECH_TREE_FULL_MODULES && window.TECH_TREE_FULL_MODULES['math-vectors-2d']) || REPO_DATA.modules[0];
+    let activeChapterFile = 'chapter-01-scalars-and-paradox.md';
+    let currentChapterRawContent = '';
+    let isServerApiAvailable = false;
     let activeDisciplineFilter = 'all';
+    let activeDashboardFilter = 'certified';
     let activePathwayKey = '2d-physics';
     let zoomLevel = 1.0;
     let panOffset = { x: 50, y: 50 };
     let isDragging = false;
     let dragStart = { x: 0, y: 0 };
+
+    // Text-to-Speech Engine State
+    let ttsUtterance = null;
+    let isTtsSpeaking = false;
+    let isTtsPaused = false;
+    let ttsSpeechRate = 1.0;
+    let ttsVoices = [];
+    let ttsQueue = [];
+    let ttsCurrentIndex = 0;
 
     // DOM Elements
     const graphSvg = document.getElementById('graphSvg');
@@ -3138,6 +3261,7 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
         btn.classList.add('active');
         const tabId = btn.getAttribute('data-tab');
         document.getElementById(tabId).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'instant' });
 
         if (tabId === 'tab-reader') {
           renderReaderModule(selectedModule);
@@ -3403,6 +3527,7 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
     // Render Learning Pathway Timeline
     function renderTimeline() {
       const container = document.getElementById('pathwayTimeline');
+      if (!container) return;
       container.innerHTML = '';
 
       const pData = REPO_DATA.pathways[activePathwayKey] || REPO_DATA.pathways['2d-physics'];
@@ -3413,23 +3538,70 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
       REPO_DATA.modules.forEach(m => nodeMap.set(m.slug, m));
 
       pathwaySlugs.forEach((slug, idx) => {
-        const mod = nodeMap.get(slug);
+        const mod = (window.TECH_TREE_FULL_MODULES && window.TECH_TREE_FULL_MODULES[slug]) || nodeMap.get(slug);
         if (!mod) return;
         const isDone = completedModules.has(slug);
+        const chapters = (mod.chapters && mod.chapters.length > 0) ? mod.chapters : (CHAPTERS_METADATA[slug] || []);
+        const isCertified = chapters.length > 0;
+        let wordsStr = '';
+        if (isCertified) {
+          const totalWords = chapters.reduce((sum, ch) => sum + (ch.wordCount || parseInt((ch.words || '0').replace(/,/g, ''), 10)), 0);
+          wordsStr = `${totalWords.toLocaleString()} words • 12 chapters`;
+        } else if (mod.content) {
+          const words = mod.content.trim().split(/\s+/).length;
+          wordsStr = `${words.toLocaleString()} words`;
+        }
 
         const card = document.createElement('div');
-        card.className = 'timeline-step';
+        card.className = `timeline-step ${isCertified ? 'certified' : ''}`;
 
         card.innerHTML = `
           <div class="step-number ${isDone ? 'completed' : ''}">${isDone ? '✓' : idx + 1}</div>
-          <div class="step-details">
-            <div class="step-title">${mod.title}</div>
-            <div class="step-meta">${(mod.discipline || "mathematics").toUpperCase()} • Tier ${mod.proficiencyTier} • ~${mod.duration} mins</div>
+          <div class="step-details" style="flex:1;">
+            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.25rem;">
+              <span class="step-title" style="font-weight:700; font-size:1.05rem;">${mod.title}</span>
+              ${isCertified ? '<span class="stat-pill" style="color:var(--accent-phys); border-color:var(--accent-phys); font-size:0.72rem; font-weight:700;">✨ SMTS-40K Certified</span>' : ''}
+            </div>
+            <div class="step-meta" style="font-size:0.82rem; color:var(--text-muted); display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center;">
+              <span style="color:${getDiscColor(mod.discipline)}; font-weight:600;">${(mod.discipline || "mathematics").toUpperCase()}</span>
+              <span>•</span>
+              <span>Tier ${mod.proficiencyTier}</span>
+              <span>•</span>
+              <span>~${mod.duration} mins</span>
+              ${wordsStr ? `<span>•</span><span style="color:var(--text-main); font-weight:600;">📖 ${wordsStr}</span>` : ''}
+            </div>
+            <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.35rem; line-height:1.45;">${mod.summary || ''}</div>
           </div>
-          <button class="sim-btn" onclick="openModuleBySlug('${mod.slug}')">Study Module ➔</button>
+          <button class="sim-btn ${isCertified ? 'primary' : ''}" onclick="openModuleBySlug('${mod.slug}')" style="min-width:140px;">
+            ${isCertified ? 'Study Treatise ➔' : 'Study Module ➔'}
+          </button>
         `;
         container.appendChild(card);
       });
+
+      // If active pathway is 2d-physics, append celebratory capstone project card
+      if (activePathwayKey === '2d-physics') {
+        const capstone = document.createElement('div');
+        capstone.className = 'timeline-step';
+        capstone.style.border = '1px dashed var(--accent-phys)';
+        capstone.style.background = 'linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, var(--bg-card) 100%)';
+        capstone.innerHTML = `
+          <div class="step-number" style="background:var(--accent-phys); color:#000; font-weight:800;">🏁</div>
+          <div class="step-details" style="flex:1;">
+            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.25rem;">
+              <span class="step-title" style="font-weight:800; font-size:1.1rem; color:var(--accent-phys);">Capstone Project: Production 2D Physics Simulator</span>
+              <span class="stat-pill" style="color:var(--accent-phys); border-color:var(--accent-phys); font-size:0.72rem; font-weight:700;">Complete Engine Integration</span>
+            </div>
+            <div style="font-size:0.85rem; color:var(--text-muted); line-height:1.5;">
+              Synthesis of all 8 treatises: vector algebra, differential calculus, Newtonian mechanics, momentum conservation, fixed-timestep loops, symplectic Verlet integration, and SAT collision manifolds into an interactive browser canvas.
+            </div>
+          </div>
+          <button class="sim-btn" onclick="document.querySelector('[data-tab=\\'tab-simulator\\']').click()" style="background:var(--accent-phys); color:#0f172a; font-weight:700; border:none; min-width:160px;">
+            🧪 Launch Physics Lab ➔
+          </button>
+        `;
+        container.appendChild(capstone);
+      }
     }
 
     // Pathway Selector Interactivity
@@ -3452,11 +3624,23 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
       });
     });
 
-    window.openModuleBySlug = function(slug) {
-      const mod = REPO_DATA.modules.find(m => m.slug === slug);
-      if (mod) {
-        selectNode(mod);
+    window.openModuleBySlug = function(slug, chapterFile) {
+      let target = null;
+      if (window.TECH_TREE_FULL_MODULES && window.TECH_TREE_FULL_MODULES[slug]) {
+        target = window.TECH_TREE_FULL_MODULES[slug];
+      } else {
+        target = REPO_DATA.modules.find(m => m.slug === slug);
+      }
+      if (target) {
+        selectNode(target);
+        const chapters = (target.chapters && target.chapters.length > 0) ? target.chapters : (CHAPTERS_METADATA[slug] || []);
+        if (chapters.length > 0) {
+          activeChapterFile = chapterFile || chapters[0].file;
+        } else {
+          activeChapterFile = 'all';
+        }
         document.querySelector('[data-tab="tab-reader"]').click();
+        renderReaderModule(target, activeChapterFile);
       }
     };
 
@@ -3974,27 +4158,20 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
     }
 
     // Render Reader Studio
-    function renderReaderModule(mod) {
+    function renderReaderModule(mod, targetChapter) {
       if (!mod) {
         mod = (window.TECH_TREE_FULL_MODULES && window.TECH_TREE_FULL_MODULES['math-vectors-2d']) || REPO_DATA.modules[0];
       }
       const fullMod = (window.TECH_TREE_FULL_MODULES && window.TECH_TREE_FULL_MODULES[mod.slug]) || mod;
+      selectedModule = fullMod;
+
+      if (typeof stopTTS === 'function') stopTTS();
 
       document.getElementById('readerTitle').textContent = fullMod.title;
       document.getElementById('readerDisciplineBadge').textContent = (fullMod.discipline || "mathematics").toUpperCase() + ' / ' + (fullMod.domain || "general");
       document.getElementById('readerDisciplineBadge').style.borderColor = getDiscColor(fullMod.discipline);
       document.getElementById('readerTierBadge').textContent = 'Tier ' + (fullMod.proficiencyTier ?? 1);
       document.getElementById('readerSummary').textContent = fullMod.summary;
-
-      // Render Markdown / HTML with Marked.js
-      const rawContent = fullMod.content || '';
-      let formattedHtml = '';
-      if (window.marked && typeof window.marked.parse === 'function') {
-        formattedHtml = window.marked.parse(rawContent);
-      } else {
-        formattedHtml = rawContent;
-      }
-      document.getElementById('readerBody').innerHTML = formattedHtml;
 
       // Mount or unmount Interactive Vector Lab
       const labBox = document.getElementById('vectorLabBox');
@@ -4012,17 +4189,6 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
         initCalculusLab();
       } else {
         calcLabBox.style.display = 'none';
-      }
-
-      // Render KaTeX Math
-      if (window.renderMathInElement) {
-        renderMathInElement(document.getElementById('readerBody'), {
-          delimiters: [
-            {left: '$$', right: '$$', display: true},
-            {left: '$', right: '$', display: false}
-          ],
-          throwOnError: false
-        });
       }
 
       // Quiz
@@ -4064,6 +4230,177 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
         li.innerHTML = `${s.citation} ${s.isbn ? `(ISBN: ${s.isbn})` : ''} ${s.url ? `<a href="${s.url}" target="_blank" style="color:var(--accent-math);">[Source Link]</a>` : ''}`;
         provList.appendChild(li);
       });
+
+      // Modular Chapter Setup and Loading
+      setupReaderChapter(fullMod, targetChapter);
+    }
+
+    function setupReaderChapter(fullMod, targetChapter) {
+      const chapters = (fullMod.chapters && fullMod.chapters.length > 0) ? fullMod.chapters : (CHAPTERS_METADATA[fullMod.slug] || []);
+      const toolbar = document.getElementById('chapterToolbar');
+      const paginationFooter = document.getElementById('chapterPaginationFooter');
+      const select = document.getElementById('chapterSelect');
+
+      if (chapters && chapters.length > 0) {
+        if (toolbar) toolbar.style.display = 'flex';
+        if (paginationFooter) paginationFooter.style.display = 'flex';
+
+        if (select) {
+          select.innerHTML = '';
+          chapters.forEach(ch => {
+            const opt = document.createElement('option');
+            opt.value = ch.file;
+            const w = ch.words || ch.wordCount;
+            opt.textContent = `${ch.title} (${typeof w === 'number' ? w.toLocaleString() : w} words)`;
+            select.appendChild(opt);
+          });
+          const totalWords = chapters.reduce((sum, ch) => sum + (ch.wordCount || parseInt((ch.words || '0').replace(/,/g, ''), 10)), 0);
+          const optAll = document.createElement('option');
+          optAll.value = 'all';
+          optAll.textContent = `📖 Full Sovereign Treatise (All ${chapters.length} Chapters • ${totalWords.toLocaleString()} Words) [Heavy]`;
+          select.appendChild(optAll);
+        }
+
+        let chToLoad = targetChapter;
+        if (!chToLoad) {
+          if (activeChapterFile && activeChapterFile !== 'all' && chapters.some(c => c.file === activeChapterFile)) {
+            chToLoad = activeChapterFile;
+          } else {
+            chToLoad = chapters[0].file;
+          }
+        }
+        loadAndRenderChapter(fullMod.slug, chToLoad);
+      } else {
+        if (toolbar) toolbar.style.display = 'none';
+        if (paginationFooter) paginationFooter.style.display = 'none';
+        activeChapterFile = 'all';
+        currentChapterRawContent = fullMod.content || '';
+        renderMarkdownBody(fullMod.content || '');
+      }
+    }
+
+    async function loadAndRenderChapter(slug, chapterFile) {
+      const fullMod = (window.TECH_TREE_FULL_MODULES && window.TECH_TREE_FULL_MODULES[slug]) || selectedModule;
+      if (!fullMod) return;
+
+      activeChapterFile = chapterFile;
+      const select = document.getElementById('chapterSelect');
+      if (select && select.value !== chapterFile) {
+        select.value = chapterFile;
+      }
+
+      updatePaginationControls(slug, chapterFile);
+
+      if (chapterFile === 'all') {
+        const readerBody = document.getElementById('readerBody');
+        if (readerBody) {
+          readerBody.innerHTML = `
+            <div style="text-align:center; padding:3rem; color:var(--text-muted);">
+              <div style="font-size:2.5rem; margin-bottom:1rem;">⏳</div>
+              <div style="font-weight:700; color:var(--text-main); font-size:1.1rem;">Rendering Full Sovereign Treatise...</div>
+              <p style="font-size:0.85rem; margin-top:0.5rem;">Compiling all 12 chapters with KaTeX mathematical formulas.</p>
+            </div>
+          `;
+        }
+        setTimeout(() => {
+          currentChapterRawContent = fullMod.content || '';
+          renderMarkdownBody(fullMod.content || '');
+        }, 40);
+        return;
+      }
+
+      let chapterText = null;
+      if (isServerApiAvailable) {
+        try {
+          const res = await fetch(`/api/modules/${slug}/chapters/${chapterFile}`);
+          if (res.ok) {
+            chapterText = await res.text();
+          }
+        } catch (e) {
+          console.warn('API chapter fetch failed, falling back to local extraction:', e);
+        }
+      }
+
+      if (!chapterText && fullMod.content) {
+        chapterText = extractChapterContent(fullMod.content, slug, chapterFile);
+      }
+
+      if (chapterText) {
+        currentChapterRawContent = chapterText;
+        renderMarkdownBody(chapterText);
+      } else {
+        currentChapterRawContent = fullMod.content || '';
+        renderMarkdownBody(fullMod.content || '');
+      }
+    }
+
+    function extractChapterContent(content, slug, chapterFile) {
+      if (!content) return '';
+      const fullMod = (window.TECH_TREE_FULL_MODULES && window.TECH_TREE_FULL_MODULES[slug]) || selectedModule;
+      const chapters = (fullMod && fullMod.chapters && fullMod.chapters.length > 0) ? fullMod.chapters : (CHAPTERS_METADATA[slug] || []);
+      if (!chapters || chapters.length === 0) return content;
+
+      const chIndex = chapters.findIndex(c => c.file === chapterFile);
+      if (chIndex === -1) return content;
+
+      const chNum = chIndex + 1;
+      const startRegex = new RegExp(`(^|\\n)#\\s*Chapter\\s*0?${chNum}\\b`, 'i');
+      const nextRegex = new RegExp(`(^|\\n)#\\s*Chapter\\s*0?${chNum + 1}\\b`, 'i');
+      const matchStart = content.search(startRegex);
+      if (matchStart !== -1) {
+        const start = matchStart + (content[matchStart] === '\n' ? 1 : 0);
+        const rest = content.slice(start);
+        const matchNext = rest.search(nextRegex);
+        let end = matchNext !== -1 ? start + matchNext : content.length;
+        return content.slice(start, end).replace(/---\\s*$/, '').trim();
+      }
+      return content;
+    }
+
+    function updatePaginationControls(slug, chapterFile) {
+      const fullMod = (window.TECH_TREE_FULL_MODULES && window.TECH_TREE_FULL_MODULES[slug]) || selectedModule;
+      const chapters = (fullMod && fullMod.chapters && fullMod.chapters.length > 0) ? fullMod.chapters : (CHAPTERS_METADATA[slug] || []);
+
+      const btnPrevTop = document.getElementById('btnPrevChapterTop');
+      const btnNextTop = document.getElementById('btnNextChapterTop');
+      const btnPrevFooter = document.getElementById('btnFooterPrevChapter');
+      const btnNextFooter = document.getElementById('btnFooterNextChapter');
+      const footerNum = document.getElementById('footerChapterNumber');
+      const footerTitle = document.getElementById('footerChapterTitle');
+
+      if (!chapters || chapters.length === 0 || chapterFile === 'all') {
+        if (footerNum) footerNum.textContent = 'Complete Compilation';
+        if (footerTitle) footerTitle.textContent = 'All 12 Chapters (Full Sovereign Treatise)';
+        if (btnPrevTop) btnPrevTop.disabled = true;
+        if (btnNextTop) btnNextTop.disabled = true;
+        if (btnPrevFooter) btnPrevFooter.disabled = true;
+        if (btnNextFooter) btnNextFooter.disabled = true;
+        return;
+      }
+
+      const idx = chapters.findIndex(c => c.file === chapterFile);
+      if (idx !== -1) {
+        const ch = chapters[idx];
+        if (footerNum) footerNum.textContent = `Chapter ${idx + 1} of ${chapters.length}`;
+        if (footerTitle) footerTitle.textContent = ch.title;
+        if (btnPrevTop) btnPrevTop.disabled = (idx === 0);
+        if (btnPrevFooter) btnPrevFooter.disabled = (idx === 0);
+        if (btnNextTop) btnNextTop.disabled = (idx === chapters.length - 1);
+        if (btnNextFooter) btnNextFooter.disabled = (idx === chapters.length - 1);
+      }
+    }
+
+    function stepChapter(delta) {
+      if (!selectedModule) return;
+      const chapters = (selectedModule.chapters && selectedModule.chapters.length > 0) ? selectedModule.chapters : (CHAPTERS_METADATA[selectedModule.slug] || []);
+      if (!chapters || chapters.length === 0) return;
+
+      let currentIndex = chapters.findIndex(c => c.file === activeChapterFile);
+      if (currentIndex === -1) currentIndex = 0;
+      const targetIndex = currentIndex + delta;
+      if (targetIndex >= 0 && targetIndex < chapters.length) {
+        loadAndRenderChapter(selectedModule.slug, chapters[targetIndex].file);
+      }
     }
 
     // Quiz Submission Checker
@@ -4389,16 +4726,13 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
     // Initial setup on load
     renderGraph();
     renderTimeline();
+    renderDashboardModulesGrid('certified');
     selectNode(REPO_DATA.modules[0]);
     updateProgress();
   
     // =========================================================================
     // GLOBAL APP STATE & BACKEND SYNCHRONIZATION
     // =========================================================================
-    let isServerApiAvailable = false;
-    let activeChapterFile = 'all';
-    let currentChapterRawContent = '';
-
     // Quick Jump Helpers
     window.jumpToPathway = function(pathwayId) {
       document.querySelector('[data-tab="tab-pathways"]').click();
@@ -4412,26 +4746,25 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
       renderTimeline();
     };
 
-    window.openModuleBySlug = function(slug) {
-      let target = null;
-      if (window.TECH_TREE_FULL_MODULES && window.TECH_TREE_FULL_MODULES[slug]) {
-        target = window.TECH_TREE_FULL_MODULES[slug];
-      } else {
-        target = REPO_DATA.modules.find(m => m.slug === slug);
-      }
-      if (target) {
-        selectedModule = target;
-        activeChapterFile = 'all';
-        document.querySelector('[data-tab="tab-reader"]').click();
-        renderReaderModule(selectedModule);
-      }
-    };
-
-    // Dashboard Quick Action Listeners
+    // Dashboard Executive Quick Action Listeners
     const btnResume = document.getElementById('dashBtnResume');
     if (btnResume) {
       btnResume.addEventListener('click', () => {
+        jumpToPathway('2d-physics');
+      });
+    }
+
+    const btnStartCh1 = document.getElementById('dashBtnStartCh1');
+    if (btnStartCh1) {
+      btnStartCh1.addEventListener('click', () => {
         openModuleBySlug('math-vectors-2d');
+      });
+    }
+
+    const btnLaunchLab = document.getElementById('dashBtnLaunchLab');
+    if (btnLaunchLab) {
+      btnLaunchLab.addEventListener('click', () => {
+        document.querySelector('[data-tab="tab-simulator"]').click();
       });
     }
 
@@ -4441,6 +4774,93 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
         document.querySelector('[data-tab="tab-pathways"]').click();
       });
     }
+
+    // Dashboard Disciplines Explorer Grid & Filtering
+    function renderDashboardModulesGrid(filter) {
+      if (filter) activeDashboardFilter = filter;
+      const container = document.getElementById('dashModulesGrid');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const allModules = REPO_DATA.modules || [];
+      let displayList = [];
+
+      if (activeDashboardFilter === 'certified') {
+        displayList = allModules.filter(m => {
+          const full = (window.TECH_TREE_FULL_MODULES && window.TECH_TREE_FULL_MODULES[m.slug]) || m;
+          return (full.chapters && full.chapters.length > 0) || Boolean(CHAPTERS_METADATA[m.slug]);
+        });
+      } else if (activeDashboardFilter === 'all') {
+        displayList = allModules;
+      } else {
+        displayList = allModules.filter(m => m.discipline === activeDashboardFilter);
+      }
+
+      if (displayList.length === 0) {
+        container.innerHTML = `<div style="grid-column: 1 / -1; padding: 2rem; text-align: center; color: var(--text-muted);">No modules found for this filter.</div>`;
+        return;
+      }
+
+      displayList.forEach(mod => {
+        const full = (window.TECH_TREE_FULL_MODULES && window.TECH_TREE_FULL_MODULES[mod.slug]) || mod;
+        const chapters = (full.chapters && full.chapters.length > 0) ? full.chapters : (CHAPTERS_METADATA[mod.slug] || []);
+        const isCertified = chapters.length > 0;
+        const discColor = getDiscColor(mod.discipline);
+
+        let wordCountStr = '';
+        if (isCertified) {
+          const totalWords = chapters.reduce((sum, ch) => sum + (ch.wordCount || parseInt((ch.words || '0').replace(/,/g, ''), 10)), 0);
+          wordCountStr = `${totalWords.toLocaleString()} words`;
+        } else if (full.content) {
+          const words = full.content.trim().split(/\s+/).length;
+          wordCountStr = `${words.toLocaleString()} words`;
+        }
+
+        const card = document.createElement('div');
+        card.className = `dash-module-card ${isCertified ? 'certified' : ''}`;
+
+        card.innerHTML = `
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.5rem; gap:0.5rem; flex-wrap:wrap;">
+              <span style="font-size:0.75rem; font-weight:700; color:${discColor}; text-transform:uppercase; letter-spacing:0.05em;">
+                ${(mod.discipline || "mathematics").toUpperCase()}
+              </span>
+              <div style="display:flex; gap:0.35rem; align-items:center;">
+                <span class="tier-badge tier-${mod.proficiencyTier}" style="font-size:0.7rem; padding:0.15rem 0.45rem;">Tier ${mod.proficiencyTier}</span>
+                ${isCertified ? '<span class="stat-pill" style="color:var(--accent-phys); border-color:var(--accent-phys); font-size:0.68rem; font-weight:700; padding:0.15rem 0.45rem;">✨ SMTS-40K</span>' : ''}
+              </div>
+            </div>
+            <h3 style="font-size:1.02rem; font-weight:700; color:var(--text-main); line-height:1.35; margin-bottom:0.4rem;">
+              ${mod.title}
+            </h3>
+            <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.45; margin-bottom:0.75rem;">
+              ${mod.summary.length > 130 ? mod.summary.slice(0, 127) + '...' : mod.summary}
+            </p>
+          </div>
+
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:var(--text-muted); border-top:1px solid var(--border-color); padding-top:0.6rem; margin-bottom:0.75rem;">
+              <span>${isCertified ? '🧩 12 Chapters' : `⏱ ~${mod.duration} mins`}</span>
+              <span style="color:var(--text-main); font-weight:600;">${wordCountStr ? `📖 ${wordCountStr}` : ''}</span>
+            </div>
+            <button class="sim-btn ${isCertified ? 'primary' : ''}" style="width:100%; font-size:0.85rem; padding:0.5rem 0.75rem;" onclick="openModuleBySlug('${mod.slug}')">
+              ${isCertified ? 'Study Treatise ➔' : 'View Syllabus ➔'}
+            </button>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    document.querySelectorAll('#dashDiscFilterBar .filter-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('#dashDiscFilterBar .filter-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const filter = pill.getAttribute('data-dash-disc');
+        renderDashboardModulesGrid(filter);
+      });
+    });
 
     // Backend Health & Progress Sync
     async function initBackendSync() {
@@ -4488,197 +4908,19 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
       }
     }
 
-    // =========================================================================
-    // MODULAR CHAPTER NAVIGATION & DOWNLOAD SYSTEM
-    // =========================================================================
-    const CHAPTERS_METADATA = {
-      'math-vectors-2d': [
-        { file: 'chapter-01-scalars-and-paradox.md', title: "Chapter 1: The Layman's Genesis — The Scalar Illusion & The Lost Island", words: '4,007' },
-        { file: 'chapter-02-coordinates-and-grid.md', title: "Chapter 2: The Grid World — Descartes, The Fly, and Coordinates", words: '3,806' },
-        { file: 'chapter-03-components-and-notation.md', title: "Chapter 3: The Anatomy of an Arrow — Components & Basis Vectors", words: '3,320' },
-        { file: 'chapter-04-magnitude-and-pythagoras.md', title: "Chapter 4: Pythagoras in Flatland — Distance & Vector Magnitude", words: '2,917' },
-        { file: 'chapter-05-vector-addition.md', title: "Chapter 5: The Geometry of Combining — Tip-to-Tail & Parallelograms", words: '3,657' },
-        { file: 'chapter-06-subtraction-and-scaling.md', title: "Chapter 6: The Anti-Arrow & Scaling — Relative Velocity", words: '3,516' },
-        { file: 'chapter-07-unit-vectors-and-normalization.md', title: "Chapter 7: The Compass Needle — Unit Vectors & Normalization", words: '2,913' },
-        { file: 'chapter-08-trigonometry-and-polar.md', title: "Chapter 8: The Dance of Angles — Polar Coordinates & atan2", words: '3,488' },
-        { file: 'chapter-09-dot-product-and-work.md', title: "Chapter 9: The Teamwork Meter — Dot Product & Mechanical Work", words: '3,857' },
-        { file: 'chapter-10-projections-and-reflections.md', title: "Chapter 10: The Shadow and The Mirror — Projections & Reflections", words: '3,855' },
-        { file: 'chapter-11-cross-product-and-steering.md', title: "Chapter 11: Turning in Flatland — 2D Cross Product & Steering", words: '3,026' },
-        { file: 'chapter-12-typescript-engine-and-grand-gauntlet.md', title: "Chapter 12: Computational Engine & Civilizational Grand Gauntlet", words: '3,819' }
-      ],
-      'math-calculus-derivatives': [
-        { file: 'chapter-01-zeno-and-speedometer-paradox.md', title: "Chapter 1: The Speedometer Paradox — Zeno, Instantaneous Speed, and the Limit", words: '5,624' },
-        { file: 'chapter-02-secant-slopes-and-average-rates.md', title: "Chapter 2: The Secant Line & Average Rate of Change", words: '3,860' },
-        { file: 'chapter-03-vanishing-step-and-limits.md', title: "Chapter 3: The Vanishing Step — Limits, Infinitesimals, and the Tangent Line", words: '5,033' },
-        { file: 'chapter-04-formal-derivative-definition.md', title: "Chapter 4: The Formal Definition of the Derivative — First Principles & Notation", words: '4,549' },
-        { file: 'chapter-05-linearity-constant-power-sum-rules.md', title: "Chapter 5: Linearity, the Power Rule, and Polynomial Calculus", words: '3,708' },
-        { file: 'chapter-06-product-and-quotient-rules.md', title: "Chapter 6: The Product and Quotient Rules — Geometry of Compounding Rates", words: '3,890' },
-        { file: 'chapter-07-chain-rule-and-implicit-differentiation.md', title: "Chapter 7: The Chain Rule and Implicit Differentiation — The Nested Gearbox", words: '3,569' },
-        { file: 'chapter-08-trigonometric-derivatives.md', title: "Chapter 8: Trigonometric Derivatives and Oscillatory Mechanics", words: '3,255' },
-        { file: 'chapter-09-physical-hierarchy-of-motion.md', title: "Chapter 9: The Physical Hierarchy of Motion — Position, Velocity, Acceleration, Jerk, Snap", words: '4,026' },
-        { file: 'chapter-10-extrema-optimization-concavity.md', title: "Chapter 10: Extrema, Concavity, and the Geometry of Optimization", words: '5,191' },
-        { file: 'chapter-11-numerical-differentiation-and-floating-point.md', title: "Chapter 11: Numerical Differentiation, Taylor Series, and Floating-Point Error", words: '4,270' },
-        { file: 'chapter-12-typescript-calculus-engine-and-grand-gauntlet.md', title: "Chapter 12: Production TypeScript Calculus Engine & Civilizational Grand Gauntlet", words: '3,856' }
-      ],
-      'phys-kinematics-1d-2d': [
-        { file: 'chapter-01-space-time-and-reference-frames.md', title: "Chapter 1: The Layman's Genesis — Space, Time, and Reference Frames", words: '4,373' },
-        { file: 'chapter-02-velocity-and-average-speed.md', title: "Chapter 2: Velocity vs. Average Speed & The Harmonic Mean Paradox", words: '4,616' },
-        { file: 'chapter-03-instantaneous-velocity-acceleration-graphs.md', title: "Chapter 3: Instantaneous Velocity, Acceleration & The Graph Trinity", words: '5,285' },
-        { file: 'chapter-04-four-sacred-kinematic-equations.md', title: "Chapter 4: The Four Sacred Kinematic Equations of Constant Acceleration", words: '4,944' },
-        { file: 'chapter-05-free-fall-and-gravitational-acceleration.md', title: "Chapter 5: Free Fall, Gravity, and the Vacuum Equivalence Theorem", words: '4,592' },
-        { file: 'chapter-06-two-dimensional-vector-kinematics.md', title: "Chapter 6: Two-Dimensional Motion and Galileo's Orthogonal Independence", words: '4,749' },
-        { file: 'chapter-07-projectile-motion-and-parabolic-trajectories.md', title: "Chapter 7: Projectile Motion & Parabolic Trajectories", words: '6,630' },
-        { file: 'chapter-08-asymmetric-launches-inclines-and-targeting.md', title: "Chapter 8: Asymmetric Launches, Inclines, & Inverse Ballistic Targeting", words: '6,094' },
-        { file: 'chapter-09-relative-motion-and-galilean-transformations.md', title: "Chapter 9: Relative Motion & Galilean Transformations", words: '5,795' },
-        { file: 'chapter-10-circular-motion-centripetal-acceleration.md', title: "Chapter 10: Circular Motion & Centripetal Acceleration", words: '5,153' },
-        { file: 'chapter-11-calculus-based-kinematics-and-drag.md', title: "Chapter 11: Calculus-Based Kinematics & Aerodynamic Drag", words: '6,636' },
-        { file: 'chapter-12-typescript-kinematics-simulator-and-grand-gauntlet.md', title: "Chapter 12: Production TypeScript Kinematics Engine & Civilizational Grand Gauntlet", words: '4,901' }
-      ],
-      'phys-newtons-laws': [
-        { file: 'chapter-01-aristotles-fallacy-and-the-dawn-of-inertia.md', title: "Chapter 1: Aristotle's Fallacy and the Dawn of Inertia", words: '6,321' },
-        { file: 'chapter-02-mass-force-and-vector-equilibrium.md', title: "Chapter 2: Mass, Force, and Vector Equilibrium", words: '5,515' },
-        { file: 'chapter-03-second-law-and-force-acceleration-dynamics.md', title: "Chapter 3: The Second Law and Force-Acceleration Dynamics", words: '5,219' },
-        { file: 'chapter-04-free-body-diagrams-and-normal-forces.md', title: "Chapter 4: Free-Body Diagrams and the Normal Force Constraint", words: '5,053' },
-        { file: 'chapter-05-third-law-action-reaction-symmetries.md', title: "Chapter 5: The Third Law and Action-Reaction Symmetries", words: '6,721' },
-        { file: 'chapter-06-coulomb-friction-static-kinetic-stick-slip.md', title: "Chapter 6: Coulomb Friction — Static, Kinetic, and Stick-Slip Dynamics", words: '5,903' },
-        { file: 'chapter-07-dynamics-on-inclined-planes.md', title: "Chapter 7: Dynamics on Inclined Planes — Coordinate Transformations & Gravity Dilution", words: '7,298' },
-        { file: 'chapter-08-coupled-multi-body-systems-and-atwood-machines.md', title: "Chapter 8: Coupled Multi-Body Systems and Atwood Machines", words: '6,660' },
-        { file: 'chapter-09-elastic-restitution-springs-and-hookes-law.md', title: "Chapter 9: Elastic Restitution, Springs, and Hooke's Law", words: '6,133' },
-        { file: 'chapter-10-non-inertial-reference-frames-and-fictitious-forces.md', title: "Chapter 10: Non-Inertial Reference Frames and Fictitious Forces", words: '5,675' },
-        { file: 'chapter-11-drag-damping-and-resisted-force-fields.md', title: "Chapter 11: Drag, Damping, and Resisted Force Fields", words: '5,076' },
-        { file: 'chapter-12-typescript-dynamics-engine-and-grand-gauntlet.md', title: "Chapter 12: Production TypeScript Dynamics Engine & Civilizational Grand Gauntlet", words: '4,828' }
-      ],
-      'phys-momentum-conservation': [
-        { file: 'chapter-01-the-quantity-of-motion-and-the-momentum-axiom.md', title: "Chapter 1: The Quantity of Motion & The Momentum Axiom", words: '5,031' },
-        { file: 'chapter-02-the-impulse-momentum-theorem-and-impact-mechanics.md', title: "Chapter 2: The Impulse-Momentum Theorem & Impact Mechanics", words: '4,923' },
-        { file: 'chapter-03-conservation-of-momentum-in-isolated-systems.md', title: "Chapter 3: Conservation of Momentum in Isolated Systems", words: '4,991' },
-        { file: 'chapter-04-center-of-mass-kinematics-and-dynamics.md', title: "Chapter 4: Center-of-Mass Kinematics & Koenig's Theorem", words: '5,145' },
-        { file: 'chapter-05-one-dimensional-elastic-collisions.md', title: "Chapter 5: One-Dimensional Elastic Collisions & Relative Speed Invariance", words: '5,365' },
-        { file: 'chapter-06-inelastic-collisions-and-the-coefficient-of-restitution.md', title: "Chapter 6: Inelastic Collisions & The Coefficient of Restitution", words: '4,738' },
-        { file: 'chapter-07-two-dimensional-oblique-collisions.md', title: "Chapter 7: Two-Dimensional Oblique Collisions & Planar Scattering", words: '7,026' },
-        { file: 'chapter-08-variable-mass-systems-and-rocket-propulsion.md', title: "Chapter 8: Variable-Mass Systems & Rocket Propulsion", words: '6,221' },
-        { file: 'chapter-09-scattering-theory-cross-sections-and-impact-parameters.md', title: "Chapter 9: Classical Scattering Theory & Cross Sections", words: '5,334' },
-        { file: 'chapter-10-energy-partitioning-and-thermodynamics-of-impact.md', title: "Chapter 10: Energy Partitioning & Thermodynamics of Impact", words: '5,474' },
-        { file: 'chapter-11-computational-impulse-resolution-and-contact-solvers.md', title: "Chapter 11: Computational Impulse Resolution & Contact Solvers", words: '6,306' },
-        { file: 'chapter-12-typescript-momentum-engine-and-grand-gauntlet.md', title: "Chapter 12: Production TypeScript Momentum Engine & Civilizational Grand Gauntlet", words: '4,914' }
-      ],
-      'cs-prog-fundamentals': [
-        { file: 'chapter-01-the-genesis-of-discrete-state-machines.md', title: "Chapter 1: The Genesis of Discrete State Machines & Silicon Computation", words: '6,643' },
-        { file: 'chapter-02-variables-data-primitives-and-memory-hierarchy.md', title: "Chapter 2: Variables, Data Primitives, and the Memory Hierarchy", words: '5,814' },
-        { file: 'chapter-03-discrete-state-mutation-and-control-flow.md', title: "Chapter 3: Discrete State Mutation & Branch Prediction", words: '4,984' },
-        { file: 'chapter-04-iterative-loops-algorithmic-invariants-and-halting.md', title: "Chapter 4: Iterative Loops, Algorithmic Invariants, and the Halting Problem", words: '5,045' },
-        { file: 'chapter-05-functions-stack-frames-and-procedural-abstraction.md', title: "Chapter 5: Functions, Stack Frames, and Procedural Abstraction", words: '4,919' },
-        { file: 'chapter-06-pointers-references-and-dynamic-memory.md', title: "Chapter 6: Pointers, References, and Dynamic Memory Architecture", words: '4,758' },
-        { file: 'chapter-07-data-oriented-design-and-cache-locality.md', title: "Chapter 7: Data-Oriented Design, Cache Locality, and Memory Streaming", words: '4,765' },
-        { file: 'chapter-08-floating-point-arithmetic-and-numerical-traps.md', title: "Chapter 8: Floating-Point Arithmetic and Numerical Traps in Simulation", words: '4,658' },
-        { file: 'chapter-09-determinism-prng-and-floating-point-drift.md', title: "Chapter 9: Determinism, PRNG, and Floating-Point Drift", words: '6,730' },
-        { file: 'chapter-10-the-discrete-simulation-loop-and-the-spiral-of-death.md', title: "Chapter 10: The Discrete Simulation Loop & The Spiral of Death", words: '6,855' },
-        { file: 'chapter-11-sub-tick-temporal-interpolation-and-rollback-architecture.md', title: "Chapter 11: Sub-Tick Temporal Interpolation & Rollback Architecture", words: '5,569' },
-        { file: 'chapter-12-production-typescript-simulation-engine-and-grand-gauntlet.md', title: "Chapter 12: Production TypeScript Simulation Engine & Civilizational Grand Gauntlet", words: '4,878' }
-      ],
-      'cs-numerical-integration': [
-        { file: 'chapter-01-the-differential-abyss-continuous-physics-meets-discrete-silicon.md', title: "Chapter 1: The Differential Abyss: Continuous Physics Meets Discrete Silicon", words: '5,780' },
-        { file: 'chapter-02-taylor-series-foundations-and-the-calculus-of-truncation-errors.md', title: "Chapter 2: Taylor Series Foundations & Calculus of Truncation Errors", words: '5,894' },
-        { file: 'chapter-03-explicit-forward-euler-the-seductive-trap-of-first-order-discretization.md', title: "Chapter 3: Explicit Forward Euler: Seductive Trap of First-Order Discretization", words: '6,283' },
-        { file: 'chapter-04-implicit-backward-euler-stiff-equations-and-artificial-damping.md', title: "Chapter 4: Implicit Backward Euler: Stiff Equations & Artificial Damping", words: '6,311' },
-        { file: 'chapter-05-hamiltonian-mechanics-phase-space-and-liouvilles-theorem.md', title: "Chapter 5: Hamiltonian Mechanics, Phase Space & Liouville's Theorem", words: '6,403' },
-        { file: 'chapter-06-semi-implicit-symplectic-euler-the-magic-of-asynchronous-stepping.md', title: "Chapter 6: Semi-Implicit Symplectic Euler: Asynchronous Stepping", words: '6,325' },
-        { file: 'chapter-07-the-verlet-algorithm-family-position-verlet-and-stormer-verlet.md', title: "Chapter 7: The Verlet Family: Position Verlet & Størmer-Verlet", words: '5,241' },
-        { file: 'chapter-08-velocity-verlet-and-leapfrog-integration-the-gold-standard.md', title: "Chapter 8: Velocity Verlet & Leapfrog: The Gold Standard", words: '5,382' },
-        { file: 'chapter-09-higher-order-integrators-runge-kutta-vs-symplectic-compositions.md', title: "Chapter 9: Higher-Order Integrators: Runge-Kutta vs Symplectic Compositions", words: '5,790' },
-        { file: 'chapter-10-stability-analysis-eigenvalues-and-the-cfl-condition.md', title: "Chapter 10: Linear Stability Analysis, Eigenvalues & The CFL Condition", words: '8,199' },
-        { file: 'chapter-11-dissipative-forces-velocity-dependent-damping-and-stiff-constraints.md', title: "Chapter 11: Dissipative Forces, Velocity Damping & Stiff Constraints", words: '6,818' },
-        { file: 'chapter-12-production-typescript-integrator-suite-and-grand-gauntlet.md', title: "Chapter 12: Production TypeScript Integrator Suite & Grand Gauntlet", words: '5,856' }
-      ],
-      'cs-collision-detection': [
-        { file: 'chapter-01-the-collision-detection-pipeline-complexity-and-spatial-philosophy.md', title: "Chapter 1: The Collision Detection Pipeline, Complexity & Spatial Philosophy", words: '7,122' },
-        { file: 'chapter-02-bounding-volume-foundations-spheres-and-aabbs.md', title: "Chapter 2: Bounding Volume Foundations: Spheres and AABBs", words: '7,311' },
-        { file: 'chapter-03-primitive-narrow-phase-geometry-circles-lines-and-aabbs.md', title: "Chapter 3: Primitive Narrow-Phase Geometry: Circles, Lines, and AABBs", words: '6,209' },
-        { file: 'chapter-04-convexity-and-the-hyperplane-separation-theorem.md', title: "Chapter 4: Convexity and the Hyperplane Separation Theorem", words: '6,368' },
-        { file: 'chapter-05-the-separating-axis-theorem-sat-for-2d-polygons.md', title: "Chapter 5: The Separating Axis Theorem (SAT) for 2D Polygons", words: '6,270' },
-        { file: 'chapter-06-contact-manifold-generation-reference-and-incident-edges.md', title: "Chapter 6: Contact Manifold Generation: Reference and Incident Edges", words: '5,990' },
-        { file: 'chapter-07-broad-phase-spatial-partitioning-uniform-spatial-hash-grids.md', title: "Chapter 7: Broad-Phase Spatial Partitioning: Uniform Spatial Hash Grids", words: '5,420' },
-        { file: 'chapter-08-hierarchical-broad-phase-dynamic-bounding-volume-hierarchies.md', title: "Chapter 8: Hierarchical Broad-Phase: Dynamic Bounding Volume Hierarchies", words: '5,313' },
-        { file: 'chapter-09-continuous-collision-detection-and-tunneling-mitigation.md', title: "Chapter 9: Continuous Collision Detection & Tunneling Mitigation", words: '8,619' },
-        { file: 'chapter-10-positional-correction-baumgarte-stabilization-and-slop.md', title: "Chapter 10: Positional Correction, Baumgarte Stabilization & Slop", words: '6,736' },
-        { file: 'chapter-11-friction-stiction-and-sequential-impulse-solvers.md', title: "Chapter 11: Friction, Stiction & Sequential Impulse Solvers", words: '6,465' },
-        { file: 'chapter-12-production-typescript-collision-engine-and-grand-gauntlet.md', title: "Chapter 12: Production TypeScript Collision Engine & Grand Gauntlet", words: '6,646' }
-      ]
-    };
-
-    function updateChapterToolbar(modSlug) {
-      const toolbar = document.getElementById('chapterToolbar');
-      const select = document.getElementById('chapterSelect');
-      if (!toolbar || !select) return;
-
-      const chapters = CHAPTERS_METADATA[modSlug];
-      if (chapters && chapters.length > 0) {
-        toolbar.style.display = 'flex';
-        const totalWords = chapters.reduce((sum, ch) => sum + parseInt(ch.words.replace(/,/g, ''), 10), 0);
-        select.innerHTML = `<option value="all">📖 Full Sovereign Treatise (All ${chapters.length} Chapters • ${totalWords.toLocaleString()} Words)</option>`;
-        chapters.forEach(ch => {
-          const opt = document.createElement('option');
-          opt.value = ch.file;
-          opt.textContent = `${ch.title} (${ch.words} words)`;
-          select.appendChild(opt);
-        });
-        select.value = activeChapterFile;
-      } else {
-        toolbar.style.display = 'none';
-      }
-    }
-
+    // Chapter Select & Dual Pagination Controls
     const chapterSelect = document.getElementById('chapterSelect');
     if (chapterSelect) {
-      chapterSelect.addEventListener('change', async (e) => {
-        activeChapterFile = e.target.value;
+      chapterSelect.addEventListener('change', (e) => {
         if (!selectedModule) return;
-
-        if (activeChapterFile === 'all') {
-          // Render full content
-          renderMarkdownBody(selectedModule.content || '');
-          currentChapterRawContent = selectedModule.content || '';
-        } else {
-          // Attempt to fetch specific chapter from API or extract
-          if (isServerApiAvailable) {
-            try {
-              const res = await fetch(`/api/modules/${selectedModule.slug}/chapters/${activeChapterFile}`);
-              if (res.ok) {
-                const text = await res.text();
-                currentChapterRawContent = text;
-                renderMarkdownBody(text);
-                return;
-              }
-            } catch (err) {
-              console.warn('API chapter fetch failed, falling back to local extraction:', err);
-            }
-          }
-
-          // Fallback: extract chapter from full content
-          const full = selectedModule.content || '';
-          const chIndex = CHAPTERS_METADATA[selectedModule.slug]?.findIndex(c => c.file === activeChapterFile) ?? -1;
-          if (chIndex !== -1) {
-            const chNum = chIndex + 1;
-            const markerRegex = new RegExp(`(^|\\n)#\\s*chapter\\s*${chNum}\\b`, 'i');
-            const nextMarkerRegex = new RegExp(`(^|\\n)#\\s*chapter\\s*${chNum + 1}\\b`, 'i');
-            const matchStart = full.search(markerRegex);
-            if (matchStart !== -1) {
-              const start = matchStart + (full[matchStart] === '\n' ? 1 : 0);
-              const remainder = full.slice(start);
-              const matchEnd = remainder.search(nextMarkerRegex);
-              let end = matchEnd !== -1 ? start + matchEnd : full.length;
-              const chText = full.slice(start, end).replace(/---\s*$/, '').trim();
-              currentChapterRawContent = chText;
-              renderMarkdownBody(chText);
-              return;
-            }
-          }
-
-          renderMarkdownBody(full);
-          currentChapterRawContent = full;
-        }
+        loadAndRenderChapter(selectedModule.slug, e.target.value);
       });
     }
+
+    document.getElementById('btnPrevChapterTop')?.addEventListener('click', () => stepChapter(-1));
+    document.getElementById('btnNextChapterTop')?.addEventListener('click', () => stepChapter(1));
+    document.getElementById('btnFooterPrevChapter')?.addEventListener('click', () => stepChapter(-1));
+    document.getElementById('btnFooterNextChapter')?.addEventListener('click', () => stepChapter(1));
 
     function renderMarkdownBody(rawContent) {
       const readerBody = document.getElementById('readerBody');
@@ -4750,14 +4992,6 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
     // =========================================================================
     // NATIVE BROWSER TEXT-TO-SPEECH (READ ALOUD) ENGINE
     // =========================================================================
-    let ttsUtterance = null;
-    let isTtsSpeaking = false;
-    let isTtsPaused = false;
-    let ttsSpeechRate = 1.0;
-    let ttsVoices = [];
-    let ttsQueue = [];
-    let ttsCurrentIndex = 0;
-
     const btnTtsPlay = document.getElementById('btnTtsPlay');
     const btnTtsPause = document.getElementById('btnTtsPause');
     const btnTtsStop = document.getElementById('btnTtsStop');
@@ -4831,10 +5065,12 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
       isTtsPaused = false;
       ttsQueue = [];
       ttsCurrentIndex = 0;
-      btnTtsPlay.style.display = 'inline-flex';
-      btnTtsPlay.textContent = '▶ Read Aloud';
-      btnTtsPause.style.display = 'none';
-      btnTtsStop.style.display = 'none';
+      if (btnTtsPlay) {
+        btnTtsPlay.style.display = 'inline-flex';
+        btnTtsPlay.textContent = '▶ Read Aloud';
+      }
+      if (btnTtsPause) btnTtsPause.style.display = 'none';
+      if (btnTtsStop) btnTtsStop.style.display = 'none';
       if (ttsPulse) ttsPulse.style.display = 'none';
       if (ttsStatusText) ttsStatusText.textContent = 'Audio TTS Ready';
     }
@@ -4953,18 +5189,6 @@ $$ \\text{Update: } \\hat{x}_{k|k} = \\hat{x}_{k|k-1} + K_k (z_k - H \\hat{x}_{k
         }
       });
     });
-
-    // Hook updateChapterToolbar into renderReaderModule
-    const originalRenderReaderModule = renderReaderModule;
-    renderReaderModule = function(mod) {
-      stopTTS();
-      originalRenderReaderModule(mod);
-      const activeMod = (window.TECH_TREE_FULL_MODULES && mod && window.TECH_TREE_FULL_MODULES[mod.slug]) || mod;
-      if (activeMod) {
-        currentChapterRawContent = activeMod.content || '';
-        updateChapterToolbar(activeMod.slug);
-      }
-    };
 
     // When a quiz or node is completed, persist to backend
     const originalUpdateProgress = updateProgress;

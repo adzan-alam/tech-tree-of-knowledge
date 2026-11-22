@@ -106,6 +106,26 @@ for (const mDir of moduleDirs) {
     url: s.url
   }));
 
+  // Discovered modular chapters if present
+  let chapters: any[] = [];
+  const chapDir = path.join(mDir, 'chapters');
+  if (fs.existsSync(chapDir)) {
+    const files = fs.readdirSync(chapDir).filter(f => f.endsWith('.md')).sort();
+    chapters = files.map(filename => {
+      const filePath = path.join(chapDir, filename);
+      const text = fs.readFileSync(filePath, 'utf-8');
+      const firstLine = text.split('\n').find(l => l.startsWith('# ')) || filename;
+      const title = firstLine.replace(/^#\s*/, '').trim();
+      const words = text.trim().split(/\s+/).length;
+      return {
+        file: filename,
+        title,
+        wordCount: words,
+        words: words.toLocaleString()
+      };
+    });
+  }
+
   fullModules[slug] = {
     id: modData.id,
     slug: modData.slug,
@@ -120,6 +140,7 @@ for (const mDir of moduleDirs) {
     y: coords.y,
     quiz,
     sources,
+    chapters,
     content: contentMd
   };
 }
