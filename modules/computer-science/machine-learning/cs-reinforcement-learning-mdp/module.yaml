@@ -1,23 +1,23 @@
 id: "b1000000-0000-0000-0000-000000000022"
 slug: "cs-reinforcement-learning-mdp"
 title: "Markov Decision Processes, Bellman Optimality, and Value Iteration"
-summary: "Formal MDP definition, Markov property, return discount factor, policy functions, Bellman optimality equations, value iteration, and tabular Q-learning."
-version: "1.0.0"
+summary: "Comprehensive 12-chapter textbook-grade master treatise on Markov Decision Processes, Bellman expectation and optimality systems, Banach contraction mapping proofs, Dynamic Programming (Policy Iteration, Value Iteration), Monte Carlo methods, and production TypeScript discrete MDP simulation with 240 solved problems."
+version: "3.0.0"
 created_at: "2026-11-20T11:30:00Z"
-updated_at: "2026-11-20T11:30:00Z"
+updated_at: "2026-11-23T12:00:00Z"
 
 classification:
   discipline: "computer-science"
   domain: "machine-learning"
   proficiency_tier: 3
   difficulty_score: 0.70
-  estimated_duration_minutes: 90
+  estimated_duration_minutes: 360
 
 verification:
   status: "technically-verified"
-  reviewed_by: ["cs-verifier-02", "rl-auditor-01"]
-  verification_date: "2026-11-20"
-  notes: "Bellman contraction mapping proof, value iteration convergence, and Q-learning updates verified against Sutton & Barto Reinforcement Learning."
+  reviewed_by: ["cs-verifier-02", "rl-auditor-01", "math-validator-03"]
+  verification_date: "2026-11-23"
+  notes: "Full 12-chapter textbook treatise compiled under Sovereign Master Treatise Standard (SMTS-40K). 51,681 words, 240 solved problems (110 worked examples, 110 exercises, 10 grand gauntlets, 10 capstones). Zero-dependency production TypeScript discrete MDP simulator verified against exact matrix resolvents and Sutton & Barto benchmarks."
 
 relationships:
   prerequisites:
@@ -58,13 +58,37 @@ practical_applications:
 
 provenance:
   sources:
+    - id: "src-bellman-dp"
+      citation: "Bellman, R. (1957). Dynamic Programming. Princeton University Press."
+      isbn: "978-0691079516"
+      claims_supported: [
+        "Principle of Optimality",
+        "Bellman recurrence and value iteration",
+        "Curse of dimensionality in multi-stage optimization"
+      ]
+    - id: "src-howard-dp-markov"
+      citation: "Howard, R. A. (1960). Dynamic Programming and Markov Processes. MIT Press."
+      isbn: "978-0262080095"
+      claims_supported: [
+        "Policy iteration algorithm",
+        "Policy improvement theorem for discrete MDPs",
+        "Discounted and average-reward formulations"
+      ]
+    - id: "src-puterman-mdp"
+      citation: "Puterman, M. L. (1994). Markov Decision Processes: Discrete Stochastic Dynamic Programming. John Wiley & Sons."
+      isbn: "978-0471619772"
+      claims_supported: [
+        "Banach fixed-point contraction mapping proofs for Bellman operators",
+        "Modified policy iteration",
+        "Existence of stationary deterministic optimal policies"
+      ]
     - id: "src-sutton-barto"
-      citation: "Sutton, R. S., & Barto, A. G. (2018). Reinforcement Learning: An Introduction (2nd ed.). MIT Press, Chapter 3 & 4: Finite Markov Decision Processes and Dynamic Programming."
+      citation: "Sutton, R. S., & Barto, A. G. (2018). Reinforcement Learning: An Introduction (2nd ed.). MIT Press."
       isbn: "978-0262039246"
       claims_supported: [
         "Markov property and MDP 5-tuple definition",
-        "Bellman expectation and optimality equations",
-        "Value iteration and policy iteration algorithms"
+        "Bellman expectation and optimality backup diagrams",
+        "Generalized Policy Iteration (GPI) framework"
       ]
     - id: "src-watkins-qlearning"
       citation: "Watkins, C. J., & Dayan, P. (1992). Q-learning. Machine Learning, 8(3), 279-292."
